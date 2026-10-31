@@ -8,25 +8,34 @@ on:
         required: true
         type: string
       shared_input_path:
-        description: "Path to verified OCHAP_SHARED_INPUT_YYYYMMDD_M0_v1.json"
-        required: true
+        description: "Repo-local verified shared input JSON path (not needed for rollback)"
+        required: false
         type: string
       mode:
-        description: "Action mode (publish or rollback)"
+        description: "Publish today's pre-freeze M0, retrospective verification, or rollback"
         required: false
         default: "publish"
         type: choice
         options:
           - publish
+          - retrospective
           - rollback
 
 permissions:
   contents: write
 
+concurrency:
+  group: publish-gemi-reporter
+  cancel-in-progress: false
+
 jobs:
   verify-and-publish-gemi:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    env:
+      ISSUE_DATE: ${{ inputs.issue_date }}
+      SHARED_INPUT_PATH: ${{ inputs.shared_input_path }}
+      PUBLICATION_MODE: ${{ inputs.mode }}
     steps:
       - name: Checkout ochap-press repository
         uses: actions/checkout@v4
@@ -36,34 +45,95 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Execute Rollback if requested
+      - name: Validate dates, paths, and M0 mode
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import os, json, pathlib, datetime
+          day = datetime.date.fromisoformat(os.environ["ISSUE_DATE"])
+          mode = os.environ["PUBLICATION_MODE"]
+          if mode not in {"publish", "retrospective", "rollback"}:
+              raise SystemExit("Unsupported publication mode")
+          if mode != "rollback":
+              raw = os.environ["SHARED_INPUT_PATH"]
+              path = pathlib.Path(raw)
+              root = pathlib.Path.cwd().resolve()
+              if not raw or path.is_absolute() or ".." in path.parts or path.suffix != ".json":
+                  raise SystemExit("Shared input must be a repo-local JSON path")
+              src = path.resolve(strict=True)
+              if not src.is_relative_to(root):
+                  raise SystemExit("Shared input path outside repository")
+              data = json.loads(src.read_text(encoding="utf-8"))
+              if data.get("date") != day.isoformat():
+                  raise SystemExit("Shared input date differs from requested issue date")
+              if mode == "publish":
+                  jst = datetime.timezone(datetime.timedelta(hours=9))
+                  now = datetime.datetime.now(jst)
+                  source_time = datetime.datetime.fromisoformat(data["as_of_jst"]).astimezone(jst)
+                  if now.date() != day or now.time() >= datetime.time(7, 0):
+                      raise SystemExit("Live M0 publication allowed only on issue day before 07:00 JST")
+                  if source_time.date() != day or source_time > now or source_time.time() >= datetime.time(7, 0):
+                      raise SystemExit("Shared input is not a current pre-freeze M0 snapshot")
+          PY
+
+      - name: Locate matching HTML issue for article ID validation
+        id: issue
+        if: ${{ inputs.mode != 'rollback' }}
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, os, pathlib
+          manifest=json.loads(pathlib.Path("data/issue-index.json").read_text(encoding="utf-8"))
+          found=[x for x in manifest["issues"] if x.get("date")==os.environ["ISSUE_DATE"]]
+          if len(found)!=1:
+              raise SystemExit("No unique published HTML issue for requested date")
+          item=found[0]
+          if item.get("compression")!="none":
+              raise SystemExit("Compressed archive is not a direct validator input")
+          p=pathlib.Path(item["path"])
+          if p.is_absolute() or ".." in p.parts or not p.is_file():
+              raise SystemExit("Missing or invalid original issue HTML path")
+          with open(os.environ["GITHUB_OUTPUT"],"a",encoding="utf-8") as fh:
+              fh.write("original_html="+p.as_posix()+"\n")
+          PY
+
+      - name: Execute rollback if requested
         if: ${{ inputs.mode == 'rollback' }}
+        shell: bash
         run: |
           python3 scripts/rollback_gemi_press_issue.py \
-            --date "${{ inputs.issue_date }}" \
-            --output "data/gemi/${{ inputs.issue_date }}.json" \
+            --date "$ISSUE_DATE" \
+            --output "data/gemi/$ISSUE_DATE.json" \
             --reason "workflow_dispatch_rollback"
 
-      - name: Generate and Validate Gemi兄 Independent M0 Forecast
-        if: ${{ inputs.mode == 'publish' }}
+      - name: Generate and validate Gemi independent M0 issue
+        if: ${{ inputs.mode != 'rollback' }}
+        env:
+          ORIGINAL_ISSUE_HTML: ${{ steps.issue.outputs.original_html }}
+        shell: bash
         run: |
+          MODE="m0_automated_pipeline"
+          if [[ "$PUBLICATION_MODE" == "retrospective" ]]; then
+            MODE="retrospective_m0_shared_input_verification"
+          fi
           python3 scripts/generate_gemi_independent_m0_forecast.py \
-            --shared-input "${{ inputs.shared_input_path }}" \
-            --output "data/gemi/${{ inputs.issue_date }}.json" \
-            --execution-mode "m0_automated_pipeline"
+            --shared-input "$SHARED_INPUT_PATH" \
+            --output "data/gemi/$ISSUE_DATE.json" \
+            --execution-mode "$MODE"
           python3 scripts/validate_gemi_press_issue.py \
-            --gemi-json "data/gemi/${{ inputs.issue_date }}.json" \
-            --shared-input "${{ inputs.shared_input_path }}" \
-            --original-html "ochap-original.html"
+            --gemi-json "data/gemi/$ISSUE_DATE.json" \
+            --shared-input "$SHARED_INPUT_PATH" \
+            --original-html "$ORIGINAL_ISSUE_HTML"
 
-      - name: Commit and Push Verified Gemi兄 Issue
+      - name: Commit only the verified Gemi report
+        shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "data/gemi/${{ inputs.issue_date }}.json" assets/gemi-reporter.js assets/gemi-reporter.css
+          git add "data/gemi/$ISSUE_DATE.json"
           if git diff --cached --quiet; then
             echo "No changes to commit."
           else
-            git commit -m "chore(gemi): publish verified M0 forecast for ${{ inputs.issue_date }}"
+            git commit -m "chore(gemi): verified $PUBLICATION_MODE issue for $ISSUE_DATE"
             git push origin HEAD:main
           fi
