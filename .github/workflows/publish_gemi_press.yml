@@ -1,0 +1,69 @@
+name: Publish Gemi Reporter M0 Forecast
+
+on:
+  workflow_dispatch:
+    inputs:
+      issue_date:
+        description: "Target issue date (YYYY-MM-DD, JST)"
+        required: true
+        type: string
+      shared_input_path:
+        description: "Path to verified OCHAP_SHARED_INPUT_YYYYMMDD_M0_v1.json"
+        required: true
+        type: string
+      mode:
+        description: "Action mode (publish or rollback)"
+        required: false
+        default: "publish"
+        type: choice
+        options:
+          - publish
+          - rollback
+
+permissions:
+  contents: write
+
+jobs:
+  verify-and-publish-gemi:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout ochap-press repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Execute Rollback if requested
+        if: ${{ inputs.mode == 'rollback' }}
+        run: |
+          python3 scripts/rollback_gemi_press_issue.py \
+            --date "${{ inputs.issue_date }}" \
+            --output "data/gemi/${{ inputs.issue_date }}.json" \
+            --reason "workflow_dispatch_rollback"
+
+      - name: Generate and Validate Gemi兄 Independent M0 Forecast
+        if: ${{ inputs.mode == 'publish' }}
+        run: |
+          python3 scripts/generate_gemi_independent_m0_forecast.py \
+            --shared-input "${{ inputs.shared_input_path }}" \
+            --output "data/gemi/${{ inputs.issue_date }}.json" \
+            --execution-mode "m0_automated_pipeline"
+          python3 scripts/validate_gemi_press_issue.py \
+            --gemi-json "data/gemi/${{ inputs.issue_date }}.json" \
+            --shared-input "${{ inputs.shared_input_path }}" \
+            --original-html "ochap-original.html"
+
+      - name: Commit and Push Verified Gemi兄 Issue
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "data/gemi/${{ inputs.issue_date }}.json" assets/gemi-reporter.js assets/gemi-reporter.css
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(gemi): publish verified M0 forecast for ${{ inputs.issue_date }}"
+            git push origin HEAD:main
+          fi
