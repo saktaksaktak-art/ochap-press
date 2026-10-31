@@ -125,13 +125,13 @@
   function rangeStart(earliest, n) {const d=new Date(earliest);d.setUTCDate(d.getUTCDate()-n+1);return d;}
   function dateISO(d){return d.toISOString().slice(0,10);}
   function eligible(r) {
-    if(!r || r.mode!=='M0' || r.official_confirmed!==true || r.paired_verified!==true ||
+    if(!r || r.mode!=='M0' || r.official_confirmed!==true || r.paired_verified!==true || !r.official_result_source_ref ||
       !r.shared_input_sha256 || !Array.isArray(r.actual_order) || r.actual_order.length!==3 ||
       !r.reporters || !r.reporters.ocha || !r.reporters.gemi || !r.closing_at) return false;
     const cutoff=Date.parse(r.closing_at);if(!Number.isFinite(cutoff))return false;
     for(const k of ['ocha','gemi']){
       const f=r.reporters[k];
-      if(f.input_sha256!==r.shared_input_sha256 || !f.freeze_at ||
+      if(f.input_sha256!==r.shared_input_sha256 || !f.forecast_source_ref || !f.freeze_at ||
         !Number.isFinite(Date.parse(f.freeze_at)) || Date.parse(f.freeze_at)>=cutoff ||
         f.retrospective===true || f.published_before_cutoff!==true) return false;
     }
@@ -194,7 +194,7 @@
     const entries=(performance?.records||[]).filter(r=>{
       if(!eligible(r) || r.date<start || r.date>end || !conditionMatches(r,chosenCondition))return false;
       const a=r.reporters.ocha,b=r.reporters.gemi;
-      if(chosenMetric==='A')return a.scenario_review_verified===true && b.scenario_review_verified===true &&
+      if(chosenMetric==='A')return a.scenario_review_verified===true && b.scenario_review_verified===true && a.scenario_evidence_ref && b.scenario_evidence_ref &&
         ['A','B','C','D'].includes(a.scenario_grade) && ['A','B','C','D'].includes(b.scenario_grade);
       if(chosenMetric==='method')return Boolean(r.actual_method && a.predicted_method && b.predicted_method);
       if(chosenMetric==='two')return a.second_pick!=null && b.second_pick!=null;
@@ -214,7 +214,7 @@
       panel.append(p(`${score.label}。条件別の「強い」判定は、共通対象100R以上・差5ポイント以上・対応のある比較検定で有意な場合のみ表示します。`,'public-note'));
     }
     versus.append(panel);
-    const judged=entries.filter(r=>['ocha','gemi'].every(k=>r.reporters[k].scenario_review_verified===true && ['A','B','C','D'].includes(r.reporters[k].scenario_grade)));
+    const judged=entries.filter(r=>['ocha','gemi'].every(k=>r.reporters[k].scenario_review_verified===true && r.reporters[k].scenario_evidence_ref && ['A','B','C','D'].includes(r.reporters[k].scenario_grade)));
     const story=card();story.append(h2('展開評価 A〜D の内訳'));
     if(!judged.length)story.append(p('両記者の展開を検証できたレースは、まだありません。','public-status'));
     else {
