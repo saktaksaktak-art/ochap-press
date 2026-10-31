@@ -125,6 +125,12 @@ jobs:
             --shared-input "$SHARED_INPUT_PATH" \
             --original-html "$ORIGINAL_ISSUE_HTML"
 
+      - name: Prevent reporter attribution conflicts before publishing
+        shell: bash
+        run: |
+          node --check assets/gemi-reporter.js
+          python3 scripts/check_reporter_attribution.py
+
       - name: Commit only the verified Gemi report
         shell: bash
         run: |
