@@ -21,6 +21,9 @@ from typing import Any, Dict, List, Optional
 from build_and_verify_shared_m0_input import compute_canonical_payload_sha256, extract_html_article_ids
 
 TRIFECTA_RE = re.compile(r"^([1-6])-([1-6])-([1-6])$")
+# Disallow contradictory author labels in Gemini's own editorial text.
+WRONG_AUTHOR_LABEL_RE = re.compile(r"(?:おちゃっぴー|お茶P記者|ChatGPT|🍵P)(?:の|による)?\\s*予想")
+
 FORBIDDEN_PATTERNS = [
     re.compile(r"GOCSPX-[A-Za-z0-9_\-]+"),
     re.compile(r"ya29\.[A-Za-z0-9_\-]+"),
@@ -108,6 +111,16 @@ def validate_gemi_issue(
             errors.append(f"{rid}: missing freeze_at or source_ref")
         if rec.get("input_sha256") != expected_sha256:
             errors.append(f"{rid}: input_sha256 mismatch")
+
+        editorial_fields = {
+            "reason": rec.get("reason"),
+            "scenarios": rec.get("scenarios"),
+            "st_comment": rec.get("st_comment"),
+            "first_mark": rec.get("first_mark"),
+            "navi_details": rec.get("navi_details"),
+        }
+        if WRONG_AUTHOR_LABEL_RE.search(json.dumps(editorial_fields, ensure_ascii=False)):
+            errors.append(f"{rid}: Gemini reporter copy contains an OchaP/ChatGPT prediction attribution label")
 
         marks = rec.get("marks") or {}
         m_vals = [marks.get("main"), marks.get("second"), marks.get("third"), marks.get("fourth")]
