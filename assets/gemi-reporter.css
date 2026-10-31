@@ -17,3 +17,10 @@
 .ochap-gemi-pane .ochap-gemi-details{font-size:13px;color:#324f40}
 @media(max-width:700px){.ochap-report-tabs button{flex:1;min-width:112px}.ochap-gemi-pane{padding:12px}.ochap-gemi-pane .ochap-gemi-grid{grid-template-columns:1fr}}
 @media print{.ochap-report-tabs{display:none}}
+
+/* Attribution safety: hide every OchaP-only section on the Gemini tab,
+   regardless of existing newspaper/print display rules. */
+article[data-ochap-reporter-active="gemi"] > .ochap-ocha-only,
+article[data-ochap-reporter-active="gemi"] > [hidden],
+article[data-ochap-reporter-active="ocha"] > .ochap-gemi-pane,
+article > .ochap-gemi-pane[hidden] { display:none !important; }
