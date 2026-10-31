@@ -1,28 +1,41 @@
 <!doctype html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>お茶P新聞</title>
-  <style>body{font-family:system-ui,sans-serif;background:#eeeade;color:#21372e;margin:0;padding:25px}p{max-width:680px;margin:auto}</style>
-</head>
-<body>
-  <p id="loading">お茶P新聞を読み込んでいます。</p>
-  <script>
-  (async function(){
-    try{
-      const response=await fetch('./ochap-original.html',{cache:'no-store'});
-      if(!response.ok)throw new Error('新聞本体の取得に失敗しました（HTTP '+response.status+'）');
-      const source=await response.text();
-      if(!source.includes('</head>') || !source.includes('<article '))throw new Error('新聞HTMLの形式を確認できません');
-      const css='<link rel="stylesheet" href="./assets/gemi-reporter.css">';
-      const js='<scr'+'ipt src="./assets/gemi-reporter.js"></scr'+'ipt>';
-      const html=source.replace('</head>',css+'</head>').replace('</body>',js+'</body>');
-      document.open();document.write(html);document.close();
-    }catch(err){
-      document.getElementById('loading').textContent='新聞を表示できません。'+err.message;
-    }
-  })();
-  </script>
-</body>
-</html>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>お茶P新聞</title><style>body{font:14px/1.7 system-ui,sans-serif;background:#faf8f0;color:#203e36;padding:22px}#ochap-loading{max-width:680px;margin:20px auto}</style></head>
+<body><p id="ochap-loading">お茶P新聞を読み込んでいます。</p>
+<script>
+(async function(){
+  'use strict';
+  const showError=(message)=>{document.getElementById('ochap-loading').textContent='新聞を表示できません：'+message};
+  try {
+    const listResponse=await fetch('./data/issue-index.json',{cache:'no-store'});
+    if(!listResponse.ok)throw new Error('日付一覧の取得に失敗しました');
+    const manifest=await listResponse.json();
+    if(!manifest || !Array.isArray(manifest.issues) || !manifest.issues.length)throw new Error('日付一覧が不正です');
+    const query=new URL(location.href).searchParams.get('date');
+    const date=manifest.issues.some(x=>x.date===query)?query:manifest.default_date;
+    const issue=manifest.issues.find(x=>x.date===date);
+    if(!issue || !/^[a-zA-Z0-9._/-]+$/.test(issue.path) || issue.path.startsWith('/'))throw new Error('選択日の新聞が見つかりません');
+    const result=await fetch('./'+issue.path,{cache:'no-store'});
+    if(!result.ok)throw new Error('新聞HTMLを取得できません（HTTP '+result.status+'）');
+    let source;
+    if(issue.compression==='gzip'){
+      const bytes=await result.arrayBuffer();
+      const zipped=new Uint8Array(bytes);
+      if(zipped[0]===0x1f && zipped[1]===0x8b){
+        if(!('DecompressionStream' in window))throw new Error('このブラウザは圧縮HTMLに対応していません');
+        const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+        source=await new Response(stream).text();
+      }else{source=new TextDecoder().decode(bytes)}
+    }else{source=await result.text()}
+    if(!/<head[\s>]/i.test(source)||!/<\/head>/i.test(source)||!/<\/body>/i.test(source))throw new Error('新聞原本のHTMLが不正です');
+    const headTags='<link rel="stylesheet" href="./assets/date-nav.css">'+
+      (issue.gemi_tabs?'<link rel="stylesheet" href="./assets/gemi-reporter.css">':'');
+    const encoded=JSON.stringify(manifest).replace(/</g,'\\u003c');
+    const setGlobals='<script>window.__OCHAP_ISSUE_INDEX__='+encoded+';window.__OCHAP_SELECTED_DATE__='+JSON.stringify(date)+';</'+'script>';
+    const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs?'<script src="./assets/gemi-reporter.js"></'+'script>':'');
+    source=source.replace(/<\/head>/i,headTags+'</head>');
+    source=source.replace(/<\/body>/i,extraScripts+'</body>');
+    document.open();document.write(source);document.close();
+  }catch(err){showError(err.message||String(err));}
+})();
+</script>
+</body></html>
