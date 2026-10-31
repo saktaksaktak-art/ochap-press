@@ -51,6 +51,23 @@ def validate(payload):
         require(isinstance(actual, list) and len(actual) == 3 and
                 len(set(map(str, actual))) == 3 and
                 all(str(x) in "123456" for x in actual), f"{label}: actual order invalid")
+        # Official *actual entry order*: boat numbers ordered by 1C,2C,...,6C.
+        # Missing entry is allowed, but must never be guessed from the boat number.
+        # If any course-related evidence is supplied, all three fields are required.
+        course_keys = ("actual_entry_order", "official_entry_verified", "official_entry_source_ref")
+        if any(k in r for k in course_keys):
+            course_order = r.get("actual_entry_order")
+            require(r.get("official_entry_verified") is True,
+                    f"{label}: actual course data must be officially verified")
+            require(isinstance(r.get("official_entry_source_ref"), str) and
+                    bool(r["official_entry_source_ref"].strip()),
+                    f"{label}: official entry source reference missing")
+            require(isinstance(course_order, list) and len(course_order) == 6 and
+                    set(map(str, course_order)) == set("123456") and
+                    all(str(v) in "123456" and not isinstance(v, bool) for v in course_order),
+                    f"{label}: actual_entry_order must be a 6-boat permutation by course")
+            require(str(actual[0]) in [str(v) for v in course_order],
+                    f"{label}: winning boat missing from actual course ordering")
         closing = parse_time(r["closing_at"], label)
         reporters = r.get("reporters")
         require(isinstance(reporters, dict) and all(k in reporters for k in ("ocha", "gemi")),
