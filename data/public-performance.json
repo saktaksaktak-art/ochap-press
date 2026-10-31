@@ -1,0 +1,6 @@
+{
+  "schema_version": "1.0",
+  "date_policy": "JST: yesterday, rolling 7/30/365 days ending yesterday",
+  "source": "public verified pre-deadline matched M0 forecasts and official results only",
+  "records": []
+}
