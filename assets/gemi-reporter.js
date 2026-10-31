@@ -62,7 +62,7 @@
   }
 
   // Forecast text must never be attributed to a different reporter in the Gemini pane.
-  const WRONG_REPORTER_LABEL = /(?:おちゃっぴー|お茶P記者|ChatGPT|🍵P)(?:の|による)?\\s*予想/;
+  const WRONG_REPORTER_LABEL = /(?:おちゃっぴー|お茶P記者|ChatGPT|🍵P)(?:の|による)?\s*予想/;
   function gemiContent(raceId) {
     const rec = records[raceId];
     // Never display drafts, unverified predictions, or mismatched shared input hashes as published reports.
