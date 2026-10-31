@@ -26,5 +26,6 @@ jobs:
         run: |
           node --check assets/press-roles.js
           python3 scripts/check_public_scorecard.py
+          node scripts/test_course_hit_rates.js
       - name: Check Python publication validator syntax
         run: python3 -m py_compile scripts/validate_gemi_press_issue.py
