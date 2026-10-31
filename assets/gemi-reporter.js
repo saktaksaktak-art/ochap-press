@@ -129,6 +129,10 @@
   }
 
   articleNodes.forEach(setup);
+  // Gemi-only historical issues cannot display missing OchaP forecasts.
+  if (document.body.dataset.reporterDefault === 'gemi') {
+    for (const info of panes.values()) info.gemiButton.click();
+  }
   if(!issueDate) return;
   fetch(`./data/gemi/${issueDate}.json`,{cache:'no-store'})
     .then(resp=>resp.ok?resp.json():null)
