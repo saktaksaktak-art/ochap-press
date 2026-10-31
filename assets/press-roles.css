@@ -1,0 +1,26 @@
+/* Additive 3-role navigation. The original newspaper is untouched in Prediction mode. */
+#ochap-public-roles{position:sticky;top:57px;z-index:9997;display:flex;justify-content:center;gap:5px;padding:7px 8px;background:#eff4ee;border-bottom:1px solid #b3c4b7;font:700 13px/1.4 system-ui,-apple-system,sans-serif}
+#ochap-public-roles button{min-width:0;max-width:210px;flex:1;padding:10px 7px;background:white;color:#184b3b;border:1px solid #a5b9ab;border-radius:6px;cursor:pointer;font:inherit}
+#ochap-public-roles button[aria-pressed="true"]{background:#174c3a;color:white;border-color:#174c3a}
+#ochap-public-roles button:focus-visible,#ochap-public-panels button:focus-visible,#ochap-public-panels select:focus-visible{outline:3px solid #b89a4f;outline-offset:2px}
+.ochap-public-original-hidden{display:none!important}
+#ochap-public-panels{max-width:1150px;margin:15px auto;padding:0 14px;font:15px/1.6 system-ui,-apple-system,'Hiragino Kaku Gothic ProN',sans-serif;color:#173b31}
+#ochap-public-panels[hidden],#ochap-public-panels section[hidden]{display:none!important}
+#ochap-public-panels h2{color:#174c3a;margin:0 0 8px;font-size:23px}
+#ochap-public-panels p{margin:8px 0 12px}
+#ochap-public-panels .public-card{background:#fffdf5;border:1px solid #bdcdbf;border-radius:8px;padding:15px;margin:12px 0}
+#ochap-public-panels .public-note{color:#52675e;font-size:13px}
+#ochap-public-panels a{color:#16523d}
+#ochap-public-panels .public-controls{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin:12px 0}
+#ochap-public-panels select{max-width:100%;min-height:40px;padding:7px;border:1px solid #9caf9c;background:white;color:#173b31;border-radius:6px;font:inherit}
+#ochap-public-panels .public-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px}
+#ochap-public-panels .public-grid>.public-card{margin:0}
+#ochap-public-panels .public-number{display:block;font-size:25px;font-weight:750;color:#174c3a}
+#ochap-public-panels .public-table-wrap{overflow:auto}
+#ochap-public-panels table{width:100%;border-collapse:collapse;font-size:14px}
+#ochap-public-panels th,#ochap-public-panels td{border-bottom:1px solid #d8e1d7;padding:8px;text-align:left;white-space:nowrap}
+#ochap-public-panels th{background:#eaf2eb;color:#173b31}
+#ochap-public-panels .public-action{display:inline-block;padding:10px 14px;background:#174c3a;border-radius:6px;color:white;text-decoration:none;font-weight:700}
+#ochap-public-panels .public-status{padding:11px 13px;border-left:3px solid #8aa092;background:#f3f6f1}
+@media(max-width:430px){#ochap-public-roles{top:54px;gap:4px}#ochap-public-roles button{font-size:11px;padding:10px 4px}#ochap-public-panels{padding:0 9px}#ochap-public-panels h2{font-size:20px}}
+@media print{#ochap-public-roles,#ochap-public-panels{display:none!important}.ochap-public-original-hidden{display:initial!important}}
