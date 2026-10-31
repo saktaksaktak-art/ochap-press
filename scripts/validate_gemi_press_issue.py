@@ -22,7 +22,7 @@ from build_and_verify_shared_m0_input import compute_canonical_payload_sha256, e
 
 TRIFECTA_RE = re.compile(r"^([1-6])-([1-6])-([1-6])$")
 # Disallow contradictory author labels in Gemini's own editorial text.
-WRONG_AUTHOR_LABEL_RE = re.compile(r"(?:おちゃっぴー|お茶P記者|ChatGPT|🍵P)(?:の|による)?\\s*予想")
+WRONG_AUTHOR_LABEL_RE = re.compile(r"(?:おちゃっぴー|お茶P記者|ChatGPT|🍵P)(?:の|による)?\s*予想")
 
 FORBIDDEN_PATTERNS = [
     re.compile(r"GOCSPX-[A-Za-z0-9_\-]+"),
