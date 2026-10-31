@@ -108,7 +108,11 @@
   const periods = {yesterday:1,week:7,month:30,year:365};
   const periodNames = {yesterday:'前日',week:'週間（過去7日）',month:'月間（過去30日）',year:'年間（過去365日）'};
   const conditions = {
-    all:'全レース',escape:'①逃げ成立',upset:'非①頭',sashi:'差し決着',makuri:'まくり決着',makurizashi:'まくり差し決着',sg:'SG',g1:'G1',morning:'モーニング',day:'デイ',night:'ナイター'
+    all:'全レース',escape:'①逃げ成立',upset:'非①頭',
+    'course:1':'1コースからの1着','course:2':'2コースからの1着',
+    'course:3':'3コースからの1着','course:4':'4コースからの1着',
+    'course:5':'5コースからの1着','course:6':'6コースからの1着',
+    sashi:'差し決着',makuri:'まくり決着',makurizashi:'まくり差し決着',sg:'SG',g1:'G1',morning:'モーニング',day:'デイ',night:'ナイター'
   };
   const metrics = {
     head:'◎1着的中',two:'2連単一致',main:'本線3連単的中',method:'頭＋決まり手一致',A:'A評価（完全一致）'
@@ -137,8 +141,22 @@
     }
     return true;
   }
+  // Actual course (1C..6C) is not interchangeable with the winning boat number.
+  // actual_entry_order is the official list of boat numbers by course, 1C first.
+  // Exclude any missing/partial/unverified entry from course-specific statistics.
+  function actualWinningCourse(r) {
+    if (r.official_entry_verified !== true || !r.official_entry_source_ref) return null;
+    const order = r.actual_entry_order;
+    if (!Array.isArray(order) || order.length !== 6 ||
+        new Set(order.map(String)).size !== 6 ||
+        !order.every(boat => /^[1-6]$/.test(String(boat)))) return null;
+    const winner = String(r.actual_order?.[0] ?? '');
+    const idx = order.map(String).indexOf(winner);
+    return idx < 0 ? null : idx + 1;
+  }
   function conditionMatches(r,condition) {
     if(condition==='all')return true;
+    if(condition.startsWith('course:'))return actualWinningCourse(r)===Number(condition.slice(7));
     if(condition.startsWith('venue:'))return r.venue===condition.slice('venue:'.length);
     if(condition==='escape')return String(r.actual_order[0])==='1';
     if(condition==='upset')return String(r.actual_order[0])!=='1';
@@ -191,8 +209,9 @@
       makeSelect(metrics,chosenMetric,v=>{chosenMetric=v;renderComparison()},'評価指標')
     );versus.append(control);
     const yesterday=jstYesterday(),start=dateISO(rangeStart(yesterday,periods[chosenPeriod])),end=dateISO(yesterday);
-    const entries=(performance?.records||[]).filter(r=>{
-      if(!eligible(r) || r.date<start || r.date>end || !conditionMatches(r,chosenCondition))return false;
+    const baseEntries=(performance?.records||[]).filter(r=>
+      eligible(r) && r.date>=start && r.date<=end && conditionMatches(r,chosenCondition));
+    const entries=baseEntries.filter(r=>{
       const a=r.reporters.ocha,b=r.reporters.gemi;
       if(chosenMetric==='A')return a.scenario_review_verified===true && b.scenario_review_verified===true && a.scenario_evidence_ref && b.scenario_evidence_ref &&
         ['A','B','C','D'].includes(a.scenario_grade) && ['A','B','C','D'].includes(b.scenario_grade);
@@ -214,6 +233,32 @@
       panel.append(p(`${score.label}。条件別の「強い」判定は、共通対象100R以上・差5ポイント以上・対応のある比較検定で有意な場合のみ表示します。`,'public-note'));
     }
     versus.append(panel);
+
+    // Same verified, paired M0 denominator for both reporters in each winning course.
+    // Do not use the selected metric's optional data filter for these head-hit rates.
+    const courseCard=card();
+    courseCard.append(h2('1〜6コース別・◎1着的中率'));
+    const courseRows=[];
+    const courseIndexes=chosenCondition.startsWith('course:')
+      ? [Number(chosenCondition.slice(7))] : [1,2,3,4,5,6];
+    let officialCourseCount=0;
+    for (const k of courseIndexes) {
+      const races=baseEntries.filter(r=>actualWinningCourse(r)===k);
+      const n=races.length;
+      officialCourseCount+=n;
+      const hitCounts=['ocha','gemi'].map(author=>
+        races.filter(r=>String(r.reporters[author].main_pick)===String(r.actual_order[0])).length);
+      const cell=(hits)=> n ? `${(100*hits/n).toFixed(1)}%（${hits}/${n}R）` : '—（0R）';
+      courseRows.push([`${k}コース`,`${n}R`,cell(hitCounts[0]),cell(hitCounts[1])]);
+    }
+    courseCard.append(p('実際にそのコースから勝ったレースを分母に、予想◎が勝艇と一致した割合。艇番ではなく公式確認済みの実進入で判定します。','public-note'));
+    courseCard.append(makeTable(['1着の実コース','対象数','お茶P記者 ◎的中','Gemi兄記者 ◎的中'],courseRows));
+    if (!officialCourseCount) courseCard.append(p(
+      '対象期間に公式実進入まで照合できた共通レースはありません。実進入が未取得のレースは0％扱いにせず、集計から除外します。','public-status'));
+    else courseCard.append(p(
+      `実進入確認済み：${officialCourseCount}R。0Rのコースは未集計であり、的中率0%を意味しません。`,'public-note'));
+    versus.append(courseCard);
+
     const judged=entries.filter(r=>['ocha','gemi'].every(k=>r.reporters[k].scenario_review_verified===true && r.reporters[k].scenario_evidence_ref && ['A','B','C','D'].includes(r.reporters[k].scenario_grade)));
     const story=card();story.append(h2('展開評価 A〜D の内訳'));
     if(!judged.length)story.append(p('両記者の展開を検証できたレースは、まだありません。','public-status'));
