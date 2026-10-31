@@ -139,6 +139,7 @@
   }
   function conditionMatches(r,condition) {
     if(condition==='all')return true;
+    if(condition.startsWith('venue:'))return r.venue===condition.slice('venue:'.length);
     if(condition==='escape')return String(r.actual_order[0])==='1';
     if(condition==='upset')return String(r.actual_order[0])!=='1';
     if(['sashi','makuri','makurizashi'].includes(condition))return ({sashi:'差し',makuri:'まくり',makurizashi:'まくり差し'})[condition]===r.actual_method;
@@ -170,6 +171,12 @@
     const lead=strong?(d>0?'ocha':'gemi'):null;
     return {n,a,b,d,lead,label:lead ? `${lead==='ocha'?'お茶P':'Gemi兄'}が優勢` : n<30?'標本不足': '明確な優劣は未確定'};
   }
+  function conditionOptions(){
+    const opts={...conditions};
+    const places=[...new Set((performance?.records||[]).map(r=>r.venue).filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b),'ja'));
+    for(const name of places)opts['venue:'+name]='会場：'+name;
+    return opts;
+  }
   function makeSelect(options,value,callback,label){
     const s=document.createElement('select');s.setAttribute('aria-label',label);
     for(const [key,text] of Object.entries(options)){const o=document.createElement('option');o.value=key;o.textContent=text;s.append(o);}
@@ -180,7 +187,7 @@
     const control=document.createElement('div');control.className='public-controls';
     control.append(
       makeSelect(periodNames,chosenPeriod,v=>{chosenPeriod=v;renderComparison()},'集計期間'),
-      makeSelect(conditions,chosenCondition,v=>{chosenCondition=v;renderComparison()},'得意条件'),
+      makeSelect(conditionOptions(),chosenCondition,v=>{chosenCondition=v;renderComparison()},'得意条件'),
       makeSelect(metrics,chosenMetric,v=>{chosenMetric=v;renderComparison()},'評価指標')
     );versus.append(control);
     const yesterday=jstYesterday(),start=dateISO(rangeStart(yesterday,periods[chosenPeriod])),end=dateISO(yesterday);
@@ -207,6 +214,18 @@
       panel.append(p(`${score.label}。条件別の「強い」判定は、共通対象100R以上・差5ポイント以上・対応のある比較検定で有意な場合のみ表示します。`,'public-note'));
     }
     versus.append(panel);
+    const judged=entries.filter(r=>['ocha','gemi'].every(k=>r.reporters[k].scenario_review_verified===true && ['A','B','C','D'].includes(r.reporters[k].scenario_grade)));
+    const story=card();story.append(h2('展開評価 A〜D の内訳'));
+    if(!judged.length)story.append(p('両記者の展開を検証できたレースは、まだありません。','public-status'));
+    else {
+      const rows=['A','B','C','D'].map(g=>[g, ...['ocha','gemi'].map(k=>{
+        const n=judged.filter(r=>r.reporters[k].scenario_grade===g).length;
+        return `${n}/${judged.length}R（${(100*n/judged.length).toFixed(1)}%）`;
+      })]);
+      story.append(p(`展開評価の共通分母：${judged.length}R`, 'public-note'));
+      story.append(makeTable(['評価','お茶P記者','Gemi兄記者'],rows));
+    }
+    versus.append(story);
     const definitions=card();
     definitions.append(h2('昨晩の新しい観点：展開の再現性'));
     definitions.append(makeTable(['評価','基準'],[
