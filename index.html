@@ -39,7 +39,7 @@
     const encoded=JSON.stringify(manifest).replace(/</g,'\\u003c');
     const setGlobals='<script>window.__OCHAP_ISSUE_INDEX__='+encoded+';window.__OCHAP_SELECTED_DATE__='+JSON.stringify(date)+';</'+'script>';
     const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs?'<script src="./assets/gemi-reporter.js?v=20261101-attribution-fix"></'+'script>':'')+
-      '<script src="./assets/press-roles.js?v=2"></'+'script>';
+      '<script src="./assets/press-roles.js?v=3"></'+'script>';
     source=source.replace(/<\/head>/i,headTags+'</head>');
     source=source.replace(/<\/body>/i,extraScripts+'</body>');
     document.open();document.write(source);document.close();
