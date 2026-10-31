@@ -22,5 +22,9 @@ jobs:
         run: node --check assets/gemi-reporter.js
       - name: Check reporter attribution and shared-table headings
         run: python3 scripts/check_reporter_attribution.py
+      - name: Validate public reader scorecard data
+        run: |
+          node --check assets/press-roles.js
+          python3 scripts/check_public_scorecard.py
       - name: Check Python publication validator syntax
         run: python3 -m py_compile scripts/validate_gemi_press_issue.py
