@@ -1,0 +1,16 @@
+/* Additive reporter switch: all existing newspaper styles are unchanged. */
+.ochap-report-tabs{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:12px 0 3px;border-bottom:1px solid #a7b7a7;margin-bottom:12px}
+.ochap-report-tabs button{font:inherit;font-size:14px;min-height:42px;padding:8px 16px;border:1px solid #849b8d;border-radius:6px;background:#fffdf5;color:#174a37;font-weight:700;cursor:pointer}
+.ochap-report-tabs button[aria-pressed="true"]{color:#fff9e8;background:#174c3a;border-color:#174c3a}
+.ochap-report-tabs button:focus-visible{outline:3px solid #c4a34f;outline-offset:2px}
+.ochap-gemi-pane{border:1px solid #829d8b;background:#fffdf5;padding:16px;margin:14px 0}
+.ochap-gemi-pane h3{margin:0 0 8px;color:#174a37}
+.ochap-gemi-pane h4{font-size:14px;margin:14px 0 5px;color:#174a37}
+.ochap-gemi-pane .ochap-gemi-status{margin:10px 0;color:#5b655c}
+.ochap-gemi-pane .ochap-gemi-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ochap-gemi-pane .ochap-gemi-box{border:1px solid #c1cdbd;background:#f7f3e4;padding:12px}
+.ochap-gemi-pane .ochap-gemi-combos{font-size:19px;font-weight:700;white-space:normal;overflow-wrap:anywhere}
+.ochap-gemi-pane .ochap-gemi-images img{width:100%;max-width:850px;height:auto;display:block;margin:8px auto}
+.ochap-gemi-pane .ochap-gemi-details{font-size:13px;color:#324f40}
+@media(max-width:700px){.ochap-report-tabs button{flex:1;min-width:112px}.ochap-gemi-pane{padding:12px}.ochap-gemi-pane .ochap-gemi-grid{grid-template-columns:1fr}}
+@media print{.ochap-report-tabs{display:none}}
