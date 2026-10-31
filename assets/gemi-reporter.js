@@ -61,11 +61,23 @@
     </div>`;
   }
 
+  // Forecast text must never be attributed to a different reporter in the Gemini pane.
+  const WRONG_REPORTER_LABEL = /(?:おちゃっぴー|お茶P記者|ChatGPT|🍵P)(?:の|による)?\\s*予想/;
   function gemiContent(raceId) {
     const rec = records[raceId];
     // Never display drafts, unverified predictions, or mismatched shared input hashes as published reports.
     if (!rec || rec.status !== 'published' || !rec.freeze_at || !rec.source_ref) {
       return `<h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">このレースは原稿未登録です。</p>`;
+    }
+    const editorialText = JSON.stringify({
+      reason: rec.reason,
+      scenarios: rec.scenarios,
+      st_comment: rec.st_comment,
+      first_mark: rec.first_mark,
+      navi_details: rec.navi_details,
+    });
+    if (WRONG_REPORTER_LABEL.test(editorialText)) {
+      return '<h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">記者名の整合確認が必要なため、この原稿の掲載を保留しています。</p>';
     }
     if (sharedInputMeta && sharedInputMeta.sha256 && rec.input_sha256 && rec.input_sha256 !== sharedInputMeta.sha256) {
       return `<h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">共通入力ハッシュ不一致のため表示を停止しました。</p>`;
@@ -99,8 +111,16 @@
   function reporterView(article, showGemi) {
     const info = panes.get(article);
     if (!info) return;
-    for(const node of info.hideInGemi) node.hidden = showGemi;
+    // Attribute on the article enforces a single authoritative reporter view.
+    article.dataset.ochapReporterActive = showGemi ? 'gemi' : 'ocha';
+    for (const node of info.hideInGemi) {
+      node.hidden = showGemi;
+      node.classList.toggle('ochap-ocha-only', showGemi);
+    }
     info.gemiPane.hidden = !showGemi;
+    for (const item of info.sharedHeadings) {
+      item.heading.textContent = showGemi ? item.neutral : item.original;
+    }
     info.ochaButton.setAttribute('aria-pressed',String(!showGemi));
     info.gemiButton.setAttribute('aria-pressed',String(showGemi));
   }
@@ -123,7 +143,17 @@
     // OchaP's commentary, forecast ST, diagrams and tickets stay in its own tab.
     const sharedSections=new Set(Array.from(article.querySelectorAll(':scope > section.section')).filter(section=>/^\s*0[12]\s/.test(section.querySelector('h3')?.textContent || '')));
     const hiddenNodes=Array.from(article.children).filter(x=>x!==raceHead && x!==tabs && x!==pane && !sharedSections.has(x));
-    panes.set(article,{ochaButton:ocha,gemiButton:gemi,gemiPane:pane,hideInGemi:hiddenNodes});
+    const sharedHeadings=Array.from(sharedSections).map(section=>{
+      const heading=section.querySelector('h3');
+      if(!heading)return null;
+      const original=heading.textContent;
+      const neutral=/🍵P|おちゃっぴー|お茶P記者/.test(original)
+        ? original.replace(/🍵P|おちゃっぴー|お茶P記者/g,'共通')
+        : original;
+      return {heading,original,neutral};
+    }).filter(Boolean);
+    panes.set(article,{ochaButton:ocha,gemiButton:gemi,gemiPane:pane,hideInGemi:hiddenNodes,sharedHeadings});
+    reporterView(article,false);
     ocha.addEventListener('click',()=>reporterView(article,false));
     gemi.addEventListener('click',()=>reporterView(article,true));
   }
