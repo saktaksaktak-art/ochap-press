@@ -15,6 +15,18 @@
       "gemi_tabs": false
     },
     {
+      "date": "2026-10-27",
+      "path": "archives/2026-10-27.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": false
+    },
+    {
+      "date": "2026-10-26",
+      "path": "archives/2026-10-26.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": false
+    },
+    {
       "date": "2026-10-25",
       "path": "archives/2026-10-25.html.gz",
       "compression": "gzip",
