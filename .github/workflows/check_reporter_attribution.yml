@@ -1,0 +1,26 @@
+name: Check reporter attribution
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify-reporter-labels:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check Gemini frontend JavaScript syntax
+        run: node --check assets/gemi-reporter.js
+      - name: Check reporter attribution and shared-table headings
+        run: python3 scripts/check_reporter_attribution.py
+      - name: Check Python publication validator syntax
+        run: python3 -m py_compile scripts/validate_gemi_press_issue.py
