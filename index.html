@@ -17,13 +17,19 @@
     const result=await fetch('./'+issue.path,{cache:'no-store'});
     if(!result.ok)throw new Error('新聞HTMLを取得できません（HTTP '+result.status+'）');
     let source;
-    if(issue.compression==='gzip'){
-      const bytes=await result.arrayBuffer();
-      const zipped=new Uint8Array(bytes);
-      if(zipped[0]===0x1f && zipped[1]===0x8b){
-        if(!('DecompressionStream' in window))throw new Error('このブラウザは圧縮HTMLに対応していません');
-        const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
-        source=await new Response(stream).text();
+    if(issue.compression==='base64gzip'){
+      const ascii=(await result.text()).trim();
+      if(!/^[A-Za-z0-9+/=]+$/.test(ascii))throw new Error('過去号の圧縮データが不正です');
+      const raw=atob(ascii);
+      const bytes=Uint8Array.from(raw,c=>c.charCodeAt(0));
+      if(!('DecompressionStream' in window))throw new Error('このブラウザは過去号の解凍に対応していません');
+      const stream=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+      source=await new Response(stream).text();
+    }else if(issue.compression==='gzip'){
+      const bytes=new Uint8Array(await result.arrayBuffer());
+      if(bytes[0]===0x1f && bytes[1]===0x8b){
+        if(!('DecompressionStream' in window))throw new Error('このブラウザは過去号の解凍に対応していません');
+        source=await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
       }else{source=new TextDecoder().decode(bytes)}
     }else{source=await result.text()}
     if(!/<head[\s>]/i.test(source)||!/<\/head>/i.test(source)||!/<\/body>/i.test(source))throw new Error('新聞原本のHTMLが不正です');
