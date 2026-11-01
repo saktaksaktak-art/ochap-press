@@ -143,10 +143,12 @@
         x.trifecta_payout_yen.toLocaleString('ja-JP') + '円'
       ])));
     } else {
-      panel.append(p('まだ結果は届いていません。レース終了後に順次更新します。', 'public-status'));
+      panel.append(p(date === '2026-10-30'
+        ? 'この日の全レース結果・的中一覧は上のダイジェストをご覧ください。'
+        : 'まだ結果は届いていません。レース終了後に順次更新します。', 'public-status'));
     }
     const scorecard = document.createElement('div');
-    scorecard.id = 'ochap-scorecard-mount';
+    scorecard.className = 'ochap-scorecard-mount';
     results.replaceChildren(h2('結果速報'), p('対象日：' + date.replaceAll('-', '/'), 'public-note'), scorecard, panel);
     if (window.OchaPScorecard?.mount) window.OchaPScorecard.mount(scorecard, date);
   }
@@ -434,6 +436,13 @@
   async function showComparison(){
     if(!performanceLoaded){performance=await fetchJson('./data/public-performance.json').catch(()=>null);performanceLoaded=true;}
     if(!performance || performance.schema_version!=='1.0'||!Array.isArray(performance.records))performance={records:[]};
+    if (!performance.records.length && window.OchaPScorecard?.mount) {
+      const scorecard = document.createElement('div');
+      scorecard.className = 'ochap-scorecard-mount';
+      versus.replaceChildren(h2('記者別成績・比較'), scorecard);
+      window.OchaPScorecard.mount(scorecard, resultsDate());
+      return;
+    }
     renderComparison();
   }
   function switchView(which){
