@@ -99,51 +99,53 @@
     table.append(tbody);wrap.append(table);return wrap;
   }
   let resultsFetchSerial = 0;
+  function validBulletinRow(x) {
+    if (!x || !Array.isArray(x.order) || x.order.length !== 3 ||
+        new Set(x.order).size !== 3 ||
+        !x.order.every(n => Number.isInteger(n) && n >= 1 && n <= 6) ||
+        !Number.isInteger(x.trifecta_payout_yen) || x.trifecta_payout_yen < 100) return false;
+    const isOfficialLegacy = x.official_confirmed === true;
+    const isApi = x.official_confirmed === false && x.result_status === 'API_REPORTED';
+    if (!isOfficialLegacy && !isApi) return false;
+    const address = isOfficialLegacy ? x.official_result_source_ref : x.result_source_ref;
+    try {
+      const url = new URL(address);
+      if (url.protocol !== 'https:') return false;
+      return isOfficialLegacy
+        ? url.hostname === 'www.boatrace.jp' && url.pathname === '/owpc/pc/race/raceresult'
+        : url.hostname === 'boatraceopenapi.github.io' && /^\/api\/v1\/\d{4}\/\d{8}\.json$/.test(url.pathname);
+    } catch (_) { return false; }
+  }
   async function showResults() {
     const date = resultsDate();
     const serial = ++resultsFetchSerial;
-    results.replaceChildren(
-      h2('結果速報'),
-      p(`速報対象：${date.replaceAll('-', '/')}｜新聞の発行日とは独立して当日結果を表示します。`, 'public-note'),
-      p('公式レース結果ページで照合できたものだけ掲載。最大数十分の遅延があります。', 'public-note'),
-      p('最新データを確認中…', 'public-status')
-    );
-    // No memoization: switching back to the results tab always checks again.
-    const data = await fetchJson(`./data/public-results/${date}.json`).catch(() => null);
+    results.replaceChildren(h2('結果速報'),
+      p('更新されたレース結果を順次掲載します。', 'public-note'),
+      p('結果を読み込み中…', 'public-status'));
+    const data = await fetchJson('./data/public-results/' + date + '.json').catch(() => null);
     if (serial !== resultsFetchSerial || results.hidden) return;
-    const entries = data && data.schema_version === '1.0' && data.date === date && Array.isArray(data.races) ?
-      data.races.filter(x =>
-        x.official_confirmed === true &&
-        /^https:\/\/www\.boatrace\.jp\/owpc\/pc\/race\/raceresult\?/.test(x.official_result_source_ref || '') &&
-        Array.isArray(x.order) && x.order.length === 3 &&
-        typeof x.trifecta_payout_yen === 'number'
-      ) : [];
+    const entries = data && data.schema_version === '1.0' && data.date === date && Array.isArray(data.races)
+      ? data.races.filter(validBulletinRow) : [];
     const panel = card();
     if (entries.length) {
-      panel.append(p(`公式照合済み ${entries.length}レース。未確定・未取得レースは含めません。`));
-      if (data.checked_at_jst) panel.append(p(`最終照合：${data.checked_at_jst}`, 'public-note'));
-      panel.append(makeTable(['場','R','着順','決まり手','3連単払戻'],entries.map(x=>[
-        x.venue, `${x.race_no}R`, x.order.join('-'), x.method || '—',
-        `${x.trifecta_payout_yen.toLocaleString('ja-JP')}円`
-      ])));
-      const details = document.createElement('details');
-      const summary = document.createElement('summary');
-      summary.textContent = '公式結果の照合元リンクを表示';
-      details.append(summary);
-      for (const x of entries) {
-        const link = document.createElement('a');
-        link.href = x.official_result_source_ref;
-        link.rel = 'noopener noreferrer';
-        link.target = '_blank';
-        link.textContent = `${x.venue} ${x.race_no}R（BOAT RACE公式）`;
-        details.append(link, document.createTextNode('　'));
+      panel.append(p('掲載中：' + entries.length + 'レース', 'public-note'));
+      if (data.checked_at_jst) {
+        const updated = new Date(data.checked_at_jst);
+        if (!Number.isNaN(updated.getTime())) {
+          panel.append(p('更新：' + new Intl.DateTimeFormat('ja-JP', {
+            timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric',
+            hour: '2-digit', minute: '2-digit'
+          }).format(updated), 'public-note'));
+        }
       }
-      panel.append(details);
+      panel.append(makeTable(['場','R','着順','決まり手','3連単払戻'], entries.map(x => [
+        x.venue, x.race_no + 'R', x.order.join('-'), x.method || '—',
+        x.trifecta_payout_yen.toLocaleString('ja-JP') + '円'
+      ])));
     } else {
-      panel.append(p('現時点で公式照合済みの結果はありません。取得後に順次掲載します。', 'public-status'));
-      const link = externalResultsLink(); if (link) panel.append(link);
+      panel.append(p('まだ結果は届いていません。レース終了後に順次更新します。', 'public-status'));
     }
-    results.replaceChildren(h2('結果速報'), p(`速報対象：${date.replaceAll('-', '/')}　｜　公式照合結果のみ`, 'public-note'), panel);
+    results.replaceChildren(h2('結果速報'), p('対象日：' + date.replaceAll('-', '/'), 'public-note'), panel);
   }
   // Check on returning to the tab and while the bulletin is open.
   setInterval(() => {
