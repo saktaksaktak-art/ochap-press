@@ -577,7 +577,9 @@
     const archiveHeader = document.querySelector('header#top');
     if (archiveHeader) {
       const refreshVisibility = () => {
-        wrap.hidden = archiveHeader.classList.contains('ochap-public-original-hidden');
+        const hidden = archiveHeader.classList.contains('ochap-public-original-hidden');
+        wrap.hidden = hidden;
+        wrap.classList.toggle('ochap-global-hidden', hidden);
       };
       new MutationObserver(refreshVisibility).observe(archiveHeader, {
         attributes: true, attributeFilter: ['class']
