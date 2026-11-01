@@ -145,7 +145,10 @@
     } else {
       panel.append(p('まだ結果は届いていません。レース終了後に順次更新します。', 'public-status'));
     }
-    results.replaceChildren(h2('結果速報'), p('対象日：' + date.replaceAll('-', '/'), 'public-note'), panel);
+    const scorecard = document.createElement('div');
+    scorecard.id = 'ochap-scorecard-mount';
+    results.replaceChildren(h2('結果速報'), p('対象日：' + date.replaceAll('-', '/'), 'public-note'), scorecard, panel);
+    if (window.OchaPScorecard?.mount) window.OchaPScorecard.mount(scorecard, date);
   }
   // Check on returning to the tab and while the bulletin is open.
   setInterval(() => {
