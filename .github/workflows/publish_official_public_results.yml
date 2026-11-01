@@ -1,5 +1,11 @@
 name: Publish independently verified public race results
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/publish_public_results.py'
+      - 'tests/test_public_results.py'
+      - '.github/workflows/publish_official_public_results.yml'
   schedule:
     # UTC 00:00-14:45 = JST 09:00-23:45, 15-minute ticks
     - cron: '*/15 0-14 * * *'
