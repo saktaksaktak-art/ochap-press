@@ -58,7 +58,9 @@
     const requested = new URL(location.href).searchParams.get('date');
     const isValid = (x) => /^\d{4}-\d{2}-\d{2}$/.test(x || '');
     const currentDefault = window.__OCHAP_ISSUE_INDEX__?.default_date;
-    if (isValid(requested) && requested > currentDefault && requested <= today) return requested;
+    // An explicit historical date is always honored, even after midnight.
+    // With no date specified, the freshest day's results can show before its paper edition exists.
+    if (isValid(requested) && requested <= today) return requested;
     return (issueDate === currentDefault && today >= issueDate) ? today : issueDate;
   }
   let performance = null;
