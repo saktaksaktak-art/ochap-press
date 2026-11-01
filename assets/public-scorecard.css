@@ -1,0 +1,20 @@
+/* Historical public scoreboard: readable on desktop & phone */
+#ochap-scorecard-mount{margin:16px auto 24px;max-width:1280px;padding:16px;border:1px solid #aec3af;border-radius:14px;background:#fffdf7;color:#214532;box-shadow:0 3px 14px #112c1815}
+.ochap-score-title{font-size:21px;line-height:1.4;margin:0 0 8px;color:#164d36}
+.ochap-score-body h4{font-size:16px;margin:20px 0 10px;color:#164d36}
+.ochap-score-note{font-size:13px;color:#476054;margin:8px 0;line-height:1.6}
+.ochap-score-empty{font-size:13px;padding:10px 12px;background:#f1f4ef;border-left:3px solid #96aa9b;border-radius:4px;margin:10px 0;color:#516357}
+.ochap-score-controls{display:flex;gap:8px;flex-wrap:wrap;padding:12px 0}
+.ochap-score-controls select{font:inherit;min-height:40px;padding:8px;max-width:100%;border:1px solid #a6b6a9;background:white;border-radius:6px;color:#264536}
+.ochap-score-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:10px 0 18px}
+.ochap-score-stat{border:1px solid #bdccbd;background:#f5f8f1;border-radius:10px;padding:15px;min-width:0}
+.ochap-score-stat-name{font-size:12px;font-weight:700;color:#486450}
+.ochap-score-stat-value{display:block;font-size:25px;line-height:1.4;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;color:#174a34}
+.ochap-score-stat small{display:block;font-size:11px;color:#63786b}
+.ochap-score-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
+.ochap-score-table{width:100%;min-width:700px;border-collapse:collapse;font-size:12px}
+.ochap-score-table td,.ochap-score-table th{padding:9px 8px;border:1px solid #d0dbcf;text-align:left}
+.ochap-score-table th{background:#eaf2e9;color:#264a36;font-weight:700;white-space:nowrap}
+.ochap-score-table tr:nth-child(even){background:#f8faf6}
+.ochap-score-original{display:inline-block;margin:10px 0;padding:9px 12px;color:#125236;text-decoration:underline;font-weight:700}
+@media(max-width:700px){#ochap-scorecard-mount{padding:12px;margin:10px 0 20px}.ochap-score-title{font-size:18px}.ochap-score-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ochap-score-stat{padding:10px}.ochap-score-stat-value{font-size:20px}.ochap-score-controls select{flex:1 1 120px}}
