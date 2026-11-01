@@ -49,9 +49,17 @@ def main():
                     "Gemini-only newspaper contains OchaP forecast headings")
         else:
             require("05 おちゃっぴー予想" in html,
-                    "Expected original OchaP newspaper missing; preserve its original")
-            require("01 出走表" in html and "02 🍵Pコースデータ" in html,
-                    "Original factual tables missing")
+                    "Expected OchaP column/absence notice missing")
+            require("01 出走表" in html,
+                    "Factual entry table missing")
+            if item.get("not_formal_m0"):
+                require("02 コース別" in html,
+                        "Late reference edition must retain neutral Section 02 data")
+                require("おちゃっぴー記者M0予想：未登録" in html,
+                        "No after-the-fact OchaP prediction may be fabricated")
+            else:
+                require("02 🍵Pコースデータ" in html,
+                        "Original factual tables missing")
     for f in sorted((ROOT / "data/gemi").glob("*.json")):
         doc = json.loads(f.read_text(encoding="utf-8"))
         if doc.get("reporter") != "gemi":
