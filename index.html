@@ -33,12 +33,16 @@
       }else{source=new TextDecoder().decode(bytes)}
     }else{source=await result.text()}
     if(!/<head[\s>]/i.test(source)||!/<\/head>/i.test(source)||!/<\/body>/i.test(source))throw new Error('新聞原本のHTMLが不正です');
+    // Historical newspaper HTML can bundle its own Gemini reporter assets.
+    // Inject only assets missing from the source; otherwise tabs initialize twice.
+    const bundledGemiScript=/<script\b[^>]*\bsrc\s*=\s*["'][^"']*gemi-reporter\.js(?:\?[^"']*)?["']/i.test(source);
+    const bundledGemiStyle=/<link\b[^>]*\bhref\s*=\s*["'][^"']*gemi-reporter\.css(?:\?[^"']*)?["']/i.test(source);
     const headTags='<link rel="stylesheet" href="./assets/date-nav.css">'+
       '<link rel="stylesheet" href="./assets/press-roles.css?v=2">'+
-      (issue.gemi_tabs?'<link rel="stylesheet" href="./assets/gemi-reporter.css?v=20261101-floating-v2">':'');
+      (issue.gemi_tabs&&!bundledGemiStyle?'<link rel="stylesheet" href="./assets/gemi-reporter.css?v=20261101-floating-v2">':'');
     const encoded=JSON.stringify(manifest).replace(/</g,'\\u003c');
     const setGlobals='<script>window.__OCHAP_ISSUE_INDEX__='+encoded+';window.__OCHAP_SELECTED_DATE__='+JSON.stringify(date)+';</'+'script>';
-    const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs?'<script src="./assets/gemi-reporter.js?v=20261101-floating-v2"></'+'script>':'')+
+    const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./assets/gemi-reporter.js?v=20261101-floating-v2"></'+'script>':'')+
       '<script src="./assets/press-roles.js?v=6"></'+'script>';
     source=source.replace(/<\/head>/i,headTags+'</head>');
     source=source.replace(/<\/body>/i,extraScripts+'</body>');
