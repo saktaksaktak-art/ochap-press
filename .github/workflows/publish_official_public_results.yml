@@ -5,6 +5,8 @@ on:
     paths:
       - 'scripts/publish_public_results.py'
       - 'tests/test_public_results.py'
+      - 'tests/test_public_results_merge.py'
+      - 'scripts/reconcile_public_results.py'
       - '.github/workflows/publish_official_public_results.yml'
   schedule:
     # UTC 00:00-14:45 = JST 09:00-23:45, 15-minute ticks
@@ -37,7 +39,7 @@ jobs:
         run: |
           python -m py_compile scripts/publish_public_results.py
           node --check assets/press-roles.js
-          python -m unittest discover -s tests -p 'test_public_results.py' -v
+          python -m unittest discover -s tests -p 'test_public_results*.py' -v
       - name: Fetch only officially matched race results
         env:
           TARGET_DATE: ${{ inputs.issue_date }}
@@ -57,6 +59,35 @@ jobs:
             echo 'NO_NEW_OFFICIAL_DATA_TO_PUBLISH'
             exit 0
           fi
-          git commit -m 'data(results): append BOAT RACE officially matched public results'
-          git pull --rebase origin main
-          git push origin HEAD:main
+          # Concurrent push updates may land between checkout and commit.
+          # Save the verified rows, fetch fresh main, and reconcile strictly.
+          # Never silently overwrite a different official result.
+          mkdir -p "$RUNNER_TEMP/ochap-results-proposed"
+          mapfile -t changed < <(git diff --cached --name-only -- data/public-results/)
+          for file in "${changed[@]}"; do
+            cp "$file" "$RUNNER_TEMP/ochap-results-proposed/$(basename "$file")"
+          done
+          for attempt in 1 2 3; do
+            git fetch origin main
+            git reset --hard origin/main
+            for proposal in "$RUNNER_TEMP"/ochap-results-proposed/*.json; do
+              name="$(basename "$proposal")"
+              python scripts/reconcile_public_results.py \
+                --current "data/public-results/$name" \
+                --incoming "$proposal" \
+                --output "data/public-results/$name"
+            done
+            git add data/public-results/*.json
+            if git diff --cached --quiet; then
+              echo 'ALREADY_PUBLISHED_BY_ANOTHER_RUN'
+              exit 0
+            fi
+            git commit -m 'data(results): append BOAT RACE officially matched public results'
+            if git push origin HEAD:main; then
+              echo 'CONCURRENT_SAFE_RESULTS_PUBLISHED'
+              exit 0
+            fi
+            echo "Push raced with another update, retrying ($attempt/3)"
+          done
+          echo 'Unable to publish safely after three retries' >&2
+          exit 1
