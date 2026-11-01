@@ -1,13 +1,17 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "default_date": "2026-11-01",
   "issues": [
     {
       "date": "2026-11-01",
       "path": "archives/2026-11-01.html",
       "compression": "none",
-      "gemi_tabs": false,
-      "edition_status": "program_reference_only"
+      "gemi_tabs": true,
+      "edition_status": "late_reference_program_and_gemi_forecast",
+      "gemi_json": "data/gemi/2026-11-01.json",
+      "not_formal_m0": true,
+      "venues": 14,
+      "races": 168
     },
     {
       "date": "2026-10-31",
