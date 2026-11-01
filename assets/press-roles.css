@@ -24,3 +24,13 @@
 #ochap-public-panels .public-status{padding:11px 13px;border-left:3px solid #8aa092;background:#f3f6f1}
 @media(max-width:430px){#ochap-public-roles{top:54px;gap:4px}#ochap-public-roles button{font-size:11px;padding:10px 4px}#ochap-public-panels{padding:0 9px}#ochap-public-panels h2{font-size:20px}}
 @media print{#ochap-public-roles,#ochap-public-panels{display:none!important}.ochap-public-original-hidden{display:initial!important}}
+
+
+#ochap-public-panels h3{font-size:17px;margin:18px 0 7px;color:#174c3a}
+#ochap-public-panels .public-drilldown{margin:10px 0;border:1px solid #d5e1d6;border-radius:7px;overflow:hidden}
+#ochap-public-panels .public-drilldown>summary{list-style:revert;cursor:pointer;font-weight:700;background:#eef4ed;padding:10px 13px}
+#ochap-public-panels .public-drilldown .public-table-wrap{padding:0 7px 9px}
+#ochap-public-panels .public-table-wrap{max-width:100%;-webkit-overflow-scrolling:touch}
+#ochap-public-panels .public-table-wrap table th:first-child{position:sticky;left:0;z-index:1;background:#eaf2eb}
+#ochap-public-panels .public-table-wrap table td:first-child{position:sticky;left:0;background:#fffdf5;font-weight:650}
+@media(max-width:600px){#ochap-public-panels table{font-size:12px}#ochap-public-panels th,#ochap-public-panels td{padding:8px 6px}#ochap-public-panels .public-card{padding:12px}}
