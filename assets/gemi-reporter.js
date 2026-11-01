@@ -205,6 +205,8 @@
   let issueMeta = {};
   let sharedInputMeta = null;
   const panes = new Map();
+  // Refuse Gemini copy that claims to be an OchaP forecast.
+  const WRONG_REPORTER_LABEL = /(?:おちゃっぴー|お茶P記者|ChatGPT|🍵P)(?:の|による)?\s*予想/;
 
   function resolveRaceRecord(raceId) {
     if (!raceId) return null;
@@ -283,6 +285,10 @@
     }
     if (sharedInputMeta && sharedInputMeta.sha256 && rec.input_sha256 && rec.input_sha256 !== sharedInputMeta.sha256) {
       return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">共通入力ハッシュ不一致のため表示を停止しました。</p></section>`;
+    }
+    const editorialText = JSON.stringify({reason: rec.reason, scenarios: rec.scenarios, st_comment: rec.st_comment, first_mark: rec.first_mark, navi_details: rec.navi_details});
+    if (WRONG_REPORTER_LABEL.test(editorialText)) {
+      return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">記者名の整合性検査に失敗したため、この原稿の表示を停止しました。</p></section>`;
     }
     const raceTitle = article?.querySelector('.race-head h2')?.textContent || raceId;
     const bets = rec.bets || {};
@@ -393,13 +399,16 @@
   function reporterView(article, showGemi) {
     const info = panes.get(article);
     if (!info) return;
-    for (const node of info.hideInGemi) node.hidden = showGemi;
+    article.dataset.ochapReporterActive = showGemi ? 'gemi' : 'ocha';
+    for (const node of info.hideInGemi) {
+      node.classList.toggle('ochap-ocha-only', showGemi);
+      node.hidden = showGemi;
+    }
     info.gemiBanner.hidden = !showGemi;
     info.gemiPane.hidden = !showGemi;
-    // Gate 5: Keep shared factual Section 02 heading neutral in Gemi兄 view and restore exact OchaP text in OchaP view.
-    if (info.sec02Heading) {
-      info.sec02Heading.textContent = showGemi ? '02 コース別6か月データ・決まり手' : info.sec02OriginalText;
-    }
+    // Gate 5: The shared Section 02 is factual and must not be attributed to either reporter.
+    const sharedHeadings = info.sec02Heading ? [{node: info.sec02Heading, original: info.sec02OriginalText, neutral: '02 コース別6か月データ・決まり手'}] : [];
+    for (const item of sharedHeadings) item.node.textContent = showGemi ? item.neutral : item.original;
     info.ochaButton.setAttribute('aria-pressed', String(!showGemi));
     info.gemiButton.setAttribute('aria-pressed', String(showGemi));
   }
