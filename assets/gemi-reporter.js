@@ -267,7 +267,7 @@
         <span><b>本線3点</b>：${renderComboList(bets.main)}</span>
         <span><b>逆張り</b>：${formatAxisInline(revSummary.axis || (Array.isArray(bets.reverse) && bets.reverse[0] ? bets.reverse[0].slice(0,3)+'-流' : ''))}</span>
         <span><b>舟券ナビ</b>：${naviDetails.status === 'recommended' ? formatAxisInline(naviDetails.axis || (Array.isArray(bets.navi) && bets.navi[0] ? bets.navi[0].slice(0,3)+'-流' : '')) : '<span class="note">見送り</span>'}</span>
-        <span class="note">${esc(modeBadgeText(rec))}</span>
+        ${issueDate === '2026-11-01' ? '' : `<span class="note">${esc(modeBadgeText(rec))}</span>`}
       </div>
     </div>`;
   }
@@ -392,7 +392,7 @@
             <p>${esc(naviDetails.reason || naviDetails.axis_reason || '')}</p>
           </div>
         </div>
-        <p class="ochap-gemi-details">${esc(modeBadgeText(rec))} ｜ 予想凍結：${esc(rec.freeze_at)} ／ 共通入力：${esc(snapId)} (SHA256:${esc(shaShort)}…) ／ 原本：${esc(rec.source_ref)}</p>
+        ${issueDate === '2026-11-01' ? '' : `<p class="ochap-gemi-details">${esc(modeBadgeText(rec))} ｜ 予想凍結：${esc(rec.freeze_at)} ／ 共通入力：${esc(snapId)} (SHA256:${esc(shaShort)}…) ／ 原本：${esc(rec.source_ref)}</p>`}
       </section>`;
   }
 
