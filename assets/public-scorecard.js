@@ -97,6 +97,28 @@
       card("お茶P｜回収率",a.roi===null?"—":a.roi.toFixed(1)+"%",a.n+"R対象"),
       card("Gemi兄｜3連単",pct(b.three,b.n),b.n+"R対象"));
     area.append(tiles);
+    // Restore the old newspaper's all-category comparison at a glance.
+    // A separate line for each journalist keeps historical one-sided
+    // reference scores visible without inventing a head-to-head match.
+    const categories=make("section","ochap-score-categories");
+    categories.append(make("h4","","予想区分別 成績比較"));
+    const categoryRows=[];
+    const fmtStat=(number,n)=>n?pct(number,n)+"（"+number+"/"+n+"R）":"—";
+    for(const [key,title] of groups){
+      for(const [author,label] of [["ocha","お茶P"],["gemi","Gemi兄"]]){
+        const x=score(records,author,key);
+        categoryRows.push([
+          label,title,x.n?x.n+"R":"未集計",
+          fmtStat(x.win,x.n),fmtStat(x.exacta,x.n),fmtStat(x.three,x.n),
+          x.n?yen(x.stake):"—",x.n?yen(x.gross):"—",
+          x.n?yen(x.profit):"—",x.roi===null?"—":x.roi.toFixed(1)+"%"
+        ]);
+      }
+    }
+    categories.append(table(["記者","予想区分","対象","1着","2連単","3連単","投資","払戻","収支","回収率"],categoryRows));
+    categories.append(make("p","ochap-score-note",
+      "各買い目100円。全区分は本線・逆張り・舟券ナビを合算し、区分間で重なる買い目もそれぞれ1枚として計算。対象のない記者は未集計。"));
+    area.append(categories);
     for(const [name,x] of [["お茶P",a],["Gemi兄",b]]){
       if(!x.n){
         area.append(make("p","ochap-score-empty",name+"記者：集計可能な予想原本がありません。0%ではなく未集計です。"));
