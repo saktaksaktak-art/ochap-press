@@ -154,8 +154,11 @@
       host.append(make("p","ochap-score-empty","この日の予想成績はまだ集計されていません。"));
       return;
     }
+    const note=date==="2026-11-01"
+      ? "Gemi兄の11/1参考予想（9:36作成）を集計。締切後の8Rと結果未取得の2Rは除外。7時までの正式朝刊予想ではありません。"
+      : "旧版と同じ100円平買いの参考集計。区分間の重複券も区分ごとに購入扱い。正式バックチェックとは別です。";
     host.append(make("h3","ochap-score-title","全国結果速報｜全体ダイジェスト"),
-      make("p","ochap-score-note","旧版と同じ100円平買いの参考集計。区分間の重複券も区分ごとに購入扱い。正式バックチェックとは別です。"),
+      make("p","ochap-score-note",note),
       buildControls(host,data.records));
     render(host,data.records);
     if(date==="2026-10-30"){
