@@ -116,8 +116,8 @@
       const p=score(paired,"ocha",ui.group),q=score(paired,"gemi",ui.group);
       area.append(make("h4","","両記者・同じレースの直接対決（"+paired.length+"R）"));
       area.append(table(["記者","◎1着","2連単","3連単","平買い収支","回収率"],
-        [["お茶P",pct(p.win,p.n),pct(p.exacta,p.n),pct(p.three,p.n),yen(p.profit),pct(p.gross,p.stake/100)],
-         ["Gemi兄",pct(q.win,q.n),pct(q.exacta,q.n),pct(q.three,q.n),yen(q.profit),pct(q.gross,q.stake/100)]]));
+        [["お茶P",pct(p.win,p.n),pct(p.exacta,p.n),pct(p.three,p.n),yen(p.profit),p.roi===null?"—":p.roi.toFixed(1)+"%"],
+         ["Gemi兄",pct(q.win,q.n),pct(q.exacta,q.n),pct(q.three,q.n),yen(q.profit),q.roi===null?"—":q.roi.toFixed(1)+"%"]]));
     } else {
       area.append(make("p","ochap-score-note","両記者の直接対決は、同じ入力・締切前に記録した両方の予想が揃ったレースだけ掲載します。"));
     }
