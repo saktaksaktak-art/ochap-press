@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "date": "2026-11-01",
   "status": "API_RESULTS_REFERENCE_ONLY",
-  "checked_at_jst": "2026-11-01T22:05:34+09:00",
+  "checked_at_jst": "2026-11-01T22:30:27+09:00",
   "source_policy": "Unified third-party API; official-page confirmation belongs only to formal BC.",
   "not_formal_m0": true,
   "not_formal_bc": true,
@@ -2070,6 +2070,22 @@
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261101.json",
       "source_observed_at_jst": "2026-11-01T22:05:34+09:00"
+    },
+    {
+      "venue": "下関",
+      "venue_code": 19,
+      "race_no": 10,
+      "order": [
+        4,
+        6,
+        1
+      ],
+      "method": "まくり",
+      "trifecta_payout_yen": 3190,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261101.json",
+      "source_observed_at_jst": "2026-11-01T22:30:27+09:00"
     },
     {
       "venue": "芦屋",
