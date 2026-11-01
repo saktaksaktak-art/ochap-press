@@ -1,205 +1,137 @@
 #!/usr/bin/env python3
-"""Incremental public RESULTS feed. Third-party index nominates races; each row
-is independently confirmed against BOAT RACE's actual race result HTML.
-Never certify formal M0/BC from this file. Fail closed on any discrepancy."""
+"""Public速報: read unified third-party API results, no BOAT RACE official-page HTTP.
+Only formal BC performs the official verification. Preserve certified legacy rows.
+"""
 from __future__ import annotations
 import argparse
 from datetime import datetime
-from hashlib import sha256
-import json, re, time, unicodedata
 from pathlib import Path
 from urllib.error import HTTPError, URLError
-from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
-from bs4 import BeautifulSoup
+import json
+from reconcile_public_results import checked, merge
 
-JST=ZoneInfo('Asia/Tokyo')
-VENUES={1:'桐生',2:'戸田',3:'江戸川',4:'平和島',5:'多摩川',6:'浜名湖',7:'蒲郡',
-8:'常滑',9:'津',10:'三国',11:'びわこ',12:'住之江',13:'尼崎',14:'鳴門',
-15:'丸亀',16:'児島',17:'宮島',18:'徳山',19:'下関',20:'若松',21:'芦屋',
-22:'福岡',23:'唐津',24:'大村'}
-METHODS={'逃げ','差し','まくり','まくり差し','抜き','恵まれ'}
+JST = ZoneInfo('Asia/Tokyo')
+VENUES = {
+    1:'桐生',2:'戸田',3:'江戸川',4:'平和島',5:'多摩川',6:'浜名湖',
+    7:'蒲郡',8:'常滑',9:'津',10:'三国',11:'びわこ',12:'住之江',
+    13:'尼崎',14:'鳴門',15:'丸亀',16:'児島',17:'宮島',18:'徳山',
+    19:'下関',20:'若松',21:'芦屋',22:'福岡',23:'唐津',24:'大村'
+}
+METHODS = {'逃げ','差し','まくり','まくり差し','抜き','恵まれ'}
 
-def fetch(url, limit=8000000):
-    req=Request(url,headers={'User-Agent':'OchaPPressResults/1.0 public reference verifier',
-           'Accept':'text/html,application/json;q=0.9,*/*;q=0.5'})
-    with urlopen(req,timeout=18) as res:
-        if res.status!=200: raise ValueError('HTTP '+str(res.status))
-        data=res.read(limit+1)
-    if len(data)>limit:raise ValueError('oversize source')
-    return data
+def fetch(url, limit=8_000_000):
+    req=Request(url, headers={'User-Agent':'OchaPPressAPIResults/1.1',
+        'Accept':'application/json'})
+    with urlopen(req, timeout=20) as response:
+        if response.status != 200: raise ValueError('API HTTP '+str(response.status))
+        raw=response.read(limit+1)
+    if len(raw)>limit: raise ValueError('API exceeds byte budget')
+    return json.loads(raw)
 
-def norm(value):
-    return unicodedata.normalize('NFKC',str(value)).replace('\xa0',' ').strip()
-
-def candidate(entry, day):
-    if not isinstance(entry,dict) or entry.get('date')!=day:return None
-    venue,n=entry.get('stadium_number'),entry.get('number')
-    if type(venue)!=int or venue not in VENUES or type(n)!=int or not 1<=n<=12:return None
-    boats=entry.get('boats')
-    if not isinstance(boats,list):return None
+def parse_api_result(result, date, venue, rno, source_url, observed_at):
+    """Require real 6-boat race, ordered podium, and matching 3連単.
+    No official confirmation is claimed, and provisional/malformed data stays out."""
+    if not isinstance(result,dict) or result.get('date')!=date: return None
+    if type(result.get('stadium_number')) is not int or result['stadium_number']!=venue: return None
+    if type(result.get('race_number')) is not int or result['race_number']!=rno: return None
+    racers=result.get('racers')
+    if not isinstance(racers,dict) or set(racers)!=set('123456'): return None
     ranked={}
-    for boat in boats:
-        if not isinstance(boat,dict):return None
-        p,b=boat.get('racer_place_number'),boat.get('racer_boat_number')
-        if type(p)==int and 1<=p<=3:
-            if p in ranked or type(b)!=int or not 1<=b<=6:return None
-            ranked[p]=b
-    if set(ranked)!={1,2,3} or len(set(ranked.values()))!=3:return None
-    order=[ranked[p] for p in (1,2,3)]
-    payout=(entry.get('payouts') or {}).get('trifecta',[])
-    if not isinstance(payout,list) or len(payout)!=1:return None
-    p=payout[0]
-    if not isinstance(p,dict) or type(p.get('amount'))!=int or p['amount']<100:return None
-    if norm(p.get('combination',''))!='-'.join(map(str,order)):return None
-    return dict(jcd=venue,race_no=n,order=order,payout=p['amount'])
+    for boatno in range(1,7):
+        v=racers[str(boatno)]
+        if not isinstance(v,dict) or v.get('entry_number') != boatno: return None
+        if type(v.get('number')) is not int or not 1000<=v['number']<=9999: return None
+        p=v.get('place_number')
+        if type(p) is int and 1<=p<=3:
+            if p in ranked: return None
+            ranked[p]=boatno
+    if set(ranked)!={1,2,3}: return None
+    order=[ranked[k] for k in (1,2,3)]
+    payouts=result.get('payouts')
+    if not isinstance(payouts,dict): return None
+    tf=payouts.get('trifecta')
+    if not isinstance(tf,list) or len(tf)!=1 or not isinstance(tf[0],dict): return None
+    price=tf[0].get('amount')
+    if type(price) is not int or price<100 or price>100_000_000: return None
+    if tf[0].get('combination')!='-'.join(map(str,order)): return None
+    method=result.get('technique_number_source')
+    if method not in METHODS: method=None
+    return {
+        'venue':VENUES[venue], 'venue_code':venue, 'race_no':rno,
+        'order':order, 'method':method, 'trifecta_payout_yen':price,
+        'official_confirmed':False, 'result_status':'API_REPORTED',
+        'result_source_ref':source_url, 'source_observed_at_jst':observed_at
+    }
 
-def unified_v1_candidates(payload, day):
-    """Yield result candidates from the newer unified v1 API.
-    Nested results are optional until a race is complete; never guess missing data.
-    """
-    if not isinstance(payload,dict): raise ValueError('Non-object unified API payload')
-    programs=payload.get('programs')
-    stadiums=programs.get('stadiums') if isinstance(programs,dict) else None
-    if not isinstance(stadiums,dict) or not stadiums:
-        raise ValueError('Missing unified API stadiums')
-    for venue_key,stadium in stadiums.items():
-        if not isinstance(venue_key,str) or not venue_key.isdecimal() or int(venue_key) not in VENUES:
-            raise ValueError('Invalid unified API venue key')
-        if not isinstance(stadium,dict) or not isinstance(stadium.get('races'),dict):
-            raise ValueError('Missing unified API races')
-        for number_key,race in stadium['races'].items():
-            if not isinstance(number_key,str) or not number_key.isdecimal() or not 1<=int(number_key)<=12:
-                raise ValueError('Invalid unified API race key')
-            if not isinstance(race,dict):continue
-            result=race.get('result')
-            if result is None:continue
-            if not isinstance(result,dict) or result.get('date') != day or (
-                result.get('stadium_number') != int(venue_key)) or (
-                result.get('race_number') != int(number_key)):
-                continue
-            racers=result.get('racers')
-            if not isinstance(racers,dict) or len(racers)!=6:continue
-            boats=[]
-            for boat_key,boat in racers.items():
-                if not isinstance(boat_key,str) or boat_key not in '123456' or not isinstance(boat,dict):
-                    boats=[];break
-                entry=int(boat_key)
-                if boat.get('entry_number')!=entry:boats=[];break
-                boats.append({'racer_boat_number':entry,'racer_place_number':boat.get('place_number')})
-            if len(boats)!=6:continue
-            candidate_entry={'date':day,'stadium_number':int(venue_key),
-              'number':int(number_key),'boats':boats,'payouts':result.get('payouts')}
-            item=candidate(candidate_entry,day)
-            if item is not None:yield item
-
-def official_verify(raw, item, url):
-    soup=BeautifulSoup(raw,'html.parser')
-    rank_tables=[]; payout_tables=[]; method_tables=[]
-    for table in soup.select('table'):
-        heads=[norm(h.get_text(' ',strip=True)) for h in table.select('th')]
-        if all(x in heads for x in ('着','枠','ボートレーサー')):rank_tables.append(table)
-        if all(x in heads for x in ('勝式','組番','払戻金')):payout_tables.append(table)
-        if heads==['決まり手']:method_tables.append(table)
-    if any(len(t)!=1 for t in (rank_tables,payout_tables,method_tables)):return None
-    rank={}
-    for tr in rank_tables[0].select('tr'):
-        cells=tr.find_all('td',recursive=False)
-        if len(cells)<3:continue
-        place,boat=norm(cells[0].get_text(' ',strip=True)),norm(cells[1].get_text(' ',strip=True))
-        if place in ('1','2','3') and re.fullmatch('[1-6]',boat):
-            if int(place) in rank:return None
-            rank[int(place)]=int(boat)
-    if set(rank)!={1,2,3}:return None
-    order=[rank[i] for i in (1,2,3)]
-    if order!=item['order']:return None
-    payouts=[]
-    for tr in payout_tables[0].select('tr'):
-        cells=tr.find_all('td',recursive=False)
-        if len(cells)<3 or norm(cells[0].get_text(' ',strip=True))!='3連単':continue
-        boats=[norm(x.get_text(strip=True)) for x in cells[1].select('.numberSet1_number')]
-        amount=cells[2].select_one('.is-payout1')
-        if len(boats)!=3 or not amount or any(not re.fullmatch('[1-6]',b) for b in boats):continue
-        price=re.sub('[,¥￥\\s]','',norm(amount.get_text(' ',strip=True)))
-        if price.isdigit():payouts.append(([int(x) for x in boats],int(price)))
-    if len(payouts)!=1 or payouts[0]!=(order,item['payout']):return None
-    methods=[norm(td.get_text(' ',strip=True)) for td in method_tables[0].select('td')]
-    if len(methods)!=1 or methods[0] not in METHODS:return None
-    return dict(venue=VENUES[item['jcd']],venue_code=item['jcd'],race_no=item['race_no'],
-       order=order,method=methods[0],trifecta_payout_yen=item['payout'],
-       official_confirmed=True,official_result_source_ref=url,
-       official_html_sha256=sha256(raw).hexdigest(),
-       source_confirmed_at_jst=datetime.now(JST).isoformat(timespec='seconds'))
+def unified_v1_results(payload, date, source_url, observed_at):
+    if not isinstance(payload,dict): raise ValueError('Not an API object')
+    prog=payload.get('programs')
+    venues=prog.get('stadiums') if isinstance(prog,dict) else None
+    if not isinstance(venues,dict) or not venues:
+        raise ValueError('No API stadiums; schema may have changed')
+    rows={}
+    for key,stadium in venues.items():
+        if not isinstance(key,str) or not key.isdecimal() or int(key) not in VENUES:
+            raise ValueError('Invalid venue in API')
+        venue=int(key)
+        races=stadium.get('races') if isinstance(stadium,dict) else None
+        if not isinstance(races,dict): raise ValueError('Invalid races object in API')
+        for rkey,race in races.items():
+            if not isinstance(rkey,str) or not rkey.isdecimal() or not 1<=int(rkey)<=12:
+                raise ValueError('Invalid race number in API')
+            rno=int(rkey)
+            result=race.get('result') if isinstance(race,dict) else None
+            if result is None: continue
+            row=parse_api_result(result,date,venue,rno,source_url,observed_at)
+            if row is not None:
+                if (venue,rno) in rows:raise ValueError('Duplicate API race')
+                rows[(venue,rno)]=row
+    return [rows[key] for key in sorted(rows)]
 
 def main():
-    p=argparse.ArgumentParser()
-    p.add_argument('--date',default=datetime.now(JST).date().isoformat())
-    p.add_argument('--max-official',type=int,default=14)
-    p.add_argument('--sleep',type=float,default=1.25)
-    args=p.parse_args()
-    if args.max_official not in range(1,25) or args.sleep<0.8:p.error('invalid request budget')
-    date=datetime.strptime(args.date,'%Y-%m-%d').date()
-    if date>datetime.now(JST).date():p.error('future date not eligible')
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--date',default=datetime.now(JST).date().isoformat())
+    args=parser.parse_args()
+    day=datetime.strptime(args.date,'%Y-%m-%d').date()
+    now=datetime.now(JST)
+    if day>now.date():parser.error('Do not publish future results')
+    source=f'https://boatraceopenapi.github.io/api/v1/{day.year}/{day:%Y%m%d}.json'
     target=Path('data/public-results')/(args.date+'.json')
-    previous=[]
+    previous=None
     if target.exists():
-        saved=json.loads(target.read_text(encoding='utf-8'))
-        if saved.get('schema_version')!='1.0' or saved.get('date')!=args.date or not isinstance(saved.get('races'),list):
-            raise ValueError('Incompatible existing results file')
-        previous=saved['races']
-    confirmed={}
-    for row in previous:
-        key=(row.get('venue_code'),row.get('race_no'))
-        if row.get('official_confirmed') is not True or not row.get('official_result_source_ref') or key in confirmed:
-            raise ValueError('Prior verified data is inconsistent')
-        confirmed[key]=row
-    # Unified v1 provides program + preview + results in one newer JSON feed.
-    # The legacy /results/v3 feed is deprecated and no longer the primary source.
-    feed=f'https://boatraceopenapi.github.io/api/v1/{date.year}/{date:%Y%m%d}.json'
+        previous=json.loads(target.read_text(encoding='utf-8'))
+        old_day,_=checked(previous)
+        if old_day!=args.date:raise ValueError('Existing results date mismatch')
     try:
-        payload=json.loads(fetch(feed))
-    except (HTTPError,URLError,TimeoutError,ValueError) as exc:
-        print('UNIFIED_V1_UNAVAILABLE_KEEP_EXISTING',str(exc))
+        api=fetch(source)
+    except (HTTPError,URLError,TimeoutError,ValueError) as ex:
+        print('API_FETCH_UNAVAILABLE_KEEP_EXISTING',str(ex))
         return
-    rows={}
-    for c in unified_v1_candidates(payload,args.date):
-        key=(c['jcd'],c['race_no'])
-        if key in rows:raise ValueError('Duplicate unified candidate race key')
-        rows[key]=c
-    pending=[v for k,v in sorted(rows.items()) if k not in confirmed]
-    added=0; failures=0
-    for i,item in enumerate(pending[:args.max_official]):
-        url='https://www.boatrace.jp/owpc/pc/race/raceresult?'+urlencode({
-          'hd':f'{date:%Y%m%d}','jcd':f"{item['jcd']:02d}",'rno':item['race_no']})
-        try:
-            row=official_verify(fetch(url),item,url)
-            if row:
-                confirmed[(item['jcd'],item['race_no'])]=row
-                added+=1
-            else:
-                failures+=1
-                print('OFFICIAL_MISMATCH_OR_INCOMPLETE',item['jcd'],item['race_no'])
-        except (HTTPError,URLError,TimeoutError,ValueError) as exc:
-            failures+=1
-            print('OFFICIAL_FETCH_FAILED',item['jcd'],item['race_no'],str(exc))
-        if i+1<min(len(pending),args.max_official):time.sleep(args.sleep)
-    if not added:
-        print('NO_NEW_OFFICIAL_ROWS; previous kept',len(previous),'candidate',len(rows),'failures',failures)
+    observed=datetime.now(JST).isoformat(timespec='seconds')
+    rows=unified_v1_results(api,args.date,source,observed)
+    if not rows:
+        print('NO_COMPLETE_API_RESULTS_KEEP_EXISTING',args.date)
         return
-    output={
-       'schema_version':'1.0','date':args.date,
-       'status':'OFFICIAL_RACE_PAGE_VERIFIED_ONLY',
-       'checked_at_jst':datetime.now(JST).isoformat(timespec='seconds'),
-       'source_policy':'Candidates from third-party API; every published row independently checked against official BOAT RACE result page.',
-       'not_formal_m0':True,'not_formal_bc':True,
-       'races':sorted(confirmed.values(),key=lambda x:(x['venue_code'],x['race_no']))
+    incoming={
+      'schema_version':'1.0','date':args.date,
+      'status':'API_RESULTS_REFERENCE_ONLY',
+      'checked_at_jst':observed,
+      'source_policy':'Unified third-party API; official-page confirmation belongs only to formal BC.',
+      'not_formal_m0':True,'not_formal_bc':True,
+      'races':rows
     }
+    combined=merge(previous,incoming)
+    if previous is not None and combined==previous:
+        print('NO_CHANGED_API_RESULTS',args.date,len(combined['races']))
+        return
     target.parent.mkdir(parents=True,exist_ok=True)
     tmp=target.with_suffix('.tmp')
-    tmp.write_text(json.dumps(output,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+    tmp.write_text(json.dumps(combined,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     tmp.replace(target)
-    print('PUBLISHED_VERIFIED',args.date,'confirmed',len(output['races']),'new',added,'failures',failures)
+    print('PUBLISHED_API_REFERENCE',args.date,len(combined['races']),
+          'new_or_changed',len([r for r in combined['races'] if not r['official_confirmed']]))
 
 if __name__=='__main__':
     main()
