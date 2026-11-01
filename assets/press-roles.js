@@ -108,11 +108,11 @@
   const periods = {yesterday:1,week:7,month:30,year:365};
   const periodNames = {yesterday:'前日',week:'週間（過去7日）',month:'月間（過去30日）',year:'年間（過去365日）'};
   const conditions = {
-    all:'全レース',escape:'①逃げ成立',upset:'非①頭',
+    all:'全レース',escape:'①号艇1着',upset:'非①号艇1着',
     'course:1':'1コースからの1着','course:2':'2コースからの1着',
     'course:3':'3コースからの1着','course:4':'4コースからの1着',
     'course:5':'5コースからの1着','course:6':'6コースからの1着',
-    sashi:'差し決着',makuri:'まくり決着',makurizashi:'まくり差し決着',sg:'SG',g1:'G1',morning:'モーニング',day:'デイ',night:'ナイター'
+    sashi:'差し決着',makuri:'まくり決着',makurizashi:'まくり差し決着',nuki:'抜き決着',megumare:'恵まれ決着',sg:'SG',g1:'G1',g2:'G2',g3:'G3',general:'一般戦',morning:'モーニング',day:'デイ',night:'ナイター',agree:'両者◎一致',disagree:'両者◎対立',bothEscape:'両者とも①頭',bothUpset:'両者とも非①頭',...Object.fromEntries([1,2,3,4,5,6].map(n=>['boat:'+n,n+'号艇1着']))
   };
   const metrics = {
     head:'◎1着的中',headPlace2:'◎2着以内',headPlace3:'◎3着以内',
@@ -171,10 +171,15 @@
     if(condition==='all')return true;
     if(condition.startsWith('course:'))return actualWinningCourse(r)===Number(condition.slice(7));
     if(condition.startsWith('venue:'))return r.venue===condition.slice('venue:'.length);
+    if(condition.startsWith('boat:'))return String(r.actual_order[0])===condition.slice(5);
+    if(condition==='agree')return getPick(r.reporters.ocha,'main')!==null && getPick(r.reporters.ocha,'main')===getPick(r.reporters.gemi,'main');
+    if(condition==='disagree')return getPick(r.reporters.ocha,'main')!==null && getPick(r.reporters.gemi,'main')!==null && getPick(r.reporters.ocha,'main')!==getPick(r.reporters.gemi,'main');
+    if(condition==='bothEscape')return ['ocha','gemi'].every(k=>getPick(r.reporters[k],'main')==='1');
+    if(condition==='bothUpset')return ['ocha','gemi'].every(k=>getPick(r.reporters[k],'main')!==null && getPick(r.reporters[k],'main')!=='1');
     if(condition==='escape')return String(r.actual_order[0])==='1';
     if(condition==='upset')return String(r.actual_order[0])!=='1';
-    if(['sashi','makuri','makurizashi'].includes(condition))return ({sashi:'差し',makuri:'まくり',makurizashi:'まくり差し'})[condition]===r.actual_method;
-    if(['sg','g1'].includes(condition))return String(r.grade||'').toLowerCase()===condition;
+    if(['sashi','makuri','makurizashi','nuki','megumare'].includes(condition))return ({sashi:'差し',makuri:'まくり',makurizashi:'まくり差し',nuki:'抜き',megumare:'恵まれ'})[condition]===r.actual_method;
+    if(['sg','g1','g2','g3','general'].includes(condition)){const g=String(r.grade||'').trim().toLowerCase();return condition==='general'?['一般','一般戦','general','ippan'].includes(g):g===condition;}
     return r.session===condition;
   }
   function getPick(f,which){
@@ -237,7 +242,7 @@
   }
   function conditionOptions(){
     const opts={...conditions};
-    const places=[...new Set((performance?.records||[]).map(r=>r.venue).filter(Boolean))].sort((a,b)=>String(a).localeCompare(String(b),'ja'));
+    const places=[...new Set([...allVenues,...(performance?.records||[]).map(r=>r.venue).filter(Boolean)])].sort((a,b)=>String(a).localeCompare(String(b),'ja'));
     for(const name of places)opts['venue:'+name]='会場：'+name;
     return opts;
   }
@@ -309,9 +314,11 @@
     conditionCard.append(p('選択した評価指標で、期間・条件を統一して比較。条件が重なるレースは各区分に計上されます。','public-note'));
     const allPeriod=(performance?.records||[]).filter(r=>eligible(r)&&r.date>=start&&r.date<=end);
     const filterGroups={
-      '決着傾向':['escape','upset','sashi','makuri','makurizashi'],
+      '決着傾向':['escape','upset','sashi','makuri','makurizashi','nuki','megumare'],
+      '両記者の本命判断':['agree','disagree','bothEscape','bothUpset'],
+      '勝艇の号艇':['boat:1','boat:2','boat:3','boat:4','boat:5','boat:6'],
       '実進入コース':['course:1','course:2','course:3','course:4','course:5','course:6'],
-      '競走グレード':['sg','g1'],
+      '競走グレード':['sg','g1','g2','g3','general'],
       '時間帯':['morning','day','night']
     };
     for(const [group,keys] of Object.entries(filterGroups)){
