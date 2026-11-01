@@ -55,6 +55,45 @@ def candidate(entry, day):
     if norm(p.get('combination',''))!='-'.join(map(str,order)):return None
     return dict(jcd=venue,race_no=n,order=order,payout=p['amount'])
 
+def unified_v1_candidates(payload, day):
+    """Yield result candidates from the newer unified v1 API.
+    Nested results are optional until a race is complete; never guess missing data.
+    """
+    if not isinstance(payload,dict): raise ValueError('Non-object unified API payload')
+    programs=payload.get('programs')
+    stadiums=programs.get('stadiums') if isinstance(programs,dict) else None
+    if not isinstance(stadiums,dict) or not stadiums:
+        raise ValueError('Missing unified API stadiums')
+    for venue_key,stadium in stadiums.items():
+        if not isinstance(venue_key,str) or not venue_key.isdecimal() or int(venue_key) not in VENUES:
+            raise ValueError('Invalid unified API venue key')
+        if not isinstance(stadium,dict) or not isinstance(stadium.get('races'),dict):
+            raise ValueError('Missing unified API races')
+        for number_key,race in stadium['races'].items():
+            if not isinstance(number_key,str) or not number_key.isdecimal() or not 1<=int(number_key)<=12:
+                raise ValueError('Invalid unified API race key')
+            if not isinstance(race,dict):continue
+            result=race.get('result')
+            if result is None:continue
+            if not isinstance(result,dict) or result.get('date') != day or (
+                result.get('stadium_number') != int(venue_key)) or (
+                result.get('race_number') != int(number_key)):
+                continue
+            racers=result.get('racers')
+            if not isinstance(racers,dict) or len(racers)!=6:continue
+            boats=[]
+            for boat_key,boat in racers.items():
+                if not isinstance(boat_key,str) or boat_key not in '123456' or not isinstance(boat,dict):
+                    boats=[];break
+                entry=int(boat_key)
+                if boat.get('entry_number')!=entry:boats=[];break
+                boats.append({'racer_boat_number':entry,'racer_place_number':boat.get('place_number')})
+            if len(boats)!=6:continue
+            candidate_entry={'date':day,'stadium_number':int(venue_key),
+              'number':int(number_key),'boats':boats,'payouts':result.get('payouts')}
+            item=candidate(candidate_entry,day)
+            if item is not None:yield item
+
 def official_verify(raw, item, url):
     soup=BeautifulSoup(raw,'html.parser')
     rank_tables=[]; payout_tables=[]; method_tables=[]
@@ -115,21 +154,19 @@ def main():
         if row.get('official_confirmed') is not True or not row.get('official_result_source_ref') or key in confirmed:
             raise ValueError('Prior verified data is inconsistent')
         confirmed[key]=row
-    feed=f'https://boatraceopenapi.github.io/results/v3/{date.year}/{date:%Y%m%d}.json'
+    # Unified v1 provides program + preview + results in one newer JSON feed.
+    # The legacy /results/v3 feed is deprecated and no longer the primary source.
+    feed=f'https://boatraceopenapi.github.io/api/v1/{date.year}/{date:%Y%m%d}.json'
     try:
         payload=json.loads(fetch(feed))
     except (HTTPError,URLError,TimeoutError,ValueError) as exc:
-        print('CANDIDATE_UNAVAILABLE_KEEP_EXISTING',str(exc))
+        print('UNIFIED_V1_UNAVAILABLE_KEEP_EXISTING',str(exc))
         return
-    if not isinstance(payload,dict) or not isinstance(payload.get('results'),list):
-        raise ValueError('Third party index schema changed: fail closed')
     rows={}
-    for entry in payload['results']:
-        c=candidate(entry,args.date)
-        if c:
-            key=(c['jcd'],c['race_no'])
-            if key in rows:raise ValueError('Duplicate candidate race key')
-            rows[key]=c
+    for c in unified_v1_candidates(payload,args.date):
+        key=(c['jcd'],c['race_no'])
+        if key in rows:raise ValueError('Duplicate unified candidate race key')
+        rows[key]=c
     pending=[v for k,v in sorted(rows.items()) if k not in confirmed]
     added=0; failures=0
     for i,item in enumerate(pending[:args.max_official]):
