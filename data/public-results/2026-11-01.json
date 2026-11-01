@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "date": "2026-11-01",
   "status": "OFFICIAL_RACE_PAGE_VERIFIED_ONLY",
-  "checked_at_jst": "2026-11-01T21:31:22+09:00",
+  "checked_at_jst": "2026-11-01T21:54:15+09:00",
   "source_policy": "Candidates from third-party API; every published row independently checked against official BOAT RACE result page.",
   "not_formal_m0": true,
   "not_formal_bc": true,
@@ -168,6 +168,38 @@
       "source_confirmed_at_jst": "2026-11-01T21:31:16+09:00"
     },
     {
+      "venue": "戸田",
+      "venue_code": 2,
+      "race_no": 11,
+      "order": [
+        1,
+        5,
+        2
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 5230,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=02&rno=11",
+      "official_html_sha256": "de1d515f7ae65fe8336089bb666e4dfc0f6ca715b7ba5ae3c20b31e06900ae0e",
+      "source_confirmed_at_jst": "2026-11-01T21:53:54+09:00"
+    },
+    {
+      "venue": "戸田",
+      "venue_code": 2,
+      "race_no": 12,
+      "order": [
+        1,
+        2,
+        5
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 1320,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=02&rno=12",
+      "official_html_sha256": "24fdd22ba2e694800a36676746d0a51b6088dc621b609f8e22b2bcb4a84fde66",
+      "source_confirmed_at_jst": "2026-11-01T21:53:56+09:00"
+    },
+    {
       "venue": "江戸川",
       "venue_code": 3,
       "race_no": 1,
@@ -230,6 +262,198 @@
       "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=03&rno=4",
       "official_html_sha256": "4d51b395f628c6dc4e4156de48571b0cdc5d4cc6194268894c8aabe5140bbe79",
       "source_confirmed_at_jst": "2026-11-01T21:31:22+09:00"
+    },
+    {
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 5,
+      "order": [
+        3,
+        2,
+        1
+      ],
+      "method": "まくり",
+      "trifecta_payout_yen": 13530,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=03&rno=5",
+      "official_html_sha256": "186dd0a9174be3b209829da27781ce3fd0478e8f29d7d97ba717ad873287501a",
+      "source_confirmed_at_jst": "2026-11-01T21:53:57+09:00"
+    },
+    {
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 6,
+      "order": [
+        3,
+        1,
+        4
+      ],
+      "method": "抜き",
+      "trifecta_payout_yen": 1730,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=03&rno=6",
+      "official_html_sha256": "0d5c645b039e221ba0a4c009f0928c355dda01b050895402926e86adbdb0d9dc",
+      "source_confirmed_at_jst": "2026-11-01T21:53:59+09:00"
+    },
+    {
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 7,
+      "order": [
+        5,
+        1,
+        6
+      ],
+      "method": "まくり",
+      "trifecta_payout_yen": 2760,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=03&rno=7",
+      "official_html_sha256": "8107ce7d6b38a0bba2579ebee0ed92f9513734095094dd70bedba91564a82ebe",
+      "source_confirmed_at_jst": "2026-11-01T21:54:01+09:00"
+    },
+    {
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 8,
+      "order": [
+        1,
+        4,
+        3
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 1120,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=03&rno=8",
+      "official_html_sha256": "65a5f63fc031cd4aa9d3e11d11d96ba8231abf9efa323bff3739270066ffcdce",
+      "source_confirmed_at_jst": "2026-11-01T21:54:02+09:00"
+    },
+    {
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 9,
+      "order": [
+        1,
+        3,
+        5
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 5430,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=03&rno=9",
+      "official_html_sha256": "6bed56984bf75333ad77c81f26ee97bb7316ba9ee2948d09ccbb5f74c70aca4d",
+      "source_confirmed_at_jst": "2026-11-01T21:54:04+09:00"
+    },
+    {
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 10,
+      "order": [
+        5,
+        4,
+        2
+      ],
+      "method": "まくり差し",
+      "trifecta_payout_yen": 13650,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=03&rno=10",
+      "official_html_sha256": "ad04235a62323d0403d707a198fa30ca3987e2eb728dc4daae0d01e91a42559c",
+      "source_confirmed_at_jst": "2026-11-01T21:54:05+09:00"
+    },
+    {
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 11,
+      "order": [
+        2,
+        3,
+        6
+      ],
+      "method": "まくり",
+      "trifecta_payout_yen": 17700,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=03&rno=11",
+      "official_html_sha256": "47ae5c18e8772133dd4062080aad14d965c77f5d6a2c536381fba5e8f2e93674",
+      "source_confirmed_at_jst": "2026-11-01T21:54:07+09:00"
+    },
+    {
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 12,
+      "order": [
+        1,
+        2,
+        5
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 1000,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=03&rno=12",
+      "official_html_sha256": "45239bf9d51f1a66e2e42334b0e89dd56e681b4f46fda7a5f2b816ee363f8fe1",
+      "source_confirmed_at_jst": "2026-11-01T21:54:09+09:00"
+    },
+    {
+      "venue": "平和島",
+      "venue_code": 4,
+      "race_no": 1,
+      "order": [
+        5,
+        6,
+        2
+      ],
+      "method": "抜き",
+      "trifecta_payout_yen": 5640,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=04&rno=1",
+      "official_html_sha256": "2062cf576d0d80c6d9486740c6184143a31821c41533e9f567826621d2fd6448",
+      "source_confirmed_at_jst": "2026-11-01T21:54:10+09:00"
+    },
+    {
+      "venue": "平和島",
+      "venue_code": 4,
+      "race_no": 2,
+      "order": [
+        3,
+        2,
+        4
+      ],
+      "method": "まくり差し",
+      "trifecta_payout_yen": 5640,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=04&rno=2",
+      "official_html_sha256": "76c5ced9a0544a92415e481fcb190aabe506053a803598ebe21eb83c309a6827",
+      "source_confirmed_at_jst": "2026-11-01T21:54:12+09:00"
+    },
+    {
+      "venue": "平和島",
+      "venue_code": 4,
+      "race_no": 3,
+      "order": [
+        5,
+        1,
+        4
+      ],
+      "method": "まくり差し",
+      "trifecta_payout_yen": 12690,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=04&rno=3",
+      "official_html_sha256": "db0249e48ea0afc2ff5f55ca0e771da683dace6c4c1e2b26f2c73f59e0f6a7de",
+      "source_confirmed_at_jst": "2026-11-01T21:54:13+09:00"
+    },
+    {
+      "venue": "平和島",
+      "venue_code": 4,
+      "race_no": 4,
+      "order": [
+        2,
+        1,
+        6
+      ],
+      "method": "差し",
+      "trifecta_payout_yen": 3010,
+      "official_confirmed": true,
+      "official_result_source_ref": "https://www.boatrace.jp/owpc/pc/race/raceresult?hd=20261101&jcd=04&rno=4",
+      "official_html_sha256": "68edf82e8206c94379b05820106f3f9f9102d06c54288a9025c3bfdd46390222",
+      "source_confirmed_at_jst": "2026-11-01T21:54:15+09:00"
     }
   ]
 }
