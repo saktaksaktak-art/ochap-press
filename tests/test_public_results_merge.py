@@ -37,4 +37,38 @@ class ResultsMerge(unittest.TestCase):
         b['date']='2026-11-02'
         with self.assertRaisesRegex(ValueError,'Cross-date'):
             merge(a,b)
+def api_row(no,order,pay,at='2026-11-01T20:00:00+09:00'):
+    return {'venue':'鳴門','venue_code':14,'race_no':no,
+        'official_confirmed':False,'result_status':'API_REPORTED',
+        'result_source_ref':'https://boatraceopenapi.github.io/api/v1/2026/20261101.json',
+        'source_observed_at_jst':at,'order':order,'method':'逃げ',
+        'trifecta_payout_yen':pay}
+class ApiMergeTests(unittest.TestCase):
+    def test_api_added(self):
+        a=pack([row(1,[1,2,3],1230)])
+        b=pack([api_row(2,[2,1,4],2630)])
+        m=merge(a,b)
+        self.assertEqual([x['race_no'] for x in m['races']],[1,2])
+        self.assertIs(m['races'][1]['official_confirmed'],False)
+    def test_api_correction_replaces_earlier_api(self):
+        a=pack([api_row(2,[2,1,4],2630)])
+        b=pack([api_row(2,[2,4,1],2640,'2026-11-01T20:05:00+09:00')])
+        self.assertEqual(merge(a,b)['races'][0]['order'],[2,4,1])
+    def test_api_does_not_downgrade_verified_legacy(self):
+        a=pack([row(1,[1,2,3],1230)])
+        b=pack([api_row(1,[1,3,2],3330)])
+        self.assertEqual(merge(a,b),a)
+    def test_unchanged_api_no_commit(self):
+        a=pack([api_row(1,[1,2,3],1230)])
+        b=pack([api_row(1,[1,2,3],1230,'2026-11-01T20:05:00+09:00')])
+        self.assertEqual(merge(a,b),a)
+    def test_stale_api_correction_does_not_revert(self):
+        a=pack([api_row(1,[1,3,2],3330,'2026-11-01T20:10:00+09:00')])
+        b=pack([api_row(1,[1,2,3],1230,'2026-11-01T20:05:00+09:00')])
+        self.assertEqual(merge(a,b),a)
+    def test_api_row_without_status_rejected(self):
+        x=api_row(1,[1,2,3],1230)
+        del x['result_status']
+        with self.assertRaisesRegex(ValueError,'Unverified'):
+            merge(None,pack([x]))
 if __name__=='__main__':unittest.main()
