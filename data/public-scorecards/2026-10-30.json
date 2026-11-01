@@ -1,0 +1,6781 @@
+{
+  "schema_version": "ochap.public.reference_scorecard.v1",
+  "date": "2026-10-30",
+  "scope": "historical_reference_only",
+  "not_formal_m0": true,
+  "not_formal_bc": true,
+  "reader_label": "参考成績",
+  "source_forecasts": "https://ochap-newspaper-20261025.saktaksaktak.chatgpt.site/results?date=2026-10-30",
+  "source_results": "https://boatraceopenapi.github.io/api/v1/2026/20261030.json",
+  "policy": "Each reporter needs a frozen independently attributable pre-deadline forecast; do not create a Gemi retrospective comparison.",
+  "summary": {
+    "race_count": 144,
+    "forecasts_with_picks": {
+      "main": 432,
+      "reverse": 576,
+      "nav": 560
+    }
+  },
+  "records": [
+    {
+      "id": "v14-r1",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 1,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T08:35:00+09:00",
+      "result": {
+        "order": [
+          1,
+          6,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 12540,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-5",
+              "1-5-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r2",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 2,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T09:01:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1380,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r3",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 3,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T09:27:00+09:00",
+      "result": {
+        "order": [
+          6,
+          5,
+          3
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 7690,
+        "refund_boats": [
+          2
+        ]
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r4",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 4,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T09:53:00+09:00",
+      "result": {
+        "order": [
+          6,
+          4,
+          5
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 218130,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-6"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-2-3",
+              "4-2-5",
+              "4-2-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r5",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 5,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T10:27:00+09:00",
+      "result": {
+        "order": [
+          2,
+          4,
+          1
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 2990,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r6",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 6,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T10:55:00+09:00",
+      "result": {
+        "order": [
+          3,
+          2,
+          5
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 1450,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-3-1",
+              "2-1-3",
+              "2-3-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r7",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 7,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T11:22:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 6500,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-1-4",
+              "2-4-1",
+              "2-1-5"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-4-2",
+              "3-4-5",
+              "3-4-6"
+            ],
+            "nav": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r8",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 8,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T11:54:00+09:00",
+      "result": {
+        "order": [
+          5,
+          6,
+          2
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 29160,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-1-4",
+              "3-1-2",
+              "3-1-6"
+            ],
+            "reverse": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ],
+            "nav": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r9",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 9,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T12:23:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 540,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-6"
+            ],
+            "reverse": [
+              "2-3-1",
+              "2-3-4",
+              "2-3-5",
+              "2-3-6"
+            ],
+            "nav": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r10",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 10,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T13:03:00+09:00",
+      "result": {
+        "order": [
+          6,
+          2,
+          3
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 2250,
+        "refund_boats": [
+          5
+        ]
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "6-2-1",
+              "6-1-2",
+              "6-2-5"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "2-1-3",
+              "2-1-4",
+              "2-1-5",
+              "2-1-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r11",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 11,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T13:39:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2830,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-5-3",
+              "1-3-5",
+              "1-5-2"
+            ],
+            "reverse": [
+              "5-2-1",
+              "5-2-3",
+              "5-2-4",
+              "5-2-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v14-r12",
+      "venue": "鳴門",
+      "venue_code": 14,
+      "race_no": 12,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T14:13:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1580,
+        "refund_boats": [
+          5
+        ]
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-4",
+              "1-4-3",
+              "1-3-6"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r1",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 1,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T08:51:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "抜き",
+        "trifecta_payout_yen": 1460,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-4-3"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r2",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 2,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T09:17:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 840,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r3",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 3,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T09:43:00+09:00",
+      "result": {
+        "order": [
+          1,
+          6,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1880,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r4",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 4,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T10:09:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1150,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r5",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 5,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T10:40:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 620,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r6",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 6,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T11:09:00+09:00",
+      "result": {
+        "order": [
+          1,
+          5,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1470,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-1-5",
+              "2-5-1",
+              "2-1-3"
+            ],
+            "reverse": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ],
+            "nav": [
+              "5-2-1",
+              "5-2-3",
+              "5-2-4",
+              "5-2-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r7",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 7,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T11:40:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1970,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-1-4",
+              "2-4-1",
+              "2-1-3"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-3-2",
+              "4-3-5",
+              "4-3-6"
+            ],
+            "nav": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r8",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 8,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T12:11:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 810,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "4-1-3",
+              "4-3-1",
+              "4-1-2"
+            ],
+            "reverse": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ],
+            "nav": [
+              "4-3-1",
+              "4-3-2",
+              "4-3-5",
+              "4-3-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r9",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 9,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T12:42:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 490,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-6"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r10",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 10,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T13:17:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2480,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r11",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 11,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T13:50:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          3
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 900,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-1-3",
+              "2-3-1",
+              "2-1-4"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-4-2",
+              "3-4-5",
+              "3-4-6"
+            ],
+            "nav": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v18-r12",
+      "venue": "徳山",
+      "venue_code": 18,
+      "race_no": 12,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T14:27:00+09:00",
+      "result": {
+        "order": [
+          5,
+          2,
+          1
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 19820,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r1",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 1,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T08:43:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1120,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-5-4",
+              "1-4-5",
+              "1-5-3"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r2",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 2,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T09:09:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 320,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-3"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r3",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 3,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T09:35:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1230,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-4",
+              "1-4-3",
+              "1-3-2"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-3-2",
+              "4-3-5",
+              "4-3-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r4",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 4,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T10:01:00+09:00",
+      "result": {
+        "order": [
+          1,
+          6,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 4510,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-1-2",
+              "3-2-1",
+              "3-1-6"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r5",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 5,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T10:32:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2660,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r6",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 6,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T11:01:00+09:00",
+      "result": {
+        "order": [
+          1,
+          6,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 32260,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-1-4",
+              "3-4-1",
+              "3-1-2"
+            ],
+            "reverse": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ],
+            "nav": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r7",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 7,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T11:34:00+09:00",
+      "result": {
+        "order": [
+          2,
+          3,
+          5
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 3140,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-3-1",
+              "2-3-6",
+              "2-1-3"
+            ],
+            "reverse": [
+              "6-3-1",
+              "6-3-2",
+              "6-3-4",
+              "6-3-5"
+            ],
+            "nav": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r8",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 8,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T12:06:00+09:00",
+      "result": {
+        "order": [
+          3,
+          2,
+          4
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 15200,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-6-4",
+              "2-4-6",
+              "2-6-1"
+            ],
+            "reverse": [
+              "6-4-1",
+              "6-4-2",
+              "6-4-3",
+              "6-4-5"
+            ],
+            "nav": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r9",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 9,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T12:37:00+09:00",
+      "result": {
+        "order": [
+          4,
+          5,
+          1
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 3470,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-4-1",
+              "3-4-5",
+              "3-4-6"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r10",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 10,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T13:07:00+09:00",
+      "result": {
+        "order": [
+          4,
+          3,
+          5
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 10910,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-4",
+              "1-4-3",
+              "1-3-2"
+            ],
+            "reverse": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r11",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 11,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T13:44:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          5
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 9010,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-5",
+              "1-5-3",
+              "1-3-2"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v23-r12",
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 12,
+      "daypart": "モーニング",
+      "close_at_jst": "2026-10-30T14:23:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 410,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r1",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 1,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T10:59:00+09:00",
+      "result": {
+        "order": [
+          2,
+          3,
+          1
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 9240,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-6"
+            ],
+            "reverse": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r2",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 2,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:25:00+09:00",
+      "result": {
+        "order": [
+          3,
+          1,
+          2
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 2130,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-4",
+              "1-4-3",
+              "1-3-2"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-4-2",
+              "3-4-5",
+              "3-4-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r3",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 3,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:51:00+09:00",
+      "result": {
+        "order": [
+          2,
+          5,
+          3
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 2040,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-2-5",
+              "1-3-2"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r4",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 4,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:17:00+09:00",
+      "result": {
+        "order": [
+          2,
+          4,
+          5
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 1900,
+        "refund_boats": [
+          3
+        ]
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-2-4",
+              "3-4-2",
+              "3-2-1"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r5",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 5,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:43:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1350,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-4-6",
+              "1-2-4"
+            ],
+            "reverse": [
+              "6-4-1",
+              "6-4-2",
+              "6-4-3",
+              "6-4-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r6",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 6,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T13:09:00+09:00",
+      "result": {
+        "order": [
+          3,
+          1,
+          5
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 1710,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-4",
+              "1-4-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r7",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 7,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T13:35:00+09:00",
+      "result": {
+        "order": [
+          3,
+          2,
+          1
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 3930,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-6"
+            ],
+            "reverse": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r8",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 8,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:02:00+09:00",
+      "result": {
+        "order": [
+          2,
+          4,
+          3
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 12920,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-5"
+            ],
+            "reverse": [
+              "5-4-1",
+              "5-4-2",
+              "5-4-3",
+              "5-4-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r9",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 9,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:30:00+09:00",
+      "result": {
+        "order": [
+          6,
+          5,
+          3
+        ],
+        "method": "抜き",
+        "trifecta_payout_yen": 68900,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-5",
+              "1-5-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "5-6-1",
+              "5-6-2",
+              "5-6-3",
+              "5-6-4"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r10",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 10,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:59:00+09:00",
+      "result": {
+        "order": [
+          3,
+          1,
+          5
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 3960,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-6",
+              "1-6-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "6-5-1",
+              "6-5-2",
+              "6-5-3",
+              "6-5-4"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r11",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 11,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T15:29:00+09:00",
+      "result": {
+        "order": [
+          4,
+          1,
+          2
+        ],
+        "method": "抜き",
+        "trifecta_payout_yen": 6370,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-2-5",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v3-r12",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "race_no": 12,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T16:00:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1220,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-3",
+              "1-3-4",
+              "1-4-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r1",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 1,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T10:43:00+09:00",
+      "result": {
+        "order": [
+          3,
+          1,
+          4
+        ],
+        "method": "恵まれ",
+        "trifecta_payout_yen": 1190,
+        "refund_boats": [
+          2
+        ]
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-3-1",
+              "2-3-4",
+              "2-3-5",
+              "2-3-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r2",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 2,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:11:00+09:00",
+      "result": {
+        "order": [
+          2,
+          5,
+          3
+        ],
+        "method": "抜き",
+        "trifecta_payout_yen": 19500,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-5",
+              "1-5-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "5-6-1",
+              "5-6-2",
+              "5-6-3",
+              "5-6-4"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r3",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 3,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:37:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          3
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 1060,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r4",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 4,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:03:00+09:00",
+      "result": {
+        "order": [
+          2,
+          3,
+          1
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 18210,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-4-1",
+              "3-1-4",
+              "3-4-2"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-3-2",
+              "4-3-5",
+              "4-3-6"
+            ],
+            "nav": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r5",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 5,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:34:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 390,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r6",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 6,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T13:12:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1010,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r7",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 7,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T13:41:00+09:00",
+      "result": {
+        "order": [
+          2,
+          5,
+          3
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 5550,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-1-3",
+              "2-3-1",
+              "2-1-4"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-3-2",
+              "4-3-5",
+              "4-3-6"
+            ],
+            "nav": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r8",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 8,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:09:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 530,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-6",
+              "1-6-2",
+              "1-2-3"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r9",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 9,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:42:00+09:00",
+      "result": {
+        "order": [
+          4,
+          1,
+          5
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 1650,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-5"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-2-3",
+              "4-2-5",
+              "4-2-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r10",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 10,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T15:11:00+09:00",
+      "result": {
+        "order": [
+          3,
+          4,
+          6
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 19140,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r11",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 11,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T15:38:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 780,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-5",
+              "1-5-3",
+              "1-3-2"
+            ],
+            "reverse": [
+              "2-3-1",
+              "2-3-4",
+              "2-3-5",
+              "2-3-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v6-r12",
+      "venue": "浜名湖",
+      "venue_code": 6,
+      "race_no": 12,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T16:14:00+09:00",
+      "result": {
+        "order": [
+          1,
+          5,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2480,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "5-2-1",
+              "5-2-3",
+              "5-2-4",
+              "5-2-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r1",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 1,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T10:20:00+09:00",
+      "result": {
+        "order": [
+          4,
+          1,
+          6
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 3600,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-6"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r2",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 2,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T10:50:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          3
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 3380,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-4-2",
+              "3-4-5",
+              "3-4-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r3",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 3,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:19:00+09:00",
+      "result": {
+        "order": [
+          2,
+          3,
+          1
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 11300,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-6",
+              "1-6-3",
+              "1-3-2"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r4",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 4,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:50:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 950,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-1-2",
+              "3-2-1",
+              "3-1-4"
+            ],
+            "reverse": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ],
+            "nav": [
+              "3-2-1",
+              "3-2-4",
+              "3-2-5",
+              "3-2-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r5",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 5,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:21:00+09:00",
+      "result": {
+        "order": [
+          6,
+          2,
+          3
+        ],
+        "method": "抜き",
+        "trifecta_payout_yen": 12010,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-6",
+              "1-6-2",
+              "1-2-3"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r6",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 6,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:48:00+09:00",
+      "result": {
+        "order": [
+          1,
+          5,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1940,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-5"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r7",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 7,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T13:15:00+09:00",
+      "result": {
+        "order": [
+          1,
+          5,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 4170,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-3"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-2-3",
+              "4-2-5",
+              "4-2-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r8",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 8,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T13:48:00+09:00",
+      "result": {
+        "order": [
+          4,
+          5,
+          6
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 330,
+        "refund_boats": [
+          1
+        ]
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": null
+          },
+          "navi_status": "not_recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r9",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 9,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:17:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1100,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-3"
+            ],
+            "reverse": [
+              "2-3-1",
+              "2-3-4",
+              "2-3-5",
+              "2-3-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r10",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 10,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:46:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 990,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-2-5",
+              "1-3-2"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r11",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 11,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T15:24:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 630,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v8-r12",
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 12,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T16:04:00+09:00",
+      "result": {
+        "order": [
+          1,
+          6,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 9260,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-3-2",
+              "4-3-5",
+              "4-3-6"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r1",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 1,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T10:37:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1010,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "5-2-1",
+              "5-2-3",
+              "5-2-4",
+              "5-2-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r2",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 2,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:03:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 3460,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-3"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-3-2",
+              "4-3-5",
+              "4-3-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r3",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 3,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:29:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1820,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-3",
+              "1-3-4",
+              "1-4-5"
+            ],
+            "reverse": [
+              "5-4-1",
+              "5-4-2",
+              "5-4-3",
+              "5-4-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r4",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 4,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:57:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1860,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r5",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 5,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:28:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2310,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-5",
+              "1-5-3",
+              "1-3-2"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r6",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 6,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:59:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 3190,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-3"
+            ],
+            "reverse": [
+              "5-3-1",
+              "5-3-2",
+              "5-3-4",
+              "5-3-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r7",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 7,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T13:30:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 960,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r8",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 8,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:02:00+09:00",
+      "result": {
+        "order": [
+          5,
+          1,
+          3
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 38670,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-5-2",
+              "1-2-5",
+              "1-5-4"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-2-3",
+              "4-2-5",
+              "4-2-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r9",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 9,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:34:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2570,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "4-1-2",
+              "4-2-1",
+              "4-1-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r10",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 10,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T15:08:00+09:00",
+      "result": {
+        "order": [
+          3,
+          1,
+          4
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 5560,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "5-6-1",
+              "5-6-2",
+              "5-6-3",
+              "5-6-4"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r11",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 11,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T15:50:00+09:00",
+      "result": {
+        "order": [
+          4,
+          3,
+          6
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 17870,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-3",
+              "1-3-4",
+              "1-4-5"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-3-2",
+              "4-3-5",
+              "4-3-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v13-r12",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 12,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T16:35:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 960,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r1",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 1,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T10:48:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1460,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-3"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-2-3",
+              "4-2-5",
+              "4-2-6"
+            ],
+            "nav": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r2",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 2,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:17:00+09:00",
+      "result": {
+        "order": [
+          3,
+          4,
+          5
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 6240,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-3-4",
+              "1-2-3"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-4-2",
+              "3-4-5",
+              "3-4-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r3",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 3,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T11:47:00+09:00",
+      "result": {
+        "order": [
+          4,
+          2,
+          1
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 5620,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-4-6",
+              "1-2-4"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r4",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 4,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:15:00+09:00",
+      "result": {
+        "order": [
+          3,
+          1,
+          6
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 3140,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r5",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 5,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T12:54:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 670,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r6",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 6,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T13:25:00+09:00",
+      "result": {
+        "order": [
+          6,
+          1,
+          4
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 3850,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-6"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r7",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 7,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T13:57:00+09:00",
+      "result": {
+        "order": [
+          1,
+          5,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 850,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-2-5",
+              "1-3-2"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r8",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 8,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:25:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          4
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 3930,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-3"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r9",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 9,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T14:56:00+09:00",
+      "result": {
+        "order": [
+          3,
+          1,
+          4
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 12080,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "3-2-1",
+              "3-2-4",
+              "3-2-5",
+              "3-2-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r10",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 10,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T15:27:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 820,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-3"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r11",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 11,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T15:57:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 900,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "2-3-1",
+              "2-3-4",
+              "2-3-5",
+              "2-3-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v16-r12",
+      "venue": "児島",
+      "venue_code": 16,
+      "race_no": 12,
+      "daypart": "デイ",
+      "close_at_jst": "2026-10-30T16:30:00+09:00",
+      "result": {
+        "order": [
+          1,
+          5,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 8860,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r1",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 1,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T15:21:00+09:00",
+      "result": {
+        "order": [
+          3,
+          1,
+          4
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 7270,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-2-1",
+              "3-2-4",
+              "3-2-6"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r2",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 2,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T15:47:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 620,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-5",
+              "1-5-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r3",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 3,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T16:18:00+09:00",
+      "result": {
+        "order": [
+          2,
+          5,
+          6
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 17100,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r4",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 4,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T16:49:00+09:00",
+      "result": {
+        "order": [
+          1,
+          6,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 3880,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-6",
+              "1-6-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r5",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 5,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T17:22:00+09:00",
+      "result": {
+        "order": [
+          1,
+          6,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1520,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-6-4",
+              "1-4-6",
+              "1-6-2"
+            ],
+            "reverse": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r6",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 6,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T17:51:00+09:00",
+      "result": {
+        "order": [
+          4,
+          5,
+          1
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 19850,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-3",
+              "1-3-4",
+              "1-4-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r7",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 7,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T18:18:00+09:00",
+      "result": {
+        "order": [
+          3,
+          4,
+          1
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 3710,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-1-2",
+              "3-2-1",
+              "3-1-4"
+            ],
+            "reverse": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ],
+            "nav": [
+              "3-4-1",
+              "3-4-2",
+              "3-4-5",
+              "3-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r8",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 8,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T18:46:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 800,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r9",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 9,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T19:16:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          4
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 8340,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "5-2-1",
+              "5-1-2",
+              "5-2-6"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "5-6-1",
+              "5-6-2",
+              "5-6-3",
+              "5-6-4"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r10",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 10,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T19:48:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1300,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "5-4-1",
+              "5-4-2",
+              "5-4-3",
+              "5-4-6"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r11",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 11,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T20:16:00+09:00",
+      "result": {
+        "order": [
+          5,
+          4,
+          1
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 11350,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v1-r12",
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 12,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T20:45:00+09:00",
+      "result": {
+        "order": [
+          5,
+          1,
+          2
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 13570,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r1",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 1,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T15:19:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 920,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-5-3",
+              "1-3-5",
+              "1-5-2"
+            ],
+            "reverse": [
+              "5-3-1",
+              "5-3-2",
+              "5-3-4",
+              "5-3-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r2",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 2,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T15:44:00+09:00",
+      "result": {
+        "order": [
+          3,
+          4,
+          2
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 3550,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-2-1",
+              "3-1-2",
+              "3-2-5"
+            ],
+            "reverse": [
+              "2-1-3",
+              "2-1-4",
+              "2-1-5",
+              "2-1-6"
+            ],
+            "nav": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r3",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 3,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T16:11:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 8500,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-3-4",
+              "2-4-3",
+              "2-3-1"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-4-2",
+              "3-4-5",
+              "3-4-6"
+            ],
+            "nav": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r4",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 4,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T16:39:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2120,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-3"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r5",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 5,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T17:08:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          3
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 34100,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-5-2",
+              "1-2-5",
+              "1-5-4"
+            ],
+            "reverse": [
+              "5-4-1",
+              "5-4-2",
+              "5-4-3",
+              "5-4-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r6",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 6,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T17:37:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 470,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-2-6",
+              "1-3-2"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r7",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 7,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T18:04:00+09:00",
+      "result": {
+        "order": [
+          3,
+          4,
+          1
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 8240,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r8",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 8,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T18:32:00+09:00",
+      "result": {
+        "order": [
+          3,
+          1,
+          5
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 1650,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r9",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 9,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T19:02:00+09:00",
+      "result": {
+        "order": [
+          2,
+          5,
+          4
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 15630,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-1-4",
+              "2-4-1",
+              "2-1-3"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r10",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 10,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T19:32:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 620,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r11",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 11,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T20:04:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1980,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v7-r12",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 12,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T20:35:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2340,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r1",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 1,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T15:17:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 570,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-4-5",
+              "1-5-4",
+              "1-4-2"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r2",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 2,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T15:41:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          3
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 1010,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-3-1",
+              "2-1-3",
+              "2-3-4"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r3",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 3,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T16:06:00+09:00",
+      "result": {
+        "order": [
+          3,
+          2,
+          6
+        ],
+        "method": "まくり",
+        "trifecta_payout_yen": 5960,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-2-6",
+              "1-3-2"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r4",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 4,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T16:32:00+09:00",
+      "result": {
+        "order": [
+          1,
+          6,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2730,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-5-3",
+              "1-3-5",
+              "1-5-4"
+            ],
+            "reverse": [
+              "5-6-1",
+              "5-6-2",
+              "5-6-3",
+              "5-6-4"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r5",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 5,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T17:01:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          6
+        ],
+        "method": "抜き",
+        "trifecta_payout_yen": 1080,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-6"
+            ],
+            "reverse": [
+              "2-6-1",
+              "2-6-3",
+              "2-6-4",
+              "2-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r6",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 6,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T17:29:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 780,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-6"
+            ],
+            "reverse": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r7",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 7,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T17:57:00+09:00",
+      "result": {
+        "order": [
+          1,
+          6,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1020,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-6-3",
+              "1-3-6",
+              "1-6-5"
+            ],
+            "reverse": [
+              "5-6-1",
+              "5-6-2",
+              "5-6-3",
+              "5-6-4"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r8",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 8,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T18:25:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 800,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r9",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 9,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T18:54:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1010,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-5",
+              "1-5-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "5-4-1",
+              "5-4-2",
+              "5-4-3",
+              "5-4-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r10",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 10,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T19:24:00+09:00",
+      "result": {
+        "order": [
+          5,
+          4,
+          1
+        ],
+        "method": "まくり差し",
+        "trifecta_payout_yen": 28500,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-4",
+              "1-4-3",
+              "1-3-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r11",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 11,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T19:57:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1480,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v15-r12",
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 12,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T20:30:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1020,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "3-6-1",
+              "3-6-2",
+              "3-6-4",
+              "3-6-5"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r1",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 1,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T15:26:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          5
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 3190,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-4",
+              "1-4-2",
+              "1-2-3"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-2-3",
+              "4-2-5",
+              "4-2-6"
+            ],
+            "nav": null
+          },
+          "navi_status": "not_recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r2",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 2,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T15:55:00+09:00",
+      "result": {
+        "order": [
+          1,
+          4,
+          3
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 11350,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-6"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "4-6-1",
+              "4-6-2",
+              "4-6-3",
+              "4-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r3",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 3,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T16:24:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1110,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "6-3-1",
+              "6-3-2",
+              "6-3-4",
+              "6-3-5"
+            ],
+            "nav": null
+          },
+          "navi_status": "not_recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r4",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 4,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T16:47:00+09:00",
+      "result": {
+        "order": [
+          4,
+          2,
+          1
+        ],
+        "method": "抜き",
+        "trifecta_payout_yen": 12110,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "3-1-4",
+              "3-4-1",
+              "3-1-2"
+            ],
+            "reverse": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ],
+            "nav": [
+              "3-4-1",
+              "3-4-2",
+              "3-4-5",
+              "3-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r5",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 5,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T17:15:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          4
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 4230,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-5",
+              "1-5-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "5-2-1",
+              "5-2-3",
+              "5-2-4",
+              "5-2-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r6",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 6,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T17:44:00+09:00",
+      "result": {
+        "order": [
+          3,
+          2,
+          4
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 2950,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "2-1-4",
+              "2-4-1",
+              "2-1-5"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-5-2",
+              "4-5-3",
+              "4-5-6"
+            ],
+            "nav": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r7",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 7,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T18:11:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          2
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 440,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-5-2",
+              "3-5-4",
+              "3-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r8",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 8,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T18:39:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 7420,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-5-4",
+              "1-4-5",
+              "1-5-3"
+            ],
+            "reverse": [
+              "5-4-1",
+              "5-4-2",
+              "5-4-3",
+              "5-4-6"
+            ],
+            "nav": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r9",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 9,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T19:09:00+09:00",
+      "result": {
+        "order": [
+          1,
+          5,
+          6
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 2190,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-3-2",
+              "4-3-5",
+              "4-3-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r10",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 10,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T19:40:00+09:00",
+      "result": {
+        "order": [
+          2,
+          1,
+          3
+        ],
+        "method": "差し",
+        "trifecta_payout_yen": 1710,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": null
+          },
+          "navi_status": "not_recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r11",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 11,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T20:10:00+09:00",
+      "result": {
+        "order": [
+          1,
+          3,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 700,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-3-2",
+              "1-2-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "2-4-1",
+              "2-4-3",
+              "2-4-5",
+              "2-4-6"
+            ],
+            "nav": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    },
+    {
+      "id": "v24-r12",
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 12,
+      "daypart": "ナイター",
+      "close_at_jst": "2026-10-30T20:40:00+09:00",
+      "result": {
+        "order": [
+          1,
+          2,
+          4
+        ],
+        "method": "逃げ",
+        "trifecta_payout_yen": 1020,
+        "refund_boats": []
+      },
+      "reporters": {
+        "ocha": {
+          "eligible": true,
+          "prediction_status": "発行時の予想",
+          "freeze_at_jst": "2026-10-30T07:01:37+09:00",
+          "issue_at_jst": "2026-10-30T07:04:25.426732+09:00",
+          "source_forecast_sha256": "908988977722a886ae8b68040551b239946128db78d7cade741e94d7319e0dce",
+          "picks": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-5-1",
+              "2-5-3",
+              "2-5-4",
+              "2-5-6"
+            ],
+            "nav": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          },
+          "navi_status": "recommended"
+        }
+      }
+    }
+  ]
+}
