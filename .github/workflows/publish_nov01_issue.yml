@@ -1,0 +1,73 @@
+name: Publish Nov 1 dated HTML in existing newspaper
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/publish_nov01_issue.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: publish-ochap-20261101-reference
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Build missing dated HTML and update existing date index
+        run: python scripts/build_daily_reference_issue.py --date 2026-11-01
+      - name: Verify exactly 168 article IDs and index linkage
+        run: |
+          python - <<'PY'
+          import json,pathlib,re
+          index=json.loads(pathlib.Path('data/issue-index.json').read_text(encoding='utf-8'))
+          issue=[x for x in index['issues'] if x['date']=='2026-11-01']
+          assert len(issue)==1 and issue[0]['path']=='archives/2026-11-01.html'
+          assert index['default_date']=='2026-11-01'
+          text=pathlib.Path(issue[0]['path']).read_text(encoding='utf-8')
+          ids=re.findall(r'<article id="(v\d+-r\d+)"',text)
+          assert len(ids)==168 and len(set(ids))==168, (len(ids),len(set(ids)))
+          groups={int(i.split('-')[0][1:]) for i in ids}
+          assert len(groups)==14
+          for v in groups:
+              assert all(f'v{v}-r{k}' in ids for k in range(1,13))
+          assert text.count('<tr><td><span class="bnum')==1008
+          assert '正式な朝刊M0予想ではありません' in text
+          assert pathlib.Path('ochap-original.html').exists()
+          print('VERIFIED_DATED_HTML_2026_11_01: 14 venues, 168 R, 1008 boats; original preserved')
+          PY
+      - name: Commit HTML and existing date index
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add archives/2026-11-01.html data/issue-index.json data/issue-source-2026-11-01.json
+          if git diff --cached --quiet; then
+            echo 'Existing dated issue already current.'
+          else
+            git commit -m 'Publish Nov 1 date-selectable 168R reference HTML without retroactive M0'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Prepare published site artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: '.'
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
