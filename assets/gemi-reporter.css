@@ -37,7 +37,9 @@ article > .ochap-gemi-pane[hidden] { display:none !important; }
   box-shadow:0 4px 20px #09291f45;
   font:700 13px/1.3 system-ui,-apple-system,'Hiragino Kaku Gothic ProN',sans-serif;
 }
-#ochap-global-reporter-switch[hidden]{display:none!important}
+#ochap-global-reporter-switch[hidden],
+#ochap-global-reporter-switch.ochap-global-hidden,
+body:has(header#top.ochap-public-original-hidden) #ochap-global-reporter-switch{display:none!important}
 #ochap-global-reporter-switch .ochap-floating-reporter-caption{
   padding:0 7px;color:#426453;white-space:nowrap;
 }
