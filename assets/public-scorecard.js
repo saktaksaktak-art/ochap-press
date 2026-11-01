@@ -121,12 +121,16 @@
     } else {
       area.append(make("p","ochap-score-note","両記者の直接対決は、同じ入力・締切前に記録した両方の予想が揃ったレースだけ掲載します。"));
     }
-    const hits=a.hits.filter(x=>x.hit&&x.record.result.trifecta_payout_yen>=2000)
+    // Show paying hits for either journalist, not only for OchaP.
+    const hits=[...a.hits.map(x=>({reporter:"お茶P",...x})),
+      ...b.hits.map(x=>({reporter:"Gemi兄",...x}))]
+      .filter(x=>x.hit&&x.record.result.trifecta_payout_yen>=2000)
       .sort((x,y)=>y.record.result.trifecta_payout_yen-x.record.result.trifecta_payout_yen);
     if(hits.length){
-      area.append(make("h4","","2,000円以上の的中（"+hits.length+"R）"));
-      area.append(table(["場・R","出目","3連単払戻"],hits.map(x=>[
-        x.record.venue+" "+x.record.race_no+"R",x.record.result.order.join("-"),yen(x.record.result.trifecta_payout_yen)])));
+      area.append(make("h4","","2,000円以上の的中（"+hits.length+"件）"));
+      area.append(table(["記者","場・R","出目","3連単払戻"],hits.map(x=>[
+        x.reporter,x.record.venue+" "+x.record.race_no+"R",x.record.result.order.join("-"),
+        yen(x.record.result.trifecta_payout_yen)])));
     }
     area.append(make("h4","","全レース的中一覧"));
     const hitAt=(r,author,k)=>{
@@ -134,10 +138,12 @@
       if(!list)return "—";
       return list.includes(r.result.order.join("-"))?"的中":"×";
     };
-    area.append(table(["場・R","時間帯","結果","3連単払戻","お茶P本線","逆張り","ナビ","Gemi兄本線"],
+    area.append(table(["場・R","時間帯","結果","3連単払戻",
+      "お茶P本線","お茶P逆張り","お茶Pナビ","Gemi兄本線","Gemi兄逆張り","Gemi兄ナビ"],
       records.map(r=>[r.venue+" "+r.race_no+"R",r.daypart,
-        r.result.order.join("-"),yen(r.result.trifecta_payout_yen),hitAt(r,"ocha","main"),
-        hitAt(r,"ocha","reverse"),hitAt(r,"ocha","nav"),hitAt(r,"gemi","main")])));
+        r.result.order.join("-"),yen(r.result.trifecta_payout_yen),
+        hitAt(r,"ocha","main"),hitAt(r,"ocha","reverse"),hitAt(r,"ocha","nav"),
+        hitAt(r,"gemi","main"),hitAt(r,"gemi","reverse"),hitAt(r,"gemi","nav")])));
     const old=host.querySelector(".ochap-score-body");
     if(old)old.replaceWith(area);else host.append(area);
   }
