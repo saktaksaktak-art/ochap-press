@@ -48,8 +48,19 @@
 
   const legacy = document.querySelector('.export-switch a[href*="/results"]');
   const originalResultsUrl = legacy ? legacy.href : null;
-  let cachedResults = null;
-  let resultLoaded = false;
+  // Results are independently dated from the latest published forecast edition.
+  // This permits today's official bulletin even if today's newspaper has not
+  // yet been published. Archived non-default dates retain their own results.
+  function resultsDate() {
+    const parts = new Intl.DateTimeFormat('en-US', {timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
+    const get = (type) => parts.find(p => p.type === type)?.value;
+    const today = get('year')+'-'+get('month')+'-'+get('day');
+    const requested = new URL(location.href).searchParams.get('date');
+    const isValid = (x) => /^\d{4}-\d{2}-\d{2}$/.test(x || '');
+    const currentDefault = window.__OCHAP_ISSUE_INDEX__?.default_date;
+    if (isValid(requested) && requested > currentDefault && requested <= today) return requested;
+    return (issueDate === currentDefault && today >= issueDate) ? today : issueDate;
+  }
   let performance = null;
   let performanceLoaded = false;
 
@@ -87,23 +98,57 @@
     }
     table.append(tbody);wrap.append(table);return wrap;
   }
+  let resultsFetchSerial = 0;
   async function showResults() {
-    results.replaceChildren(h2('結果速報'), p(`選択中：${issueDate.replaceAll('-', '/')}　｜　確定した結果のみ表示します。`, 'public-note'));
-    if (!resultLoaded) {
-      cachedResults = await fetchJson(`./data/public-results/${issueDate}.json`).catch(() => null);
-      resultLoaded = true;
-    }
-    const entries = cachedResults && cachedResults.schema_version === '1.0' && cachedResults.date === issueDate && Array.isArray(cachedResults.races) ? cachedResults.races.filter(x=>x.official_confirmed===true) : [];
+    const date = resultsDate();
+    const serial = ++resultsFetchSerial;
+    results.replaceChildren(
+      h2('結果速報'),
+      p(`速報対象：${date.replaceAll('-', '/')}｜新聞の発行日とは独立して当日結果を表示します。`, 'public-note'),
+      p('公式レース結果ページで照合できたものだけ掲載。最大数十分の遅延があります。', 'public-note'),
+      p('最新データを確認中…', 'public-status')
+    );
+    // No memoization: switching back to the results tab always checks again.
+    const data = await fetchJson(`./data/public-results/${date}.json`).catch(() => null);
+    if (serial !== resultsFetchSerial || results.hidden) return;
+    const entries = data && data.schema_version === '1.0' && data.date === date && Array.isArray(data.races) ?
+      data.races.filter(x =>
+        x.official_confirmed === true &&
+        /^https:\/\/www\.boatrace\.jp\/owpc\/pc\/race\/raceresult\?/.test(x.official_result_source_ref || '') &&
+        Array.isArray(x.order) && x.order.length === 3 &&
+        typeof x.trifecta_payout_yen === 'number'
+      ) : [];
     const panel = card();
     if (entries.length) {
-      panel.append(p(`公式確認済み ${entries.length}レース。未確定・未取得レースは集計に含めません。`));
-      panel.append(makeTable(['場','R','着順','決まり手','3連単払戻'],entries.map(x=>[x.venue,`${x.race_no}R`,Array.isArray(x.order)?x.order.join('-'):'—',x.method||'—',x.trifecta_payout_yen!=null?`${x.trifecta_payout_yen}円`:'—'])));
+      panel.append(p(`公式照合済み ${entries.length}レース。未確定・未取得レースは含めません。`));
+      if (data.checked_at_jst) panel.append(p(`最終照合：${data.checked_at_jst}`, 'public-note'));
+      panel.append(makeTable(['場','R','着順','決まり手','3連単払戻'],entries.map(x=>[
+        x.venue, `${x.race_no}R`, x.order.join('-'), x.method || '—',
+        `${x.trifecta_payout_yen.toLocaleString('ja-JP')}円`
+      ])));
+      const details = document.createElement('details');
+      const summary = document.createElement('summary');
+      summary.textContent = '公式結果の照合元リンクを表示';
+      details.append(summary);
+      for (const x of entries) {
+        const link = document.createElement('a');
+        link.href = x.official_result_source_ref;
+        link.rel = 'noopener noreferrer';
+        link.target = '_blank';
+        link.textContent = `${x.venue} ${x.race_no}R（BOAT RACE公式）`;
+        details.append(link, document.createTextNode('　'));
+      }
+      panel.append(details);
     } else {
-      panel.append(p('この日の確認済み結果データは、現在のHPには登録されていません。', 'public-status'));
-      const link = externalResultsLink();if(link)panel.append(link);
+      panel.append(p('現時点で公式照合済みの結果はありません。取得後に順次掲載します。', 'public-status'));
+      const link = externalResultsLink(); if (link) panel.append(link);
     }
-    results.append(panel);
+    results.replaceChildren(h2('結果速報'), p(`速報対象：${date.replaceAll('-', '/')}　｜　公式照合結果のみ`, 'public-note'), panel);
   }
+  // Check on returning to the tab and while the bulletin is open.
+  setInterval(() => {
+    if (!results.hidden && document.visibilityState === 'visible') showResults();
+  }, 90000);
 
   const periods = {yesterday:1,week:7,month:30,year:365};
   const periodNames = {yesterday:'前日',week:'週間（過去7日）',month:'月間（過去30日）',year:'年間（過去365日）'};
