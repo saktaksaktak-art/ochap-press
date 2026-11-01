@@ -1,5 +1,5 @@
 /* Historical public scoreboard: readable on desktop & phone */
-#ochap-scorecard-mount{margin:16px auto 24px;max-width:1280px;padding:16px;border:1px solid #aec3af;border-radius:14px;background:#fffdf7;color:#214532;box-shadow:0 3px 14px #112c1815}
+.ochap-scorecard-mount{margin:16px auto 24px;max-width:1280px;padding:16px;border:1px solid #aec3af;border-radius:14px;background:#fffdf7;color:#214532;box-shadow:0 3px 14px #112c1815}
 .ochap-score-title{font-size:21px;line-height:1.4;margin:0 0 8px;color:#164d36}
 .ochap-score-body h4{font-size:16px;margin:20px 0 10px;color:#164d36}
 .ochap-score-note{font-size:13px;color:#476054;margin:8px 0;line-height:1.6}
@@ -17,4 +17,4 @@
 .ochap-score-table th{background:#eaf2e9;color:#264a36;font-weight:700;white-space:nowrap}
 .ochap-score-table tr:nth-child(even){background:#f8faf6}
 .ochap-score-original{display:inline-block;margin:10px 0;padding:9px 12px;color:#125236;text-decoration:underline;font-weight:700}
-@media(max-width:700px){#ochap-scorecard-mount{padding:12px;margin:10px 0 20px}.ochap-score-title{font-size:18px}.ochap-score-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ochap-score-stat{padding:10px}.ochap-score-stat-value{font-size:20px}.ochap-score-controls select{flex:1 1 120px}}
+@media(max-width:700px){.ochap-scorecard-mount{padding:12px;margin:10px 0 20px}.ochap-score-title{font-size:18px}.ochap-score-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.ochap-score-stat{padding:10px}.ochap-score-stat-value{font-size:20px}.ochap-score-controls select{flex:1 1 120px}}
