@@ -1,0 +1,12 @@
+{
+  "date": "2026-11-01",
+  "source": "https://boatraceopenapi.github.io/api/v1/2026/20261101.json",
+  "sha256": "2979e9644e66078db15a0c20d4706005eff2c1d876c8124570dfb4a92e2df776",
+  "venues": 14,
+  "races": 168,
+  "boat_slots": 1008,
+  "verified": true,
+  "kind": "public_program_reference_only",
+  "not_formal_m0": true,
+  "generated_at_jst": "2026/11/01 10:44 JST"
+}

@@ -1,7 +1,14 @@
 {
   "schema_version": "1.0",
-  "default_date": "2026-10-30",
+  "default_date": "2026-11-01",
   "issues": [
+    {
+      "date": "2026-11-01",
+      "path": "archives/2026-11-01.html",
+      "compression": "none",
+      "gemi_tabs": false,
+      "edition_status": "program_reference_only"
+    },
     {
       "date": "2026-10-31",
       "path": "archives/2026-10-31-gemi-only.html",
