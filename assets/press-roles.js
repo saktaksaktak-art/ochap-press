@@ -115,8 +115,21 @@
     sashi:'差し決着',makuri:'まくり決着',makurizashi:'まくり差し決着',sg:'SG',g1:'G1',morning:'モーニング',day:'デイ',night:'ナイター'
   };
   const metrics = {
-    head:'◎1着的中',two:'2連単一致',main:'本線3連単的中',method:'頭＋決まり手一致',A:'A評価（完全一致）'
+    head:'◎1着的中',headPlace2:'◎2着以内',headPlace3:'◎3着以内',
+    winTop2:'勝艇を◎○で捕捉',winTop3:'勝艇を◎○▲で捕捉',
+    second:'○2着的中',third:'▲3着的中',
+    two:'◎→○ 2連単一致',exact3:'◎○▲ 3連単一致',
+    trio3:'◎○▲ 3連複一致',main:'本線3連単的中',
+    reverse:'逆張り的中',navi:'舟券ナビ的中',any:'3区分いずれか的中',
+    method:'◎＋決まり手一致',methodOnly:'決まり手一致',
+    escapeCall:'①頭／非①頭の判定一致',A:'A評価（展開完全一致）'
   };
+  const metricGroups = {
+    '着順・印':['head','headPlace2','headPlace3','winTop2','winTop3','second','third','two','exact3','trio3'],
+    '舟券':['main','reverse','navi','any'],
+    '展開・決まり手':['method','methodOnly','escapeCall','A']
+  };
+  const allVenues=['桐生','戸田','江戸川','平和島','多摩川','浜名湖','蒲郡','常滑','津','三国','びわこ','住之江','尼崎','鳴門','丸亀','児島','宮島','徳山','下関','若松','芦屋','福岡','唐津','大村'];
   let chosenPeriod='week',chosenCondition='all',chosenMetric='head';
   function jstYesterday() {
     const parts = new Intl.DateTimeFormat('en-US',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());
@@ -164,13 +177,46 @@
     if(['sg','g1'].includes(condition))return String(r.grade||'').toLowerCase()===condition;
     return r.session===condition;
   }
+  function getPick(f,which){
+    const v = which==='main'?(f.main_pick ?? f.marks?.main):which==='second'?(f.second_pick ?? f.marks?.second):(f.third_pick ?? f.marks?.third);
+    return /^[1-6]$/.test(String(v??''))?String(v):null;
+  }
+  function getBets(f,which) {
+    const value=f[which+'_bets'] ?? f.bets?.[which];
+    return Array.isArray(value)?value:null;
+  }
+  function canScore(r,metric){
+    return ['ocha','gemi'].every(key=>{
+      const f=r.reporters[key],a=getPick(f,'main'),b=getPick(f,'second'),c=getPick(f,'third');
+      if(['head','headPlace2','headPlace3','escapeCall'].includes(metric))return !!a;
+      if(['winTop2','second','two'].includes(metric))return !!a&&!!b;
+      if(['winTop3','third','exact3','trio3'].includes(metric))return !!a&&!!b&&!!c;
+      if(['main','reverse','navi'].includes(metric))return getBets(f,metric)!==null && (metric==='main'||getBets(f,metric).length>0);
+      if(metric==='any')return ['main','reverse','navi'].every(k=>getBets(f,k)!==null);
+      if(metric==='methodOnly')return Boolean(f.predicted_method && r.actual_method);
+      if(metric==='method')return Boolean(a&&f.predicted_method&&r.actual_method);
+      if(metric==='A')return f.scenario_review_verified===true && Boolean(f.scenario_evidence_ref) && ['A','B','C','D'].includes(f.scenario_grade);
+      return false;
+    });
+  }
   function hit(r,key,metric){
-    const f=r.reporters[key],first=String(r.actual_order[0]);
-    if(metric==='head')return String(f.main_pick)===first;
-    if(metric==='two')return String(f.main_pick)===first && String(f.second_pick)===String(r.actual_order[1]);
-    if(metric==='main')return Array.isArray(f.main_bets) && f.main_bets.includes(r.actual_order.map(String).join('-'));
-    if(metric==='method')return String(f.main_pick)===first && f.predicted_method===r.actual_method;
-    if(metric==='A')return f.scenario_grade==='A' && f.scenario_review_verified===true;
+    const f=r.reporters[key],o=r.actual_order.map(String),a=getPick(f,'main'),b=getPick(f,'second'),c=getPick(f,'third');
+    if(metric==='head')return a===o[0];
+    if(metric==='headPlace2')return o.slice(0,2).includes(a);
+    if(metric==='headPlace3')return o.includes(a);
+    if(metric==='winTop2')return [a,b].includes(o[0]);
+    if(metric==='winTop3')return [a,b,c].includes(o[0]);
+    if(metric==='second')return b===o[1];
+    if(metric==='third')return c===o[2];
+    if(metric==='two')return a===o[0]&&b===o[1];
+    if(metric==='exact3')return a===o[0]&&b===o[1]&&c===o[2];
+    if(metric==='trio3')return new Set([a,b,c]).size===3 && [a,b,c].every(x=>o.includes(x));
+    if(['main','reverse','navi'].includes(metric))return getBets(f,metric)?.includes(o.join('-'))??false;
+    if(metric==='any')return ['main','reverse','navi'].some(k=>getBets(f,k)?.includes(o.join('-')));
+    if(metric==='methodOnly')return f.predicted_method===r.actual_method;
+    if(metric==='method')return a===o[0]&&f.predicted_method===r.actual_method;
+    if(metric==='escapeCall')return (a==='1')===(o[0]==='1');
+    if(metric==='A')return f.scenario_grade==='A'&&f.scenario_review_verified===true;
     return false;
   }
   function exactP(a,b) { // paired two-sided McNemar, exact binomial for moderate n
@@ -211,15 +257,7 @@
     const yesterday=jstYesterday(),start=dateISO(rangeStart(yesterday,periods[chosenPeriod])),end=dateISO(yesterday);
     const baseEntries=(performance?.records||[]).filter(r=>
       eligible(r) && r.date>=start && r.date<=end && conditionMatches(r,chosenCondition));
-    const entries=baseEntries.filter(r=>{
-      const a=r.reporters.ocha,b=r.reporters.gemi;
-      if(chosenMetric==='A')return a.scenario_review_verified===true && b.scenario_review_verified===true && a.scenario_evidence_ref && b.scenario_evidence_ref &&
-        ['A','B','C','D'].includes(a.scenario_grade) && ['A','B','C','D'].includes(b.scenario_grade);
-      if(chosenMetric==='method')return Boolean(r.actual_method && a.predicted_method && b.predicted_method);
-      if(chosenMetric==='two')return a.second_pick!=null && b.second_pick!=null;
-      if(chosenMetric==='main')return Array.isArray(a.main_bets) && Array.isArray(b.main_bets);
-      return true;
-    });
+    const entries=baseEntries.filter(r=>canScore(r,chosenMetric));
     const score=statusFor(entries,chosenMetric);
     const panel=card();
     panel.append(p(`${start} ～ ${end} ｜ 比較可能なレース：${entries.length}R`, 'public-note'));
@@ -233,6 +271,59 @@
       panel.append(p(`${score.label}。条件別の「強い」判定は、共通対象100R以上・差5ポイント以上・対応のある比較検定で有意な場合のみ表示します。`,'public-note'));
     }
     versus.append(panel);
+
+
+    const rate=(v,n)=>n?`${(100*v/n).toFixed(1)}%（${v}/${n}R）`:'—';
+    const stats=(races,metric)=>{
+      const sample=races.filter(r=>canScore(r,metric));
+      return {n:sample.length,a:sample.filter(r=>hit(r,'ocha',metric)).length,b:sample.filter(r=>hit(r,'gemi',metric)).length};
+    };
+    const statLine=(name,races,metric)=>{
+      const st=stats(races,metric),delta=st.n?(100*(st.a-st.b)/st.n):null;
+      return [name,st.n+'R',rate(st.a,st.n),rate(st.b,st.n),
+        delta===null?'—':(delta>0?'+':'')+delta.toFixed(1)+'pt'];
+    };
+    const tableHead=['比較項目','共通対象','おちゃっぴー','Gemi兄','差'];
+    const board=card();board.append(h2('全18項目・比較スコアボード'));
+    board.append(p('各指標の集計対象は両記者の予想・公式結果を照合できる共通レースのみ。「—」は未集計で、0%ではありません。','public-note'));
+    for(const [group,names] of Object.entries(metricGroups)){
+      const h=document.createElement('h3');h.textContent=group;board.append(h);
+      board.append(makeTable(tableHead,names.map(metric=>statLine(metrics[metric],baseEntries,metric))));
+    }
+    versus.append(board);
+    if(baseEntries.length){
+      const breakdown=card();breakdown.append(h2('記者対決：どちらが当てた？'));
+      const both=entries.filter(r=>hit(r,'ocha',chosenMetric)&&hit(r,'gemi',chosenMetric)).length;
+      const onlyO=entries.filter(r=>hit(r,'ocha',chosenMetric)&&!hit(r,'gemi',chosenMetric)).length;
+      const onlyG=entries.filter(r=>!hit(r,'ocha',chosenMetric)&&hit(r,'gemi',chosenMetric)).length;
+      breakdown.append(makeTable(['両者的中','お茶Pのみ','Gemi兄のみ','両者不的中'],
+        [[both+'R',onlyO+'R',onlyG+'R',(entries.length-both-onlyO-onlyG)+'R']]));
+      const conflicts=baseEntries.filter(r=>getPick(r.reporters.ocha,'main') && getPick(r.reporters.gemi,'main') && getPick(r.reporters.ocha,'main')!==getPick(r.reporters.gemi,'main'));
+      breakdown.append(h2('◎本命が割れたレース'),makeTable(tableHead,[statLine('本命対立',conflicts,chosenMetric)]));
+      versus.append(breakdown);
+      const daterows=[...new Set(baseEntries.map(r=>r.date))].sort().reverse().slice(0,31);
+      const dateCard=card();dateCard.append(h2('日別推移'),makeTable(tableHead,daterows.map(day=>statLine(day,baseEntries.filter(r=>r.date===day),chosenMetric))));
+      versus.append(dateCard);
+    }
+    const conditionCard=card();conditionCard.append(h2('どの条件に強い？'));
+    conditionCard.append(p('選択した評価指標で、期間・条件を統一して比較。条件が重なるレースは各区分に計上されます。','public-note'));
+    const allPeriod=(performance?.records||[]).filter(r=>eligible(r)&&r.date>=start&&r.date<=end);
+    const filterGroups={
+      '決着傾向':['escape','upset','sashi','makuri','makurizashi'],
+      '実進入コース':['course:1','course:2','course:3','course:4','course:5','course:6'],
+      '競走グレード':['sg','g1'],
+      '時間帯':['morning','day','night']
+    };
+    for(const [group,keys] of Object.entries(filterGroups)){
+      const detail=document.createElement('details');detail.className='public-drilldown';detail.open=group==='決着傾向';
+      const summary=document.createElement('summary');summary.textContent=group;detail.append(summary);
+      detail.append(makeTable(tableHead,keys.map(key=>statLine(conditions[key],allPeriod.filter(r=>conditionMatches(r,key)),chosenMetric))));
+      conditionCard.append(detail);
+    }
+    const venueDetail=document.createElement('details');venueDetail.className='public-drilldown';
+    const venueSummary=document.createElement('summary');venueSummary.textContent='全国24場別の比較を開く';
+    venueDetail.append(venueSummary,makeTable(tableHead,allVenues.map(v=>statLine(v,allPeriod.filter(r=>r.venue===v),chosenMetric))));
+    conditionCard.append(venueDetail);versus.append(conditionCard);
 
     // Same verified, paired M0 denominator for both reporters in each winning course.
     // Do not use the selected metric's optional data filter for these head-hit rates.
