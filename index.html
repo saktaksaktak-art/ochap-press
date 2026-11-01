@@ -39,11 +39,13 @@
     const bundledGemiStyle=/<link\b[^>]*\bhref\s*=\s*["'][^"']*gemi-reporter\.css(?:\?[^"']*)?["']/i.test(source);
     const headTags='<link rel="stylesheet" href="./assets/date-nav.css">'+
       '<link rel="stylesheet" href="./assets/press-roles.css?v=2">'+
+      '<link rel="stylesheet" href="./assets/public-scorecard.css?v=1">'+
       (issue.gemi_tabs&&!bundledGemiStyle?'<link rel="stylesheet" href="./assets/gemi-reporter.css?v=20261101-floating-v2">':'');
     const encoded=JSON.stringify(manifest).replace(/</g,'\\u003c');
     const setGlobals='<script>window.__OCHAP_ISSUE_INDEX__='+encoded+';window.__OCHAP_SELECTED_DATE__='+JSON.stringify(date)+';</'+'script>';
     const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./assets/gemi-reporter.js?v=20261101-floating-v2"></'+'script>':'')+
-      '<script src="./assets/press-roles.js?v=6"></'+'script>';
+      '<script src="./assets/public-scorecard.js?v=1"></'+'script>'+
+      '<script src="./assets/press-roles.js?v=7"></'+'script>';
     source=source.replace(/<\/head>/i,headTags+'</head>');
     source=source.replace(/<\/body>/i,extraScripts+'</body>');
     document.open();document.write(source);document.close();
