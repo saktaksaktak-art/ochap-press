@@ -14,7 +14,10 @@
     ? window.__OCHAP_SELECTED_DATE__
     : parsedHeaderDate;
   const articleNodes = Array.from(document.querySelectorAll('main article[id]'));
-  if (!articleNodes.length) return;
+  if (!articleNodes.length || window.__OCHAP_GEMI_REPORTER_INITIALIZED__) return;
+  // One initialization per document even if old archives and the entry page
+  // both include the reporter script.
+  window.__OCHAP_GEMI_REPORTER_INITIALIZED__ = true;
 
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
@@ -466,6 +469,9 @@
       sec02Heading,
       sec02OriginalText,
     });
+    // Start with OchaP on every race. Missing OchaP predictions remain
+    // explicitly "未登録" until the reader chooses Gemini themselves.
+    reporterView(article, false);
     ocha.addEventListener('click', () => { reporterView(article, false); syncFloatingSwitch(); });
     gemi.addEventListener('click', () => { reporterView(article, true); syncFloatingSwitch(); });
   }
@@ -599,10 +605,8 @@
         for (const [article, info] of panes) {
           info.gemiBanner.innerHTML = gemiQuickBanner(article.id);
           info.gemiPane.innerHTML = gemiContent(article.id, article);
-          const ochaUnregistered = info.hideInGemi.some(n => (n.textContent || '').includes('未登録'));
-          if (ochaUnregistered && resolveRaceRecord(article.id)) {
-            reporterView(article, true);
-          }
+          // Do not auto-switch to Gemini when OchaP's M0 is missing.
+          // Both journalists' forecasts remain separately attributed.
         }
       } finally {
         batchSwitch = false;
