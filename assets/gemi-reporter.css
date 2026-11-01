@@ -24,3 +24,51 @@ article[data-ochap-reporter-active="gemi"] > .ochap-ocha-only,
 article[data-ochap-reporter-active="gemi"] > [hidden],
 article[data-ochap-reporter-active="ocha"] > .ochap-gemi-pane,
 article > .ochap-gemi-pane[hidden] { display:none !important; }
+
+
+/* Always-available reporter switch: fixed above the device safe area. */
+#ochap-global-reporter-switch{
+  position:fixed;z-index:10012;right:14px;
+  bottom:calc(14px + env(safe-area-inset-bottom, 0px));
+  display:flex;align-items:center;gap:5px;padding:6px;
+  max-width:calc(100vw - 24px);
+  border:1px solid #839e8e;border-radius:999px;
+  background:rgba(255,253,246,.97);
+  box-shadow:0 4px 20px #09291f45;
+  font:700 13px/1.3 system-ui,-apple-system,'Hiragino Kaku Gothic ProN',sans-serif;
+}
+#ochap-global-reporter-switch[hidden]{display:none!important}
+#ochap-global-reporter-switch .ochap-floating-reporter-caption{
+  padding:0 7px;color:#426453;white-space:nowrap;
+}
+#ochap-global-reporter-switch button{
+  appearance:none;min-height:42px;padding:9px 13px;
+  border:1px solid #a4b8a8;border-radius:999px;
+  background:#fffdf5;color:#174a37;font:inherit;
+  white-space:nowrap;cursor:pointer;touch-action:manipulation;
+}
+#ochap-global-reporter-switch button[aria-pressed="true"]{
+  background:#174c3a;border-color:#174c3a;color:#fff;
+}
+#ochap-global-reporter-switch button:focus-visible{
+  outline:3px solid #c4a34f;outline-offset:2px;
+}
+body.ochap-has-global-reporter-switch{
+  padding-bottom:calc(80px + env(safe-area-inset-bottom, 0px));
+}
+@media(max-width:540px){
+  #ochap-global-reporter-switch{
+    left:10px;right:10px;bottom:calc(9px + env(safe-area-inset-bottom, 0px));
+    justify-content:space-between;gap:5px;padding:5px 7px;
+  }
+  #ochap-global-reporter-switch .ochap-floating-reporter-caption{
+    font-size:11px;padding:0 4px;
+  }
+  #ochap-global-reporter-switch button{
+    flex:1;min-width:0;font-size:12px;padding:10px 5px;
+  }
+}
+@media print{
+  #ochap-global-reporter-switch{display:none!important}
+  body.ochap-has-global-reporter-switch{padding-bottom:0!important}
+}
