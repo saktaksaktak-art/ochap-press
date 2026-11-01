@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
-from publish_public_results import candidate, official_verify
+from publish_public_results import candidate, official_verify, unified_v1_candidates
 
 FAKE_HTML=b'''<html><body>
 <table><thead><tr><th>\xe7\x9d\x80</th><th>\xe6\x9e\xa0</th><th>\xe3\x83\x9c\xe3\x83\xbc\xe3\x83\x88\xe3\x83\xac\xe3\x83\xbc\xe3\x82\xb5\xe3\x83\xbc</th></tr></thead>
@@ -41,6 +41,23 @@ class OfficialResultsGateTests(unittest.TestCase):
         self.assertEqual(candidate(row,'2026-11-01')['payout'],1234)
         row['payouts']['trifecta'][0]['combination']='5-1-3'
         self.assertIsNone(candidate(row,'2026-11-01'))
+    def test_unified_v1_candidates(self):
+        racers={str(n):{'entry_number':n,'place_number':pos}
+            for n,pos in ((1,1),(2,5),(3,3),(4,6),(5,2),(6,4))}
+        def make_payload(result):
+            return {'programs':{'stadiums':{'14':{'races':{'1':{'result':result}}}}}}
+        r={'date':'2026-11-01','stadium_number':14,'race_number':1,
+           'racers':racers,'payouts':{'trifecta':[{'combination':'1-5-3','amount':4260}]}}
+        self.assertEqual(list(unified_v1_candidates(make_payload(r),'2026-11-01')),
+             [{'jcd':14,'race_no':1,'order':[1,5,3],'payout':4260}])
+        self.assertEqual(list(unified_v1_candidates(make_payload(None),'2026-11-01')),[])
+        self.assertEqual(list(unified_v1_candidates(make_payload({**r,'date':'2026-10-31'}),'2026-11-01')),[])
+        self.assertEqual(list(unified_v1_candidates(make_payload({**r,'racers':{}}),'2026-11-01')),[])
+        bad_payout={'trifecta':[{'combination':'5-1-3','amount':4260}]}
+        self.assertEqual(list(unified_v1_candidates(make_payload({**r,'payouts':bad_payout}),'2026-11-01')),[])
+    def test_unified_v1_strict_schema(self):
+        with self.assertRaises(ValueError):
+            list(unified_v1_candidates({'programs':{'stadiums':[]}},'2026-11-01'))
     def test_no_unsupported_or_missing_fields(self):
         self.assertIsNone(candidate({'date':'2026-11-01','stadium_number':14,'number':1},'2026-11-01'))
         self.assertIsNone(candidate({'date':'2026-11-02','stadium_number':14,'number':1},'2026-11-01'))
