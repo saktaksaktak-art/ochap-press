@@ -466,8 +466,8 @@
       sec02Heading,
       sec02OriginalText,
     });
-    ocha.addEventListener('click', () => reporterView(article, false));
-    gemi.addEventListener('click', () => reporterView(article, true));
+    ocha.addEventListener('click', () => { reporterView(article, false); syncFloatingSwitch(); });
+    gemi.addEventListener('click', () => { reporterView(article, true); syncFloatingSwitch(); });
   }
 
   articleNodes.forEach(setup);
@@ -499,32 +499,91 @@
     return null;
   }
 
+  // A fixed, accessible, two-reporter switch remains available while scrolling.
+  // Per-race tabs still work independently; the floating switch applies to all races.
+  let floatingSwitch = null;
+  let batchSwitch = false;
+
+  function syncFloatingSwitch() {
+    if (!floatingSwitch || batchSwitch) return;
+    let ocha = 0;
+    let gemi = 0;
+    for (const [article] of panes) {
+      if (article.dataset.ochapReporterActive === 'gemi') gemi++;
+      else ocha++;
+    }
+    floatingSwitch.ocha.setAttribute('aria-pressed', String(ocha > 0 && gemi === 0));
+    floatingSwitch.gemi.setAttribute('aria-pressed', String(gemi > 0 && ocha === 0));
+    floatingSwitch.wrap.title = ocha && gemi
+      ? 'レースごとに記者の表示が異なります。押すと全レースを統一します。'
+      : '表示中の位置から全レースの記者を切り替えます';
+  }
+
+  function switchAllReporters(showGemi) {
+    // Keep the currently viewed race in place even though earlier race panels
+    // can have very different heights between the two reporters.
+    const viewportTop = 122;
+    let anchor = null;
+    let previousTop = 0;
+    let fraction = 0;
+    for (const [article] of panes) {
+      const rect = article.getBoundingClientRect();
+      if (rect.bottom > viewportTop && rect.top < window.innerHeight) {
+        anchor = article;
+        previousTop = rect.top;
+        fraction = Math.max(0, Math.min(1, (viewportTop - rect.top) / Math.max(1, rect.height)));
+        break;
+      }
+    }
+    batchSwitch = true;
+    try {
+      for (const [article] of panes) reporterView(article, showGemi);
+    } finally {
+      batchSwitch = false;
+    }
+    syncFloatingSwitch();
+    if (anchor) {
+      const now = anchor.getBoundingClientRect();
+      const desiredTop = previousTop > viewportTop ? previousTop : viewportTop - fraction * now.height;
+      window.scrollBy(0, now.top - desiredTop);
+    }
+  }
+
   function addGlobalReporterControl() {
-    const controls = document.querySelector('.controls');
-    if (!controls || document.getElementById('ochap-global-reporter-switch')) return;
-    const wrap = document.createElement('span');
+    if (document.getElementById('ochap-global-reporter-switch')) return;
+    const wrap = document.createElement('nav');
     wrap.id = 'ochap-global-reporter-switch';
-    wrap.style.cssText = 'display:inline-flex;gap:4px;align-items:center;margin-left:4px';
-    const btnGemi = document.createElement('button');
-    btnGemi.type = 'button';
-    btnGemi.textContent = '全R：✦ Gemi兄';
-    btnGemi.style.cssText = 'background:#174c3a;color:#fff9e8;border:1px solid #174c3a;border-radius:5px;padding:6px 10px;font-weight:700;cursor:pointer';
+    wrap.setAttribute('aria-label', '全レースの記者を切り替え');
+    const caption = document.createElement('span');
+    caption.className = 'ochap-floating-reporter-caption';
+    caption.textContent = '記者切替';
     const btnOcha = document.createElement('button');
     btnOcha.type = 'button';
-    btnOcha.textContent = '全R：🍵 お茶P';
-    btnOcha.style.cssText = 'background:#fffdf5;color:#174a37;border:1px solid #849b8d;border-radius:5px;padding:6px 10px;font-weight:700;cursor:pointer';
-    btnGemi.addEventListener('click', () => {
-      for (const [article] of panes) reporterView(article, true);
-      btnGemi.style.background = '#174c3a'; btnGemi.style.color = '#fff9e8';
-      btnOcha.style.background = '#fffdf5'; btnOcha.style.color = '#174a37';
-    });
-    btnOcha.addEventListener('click', () => {
-      for (const [article] of panes) reporterView(article, false);
-      btnOcha.style.background = '#174c3a'; btnOcha.style.color = '#fff9e8';
-      btnGemi.style.background = '#fffdf5'; btnGemi.style.color = '#174a37';
-    });
-    wrap.append(btnGemi, btnOcha);
-    controls.append(wrap);
+    btnOcha.textContent = '🍵 お茶P';
+    btnOcha.setAttribute('aria-label', '全レースをお茶P記者に切り替え');
+    const btnGemi = document.createElement('button');
+    btnGemi.type = 'button';
+    btnGemi.textContent = '✦ Gemi兄';
+    btnGemi.setAttribute('aria-label', '全レースをGemi兄記者に切り替え');
+    btnOcha.addEventListener('click', () => switchAllReporters(false));
+    btnGemi.addEventListener('click', () => switchAllReporters(true));
+    wrap.append(caption, btnOcha, btnGemi);
+    document.body.append(wrap);
+    document.body.classList.add('ochap-has-global-reporter-switch');
+    floatingSwitch = { wrap, ocha: btnOcha, gemi: btnGemi };
+    syncFloatingSwitch();
+
+    // Hide while viewing results/comparison; return immediately in the newspaper view.
+    const archiveHeader = document.querySelector('header#top');
+    if (archiveHeader) {
+      const refreshVisibility = () => {
+        wrap.hidden = archiveHeader.classList.contains('ochap-public-original-hidden');
+      };
+      new MutationObserver(refreshVisibility).observe(archiveHeader, {
+        attributes: true, attributeFilter: ['class']
+      });
+      refreshVisibility();
+    }
   }
 
   loadGemiIssueData(issueDate)
@@ -533,15 +592,21 @@
       issueMeta = data;
       sharedInputMeta = (data.shared_input && typeof data.shared_input === 'object') ? data.shared_input : null;
       records = data.races;
-      addGlobalReporterControl();
-      for (const [article, info] of panes) {
-        info.gemiBanner.innerHTML = gemiQuickBanner(article.id);
-        info.gemiPane.innerHTML = gemiContent(article.id, article);
-        const ochaUnregistered = info.hideInGemi.some(n => (n.textContent || '').includes('未登録'));
-        if (ochaUnregistered && resolveRaceRecord(article.id)) {
-          reporterView(article, true);
+      batchSwitch = true;
+      try {
+        for (const [article, info] of panes) {
+          info.gemiBanner.innerHTML = gemiQuickBanner(article.id);
+          info.gemiPane.innerHTML = gemiContent(article.id, article);
+          const ochaUnregistered = info.hideInGemi.some(n => (n.textContent || '').includes('未登録'));
+          if (ochaUnregistered && resolveRaceRecord(article.id)) {
+            reporterView(article, true);
+          }
         }
+      } finally {
+        batchSwitch = false;
       }
+      addGlobalReporterControl();
+      syncFloatingSwitch();
     })
     .catch(() => { /* Missing Gemini issue is displayed as 未登録. */ });
 })();
