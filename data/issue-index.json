@@ -1,7 +1,20 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-01",
+  "default_date": "2026-11-04",
   "issues": [
+    {
+      "date": "2026-11-04",
+      "path": "archives/2026-11-04.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": false,
+      "edition_status": "ocha_single_reporter_pre_deadline_reference",
+      "not_formal_m0": true,
+      "formal_bc_eligible": false,
+      "venues": 12,
+      "races": 144,
+      "forecast_frozen_at_jst": "2026-11-04T07:08:42+09:00",
+      "forecast_sha256": "1fc98d7acd6d1d2e79ac94a68af5ba299f15acc9c8ac04db3e0c44a68fbbac0c"
+    },
     {
       "date": "2026-11-01",
       "path": "archives/2026-11-01.html",

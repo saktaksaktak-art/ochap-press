@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-04",
+  "edition_status": "ocha_single_reporter_pre_deadline_reference",
+  "user_authorization": "公開版（単独締切前参考版としての公開を承認）",
+  "prepared_at_jst": "2026-11-04T07:23:51+09:00",
+  "races": 144,
+  "boat_slots": 864,
+  "figures": 432,
+  "not_formal_m0": true,
+  "formal_bc_eligible": false,
+  "formal_bc_additions": 0,
+  "forecast_frozen_at_jst": "2026-11-04T07:08:42+09:00",
+  "forecast_sha256": "1fc98d7acd6d1d2e79ac94a68af5ba299f15acc9c8ac04db3e0c44a68fbbac0c",
+  "public_html_sha256": "bf48a40c6a79e51d487a6651998ab4a83ad8db4fe08a4c28a5e701517b55dc7f",
+  "archive_sha256": "47cd1f1c54c835245325f7d3bcad2d93734ba9e3196e0c597b3a4cc4b95e0a96",
+  "article_text_unchanged_from_review": true,
+  "tests": {
+    "144_races_864_boats_432_figures": true,
+    "all_article_text_matches_review": true,
+    "compression_roundtrip": true,
+    "main_reverse_navi_3_4_4or0": true,
+    "before_race_deadlines": true
+  },
+  "gemi_today_manuscript_status": "not_received",
+  "model_switch_performed": false
+}
