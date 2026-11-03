@@ -118,9 +118,21 @@
         : url.hostname === 'boatraceopenapi.github.io' && /^\/api\/v1\/\d{4}\/\d{8}\.json$/.test(url.pathname);
     } catch (_) { return false; }
   }
+  // Keep filters stable across the 90-second live refresh; reset on a date change.
+  let resultsSelections = { date:null, session:'all', venue:'all', band:'all', type:'all' };
+  function verifiedSession(x) {
+    // Do not guess morning/day/night from venue alone; racing sessions can change.
+    if (x.session_verified !== true) return 'unknown';
+    const key = String(x.session || '').trim().toLowerCase();
+    return ({morning:'morning',day:'day',night:'night',
+      'モーニング':'morning','デイ':'day','ナイター':'night'})[key] || 'unknown';
+  }
   async function showResults() {
     const date = resultsDate();
     const serial = ++resultsFetchSerial;
+    if (resultsSelections.date !== date) {
+      resultsSelections = {date,session:'all',venue:'all',band:'all',type:'all'};
+    }
     results.replaceChildren(h2('結果速報'),
       p('更新されたレース結果を順次掲載します。', 'public-note'),
       p('結果を読み込み中…', 'public-status'));
@@ -130,29 +142,94 @@
       ? data.races.filter(validBulletinRow) : [];
     const panel = card();
     if (entries.length) {
-      panel.append(p('掲載中：' + entries.length + 'レース', 'public-note'));
-      if (data.checked_at_jst) {
-        const updated = new Date(data.checked_at_jst);
-        if (!Number.isNaN(updated.getTime())) {
-          panel.append(p('更新：' + new Intl.DateTimeFormat('ja-JP', {
-            timeZone: 'Asia/Tokyo', month: 'numeric', day: 'numeric',
-            hour: '2-digit', minute: '2-digit'
-          }).format(updated), 'public-note'));
-        }
+      const yen = amount => Number(amount).toLocaleString('ja-JP') + '円';
+      const venues = [...new Set(entries.map(x => x.venue).filter(Boolean))];
+      const total = entries.length;
+      const firstBoatWins = entries.filter(x => x.order[0] === 1).length;
+      const highest = entries.reduce((a,b) => !a || b.trifecta_payout_yen > a.trifecta_payout_yen ? b : a,null);
+      const avg = Math.round(entries.reduce((sum,x) => sum + x.trifecta_payout_yen,0) / total);
+      const manba = entries.filter(x => x.trifecta_payout_yen >= 10000).length;
+      const over2000 = entries.filter(x => x.trifecta_payout_yen >= 2000).length;
+      const methods = {};
+      for (const r of entries) {
+        const m = String(r.method || '').trim() || '不明';
+        methods[m] = (methods[m] || 0) + 1;
       }
-      panel.append(makeTable(['場','R','着順','決まり手','3連単払戻'], entries.map(x => [
-        x.venue, x.race_no + 'R', x.order.join('-'), x.method || '—',
-        x.trifecta_payout_yen.toLocaleString('ja-JP') + '円'
-      ])));
+      const updated = new Date(data.checked_at_jst || '');
+      const updatedLabel = Number.isNaN(updated.getTime()) ? '' : '｜更新 ' +
+        new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit'}).format(updated);
+      panel.append(h2('全国結果速報｜当日ダイジェスト'));
+      panel.append(p('取得 ' + total + 'R／' + venues.length + '場 ' + updatedLabel, 'public-note'));
+      panel.append(p(entries.some(x => x.official_confirmed !== true)
+        ? 'API速報の参考集計です。公式結果との照合・正式バックチェックではありません。'
+        : '公式照合済みの結果を含みます。予想成績は下の別集計をご覧ください。','public-note'));
+      const cards = document.createElement('div');
+      cards.className = 'public-grid';
+      const info = [
+        ['①号艇1着率',(100*firstBoatWins/total).toFixed(1)+'%',firstBoatWins+'/'+total+'R（進入1コース勝率とは異なります）'],
+        ['3連単平均払戻',yen(avg),'最高 '+yen(highest.trifecta_payout_yen)+'（'+highest.venue+' '+highest.race_no+'R）'],
+        ['万舟',manba+'本','3連単10,000円以上'],
+        ['2,000円以上',over2000+'R','取得 '+total+'R中']
+      ];
+      for (const [heading,value,detail] of info) {
+        const c = card();
+        c.append(p(heading,'public-note'));
+        const num=document.createElement('span');num.className='public-number';num.textContent=value;
+        c.append(num,p(detail,'public-note'));cards.append(c);
+      }
+      panel.append(cards);
+      panel.append(p('決まり手：'+Object.entries(methods).sort((a,b)=>b[1]-a[1])
+        .map(([name,n])=>name+' '+n+'R').join(' ／ '),'public-note'));
+      const sessionLabel = {morning:'モーニング',day:'デイ',night:'ナイター',unknown:'未判定'};
+      const unknownCount=entries.filter(x=>verifiedSession(x)==='unknown').length;
+      if (unknownCount) panel.append(p('時間帯の原本未確認：'+unknownCount+'R。開催場名だけで時間帯を推測せず「未判定」としています。','public-note'));
+      const venueOptions = {all:'全開催場', ...Object.fromEntries(venues.map(v=>[v,v]))};
+      const controls = document.createElement('div');
+      controls.className='public-controls';
+      const note = p('','public-note');
+      const host = document.createElement('div');
+      function renderFiltered() {
+        const f = resultsSelections;
+        const shown = entries.filter(x=>{
+          if(f.session!=='all'&&verifiedSession(x)!==f.session) return false;
+          if(f.venue!=='all'&&x.venue!==f.venue) return false;
+          const rn = Number(x.race_no);
+          if(f.band==='early' && !(rn>=1&&rn<=4)) return false;
+          if(f.band==='mid' && !(rn>=5&&rn<=8)) return false;
+          if(f.band==='late' && !(rn>=9&&rn<=12)) return false;
+          if(f.type==='first' && x.order[0]!==1) return false;
+          if(f.type==='other' && x.order[0]===1) return false;
+          if(f.type==='over2000' && x.trifecta_payout_yen<2000) return false;
+          if(f.type==='manba' && x.trifecta_payout_yen<10000) return false;
+          return true;
+        });
+        note.textContent = '表示 '+shown.length+'／'+total+'R';
+        if (!shown.length) {
+          host.replaceChildren(p('この条件の速報結果はありません。','public-status'));
+          return;
+        }
+        host.replaceChildren(makeTable(['場','R','時間帯','着順','決まり手','3連単払戻'],shown.map(x=>[
+          x.venue,x.race_no+'R',sessionLabel[verifiedSession(x)]||'未判定',
+          x.order.join('-'),x.method||'—',yen(x.trifecta_payout_yen)
+        ])));
+      }
+      controls.append(
+        makeSelect({all:'全時間帯',morning:'モーニング',day:'デイ',night:'ナイター',unknown:'時間帯未判定'},resultsSelections.session,v=>{resultsSelections.session=v;renderFiltered()},'時間帯'),
+        makeSelect(venueOptions,venues.includes(resultsSelections.venue)?resultsSelections.venue:'all',v=>{resultsSelections.venue=v;renderFiltered()},'開催場'),
+        makeSelect({all:'全レース帯',early:'1〜4R',mid:'5〜8R',late:'9〜12R'},resultsSelections.band,v=>{resultsSelections.band=v;renderFiltered()},'レース帯'),
+        makeSelect({all:'全決着・配当',first:'①号艇1着',other:'非①号艇1着',over2000:'2,000円以上',manba:'万舟'},resultsSelections.type,v=>{resultsSelections.type=v;renderFiltered()},'決着・配当')
+      );
+      panel.append(controls,note,host);
+      renderFiltered();
     } else {
-      panel.append(p(date === '2026-10-30'
+      panel.append(p(date==='2026-10-30'
         ? 'この日の全レース結果・的中一覧は上のダイジェストをご覧ください。'
-        : 'まだ結果は届いていません。レース終了後に順次更新します。', 'public-status'));
+        : 'まだ結果は届いていません。レース終了後に順次更新します。','public-status'));
     }
-    const scorecard = document.createElement('div');
-    scorecard.className = 'ochap-scorecard-mount';
-    results.replaceChildren(h2('結果速報'), p('対象日：' + date.replaceAll('-', '/'), 'public-note'), scorecard, panel);
-    if (window.OchaPScorecard?.mount) window.OchaPScorecard.mount(scorecard, date);
+    const scorecard=document.createElement('div');
+    scorecard.className='ochap-scorecard-mount';
+    results.replaceChildren(h2('結果速報'),p('対象日：'+date.replaceAll('-','/'),'public-note'),scorecard,panel);
+    if(window.OchaPScorecard?.mount)window.OchaPScorecard.mount(scorecard,date);
   }
   // Check on returning to the tab and while the bulletin is open.
   setInterval(() => {
