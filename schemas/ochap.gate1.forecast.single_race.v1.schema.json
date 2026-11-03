@@ -1,0 +1,525 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OchaP Gate 1 independent frozen SHADOW M0 forecast",
+  "description": "This schema checks structure. Chronology, external SHA, independent read isolation, probability, and bet overlap require programmatic validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_class",
+    "mode",
+    "date",
+    "race_id",
+    "venue_name",
+    "race_number",
+    "closed_at_jst",
+    "gate0_snapshot_ref",
+    "shared_input_sha256",
+    "reporter_id",
+    "prediction_spec_version",
+    "navi_policy_version",
+    "provider",
+    "model_id",
+    "execution_id",
+    "freeze_at_jst",
+    "freeze_status",
+    "isolation",
+    "forecast"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ochap.gate1.forecast.single_race.v1"
+    },
+    "run_class": {
+      "const": "SHADOW"
+    },
+    "mode": {
+      "const": "M0"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "race_id": {
+      "type": "string",
+      "pattern": "^v\\d{1,2}-r(?:[1-9]|1[0-2])$"
+    },
+    "venue_name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "race_number": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 12
+    },
+    "closed_at_jst": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+09:00$"
+    },
+    "gate0_snapshot_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "shared_input_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "reporter_id": {
+      "enum": [
+        "ocha",
+        "gemi"
+      ]
+    },
+    "prediction_spec_version": {
+      "const": "ochap.prediction.approved.v3"
+    },
+    "navi_policy_version": {
+      "const": "ochap.navi.complement.v1"
+    },
+    "provider": {
+      "enum": [
+        "OpenAI",
+        "Google"
+      ]
+    },
+    "model_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "execution_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "freeze_at_jst": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+09:00$"
+    },
+    "freeze_status": {
+      "const": "FROZEN_PRE_DEADLINE"
+    },
+    "isolation": {
+      "type": "object",
+      "required": [
+        "other_forecast_read",
+        "odds_read",
+        "results_read",
+        "m1_exhibition_read"
+      ],
+      "properties": {
+        "other_forecast_read": {
+          "const": false
+        },
+        "odds_read": {
+          "const": false
+        },
+        "results_read": {
+          "const": false
+        },
+        "m1_exhibition_read": {
+          "const": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "forecast": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "marks",
+        "predicted_entry_order",
+        "slit_rationale",
+        "scenarios",
+        "main_method",
+        "bet_tickets",
+        "navi",
+        "summary"
+      ],
+      "properties": {
+        "marks": {
+          "type": "object",
+          "required": [
+            "honmei",
+            "taikou",
+            "sanban"
+          ],
+          "properties": {
+            "honmei": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6
+            },
+            "taikou": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6
+            },
+            "sanban": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6
+            },
+            "renka": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6
+            }
+          },
+          "additionalProperties": false
+        },
+        "predicted_entry_order": {
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 6
+          },
+          "minItems": 6,
+          "maxItems": 6,
+          "uniqueItems": true
+        },
+        "slit_rationale": {
+          "type": "string",
+          "minLength": 1
+        },
+        "scenarios": {
+          "type": "object",
+          "required": [
+            "escape_holds",
+            "escape_breaks"
+          ],
+          "properties": {
+            "escape_holds": {
+              "type": "object",
+              "required": [
+                "winner_boat",
+                "method",
+                "second_candidates",
+                "third_comparison",
+                "rationale",
+                "invalid_conditions"
+              ],
+              "properties": {
+                "winner_boat": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 6
+                },
+                "method": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "second_candidates": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 6
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "third_comparison": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "rationale": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "invalid_conditions": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false
+            },
+            "escape_breaks": {
+              "type": "object",
+              "required": [
+                "winner_boat",
+                "method",
+                "second_candidates",
+                "third_comparison",
+                "rationale",
+                "invalid_conditions"
+              ],
+              "properties": {
+                "winner_boat": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 6
+                },
+                "method": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "second_candidates": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 6
+                  },
+                  "minItems": 1,
+                  "uniqueItems": true
+                },
+                "third_comparison": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "rationale": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "invalid_conditions": {
+                  "type": "string",
+                  "minLength": 1
+                }
+              },
+              "additionalProperties": false
+            }
+          },
+          "additionalProperties": false
+        },
+        "main_method": {
+          "type": "string",
+          "minLength": 1
+        },
+        "bet_tickets": {
+          "type": "object",
+          "required": [
+            "main",
+            "reverse",
+            "navi"
+          ],
+          "properties": {
+            "main": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "kind",
+                  "boats",
+                  "stake_yen"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "trifecta"
+                  },
+                  "boats": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 6
+                    },
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "uniqueItems": true
+                  },
+                  "stake_yen": {
+                    "type": "integer",
+                    "minimum": 100,
+                    "multipleOf": 100
+                  },
+                  "overlaps": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "main",
+                        "reverse"
+                      ]
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": false
+              },
+              "minItems": 3,
+              "maxItems": 3
+            },
+            "reverse": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "kind",
+                  "boats",
+                  "stake_yen"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "trifecta"
+                  },
+                  "boats": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 6
+                    },
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "uniqueItems": true
+                  },
+                  "stake_yen": {
+                    "type": "integer",
+                    "minimum": 100,
+                    "multipleOf": 100
+                  },
+                  "overlaps": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "main",
+                        "reverse"
+                      ]
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": false
+              }
+            },
+            "navi": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "kind",
+                  "boats",
+                  "stake_yen"
+                ],
+                "properties": {
+                  "kind": {
+                    "const": "trifecta"
+                  },
+                  "boats": {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 6
+                    },
+                    "minItems": 3,
+                    "maxItems": 3,
+                    "uniqueItems": true
+                  },
+                  "stake_yen": {
+                    "type": "integer",
+                    "minimum": 100,
+                    "multipleOf": 100
+                  },
+                  "overlaps": {
+                    "type": "array",
+                    "items": {
+                      "enum": [
+                        "main",
+                        "reverse"
+                      ]
+                    },
+                    "uniqueItems": true
+                  }
+                },
+                "additionalProperties": false
+              },
+              "maxItems": 4
+            }
+          },
+          "additionalProperties": false
+        },
+        "navi": {
+          "type": "object",
+          "required": [
+            "status",
+            "complement_target",
+            "missed_outcome",
+            "axis_reason",
+            "third_spread_reason",
+            "invalid_conditions"
+          ],
+          "properties": {
+            "status": {
+              "enum": [
+                "recommended",
+                "not_recommended"
+              ]
+            },
+            "complement_target": {
+              "type": "string"
+            },
+            "missed_outcome": {
+              "type": "string"
+            },
+            "axis_reason": {
+              "type": "string"
+            },
+            "third_spread_reason": {
+              "type": "string"
+            },
+            "invalid_conditions": {
+              "type": "string"
+            }
+          },
+          "additionalProperties": false
+        },
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "navi": {
+                "properties": {
+                  "status": {
+                    "const": "recommended"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "bet_tickets": {
+                "properties": {
+                  "navi": {
+                    "minItems": 4,
+                    "maxItems": 4
+                  }
+                }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "navi": {
+                "properties": {
+                  "status": {
+                    "const": "not_recommended"
+                  }
+                }
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "bet_tickets": {
+                "properties": {
+                  "navi": {
+                    "maxItems": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}
