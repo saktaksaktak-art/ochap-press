@@ -1,0 +1,1110 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "OchaP Gate 3 official-source SHADOW backcheck",
+  "description": "No third-party API result may set official_confirmed=true. Never promote shadow records to official BC counters. Cross-field verification and actual returns are computed deterministically.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "run_class",
+    "date",
+    "race_id",
+    "shared_input_sha256",
+    "status",
+    "not_formal_bc",
+    "count_toward_formal_bc",
+    "source_gate2_ref",
+    "created_at_jst",
+    "paired_verified",
+    "reporters"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "ochap.gate3.shadow_bc.single_race.v1"
+    },
+    "run_class": {
+      "const": "SHADOW"
+    },
+    "date": {
+      "type": "string",
+      "format": "date"
+    },
+    "race_id": {
+      "type": "string",
+      "pattern": "^v\\d{1,2}-r(?:[1-9]|1[0-2])$"
+    },
+    "shared_input_sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "status": {
+      "enum": [
+        "PENDING_OFFICIAL",
+        "INELIGIBLE",
+        "OFFICIAL_VERIFIED",
+        "SHADOW_BC_SCORED",
+        "RECEIPT_VERIFIED"
+      ]
+    },
+    "not_formal_bc": {
+      "const": true
+    },
+    "count_toward_formal_bc": {
+      "const": false
+    },
+    "source_gate2_ref": {
+      "type": "string",
+      "minLength": 1
+    },
+    "created_at_jst": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+09:00$"
+    },
+    "paired_verified": {
+      "type": "boolean"
+    },
+    "official_result": {
+      "anyOf": [
+        {
+          "type": "object",
+          "required": [
+            "source_url",
+            "retrieved_at_jst",
+            "official_confirmed",
+            "order",
+            "method",
+            "trifecta_payout_yen"
+          ],
+          "properties": {
+            "source_url": {
+              "type": "string",
+              "format": "uri"
+            },
+            "retrieved_at_jst": {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+09:00$"
+            },
+            "official_confirmed": {
+              "const": true
+            },
+            "order": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 6
+              },
+              "minItems": 3,
+              "maxItems": 3,
+              "uniqueItems": true
+            },
+            "method": {
+              "type": "string",
+              "minLength": 1
+            },
+            "trifecta_payout_yen": {
+              "type": "integer",
+              "minimum": 100
+            },
+            "exacta_payout_yen": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "minimum": 100
+            },
+            "actual_entry_order": {
+              "anyOf": [
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 6
+                  },
+                  "minItems": 6,
+                  "maxItems": 6,
+                  "uniqueItems": true
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "official_entry_source_ref": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "racer_st": {
+              "type": [
+                "array",
+                "null"
+              ],
+              "items": {
+                "type": [
+                  "number",
+                  "null"
+                ]
+              },
+              "minItems": 6,
+              "maxItems": 6
+            },
+            "weather": {
+              "type": [
+                "object",
+                "null"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "reporters": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ocha",
+        "gemi"
+      ],
+      "properties": {
+        "ocha": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "forecast_ref",
+                "forecast_sha256",
+                "gate1_valid",
+                "head_hit",
+                "exacta_marks_hit",
+                "trifecta_marks_hit",
+                "trio_marks_hit",
+                "tickets"
+              ],
+              "properties": {
+                "forecast_ref": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "forecast_sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "gate1_valid": {
+                  "const": true
+                },
+                "head_hit": {
+                  "type": "boolean"
+                },
+                "exacta_marks_hit": {
+                  "type": "boolean"
+                },
+                "trifecta_marks_hit": {
+                  "type": "boolean"
+                },
+                "trio_marks_hit": {
+                  "type": "boolean"
+                },
+                "tickets": {
+                  "type": "object",
+                  "required": [
+                    "main",
+                    "reverse",
+                    "navi"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "main": {
+                      "type": "object",
+                      "required": [
+                        "stake_yen",
+                        "return_yen",
+                        "hit_count"
+                      ],
+                      "properties": {
+                        "stake_yen": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "multipleOf": 100
+                        },
+                        "return_yen": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "hit_count": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "reverse": {
+                      "type": "object",
+                      "required": [
+                        "stake_yen",
+                        "return_yen",
+                        "hit_count"
+                      ],
+                      "properties": {
+                        "stake_yen": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "multipleOf": 100
+                        },
+                        "return_yen": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "hit_count": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "navi": {
+                      "type": "object",
+                      "required": [
+                        "stake_yen",
+                        "return_yen",
+                        "hit_count"
+                      ],
+                      "properties": {
+                        "stake_yen": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "multipleOf": 100
+                        },
+                        "return_yen": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "hit_count": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "gemi": {
+          "anyOf": [
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "forecast_ref",
+                "forecast_sha256",
+                "gate1_valid",
+                "head_hit",
+                "exacta_marks_hit",
+                "trifecta_marks_hit",
+                "trio_marks_hit",
+                "tickets"
+              ],
+              "properties": {
+                "forecast_ref": {
+                  "type": "string",
+                  "minLength": 1
+                },
+                "forecast_sha256": {
+                  "type": "string",
+                  "pattern": "^[a-f0-9]{64}$"
+                },
+                "gate1_valid": {
+                  "const": true
+                },
+                "head_hit": {
+                  "type": "boolean"
+                },
+                "exacta_marks_hit": {
+                  "type": "boolean"
+                },
+                "trifecta_marks_hit": {
+                  "type": "boolean"
+                },
+                "trio_marks_hit": {
+                  "type": "boolean"
+                },
+                "tickets": {
+                  "type": "object",
+                  "required": [
+                    "main",
+                    "reverse",
+                    "navi"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "main": {
+                      "type": "object",
+                      "required": [
+                        "stake_yen",
+                        "return_yen",
+                        "hit_count"
+                      ],
+                      "properties": {
+                        "stake_yen": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "multipleOf": 100
+                        },
+                        "return_yen": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "hit_count": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "reverse": {
+                      "type": "object",
+                      "required": [
+                        "stake_yen",
+                        "return_yen",
+                        "hit_count"
+                      ],
+                      "properties": {
+                        "stake_yen": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "multipleOf": 100
+                        },
+                        "return_yen": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "hit_count": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "additionalProperties": false
+                    },
+                    "navi": {
+                      "type": "object",
+                      "required": [
+                        "stake_yen",
+                        "return_yen",
+                        "hit_count"
+                      ],
+                      "properties": {
+                        "stake_yen": {
+                          "type": "integer",
+                          "minimum": 0,
+                          "multipleOf": 100
+                        },
+                        "return_yen": {
+                          "type": "integer",
+                          "minimum": 0
+                        },
+                        "hit_count": {
+                          "type": "integer",
+                          "minimum": 0
+                        }
+                      },
+                      "additionalProperties": false
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      }
+    },
+    "ineligible_reason": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receipt_ref": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "OFFICIAL_VERIFIED",
+              "SHADOW_BC_SCORED",
+              "RECEIPT_VERIFIED"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "official_result"
+        ],
+        "properties": {
+          "official_result": {
+            "type": "object",
+            "required": [
+              "source_url",
+              "retrieved_at_jst",
+              "official_confirmed",
+              "order",
+              "method",
+              "trifecta_payout_yen"
+            ],
+            "properties": {
+              "source_url": {
+                "type": "string",
+                "format": "uri"
+              },
+              "retrieved_at_jst": {
+                "type": "string",
+                "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\+09:00$"
+              },
+              "official_confirmed": {
+                "const": true
+              },
+              "order": {
+                "type": "array",
+                "items": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 6
+                },
+                "minItems": 3,
+                "maxItems": 3,
+                "uniqueItems": true
+              },
+              "method": {
+                "type": "string",
+                "minLength": 1
+              },
+              "trifecta_payout_yen": {
+                "type": "integer",
+                "minimum": 100
+              },
+              "exacta_payout_yen": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 100
+              },
+              "actual_entry_order": {
+                "anyOf": [
+                  {
+                    "type": "array",
+                    "items": {
+                      "type": "integer",
+                      "minimum": 1,
+                      "maximum": 6
+                    },
+                    "minItems": 6,
+                    "maxItems": 6,
+                    "uniqueItems": true
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "official_entry_source_ref": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "racer_st": {
+                "type": [
+                  "array",
+                  "null"
+                ],
+                "items": {
+                  "type": [
+                    "number",
+                    "null"
+                  ]
+                },
+                "minItems": 6,
+                "maxItems": 6
+              },
+              "weather": {
+                "type": [
+                  "object",
+                  "null"
+                ]
+              }
+            },
+            "additionalProperties": false
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "SHADOW_BC_SCORED",
+              "RECEIPT_VERIFIED"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reporters": {
+            "properties": {
+              "ocha": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "forecast_ref",
+                  "forecast_sha256",
+                  "gate1_valid",
+                  "head_hit",
+                  "exacta_marks_hit",
+                  "trifecta_marks_hit",
+                  "trio_marks_hit",
+                  "tickets"
+                ],
+                "properties": {
+                  "forecast_ref": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "forecast_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "gate1_valid": {
+                    "const": true
+                  },
+                  "head_hit": {
+                    "type": "boolean"
+                  },
+                  "exacta_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "trifecta_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "trio_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "tickets": {
+                    "type": "object",
+                    "required": [
+                      "main",
+                      "reverse",
+                      "navi"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "main": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "reverse": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "navi": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  }
+                }
+              },
+              "gemi": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "forecast_ref",
+                  "forecast_sha256",
+                  "gate1_valid",
+                  "head_hit",
+                  "exacta_marks_hit",
+                  "trifecta_marks_hit",
+                  "trio_marks_hit",
+                  "tickets"
+                ],
+                "properties": {
+                  "forecast_ref": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "forecast_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "gate1_valid": {
+                    "const": true
+                  },
+                  "head_hit": {
+                    "type": "boolean"
+                  },
+                  "exacta_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "trifecta_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "trio_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "tickets": {
+                    "type": "object",
+                    "required": [
+                      "main",
+                      "reverse",
+                      "navi"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "main": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "reverse": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "navi": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "paired_verified": {
+            "const": true
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "reporters": {
+            "properties": {
+              "ocha": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "forecast_ref",
+                  "forecast_sha256",
+                  "gate1_valid",
+                  "head_hit",
+                  "exacta_marks_hit",
+                  "trifecta_marks_hit",
+                  "trio_marks_hit",
+                  "tickets"
+                ],
+                "properties": {
+                  "forecast_ref": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "forecast_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "gate1_valid": {
+                    "const": true
+                  },
+                  "head_hit": {
+                    "type": "boolean"
+                  },
+                  "exacta_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "trifecta_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "trio_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "tickets": {
+                    "type": "object",
+                    "required": [
+                      "main",
+                      "reverse",
+                      "navi"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "main": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "reverse": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "navi": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  }
+                }
+              },
+              "gemi": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "forecast_ref",
+                  "forecast_sha256",
+                  "gate1_valid",
+                  "head_hit",
+                  "exacta_marks_hit",
+                  "trifecta_marks_hit",
+                  "trio_marks_hit",
+                  "tickets"
+                ],
+                "properties": {
+                  "forecast_ref": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "forecast_sha256": {
+                    "type": "string",
+                    "pattern": "^[a-f0-9]{64}$"
+                  },
+                  "gate1_valid": {
+                    "const": true
+                  },
+                  "head_hit": {
+                    "type": "boolean"
+                  },
+                  "exacta_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "trifecta_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "trio_marks_hit": {
+                    "type": "boolean"
+                  },
+                  "tickets": {
+                    "type": "object",
+                    "required": [
+                      "main",
+                      "reverse",
+                      "navi"
+                    ],
+                    "additionalProperties": false,
+                    "properties": {
+                      "main": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "reverse": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      },
+                      "navi": {
+                        "type": "object",
+                        "required": [
+                          "stake_yen",
+                          "return_yen",
+                          "hit_count"
+                        ],
+                        "properties": {
+                          "stake_yen": {
+                            "type": "integer",
+                            "minimum": 0,
+                            "multipleOf": 100
+                          },
+                          "return_yen": {
+                            "type": "integer",
+                            "minimum": 0
+                          },
+                          "hit_count": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "additionalProperties": false
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "status": {
+            "enum": [
+              "PENDING_OFFICIAL",
+              "INELIGIBLE"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "paired_verified": {
+            "const": false
+          }
+        }
+      }
+    }
+  ]
+}
