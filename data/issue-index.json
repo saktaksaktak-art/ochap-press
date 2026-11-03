@@ -6,14 +6,28 @@
       "date": "2026-11-04",
       "path": "archives/2026-11-04.html.gz.b64.txt",
       "compression": "base64gzip",
-      "gemi_tabs": false,
-      "edition_status": "ocha_single_reporter_pre_deadline_reference",
+      "gemi_tabs": true,
+      "edition_status": "dual_reporter_pre_deadline_reference",
       "not_formal_m0": true,
       "formal_bc_eligible": false,
       "venues": 12,
       "races": 144,
       "forecast_frozen_at_jst": "2026-11-04T07:08:42+09:00",
-      "forecast_sha256": "1fc98d7acd6d1d2e79ac94a68af5ba299f15acc9c8ac04db3e0c44a68fbbac0c"
+      "forecast_sha256": "1fc98d7acd6d1d2e79ac94a68af5ba299f15acc9c8ac04db3e0c44a68fbbac0c",
+      "gemi_json": "data/gemi/2026-11-04.json.gz.b64.txt",
+      "pair_comparison_eligible": false,
+      "reporter_input_versions_differ": true,
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-04T07:08:42+09:00",
+          "input_sha256": "5667fb499cb23184314c497e26010295f1bce16b15702937878f6b084325ef00"
+        },
+        "gemi": {
+          "recorded_freeze_at_jst": "2026-11-04T06:58:00+09:00",
+          "drive_saved_at_jst": "2026-11-04T07:11:57+09:00",
+          "input_sha256": "5f95820ae19bf45aa7381f0e2cd069b7c44e36a5628b408c21f50e2b51c6803a"
+        }
+      }
     },
     {
       "date": "2026-11-01",
