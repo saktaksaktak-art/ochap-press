@@ -45,7 +45,7 @@
     const setGlobals='<script>window.__OCHAP_ISSUE_INDEX__='+encoded+';window.__OCHAP_SELECTED_DATE__='+JSON.stringify(date)+';</'+'script>';
     const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./assets/gemi-reporter.js?v=20261101-floating-v2"></'+'script>':'')+
       '<script src="./assets/public-scorecard.js?v=1"></'+'script>'+
-      '<script src="./assets/press-roles.js?v=7"></'+'script>';
+      '<script src="./assets/press-roles.js?v=8"></'+'script>';
     source=source.replace(/<\/head>/i,headTags+'</head>');
     source=source.replace(/<\/body>/i,extraScripts+'</body>');
     document.open();document.write(source);document.close();
