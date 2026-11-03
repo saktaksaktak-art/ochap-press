@@ -105,7 +105,7 @@
       <style>text{font-family:system-ui,-apple-system,sans-serif}</style>
       <rect width="720" height="410" rx="12" fill="#f4f5e9"/>
       <text x="18" y="30" font-size="13" font-weight="700" fill="#5b7360">進入</text>
-      <text x="62" y="30" font-size="13" font-weight="700" fill="#5b7360">艇・選手（Gemi兄独自評価）</text>
+      <text x="62" y="30" font-size="13" font-weight="700" fill="#5b7360">艇・選手</text>
       <text x="188" y="30" font-size="13" font-weight="700" fill="#5b7360">基準ST</text>
       <text x="262" y="30" font-size="13" font-weight="700" fill="#5b7360">後手</text>
       <text x="408" y="30" font-size="12" font-weight="700" fill="#3c6147">標準スリット</text>
@@ -430,7 +430,6 @@
         <span><b>本線3点</b>：${renderComboList(bets.main)}</span>
         <span><b>逆張り</b>：${formatAxisInline(revSummary.axis || (Array.isArray(bets.reverse) && bets.reverse[0] ? bets.reverse[0].slice(0,3)+'-流' : ''))}</span>
         <span><b>舟券ナビ</b>：${naviDetails.status === 'recommended' ? formatAxisInline(naviDetails.axis || (Array.isArray(bets.navi) && bets.navi[0] ? bets.navi[0].slice(0,3)+'-流' : '')) : '<span class="note">見送り</span>'}</span>
-        <span class="note">${esc(modeBadgeText(rec))}</span>
       </div>
     </div>`;
   }
@@ -490,14 +489,14 @@
     return `
       ${window.__OCHAP_GEMI_FACT_TABLES__?.[raceId] || ""}
       <section class="section">
-        <h3>03 スタート体型・ST詳細（Gemi兄独自スリット予想）</h3>
+        <h3>スタート予想・ST詳細</h3>
         ${slitSvg ? `<figure class="slit-figure">${slitSvg}</figure>` : ''}
         ${slitTableRows ? `<div class="scroll"><table><thead><tr><th>艇/C</th><th>選手・級</th><th>C平均ST</th><th>全国平均ST</th><th>ST順位</th><th>F数</th><th>Gemi兄スリット判定</th></tr></thead><tbody>${slitTableRows}</tbody></table></div>` : ''}
         ${rec.st_comment ? `<p class="note" style="margin-top:8px">${esc(rec.st_comment)}</p>` : ''}
       </section>
 
       <section class="section">
-        <h3>04 展開予想（Gemi兄独自1M旋回図）</h3>
+        <h3>展開予想</h3>
         <div class="diagram-grid">
           <details class="diagram-branch" open>
             <summary>①逃げ成立｜予想決まり手：${boatBadge(1)} 逃げ</summary>
@@ -531,7 +530,7 @@
       </section>
 
       <section class="section">
-        <h3>05 Gemi兄記者予想（◎ ${boatBadge(marks.main)}　○ ${boatBadge(marks.second)}　▲ ${boatBadge(marks.third)}　△ ${boatBadge(marks.fourth)}）</h3>
+        <h3>Gemi兄の予想（◎ ${boatBadge(marks.main)}　○ ${boatBadge(marks.second)}　▲ ${boatBadge(marks.third)}　△ ${boatBadge(marks.fourth)}）</h3>
         <div class="picks">
           <div class="panel">
             <h3>本線</h3>
@@ -552,7 +551,6 @@
             <p>${esc(naviDetails.reason || naviDetails.axis_reason || '')}</p>
           </div>
         </div>
-        <p class="ochap-gemi-details">${esc(modeBadgeText(rec))} ｜ 予想凍結：${esc(rec.freeze_at)} ／ Gemi兄入力：${esc(snapId)} (SHA256:${esc(shaShort)}…) ／ 原本：${esc(rec.source_ref)}</p>
       </section>`;
   }
 

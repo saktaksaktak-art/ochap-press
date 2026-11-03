@@ -11,17 +11,17 @@
   "formal_bc_additions": 0,
   "forecast_frozen_at_jst": "2026-11-04T07:08:42+09:00",
   "forecast_sha256": "1fc98d7acd6d1d2e79ac94a68af5ba299f15acc9c8ac04db3e0c44a68fbbac0c",
-  "public_html_sha256": "ee929c3171fd8fc214a67c64e2425db6c9409184392a51455a1eda7b6858cc61",
-  "archive_sha256": "4e972f6b9bb783f68bbfe96322e7f404c1475e7a15ad130228200579ebf9f3ed",
-  "article_text_unchanged_from_review": true,
+  "public_html_sha256": "7c13b3d1eaa86519172e97d55dba5ded4ea2edd5c9809d9b38e431b7fb8dacfe",
+  "archive_sha256": "1c2aa79be4bd33ae1ddbd40039ec30d0516fc5d3268e235b5b06775689a9a40c",
+  "article_text_unchanged_from_review": false,
   "tests": {
     "144_races_864_boats_432_figures": true,
-    "all_article_text_matches_review": true,
     "compression_roundtrip": true,
     "main_reverse_navi_3_4_4or0": true,
-    "before_race_deadlines": true
+    "before_race_deadlines": true,
+    "article_forecast_content_unchanged_except_removed_boilerplate": true
   },
-  "gemi_today_manuscript_status": "not_received",
+  "gemi_today_manuscript_status": "received_and_published",
   "model_switch_performed": false,
   "gemi_source_file_sha256": "b8fefc234d4e927b8de76dd880ab84c719a4034f24e71c9c7649119036bce5e6",
   "gemi_input_sha256": "5f95820ae19bf45aa7381f0e2cd069b7c44e36a5628b408c21f50e2b51c6803a",
@@ -34,5 +34,8 @@
     "ocha": 432,
     "gemi": 432
   },
-  "formal_m0_certified": false
+  "formal_m0_certified": false,
+  "public_display_revision": "reader-1",
+  "forecast_records_unchanged": true,
+  "public_display_changes": "Removed operational/audit boilerplate; moved reader guidance to one footer; all selections, reasoning, data and diagrams preserved."
 }
