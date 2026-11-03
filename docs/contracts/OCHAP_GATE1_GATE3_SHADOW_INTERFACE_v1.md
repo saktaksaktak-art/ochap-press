@@ -19,7 +19,7 @@
 
 ### 凍結成果物の形式
 - スキーマ: `ochap.gate1.forecast.single_race.v1`（別添 JSON Schema）。
-- 主キー: date + race_id + reporter_id（ocha/gemi）+ version。`mode:M0`、`run_class:SHADOW`、`freeze_status:FROZEN_PRE_DEADLINE`、`shared_input_sha256`、`closed_at_jst`、`freeze_at_jst`、`prediction_spec_version:ochap.prediction.approved.v3`、source_ref、model_idを必須にする。
+- 主キー: date + race_id + reporter_id（ocha/gemi）+ version。`mode:M0`、`run_class:SHADOW`、`freeze_status:FROZEN_PRE_DEADLINE`、`shared_input_sha256`、`closed_at_jst`、`freeze_at_jst`、`prediction_spec_version:ochap.prediction.approved.v3`、gate0_snapshot_ref、model_idを必須にする。Gate1予想原本自身のforecast_source_ref（保存後に確定するDriveファイルIDなど）は必須にせず、別ファイルの凍結レシートへ記録して自己参照を防ぐ。
 - 予想本文: ◎○▲△の号艇と6艇比較、進入予想/STスリット体型・理由、①逃げ成立・崩壊を各1枝ずつ、想定決まり手、1M展開、2着順位・3着比較・不成立条件を必須にする。未取得を「数値0」としない。
 - 舟券は既存契約を維持: 本線3点、逆張り（本線と重複禁止）、舟券ナビ（推奨時は1-2着固定＋他4艇3着、4点。既存券重複は許容して重複種別を記録）。1枚100円単位。ナビ不成立は status:not_recommended + 理由 + tickets=[]。従来の「2連単抑え」を新規必須券種として追加しない。
 - predicted_win_method、各枝の成立理由・反証、想定ST、券の号艇3つが全て1〜6で重複なし、点数・金額が合法であることを検証。
