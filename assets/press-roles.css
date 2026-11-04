@@ -34,3 +34,17 @@
 #ochap-public-panels .public-table-wrap table th:first-child{position:sticky;left:0;z-index:1;background:#eaf2eb}
 #ochap-public-panels .public-table-wrap table td:first-child{position:sticky;left:0;background:#fffdf5;font-weight:650}
 @media(max-width:600px){#ochap-public-panels table{font-size:12px}#ochap-public-panels th,#ochap-public-panels td{padding:8px 6px}#ochap-public-panels .public-card{padding:12px}}
+
+/* Keep race, result and the winning journalist together on narrow screens. */
+#ochap-public-panels .public-hit-table table{min-width:0;table-layout:fixed}
+#ochap-public-panels .public-hit-table th,#ochap-public-panels .public-hit-table td{white-space:normal;overflow-wrap:anywhere;vertical-align:top}
+#ochap-public-panels .public-hit-table th:first-child,#ochap-public-panels .public-hit-table td:first-child{width:25%;position:static;text-align:left}
+#ochap-public-panels .public-hit-table th:nth-child(2){width:29%}
+#ochap-public-panels .public-hit-table small{display:block;font-size:12px;color:#52675e;line-height:1.5}
+.public-hit-reporters{display:grid;gap:6px}
+.public-hit-reporter{padding:4px 7px;border-left:3px solid #b4c4b7;background:#f1f4ef;border-radius:4px;font-size:12px;line-height:1.5}
+.public-hit-reporter.is-hit{border-color:#297647;background:#e3f2e6}
+.public-hit-gemi.is-hit{border-color:#6653a3;background:#efeaf8}
+#ochap-public-panels .public-hit-reporter.is-hit small{color:#244c35;font-weight:650}
+@media(max-width:430px){#ochap-public-panels .public-hit-table td,#ochap-public-panels .public-hit-table th{padding:8px 4px}.public-hit-reporter{padding:4px 5px;font-size:11px}#ochap-public-panels .public-hit-table small{font-size:11px}}
+

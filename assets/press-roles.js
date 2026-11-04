@@ -95,7 +95,7 @@
     const tbody = document.createElement('tbody');
     for (const r of rows) {
       const tr = document.createElement('tr');
-      for (const value of r) {const td=document.createElement('td');td.textContent=String(value ?? '—');tr.append(td);}
+      for (const value of r) {const td=document.createElement('td');if(value instanceof Node)td.append(value);else td.textContent=String(value ?? '—');tr.append(td);}
       tbody.append(tr);
     }
     table.append(tbody);wrap.append(table);return wrap;
@@ -136,7 +136,10 @@
     results.replaceChildren(h2('結果速報'),
       p('更新されたレース結果を順次掲載します。', 'public-note'),
       p('結果を読み込み中…', 'public-status'));
-    const data = await fetchJson('./data/public-results/' + date + '.json').catch(() => null);
+    const [data, forecasts] = await Promise.all([
+      fetchJson('./data/public-results/' + date + '.json').catch(() => null),
+      window.OchaPHitReporters?.load(date).catch(() => null) || null
+    ]);
     if (serial !== resultsFetchSerial || results.hidden) return;
     const entries = data && data.schema_version === '1.0' && data.date === date && Array.isArray(data.races)
       ? data.races.filter(validBulletinRow) : [];
@@ -188,6 +191,40 @@
       controls.className='public-controls';
       const note = p('','public-note');
       const host = document.createElement('div');
+      const highHits = document.createElement('div');
+      const venueCodes = ['桐生','戸田','江戸川','平和島','多摩川','浜名湖','蒲郡','常滑','津','三国','びわこ','住之江','尼崎','鳴門','丸亀','児島','宮島','徳山','下関','若松','芦屋','福岡','唐津','大村'];
+      const attribution = x => {
+        const code = Number(x.venue_code) || venueCodes.indexOf(x.venue)+1;
+        return window.OchaPHitReporters?.match(x, forecasts?.['v'+code+'-r'+x.race_no]) || [];
+      };
+      function reporterCell(x, hitsOnly = false) {
+        const cell = document.createElement('div');cell.className='public-hit-reporters';
+        for (const item of attribution(x)) {
+          if (hitsOnly && !item.groups.length) continue;
+          const line = document.createElement('div');line.className='public-hit-reporter public-hit-'+item.reporter;
+          const label = document.createElement('strong');label.textContent=item.label;
+          const detail = document.createElement('small');
+          detail.textContent=item.groups.length ? item.groups.join('・')+' 的中' : item.known ? '的中なし' : '未確認';
+          if(item.groups.length)line.classList.add('is-hit');
+          line.append(label,detail);cell.append(line);
+        }
+        if(!cell.childElementCount)cell.textContent='予想未確認';
+        return cell;
+      }
+      function resultTable(rows, hitsOnly = false) {
+        const table=makeTable(['場・R','出目・払戻','的中記者'],rows.map(x=>{
+          const outcome=document.createElement('div');
+          const order=document.createElement('strong');order.textContent=x.order.join('-');
+          const payout=document.createElement('small');payout.textContent=yen(x.trifecta_payout_yen);
+          const method=document.createElement('small');method.textContent=x.method||'—';
+          outcome.append(order,payout,method);
+          const race=document.createElement('div');race.textContent=x.venue+' '+x.race_no+'R';
+          const session=document.createElement('small');session.textContent=sessionLabel[verifiedSession(x)]||'未判定';
+          race.append(session);
+          return [race,outcome,reporterCell(x,hitsOnly)];
+        }));
+        table.classList.add('public-hit-table');return table;
+      }
       function renderFiltered() {
         const f = resultsSelections;
         const shown = entries.filter(x=>{
@@ -204,14 +241,16 @@
           return true;
         });
         note.textContent = '表示 '+shown.length+'／'+total+'R';
+        const paying=shown.filter(x=>x.trifecta_payout_yen>=2000 && attribution(x).some(a=>a.groups.length))
+          .sort((a,b)=>b.trifecta_payout_yen-a.trifecta_payout_yen);
+        const title=document.createElement('h3');title.textContent='2,000円以上の的中速報';
+        highHits.replaceChildren(title,paying.length ? resultTable(paying,true) : p('該当する的中はまだありません。','public-note'));
         if (!shown.length) {
           host.replaceChildren(p('この条件の速報結果はありません。','public-status'));
           return;
         }
-        host.replaceChildren(makeTable(['場','R','時間帯','着順','決まり手','3連単払戻'],shown.map(x=>[
-          x.venue,x.race_no+'R',sessionLabel[verifiedSession(x)]||'未判定',
-          x.order.join('-'),x.method||'—',yen(x.trifecta_payout_yen)
-        ])));
+        const heading=document.createElement('h3');heading.textContent='全国レース結果・的中記者';
+        host.replaceChildren(heading,resultTable(shown));
       }
       controls.append(
         makeSelect({all:'全時間帯',morning:'モーニング',day:'デイ',night:'ナイター',unknown:'時間帯未判定'},resultsSelections.session,v=>{resultsSelections.session=v;renderFiltered()},'時間帯'),
@@ -219,7 +258,7 @@
         makeSelect({all:'全レース帯',early:'1〜4R',mid:'5〜8R',late:'9〜12R'},resultsSelections.band,v=>{resultsSelections.band=v;renderFiltered()},'レース帯'),
         makeSelect({all:'全決着・配当',first:'①号艇1着',other:'非①号艇1着',over2000:'2,000円以上',manba:'万舟'},resultsSelections.type,v=>{resultsSelections.type=v;renderFiltered()},'決着・配当')
       );
-      panel.append(controls,note,host);
+      panel.append(controls,note,highHits,host);
       renderFiltered();
     } else {
       panel.append(p(date==='2026-10-30'
@@ -535,3 +574,4 @@
   const requested=new URL(location.href).searchParams.get('view');
   switchView(requested==='versus'||requested==='results'?requested:'forecast');
 })();
+
