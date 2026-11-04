@@ -13,7 +13,13 @@ from reportlab.graphics import renderPDF
 from xml.sax.saxutils import escape
 
 ROOT=Path(__file__).resolve().parents[1];WORK=ROOT.parent
-pdfmetrics.registerFont(TTFont('OchaJP',str(WORK/'NotoSansJP.ttf')))
+from fontTools.ttLib import TTFont as FontToolsTTFont
+from fontTools.varLib.instancer import instantiateVariableFont
+fontpath=WORK/'NotoSansJP400.ttf'
+if not fontpath.exists():
+    font=FontToolsTTFont(WORK/'NotoSansJP.ttf')
+    instantiateVariableFont(font,{'wght':400},inplace=True).save(fontpath)
+pdfmetrics.registerFont(TTFont('OchaJP',str(fontpath)))
 pdfmetrics.registerFontFamily('OchaJP',normal='OchaJP',bold='OchaJP',italic='OchaJP',boldItalic='OchaJP')
 styles={n:ParagraphStyle(n,fontName='OchaJP',fontSize=size,leading=size*1.5,textColor=HexColor('#173f32'),wordWrap='CJK') for n,size in [('body',9),('small',7.5),('heading',17),('sub',11)]}
 pred=json.loads((WORK/'OchaP_Predictions_20261105_M0_v1.json').read_text())
@@ -45,7 +51,6 @@ def draw_table(c,tag,y,widths=None):
     for tr in tag.select('tr'):
         rows.append([Paragraph(escape(td.get_text(' ',strip=True)),styles['small']) for td in tr.find_all(['th','td'],recursive=False)])
     if not widths:widths=[WIDTH/len(rows[0])]*len(rows[0])
-    t=Table(rows,colWidths=widths)
     commands=[('BACKGROUND',(0,0),(-1,0),HexColor('#e5ecdf')),('VALIGN',(0,0),(-1,-1),'MIDDLE'),('BOTTOMPADDING',(0,0),(-1,-1),3),('TOPPADDING',(0,0),(-1,-1),3),('LINEBELOW',(0,0),(-1,-1),.35,HexColor('#ccd8c9'))]
     for ri,tr in enumerate(tag.select('tr')):
         for ci,td in enumerate(tr.find_all(['th','td'],recursive=False)):
@@ -57,6 +62,7 @@ def draw_table(c,tag,y,widths=None):
                 if bn in '123456':
                     commands.append(('BACKGROUND',(ci,ri),(ci,ri),HexColor(PALETTE[int(bn)-1])))
                     if bn not in '15':rows[ri][ci]=Paragraph('<font color="white">'+escape(td.get_text(' ',strip=True))+'</font>',styles['small'])
+    t=Table(rows,colWidths=widths)
     t.setStyle(TableStyle(commands));_,h=t.wrap(WIDTH,H)
     if y-h<28:raise ValueError('table overflow '+str(y-h))
     t.drawOn(c,LEFT,y-h);return y-h-9

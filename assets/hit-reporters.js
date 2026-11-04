@@ -54,7 +54,7 @@
         ocha[article.id] = parsed;
         const heading=article.querySelector('.race-head h2')?.textContent || '';
         const race=heading.match(/(.+?)\s+(\d+)R.*締切\s*(\d{1,2}:\d{2})/);
-        if(race)metadata[article.id]={venue:race[1].replace(/^注目\s*/,''),race_no:Number(race[2]),closing_time:race[3]};
+        if(race)metadata[article.id]={venue:race[1].replace(/^注目\s*/,''),race_no:Number(race[2]),closing_time:race[3],session:article.dataset.session||null,session_verified:article.dataset.sessionVerified==='true'};
       }
     }
   }

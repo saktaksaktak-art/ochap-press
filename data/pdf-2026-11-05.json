@@ -2,16 +2,16 @@
   "morning": {
     "races": 24,
     "pages": 48,
-    "bytes": 293914
+    "bytes": 297876
   },
   "day": {
     "races": 84,
     "pages": 168,
-    "bytes": 888513
+    "bytes": 897605
   },
   "night": {
     "races": 36,
     "pages": 72,
-    "bytes": 429396
+    "bytes": 433924
   }
 }
