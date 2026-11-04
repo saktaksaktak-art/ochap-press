@@ -1,0 +1,19 @@
+{
+  "date": "2026-11-05",
+  "source_url": "https://www.boatrace.jp/owpc/pc/race/index?hd=20261105",
+  "source_fields": "tbody is-morning / is-nighter / is-midnight; unflagged daytime",
+  "sessions": {
+    "1": "night",
+    "3": "day",
+    "4": "day",
+    "8": "day",
+    "9": "day",
+    "10": "morning",
+    "11": "day",
+    "12": "night",
+    "15": "night",
+    "17": "day",
+    "21": "morning",
+    "22": "day"
+  }
+}
