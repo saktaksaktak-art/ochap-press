@@ -70,7 +70,10 @@
 #ochap-public-panels .lr-reporter.lr-gemi.lr-hit{border-color:#8b6cab;background:#f0e9f7}
 #ochap-public-panels .lr-reporter.lr-hit span{color:#236339;font-weight:750}
 #ochap-public-panels .lr-reporter.lr-gemi.lr-hit span{color:#6b4d86}
+#ochap-public-panels .lr-joint-badge{display:block;width:fit-content;max-width:100%;margin:0 0 6px;padding:3px 7px;border:1px solid #d3bc75;border-radius:5px;background:#fff2c9;color:#795c1d;font-size:11px;font-weight:800;line-height:1.5}
+#ochap-public-panels .lr-list-tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
 #ochap-public-panels .lr-reporter+.lr-reporter{margin-top:5px}
+#ochap-public-panels .lr-race-reporters>.lr-joint-badge{grid-column:1 / -1;margin:0}
 #ochap-public-panels .lr-pages{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:10px 0;font-size:12px;color:#6b7e68}
 #ochap-public-panels .lr-pages button{padding:7px 12px;min-height:36px}
 #ochap-public-panels .lr-race{border:1px solid #d3ddcd;background:#fffef9;border-radius:9px;margin:10px 0;padding:12px;box-shadow:none;min-width:0;overflow:hidden}
@@ -107,6 +110,7 @@
 #ochap-public-panels .lr-muted{font-size:12px;color:#7d8877}
 #ochap-public-panels .lr-back-top{position:fixed;right:max(15px,env(safe-area-inset-right));bottom:max(19px,env(safe-area-inset-bottom));z-index:9996;display:block;background:#2a5b46d9;border:1px solid #9db5a4;border-radius:30px;box-shadow:0 2px 10px #234c3422;padding:11px 17px;color:white;text-decoration:none;font-weight:750;backdrop-filter:blur(6px)}
 @media(max-width:650px){
+ #ochap-public-panels .lr-list-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
  #ochap-public-panels .lr-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
  #ochap-public-panels .lr-section{padding:12px;margin:12px 0}
  #ochap-public-panels .lr-section-title h3{font-size:17px}
