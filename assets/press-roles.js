@@ -133,9 +133,8 @@
     if (resultsSelections.date !== date) {
       resultsSelections = {date,session:'all',venue:'all',band:'all',type:'all'};
     }
-    results.replaceChildren(h2('結果速報'),
-      p('更新されたレース結果を順次掲載します。', 'public-note'),
-      p('結果を読み込み中…', 'public-status'));
+    if(results.dataset.liveResultsDate!==date)results.replaceChildren(h2('結果速報'),p('結果を読み込み中…','public-status'));
+    results.setAttribute('aria-busy','true');
     const [data, forecasts] = await Promise.all([
       fetchJson('./data/public-results/' + date + '.json').catch(() => null),
       window.OchaPHitReporters?.load(date).catch(() => null) || null
@@ -143,6 +142,14 @@
     if (serial !== resultsFetchSerial || results.hidden) return;
     const entries = data && data.schema_version === '1.0' && data.date === date && Array.isArray(data.races)
       ? data.races.filter(validBulletinRow) : [];
+    results.setAttribute('aria-busy','false');
+    const hasPublishedTickets=forecasts&&Object.values(forecasts).some(x=>x.ocha);
+    if(window.OchaPLiveResults?.mount&&hasPublishedTickets){
+      window.OchaPLiveResults.mount(results,{date,rows:entries,forecasts,
+        issue:window.__OCHAP_ISSUE_INDEX__?.issues?.find(x=>x.date===date),
+        updatedAt:data?.checked_at_jst,onRefresh:showResults});
+      return;
+    }
     const panel = card();
     if (entries.length) {
       const yen = amount => Number(amount).toLocaleString('ja-JP') + '円';

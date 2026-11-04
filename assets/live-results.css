@@ -1,0 +1,137 @@
+/* Live results: compact newspaper cards, no horizontal panning on phones. */
+#ochap-public-panels .lr-dashboard{max-width:1100px;margin:auto;padding-bottom:88px;color:#193f32;font-size:14px;line-height:1.5}
+#ochap-public-panels .lr-dashboard *{box-sizing:border-box}
+#ochap-public-panels .lr-dashboard h2,#ochap-public-panels .lr-dashboard h3,#ochap-public-panels .lr-dashboard h4,#ochap-public-panels .lr-dashboard p{margin:0}
+#ochap-public-panels .lr-header{display:flex;justify-content:space-between;align-items:center;margin:8px 0 14px}
+#ochap-public-panels .lr-header h2{font-size:27px;letter-spacing:.04em}
+#ochap-public-panels .lr-header p{font-size:13px;color:#647669;margin-top:3px}
+#ochap-public-panels .lr-header p span{margin-left:14px}
+#ochap-public-panels .lr-dashboard button{min-height:40px;font:inherit;border:1px solid #bccbbf;border-radius:7px;background:#fffef8;color:#1c4e39;padding:8px 12px;cursor:pointer}
+#ochap-public-panels .lr-dashboard button:disabled{opacity:.4;cursor:default}
+#ochap-public-panels .lr-tabs{display:flex;gap:5px;padding:4px;background:#e8eee5;border:1px solid #c9d4c5;border-radius:10px;margin-bottom:12px}
+#ochap-public-panels .lr-tabs button{flex:1;min-width:0;border:0;background:transparent;font-weight:700;padding:9px 5px}
+#ochap-public-panels .lr-tabs button[aria-pressed=true]{background:#1b513c;color:#fff;box-shadow:0 1px 4px #234b3026}
+#ochap-public-panels .lr-tabs button[data-value=gemi][aria-pressed=true]{background:#655181}
+#ochap-public-panels .lr-filters{display:flex;align-items:end;gap:9px;flex-wrap:wrap;margin:10px 0 14px}
+#ochap-public-panels .lr-filter{display:flex;flex:1;min-width:105px;gap:4px;flex-direction:column}
+#ochap-public-panels .lr-filter>span{font-size:11px;color:#617365;font-weight:650}
+#ochap-public-panels .lr-filter select{width:100%;min-width:0;background:#fffef8;border-radius:7px;font-size:14px;padding:9px 8px}
+#ochap-public-panels .lr-extra{padding:10px;background:#edf2e9;border-radius:8px}
+#ochap-public-panels .lr-summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px;margin:14px 0}
+#ochap-public-panels .lr-metric{border:1px solid #cbd5c7;border-radius:10px;background:#fffef8;padding:13px;min-width:0}
+#ochap-public-panels .lr-metric h3{font-size:13px;color:#657366;margin:0 0 10px}
+#ochap-public-panels .lr-total{display:block;font-size:31px;line-height:1.5;font-variant-numeric:tabular-nums}
+#ochap-public-panels .lr-total small{display:inline;font-size:15px;font-weight:500}
+#ochap-public-panels .lr-metric>small{color:#687c6b;font-size:12px;display:block}
+#ochap-public-panels .lr-metric-author{display:grid;grid-template-columns:1fr auto;align-items:center;gap:0 5px;margin:6px 0}
+#ochap-public-panels .lr-metric-author>span{font-size:11px;font-weight:650}
+#ochap-public-panels .lr-metric-author b{font-size:22px;line-height:1.25;font-variant-numeric:tabular-nums}
+#ochap-public-panels .lr-metric-author small{grid-column:2;font-size:10px;color:#718170;text-align:right}
+#ochap-public-panels .lr-gemi h4,#ochap-public-panels .lr-gemi>h3,#ochap-public-panels .lr-metric-author.lr-gemi{color:#665180}
+#ochap-public-panels .lr-finance-overview{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr));gap:9px;margin:12px 0 16px}
+#ochap-public-panels .lr-total-finance{border:1px solid #bccebb;border-top:3px solid #38704d;border-radius:9px;background:#fffef8;padding:13px 16px}
+#ochap-public-panels .lr-total-finance.lr-gemi{border-top-color:#7d649b}
+#ochap-public-panels .lr-total-finance h3{font-size:14px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+#ochap-public-panels .lr-total-finance h3 small{font-weight:500;font-size:11px;color:#68796b}
+#ochap-public-panels .lr-finance{display:grid;grid-template-columns:1fr 1fr;gap:7px 18px;margin:10px 0 0;font-size:12px;font-variant-numeric:tabular-nums}
+#ochap-public-panels .lr-finance>div{display:flex;gap:6px;justify-content:space-between;align-items:baseline;min-width:0}
+#ochap-public-panels .lr-finance dt{color:#6a796a;font-size:11px;white-space:nowrap}
+#ochap-public-panels .lr-finance dd{margin:0;font-weight:750;overflow-wrap:anywhere}
+#ochap-public-panels .lr-positive{color:#1c733f}
+#ochap-public-panels .lr-negative{color:#a05a45}
+#ochap-public-panels .lr-jumps{display:flex;gap:7px;margin:12px 0 18px;flex-wrap:wrap}
+#ochap-public-panels .lr-jumps a{flex:1;text-align:center;background:#e8eee2;padding:8px 6px;border-radius:7px;font-weight:700;font-size:12px;text-decoration:none}
+#ochap-public-panels .lr-section{border:1px solid #cbd5c7;background:#fffef8;border-radius:12px;padding:16px;margin:15px 0;scroll-margin-top:130px;min-width:0}
+#ochap-public-panels .lr-section-title{display:flex;justify-content:space-between;align-items:baseline;gap:8px;border-bottom:2px solid #d8e0d2;padding-bottom:10px;margin-bottom:12px}
+#ochap-public-panels .lr-section-title h3{font-size:19px;line-height:1.4}
+#ochap-public-panels .lr-section-title>span{color:#687967;font-size:12px;white-space:nowrap}
+#ochap-public-panels .lr-dashboard .lr-empty{padding:16px 10px;color:#768472;background:#f3f5ee;border-radius:7px;font-size:13px}
+#ochap-public-panels .lr-compact table{width:100%;min-width:0;table-layout:fixed;border-collapse:collapse;font-size:13px}
+#ochap-public-panels .lr-compact td,#ochap-public-panels .lr-compact th{position:static;background:none;white-space:normal;overflow-wrap:anywhere;padding:9px 6px;text-align:left;vertical-align:middle;border-bottom:1px solid #e1e6d9;font-weight:500}
+#ochap-public-panels .lr-compact th{background:#e9efe3;font-size:12px;color:#48624b}
+#ochap-public-panels .lr-compact td:first-child b{display:block}
+#ochap-public-panels .lr-col-race{width:17%}
+#ochap-public-panels .lr-col-order{width:22%}
+#ochap-public-panels .lr-col-pay{width:22%}
+#ochap-public-panels .lr-col-author{width:39%}
+#ochap-public-panels .lr-payout{font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
+#ochap-public-panels .lr-order{display:inline-flex;gap:2px;white-space:nowrap;vertical-align:middle}
+#ochap-public-panels .lr-boat{display:inline-grid;place-items:center;width:23px;height:24px;border:1px solid #b7bcb5;border-radius:4px;font-weight:800;font-size:14px;line-height:1;color:#142318;background:white}
+#ochap-public-panels .lr-b2{background:#2e302f;color:#fff;border-color:#2e302f}
+#ochap-public-panels .lr-b3{background:#ce3e3e;color:white;border-color:#ce3e3e}
+#ochap-public-panels .lr-b4{background:#396bbb;color:white;border-color:#396bbb}
+#ochap-public-panels .lr-b5{background:#f2cd35;color:#26240c;border-color:#d3b42c}
+#ochap-public-panels .lr-b6{background:#3c8950;color:white;border-color:#3c8950}
+#ochap-public-panels .lr-reporter{min-width:0;padding:6px 8px;border-left:3px solid #d1d9cb;background:#f2f5ed;border-radius:4px;font-size:12px;line-height:1.5}
+#ochap-public-panels .lr-reporter b{display:block;font-weight:750}
+#ochap-public-panels .lr-reporter span{display:block;color:#7a8576;font-size:11px}
+#ochap-public-panels .lr-reporter small{display:block;font-size:11px;color:#52664f}
+#ochap-public-panels .lr-reporter.lr-hit{border-color:#3b8252;background:#e5f2e3}
+#ochap-public-panels .lr-reporter.lr-gemi.lr-hit{border-color:#8b6cab;background:#f0e9f7}
+#ochap-public-panels .lr-reporter.lr-hit span{color:#236339;font-weight:750}
+#ochap-public-panels .lr-reporter.lr-gemi.lr-hit span{color:#6b4d86}
+#ochap-public-panels .lr-reporter+.lr-reporter{margin-top:5px}
+#ochap-public-panels .lr-pages{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:10px 0;font-size:12px;color:#6b7e68}
+#ochap-public-panels .lr-pages button{padding:7px 12px;min-height:36px}
+#ochap-public-panels .lr-race{border:1px solid #d3ddcd;background:#fffef9;border-radius:9px;margin:10px 0;padding:12px;box-shadow:none;min-width:0;overflow:hidden}
+#ochap-public-panels .lr-race-top{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;border-bottom:1px solid #e2e8da;padding-bottom:10px}
+#ochap-public-panels .lr-race-top strong{font-size:15px}
+#ochap-public-panels .lr-race-top>div:nth-child(2){text-align:center}
+#ochap-public-panels .lr-race-top small{display:block;color:#7c8a78;font-size:11px;margin-top:3px;font-weight:400}
+#ochap-public-panels .lr-race-reporters{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr));gap:8px;margin-top:10px}
+#ochap-public-panels .lr-race-reporters .lr-reporter{margin:0}
+#ochap-public-panels .lr-race details{border-top:0;margin-top:7px;padding:4px 0 0}
+#ochap-public-panels .lr-race summary{font-size:11px;font-weight:500;color:#6b7d68;cursor:pointer;list-style:revert}
+#ochap-public-panels .lr-pick-detail{margin:8px 0;padding:8px;background:#f4f6ef;border-radius:6px;font-size:11px}
+#ochap-public-panels .lr-pick-detail h4{font-size:12px;margin-bottom:5px}
+#ochap-public-panels .lr-bets{display:grid;grid-template-columns:55px 1fr;gap:5px;margin:5px 0}
+#ochap-public-panels .lr-bets>span{display:flex;gap:3px;flex-wrap:wrap}
+#ochap-public-panels .lr-bets>span>span{background:#fff;padding:2px 4px;border-radius:3px;border:1px solid #dbe2d5}
+#ochap-public-panels .lr-bets .lr-ticket-hit{background:#dcefd5;color:#29613e;border-color:#8bb982;font-weight:800}
+#ochap-public-panels .lr-bet-tabs{max-width:450px}
+#ochap-public-panels .lr-categories{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+#ochap-public-panels .lr-category{border:1px solid #c9d5c2;border-radius:9px;overflow:hidden;min-width:0}
+#ochap-public-panels .lr-category>h3{background:#e5eddf;padding:10px 12px;font-size:15px;letter-spacing:.04em}
+#ochap-public-panels .lr-category-author{padding:12px}
+#ochap-public-panels .lr-category-author+.lr-category-author{border-top:1px solid #e0e6d9}
+#ochap-public-panels .lr-category-author h4{font-size:13px;display:flex;justify-content:space-between;gap:4px;flex-wrap:wrap}
+#ochap-public-panels .lr-category-author h4 small{color:#7b8875;font-size:10px;font-weight:400}
+#ochap-public-panels .lr-rates{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:5px;text-align:center;border-bottom:1px solid #dfe7d6;margin:9px 0;padding-bottom:10px}
+#ochap-public-panels .lr-rates span,#ochap-public-panels .lr-rates small{display:block;font-size:10px;color:#7a8672}
+#ochap-public-panels .lr-rates b{font-size:22px;display:block;font-variant-numeric:tabular-nums}
+#ochap-public-panels .lr-category .lr-finance{font-size:13px}
+#ochap-public-panels .lr-caption{font-size:10px;color:#99704d;margin-top:6px}
+#ochap-public-panels .lr-howto{font-size:12px;color:#798472;padding:14px 0;border:0}
+#ochap-public-panels .lr-howto summary{font-size:12px;cursor:pointer}
+#ochap-public-panels .lr-howto p{margin-top:9px}
+#ochap-public-panels .lr-muted{font-size:12px;color:#7d8877}
+#ochap-public-panels .lr-back-top{position:fixed;right:max(15px,env(safe-area-inset-right));bottom:max(19px,env(safe-area-inset-bottom));z-index:9996;display:block;background:#2a5b46d9;border:1px solid #9db5a4;border-radius:30px;box-shadow:0 2px 10px #234c3422;padding:11px 17px;color:white;text-decoration:none;font-weight:750;backdrop-filter:blur(6px)}
+@media(max-width:650px){
+ #ochap-public-panels .lr-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #ochap-public-panels .lr-section{padding:12px;margin:12px 0}
+ #ochap-public-panels .lr-section-title h3{font-size:17px}
+ #ochap-public-panels .lr-category .lr-finance{grid-template-columns:1fr;font-size:12px;gap:5px}
+ #ochap-public-panels .lr-category-author{padding:10px 8px}
+ #ochap-public-panels .lr-category-author h4{font-size:12px}
+ #ochap-public-panels .lr-rates{gap:2px}
+ #ochap-public-panels .lr-rates b{font-size:16px}
+ #ochap-public-panels .lr-rates small{font-size:9px}
+ #ochap-public-panels .lr-categories{gap:8px}
+ #ochap-public-panels .lr-race-reporters{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #ochap-public-panels .lr-race-reporters .lr-reporter small{font-size:10px;letter-spacing:-.3px}
+ #ochap-public-panels .lr-race-top{gap:6px;font-size:12px}
+ #ochap-public-panels .lr-race-top strong{font-size:14px}
+ #ochap-public-panels .lr-race{padding:10px}
+ #ochap-public-panels .lr-boat{width:20px;height:22px;font-size:13px}
+ #ochap-public-panels .lr-compact td,#ochap-public-panels .lr-compact th{padding:8px 3px;font-size:11px}
+ #ochap-public-panels .lr-compact .lr-boat{width:17px;height:20px;font-size:11px;border-radius:3px}
+ #ochap-public-panels .lr-compact .lr-order{gap:1px}
+ #ochap-public-panels .lr-compact .lr-reporter{padding:4px;font-size:10px}
+ #ochap-public-panels .lr-compact .lr-reporter span{font-size:10px}
+}
+@media(max-width:370px){
+ #ochap-public-panels .lr-tabs button{font-size:12px}
+ #ochap-public-panels .lr-race-top strong{font-size:12px}
+ #ochap-public-panels .lr-race-top small{font-size:10px}
+ #ochap-public-panels .lr-rates b{font-size:14px}
+}
