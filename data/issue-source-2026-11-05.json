@@ -1,0 +1,24 @@
+{
+  "date": "2026-11-05",
+  "path": "archives/2026-11-05.html",
+  "compression": "none",
+  "gemi_tabs": false,
+  "edition_status": "ocha_published_pre_deadline",
+  "venues": 12,
+  "races": 144,
+  "forecast_frozen_at_jst": "2026-11-05T06:38:00+09:00",
+  "forecast_sha256": "2732a7da24bf88e3286e8102bb6e0ffca8226ad0595c4127931ffe885cb4c0e0",
+  "formal_bc_eligible": false,
+  "reporters": {
+    "ocha": {
+      "frozen_at_jst": "2026-11-05T06:38:00+09:00",
+      "input_sha256": "ba14db15029db64b6c49b412b85417f8b2fb1fe95bb454adfaa30b858fe90c91"
+    }
+  },
+  "diagrams": false,
+  "forecast_drive_id": "1Ei7b5d4ktA0EF9np0tORiQ6Tr2lVKaUa",
+  "shared_input_drive_id": "1VzcdL7wm_ArFKQcoz-uYcZCqS5s6FJhj",
+  "prepared_at_jst": "2026-11-04T21:44:31.470Z",
+  "html_sha256": "df0b77baab951d514f48d7601401377ad04a29c56358547cd460f997c4803136",
+  "model": "gpt-6.1-sol"
+}
