@@ -40,6 +40,7 @@
     const headTags='<link rel="stylesheet" href="./assets/date-nav.css">'+
       '<link rel="stylesheet" href="./assets/press-roles.css?v=3">'+
       '<link rel="stylesheet" href="./assets/live-results.css?v=1">'+
+      '<link rel="stylesheet" href="./assets/ticket-colors.css?v=1">'+
       '<link rel="stylesheet" href="./assets/public-scorecard.css?v=1">'+
       (issue.gemi_tabs&&!bundledGemiStyle?'<link rel="stylesheet" href="./assets/gemi-reporter.css?v=20261101-floating-v2">':'');
     const encoded=JSON.stringify(manifest).replace(/</g,'\\u003c');
@@ -48,7 +49,8 @@
       '<script src="./assets/public-scorecard.js?v=1"></'+'script>'+
       '<script src="./assets/hit-reporters.js?v=2"></'+'script>'+
       '<script src="./assets/live-results.js?v=1"></'+'script>'+
-      '<script src="./assets/press-roles.js?v=10"></'+'script>';
+      '<script src="./assets/press-roles.js?v=10"></'+'script>'+
+      '<script src="./assets/ticket-colors.js?v=1"></'+'script>';
     source=source.replace(/<\/head>/i,headTags+'</head>');
     source=source.replace(/<\/body>/i,extraScripts+'</'+'body>');
     document.open();document.write(source);document.close();

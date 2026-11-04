@@ -1,0 +1,20 @@
+/* Shared boat palette for both journalists' tickets, including print output. */
+.ochap-ticket-color{display:inline-flex;align-items:center;gap:3px;white-space:nowrap;vertical-align:middle}
+.ochap-ticket-boat,.ochap-gemi-pane .boat,.ochap-gemi-quickbar .boat{
+ display:inline-grid;place-items:center;flex:none;min-width:24px;height:26px;padding:0 3px;border:1px solid #aeb7ae;border-radius:4px;
+ font-weight:800;font-size:16px;line-height:1;font-variant-numeric:tabular-nums;text-align:center;
+ -webkit-print-color-adjust:exact;print-color-adjust:exact
+}
+.oc-b1,.ochap-gemi-pane .boat.b1,.ochap-gemi-quickbar .boat.b1{background:#fff;color:#161b17;border-color:#aeb7ae}
+.oc-b2,.ochap-gemi-pane .boat.b2,.ochap-gemi-quickbar .boat.b2{background:#292c2a;color:#fff;border-color:#292c2a}
+.oc-b3,.ochap-gemi-pane .boat.b3,.ochap-gemi-quickbar .boat.b3{background:#cf3d3d;color:#fff;border-color:#cf3d3d}
+.oc-b4,.ochap-gemi-pane .boat.b4,.ochap-gemi-quickbar .boat.b4{background:#356abd;color:#fff;border-color:#356abd}
+.oc-b5,.ochap-gemi-pane .boat.b5,.ochap-gemi-quickbar .boat.b5{background:#f2ce35;color:#22210f;border-color:#d2b42d}
+.oc-b6,.ochap-gemi-pane .boat.b6,.ochap-gemi-quickbar .boat.b6{background:#32844c;color:#fff;border-color:#32844c}
+.ochap-gemi-pane .combo{display:inline-flex;align-items:center;gap:3px;margin:0 6px 6px 0;padding:5px 9px;background:#eef5ed;border:1px solid #bbd0b7;border-radius:5px;font-weight:700;font-size:16px;vertical-align:middle;white-space:nowrap}
+.ochap-gemi-pane .reverse .combo{background:#f5f0e5;border-color:#d9cfb3}
+.ochap-gemi-pane .ticket-dash,.ochap-gemi-quickbar .ticket-dash{margin:0 1px;color:#647568}
+#digest .ochap-ticket-color{margin:2px 0}
+#digest .ochap-ticket-boat,#ochap-public-panels .lr-bets .ochap-ticket-boat{min-width:18px;height:20px;padding:0 2px;font-size:12px;border-radius:3px}
+#ochap-public-panels .lr-bets .ochap-ticket-color{gap:1px}
+@media(max-width:600px){.ochap-ticket-boat,.ochap-gemi-pane .boat,.ochap-gemi-quickbar .boat{min-width:22px;height:24px;font-size:14px}.ochap-gemi-pane .combo{padding:5px 7px}}
