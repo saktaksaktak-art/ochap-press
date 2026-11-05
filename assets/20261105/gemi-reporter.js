@@ -485,6 +485,9 @@
 
     const shaShort = String(rec.input_sha256 || sharedInputMeta?.sha256 || '').slice(0, 12);
     const snapId = sharedInputMeta?.snapshot_id || `OCHAP_SHARED_INPUT_${String(issueDate || '').replaceAll('-','')}_M0_v1`;
+    const sharedFacts = Array.from(article.querySelectorAll(':scope > .copy > details'))
+      .filter(node => /^0[12]\s/.test(node.querySelector('summary')?.textContent || ''))
+      .map(node => node.outerHTML.replace('🍵Pコースデータ', 'コースデータ')).join('');
 
     return `
       <div class="copy">
@@ -502,6 +505,7 @@
         </div>
         <p>${esc(rec.first_mark || '')}</p>
       </div>
+      ${sharedFacts}
       <details><summary>03 ST詳細・スリット隊形</summary>
         ${slitSvg ? `<figure class="slit-figure">${slitSvg}</figure>` : ''}
         <div class="table-scroll"><table><thead><tr><th>艇/C</th><th>選手・級</th><th>C平均ST</th><th>全国平均ST</th><th>ST順位</th><th>F数</th><th>スリット判定</th></tr></thead><tbody>${slitTableRows}</tbody></table></div>
