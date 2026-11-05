@@ -37,6 +37,8 @@
     // Inject only assets missing from the source; otherwise tabs initialize twice.
     const bundledGemiScript=/<script\b[^>]*\bsrc\s*=\s*["'][^"']*gemi-reporter\.js(?:\?[^"']*)?["']/i.test(source);
     const bundledGemiStyle=/<link\b[^>]*\bhref\s*=\s*["'][^"']*gemi-reporter\.css(?:\?[^"']*)?["']/i.test(source);
+    const gemiScript = /^assets\/(?:\d{8}\/)?gemi-reporter\.js$/.test(issue.gemi_script || '')
+      ? issue.gemi_script : 'assets/gemi-reporter.js';
     const headTags='<link rel="stylesheet" href="./assets/date-nav.css">'+
       '<link rel="stylesheet" href="./assets/press-roles.css?v=4">'+
       '<link rel="stylesheet" href="./assets/live-results.css?v=2">'+
@@ -45,7 +47,7 @@
       (issue.gemi_tabs&&!bundledGemiStyle?'<link rel="stylesheet" href="./assets/gemi-reporter.css?v=20261101-floating-v2">':'');
     const encoded=JSON.stringify(manifest).replace(/</g,'\\u003c');
     const setGlobals='<script>window.__OCHAP_ISSUE_INDEX__='+encoded+';window.__OCHAP_SELECTED_DATE__='+JSON.stringify(date)+';</'+'script>';
-    const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./assets/gemi-reporter.js?v=20261101-floating-v2"></'+'script>':'')+
+    const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./'+gemiScript+'?v=20261105"></'+'script>':'')+
       '<script src="./assets/public-scorecard.js?v=1"></'+'script>'+
       '<script src="./assets/hit-reporters.js?v=3"></'+'script>'+
       '<script src="./assets/live-results.js?v=2"></'+'script>'+

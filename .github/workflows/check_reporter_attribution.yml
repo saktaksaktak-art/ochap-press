@@ -22,6 +22,10 @@ jobs:
         run: node --check assets/gemi-reporter.js
       - name: Check reporter attribution and shared-table headings
         run: python3 scripts/check_reporter_attribution.py
+      - name: Check Gemini forecast publication linkage
+        run: |
+          python3 scripts/check_gemi_publication.py
+          node --check assets/20261105/gemi-reporter.js
       - name: Validate public reader scorecard data
         run: |
           node --check assets/press-roles.js
