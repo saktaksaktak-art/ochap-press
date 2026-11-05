@@ -11,6 +11,7 @@
   nav.setAttribute('aria-label', 'お茶P新聞の表示切り替え');
   const choices = [
     ['forecast', '予想'],
+    ['consensus', 'お茶P Gemi兄　予想一致レース'],
     ['results', '結果速報'],
     ['versus', 'おちゃっぴー vs Gemini']
   ];
@@ -40,7 +41,10 @@
   const versus = document.createElement('section');
   versus.id = 'ochap-versus-view';
   versus.hidden = true;
-  panels.append(results, versus);
+  const consensus = document.createElement('section');
+  consensus.id = 'ochap-consensus-view';
+  consensus.hidden = true;
+  panels.append(results, versus, consensus);
 
   const h2 = (label) => {const x = document.createElement('h2');x.textContent = label;return x;};
   const p = (label, className = '') => {const x = document.createElement('p');x.textContent = label;if(className)x.className=className;return x;};
@@ -573,12 +577,14 @@
   function switchView(which){
     for(const [key,button] of Object.entries(controls))button.setAttribute('aria-pressed',String(key===which));
     for(const node of originals)node.classList.toggle('ochap-public-original-hidden',which!=='forecast');
-    panels.hidden=which==='forecast';results.hidden=which!=='results';versus.hidden=which!=='versus';
+    panels.hidden=which==='forecast';results.hidden=which!=='results';versus.hidden=which!=='versus';consensus.hidden=which!=='consensus';
+    if(which==='consensus')window.OchaPConsensus?.mount(consensus,issueDate);
     if(which==='results')showResults();if(which==='versus')showComparison();
     const current=new URL(location.href);if(which==='forecast')current.searchParams.delete('view');else current.searchParams.set('view',which);
     if(location.protocol==='http:' || location.protocol==='https:') history.replaceState(null,'',current.pathname+current.search+current.hash);
   }
   const requested=new URL(location.href).searchParams.get('view');
-  switchView(requested==='versus'||requested==='results'?requested:'forecast');
+  switchView(['versus','results','consensus'].includes(requested)?requested:'forecast');
 })();
+
 
