@@ -38,8 +38,15 @@ def main():
         html = read_bytes(item['path']).decode()
         ids = re.findall(r'<article\b[^>]*\bid="([^"]+)"', html)
         assert len(ids) == item['races'] and set(ids) == set(doc['races']), date
-        sha = item['reporters']['ocha']['input_sha256']
+        ocha_sha = item['reporters']['ocha']['input_sha256']
+        sha = item['reporters']['gemi']['input_sha256']
         assert doc['shared_input']['sha256'] == sha, date
+        if sha != ocha_sha:
+            # Both originals remain readable; an explicitly recorded difference
+            # must never be certified as an identical-input comparison.
+            assert item.get('reporter_input_versions_differ') is True, date
+            assert item.get('pair_comparison_eligible') is False, date
+            assert item.get('formal_bc_eligible') is False, date
         assert (ROOT / item['gemi_script']).is_file(), date
         for rid, rec in doc['races'].items():
             assert rec['status'] == 'published' and rec['input_sha256'] == sha, rid
@@ -52,3 +59,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
