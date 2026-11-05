@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-06",
+  "path": "archives/2026-11-06.html.gz.b64.txt",
+  "compression": "base64gzip",
+  "gemi_tabs": true,
+  "edition_status": "dual_reporter_frozen_forecasts_published",
+  "venues": 13,
+  "races": 156,
+  "forecast_frozen_at_jst": "2026-11-06T07:13:17+09:00",
+  "forecast_sha256": "67793bb6810abce946c34d2757103ed9278ea5f7dcf10b78c4974fb731102ea4",
+  "formal_bc_eligible": false,
+  "reporters": {
+    "ocha": {
+      "frozen_at_jst": "2026-11-06T07:13:17+09:00",
+      "input_sha256": "cbe093be92b303349e1fe6843a13c387047d254b4f99b5441586492bd8032618"
+    },
+    "gemi": {
+      "recorded_freeze_at_jst": "2026-11-06T06:58:00+09:00",
+      "input_sha256": "34696d921f5a1b6bcbe6970b2a17ec6c5c64895e38bc66b6ccc1d718966e1b20"
+    }
+  },
+  "diagrams": true,
+  "forecast_drive_id": "12poly_LBH7848xEybyozHoctdXLCQH28",
+  "shared_input_drive_id": "10qa-PN-uAxyq4yJjNTYemjqr_Tw9wcXD",
+  "prepared_at_jst": "2026-11-06T07:22:17+09:00",
+  "html_sha256": "5ac4a264a7550470e1864f61112e19bc7e4b760594f4e7429666eee7a5a81d80",
+  "model": "gpt-6.1-sol",
+  "gemi_json": "data/gemi/2026-11-06.json.gz.b64.txt",
+  "gemi_script": "assets/20261106/gemi-reporter.js",
+  "gemi_original_sha256": "23d9b3f75297d7d396a71ff8499ac02cc328d1e318b5578c058bee0d64937f9f",
+  "gemi_public_sha256": "23d9b3f75297d7d396a71ff8499ac02cc328d1e318b5578c058bee0d64937f9f",
+  "reporter_input_versions_differ": true,
+  "pair_comparison_eligible": false,
+  "gemi_original_drive_id": "1UnPs1-b9hDQvyjUNKLb3sPr4F0gxgVqS",
+  "underlying_program_and_st_sources_match": true
+}

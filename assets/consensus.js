@@ -56,8 +56,8 @@
       const summary=element('div',undefined,'public-grid');
       [['一致レース',available.length+'R'],['共通券的中',m.hits+'/'+m.n+'R（'+pct(m.hit_rate_pct)+'）'],['100円平買い回収率',pct(m.return_rate_pct)],['平買い収支',(m.profit_yen>0?'+':'')+yen(m.profit_yen)]].forEach(([title,value])=>{const c=element('div',undefined,'public-card');c.append(element('span',title),element('strong',value,'public-number'));summary.append(c);});root.append(summary);
       const snapshot=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date(data.snapshot_at_jst));
-      root.append(element('p','成績は'+snapshot+'時点の参考集計。的中率は通常レース、収支は事故・返還分を含む'+m.finance_races+'R・'+m.ticket_points+'点。一致して外れたRも含みます。','public-note'));
-      const evaluation=element('div',undefined,'public-card');evaluation.append(element('h3','一致予想は有効か'));
+      root.append(element('p',m.n===0?'成績は結果確定後に集計します。':'成績は'+snapshot+'時点の参考集計。的中率は通常レース、収支は事故・返還分を含む'+m.finance_races+'R・'+m.ticket_points+'点。一致して外れたRも含みます。','public-note'));
+      if(m.n>0){const evaluation=element('div',undefined,'public-card');evaluation.append(element('h3','一致予想は有効か'));
       const g=m.agreement_selection_test.gemi;
       const selectionSignal=g.holm_adjusted_p_four_tests<.05 && g.with_common_hits/g.with_common_n>g.without_common_hits/g.without_common_n;
       evaluation.append(element('p',selectionSignal?'レースを絞る手掛かりはありますが、共通券購入の優位性は未確認です。':'共通券購入の優位性は未確認です。共通券なしの比較群は'+g.without_common_n+'R。継続して検証します。'));
@@ -69,7 +69,7 @@
       details.append(element('p','上の点数は通常Rでの比較。回収率は共通券がある同一の'+m.finance_races+'Rで比較しています。購入点数が異なるため、的中率だけでは優劣を判定できません。','public-note'));
       details.append(element('p','共通券回収率の95%推定区間：'+m.roi_cluster_bootstrap95_pct.map(pct).join('〜')+'。場ごとに再抽出した参考値です。1日分の途中結果であり、翌日以降の再現確認が必要です。','public-note'));
       details.append(element('p','的中率の95%区間：'+m.wilson95_hit_pct.map(pct).join('〜')+'。レース選別の検定は各記者の全本線（3連単は全区分）を共通券あり／なしの別R群で比較し、場別条件付き検定・4比較のHolm補正を使用。お茶P p='+m.agreement_selection_test.ocha.holm_adjusted_p_four_tests.toFixed(3)+'、Gemi兄 p='+m.agreement_selection_test.gemi.holm_adjusted_p_four_tests.toFixed(3)+'。探索的な関連の検証で、収益改善の証明ではありません。','public-note'));
-      evaluation.append(details);root.append(evaluation);
+      evaluation.append(details);root.append(evaluation);}
       const filters=element('div',undefined,'public-controls');
       function select(name,options,value,onchange){const l=element('label',name+' '),s=element('select');s.setAttribute('aria-label',name);options.forEach(([v,n])=>{const o=element('option',n);o.value=v;s.append(o);});s.value=value;s.onchange=()=>{onchange(s.value);page=0;render();};l.append(s);return l;}
       filters.append(select('場',[['','全場'],...Array.from(new Set(available.map(r=>r.venue))).map(v=>[v,v])],venue,v=>venue=v));
@@ -93,3 +93,4 @@
   }
   window.OchaPConsensus={mount};
 })();
+
