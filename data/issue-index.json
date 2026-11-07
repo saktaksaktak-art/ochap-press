@@ -27,14 +27,19 @@
       "label": "2026-11-08（日）全国11場132R【おちゃっぴーM0・本線4点順位・Gemi兄準備中】",
       "gemi_status": "preparing_original_not_received",
       "gemi_publication_pending": true,
-      "ochap_status": "frozen_original_saved",
+      "ochap_status": "published_original_preserved",
       "data_limitations_present": true,
       "source_input_drive_id": "1Gn3-SkqqKHOG9xJI8yu6W_Q-sf-An5Fp",
       "publication_timing_semantics": "render-time deadline check; public confirmation recorded separately",
       "expected_races": 132,
       "unissued_races": 0,
       "missing_races": 0,
-      "diagrams_count": 132
+      "diagrams_count": 132,
+      "first_prediction_public_availability_confirmed_at_jst": "2026-11-08T06:21:10+09:00",
+      "first_publication_timestamp_semantics": "conservative first verified public availability; never backdated",
+      "public_verified": true,
+      "publication_receipt_drive_id": "1-7mAeLoExGmeA64FWZxMVo_Ppj4Hv1pQ",
+      "issue_index_drive_id": "1ZVa5t_tF6RYG7CJ9pVbILEpZnnVThXeO"
     },
     {
       "date": "2026-11-07",
