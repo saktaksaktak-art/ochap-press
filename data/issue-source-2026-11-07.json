@@ -24,11 +24,14 @@
     "v23-r3",
     "v23-r4"
   ],
-  "diagrams": false,
+  "diagrams": true,
   "forecast_drive_id": "1-ukO-i_onHBKO_OmDZWjBLGCMxHW9IZn",
   "shared_input_drive_id": "1jzd-JfVK1j-VLGCKKlqsxzNKXEmfXd16",
-  "prepared_at_jst": "2026-11-07T00:55:05.980Z",
-  "html_sha256": "02f21255711260c0b3d3cb3300b01d57d90b78dc43cce8c3899f93d5cdffc9b9",
+  "prepared_at_jst": "2026-11-07T00:58:48.088Z",
+  "html_sha256": "c62ddc3726b03bd41153a7e8c5b932bb11cbabd7b70525a2fe6dd9cf44293d8f",
   "model": "not_independently_verified_in_this_session",
-  "publication_timing_checked_at": "2026-11-07T00:55:05.940Z"
+  "publication_timing_checked_at": "2026-11-07T09:58:15.890311+09:00",
+  "first_prediction_public_availability_confirmed_at_jst": "2026-11-07T09:58:15.890311+09:00",
+  "first_publication_timestamp_semantics": "conservative first verified public availability; never backdated",
+  "diagrams_count": 396
 }
