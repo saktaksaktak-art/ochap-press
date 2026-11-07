@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-08",
+  "path": "archives/2026-11-08.html.gz.b64.txt",
+  "compression": "base64gzip",
+  "gemi_tabs": false,
+  "edition_status": "ocha_pre_deadline_reference_m0",
+  "venues": 11,
+  "races": 132,
+  "forecast_frozen_at_jst": "2026-11-08T06:15:53+09:00",
+  "publication_timing_checked_at": "2026-11-07T21:17:45.685Z",
+  "forecast_sha256": "8633dc7f8594e67659b80b22ffea74ab8c0a2a9653f57f5dc93c00e87ed0d006",
+  "formal_bc_eligible": false,
+  "reporters": {
+    "ocha": {
+      "frozen_at_jst": "2026-11-08T06:15:53+09:00",
+      "input_sha256": "ab067b4a854d498c1272e9d18903f1e56c30fdfdbb2e6d3c9c4cf4571d1d58e0"
+    }
+  },
+  "post_deadline_reference_races": [],
+  "diagrams": true,
+  "diagram_policy": "slit-only.v1",
+  "turn_diagrams": false,
+  "forecast_drive_id": "12XYWjHk11YJ6So1IZVAV1uSmMLju6ZNO",
+  "shared_input_drive_id": "1Gn3-SkqqKHOG9xJI8yu6W_Q-sf-An5Fp",
+  "prepared_at_jst": "2026-11-07T21:17:45.822Z",
+  "html_sha256": "c41bb2859fd09f610a0857db77ff6f967b917d3021096b09e67875b3ece5d37b",
+  "model": {
+    "reported_runtime": "GPT-6 based Codex",
+    "exact_model_id": "unverified",
+    "model_switch_performed": false
+  },
+  "label": "2026-11-08（日）全国11場132R【おちゃっぴーM0・本線4点順位・Gemi兄準備中】",
+  "gemi_status": "preparing_original_not_received",
+  "gemi_publication_pending": true,
+  "ochap_status": "frozen_original_saved",
+  "data_limitations_present": true,
+  "source_input_drive_id": "1Gn3-SkqqKHOG9xJI8yu6W_Q-sf-An5Fp",
+  "publication_timing_semantics": "render-time deadline check; public confirmation recorded separately",
+  "expected_races": 132,
+  "unissued_races": 0,
+  "missing_races": 0,
+  "diagrams_count": 132,
+  "forecast_library_file_id": "libfile_dff57e351e08819194565499b1e646f0"
+}
