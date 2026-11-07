@@ -34,7 +34,6 @@
   const metadata = {};
   if (typeof document !== 'undefined') {
     for (const article of document.querySelectorAll('article[id]')) {
-      if(article.dataset.postdeadlineReference==='true')continue;
       const copy = article.querySelector(':scope > .copy');
       if (!copy) continue;
       const bets = {};
@@ -52,7 +51,7 @@
       if (parsed) {
         const head=copy.querySelector('.lead')?.textContent.match(/◎\s*([1-6])/);
         if(head)parsed.main_pick=head[1];
-        ocha[article.id] = parsed;
+        ocha[article.id] = article.dataset.postdeadlineReference==='true' ? null : parsed;
         const heading=article.querySelector('.race-head h2')?.textContent || '';
         const race=heading.match(/(.+?)\s+(\d+)R.*締切\s*(\d{1,2}:\d{2})/);
         if(race)metadata[article.id]={venue:race[1].replace(/^注目\s*/,''),race_no:Number(race[2]),closing_time:race[3],session:article.dataset.session||null,session_verified:article.dataset.sessionVerified==='true'};
