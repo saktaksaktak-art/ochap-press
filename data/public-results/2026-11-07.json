@@ -1,0 +1,75 @@
+{
+  "schema_version": "1.0",
+  "date": "2026-11-07",
+  "status": "API_RESULTS_REFERENCE_ONLY",
+  "checked_at_jst": "2026-11-07T09:39:07+09:00",
+  "source_policy": "Unified third-party API; official-page confirmation belongs only to formal BC.",
+  "not_formal_m0": true,
+  "not_formal_bc": true,
+  "races": [
+    {
+      "venue": "三国",
+      "venue_code": 10,
+      "race_no": 1,
+      "order": [
+        1,
+        4,
+        5
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 4420,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261107.json",
+      "source_observed_at_jst": "2026-11-07T09:39:07+09:00"
+    },
+    {
+      "venue": "三国",
+      "venue_code": 10,
+      "race_no": 2,
+      "order": [
+        1,
+        2,
+        4
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 1260,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261107.json",
+      "source_observed_at_jst": "2026-11-07T09:39:07+09:00"
+    },
+    {
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 1,
+      "order": [
+        1,
+        5,
+        2
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 5240,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261107.json",
+      "source_observed_at_jst": "2026-11-07T09:39:07+09:00"
+    },
+    {
+      "venue": "唐津",
+      "venue_code": 23,
+      "race_no": 2,
+      "order": [
+        1,
+        4,
+        2
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 5380,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261107.json",
+      "source_observed_at_jst": "2026-11-07T09:39:07+09:00"
+    }
+  ]
+}
