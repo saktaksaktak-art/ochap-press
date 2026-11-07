@@ -6,7 +6,7 @@
       "date": "2026-11-08",
       "path": "archives/2026-11-08.html.gz.b64.txt",
       "compression": "base64gzip",
-      "gemi_tabs": false,
+      "gemi_tabs": true,
       "edition_status": "ocha_pre_deadline_reference_m0",
       "venues": 11,
       "races": 132,
@@ -39,7 +39,11 @@
       "first_publication_timestamp_semantics": "conservative first verified public availability; never backdated",
       "public_verified": true,
       "publication_receipt_drive_id": "1-7mAeLoExGmeA64FWZxMVo_Ppj4Hv1pQ",
-      "issue_index_drive_id": "1ZVa5t_tF6RYG7CJ9pVbILEpZnnVThXeO"
+      "issue_index_drive_id": "1ZVa5t_tF6RYG7CJ9pVbILEpZnnVThXeO",
+      "gemi_json": "data/gemi/2026-11-08.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-08.json",
+      "consensus_json": "data/consensus/2026-11-08.json",
+      "gemi_first_publication_confirmed_at_jst": "2026-11-08T07:02:11+09:00"
     },
     {
       "date": "2026-11-07",
