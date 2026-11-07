@@ -34,6 +34,7 @@
   const metadata = {};
   if (typeof document !== 'undefined') {
     for (const article of document.querySelectorAll('article[id]')) {
+      if(article.dataset.postdeadlineReference==='true')continue;
       const copy = article.querySelector(':scope > .copy');
       if (!copy) continue;
       const bets = {};
