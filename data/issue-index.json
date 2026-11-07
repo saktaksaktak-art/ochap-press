@@ -1,7 +1,36 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-06",
+  "default_date": "2026-11-07",
   "issues": [
+    {
+      "date": "2026-11-07",
+      "path": "archives/2026-11-07.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": false,
+      "edition_status": "ocha_forecast_with_separate_postdeadline_reference",
+      "venues": 11,
+      "races": 132,
+      "forecast_frozen_at_jst": "2026-11-07T09:52:02+09:00",
+      "publication_timing_checked_at": "2026-11-07T00:55:05.940Z",
+      "forecast_sha256": "612651f542927010c3e7405d56f1fa2fc36157ee2786702c98af684433be6918",
+      "formal_bc_eligible": false,
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-07T09:52:02+09:00",
+          "input_sha256": "a3fabbdfea84966cb10ed85562c15d0fd8f03c20973505f48f058cdeecd0e60f"
+        }
+      },
+      "post_deadline_reference_races": [
+        "v10-r1",
+        "v10-r2",
+        "v10-r3",
+        "v23-r1",
+        "v23-r2",
+        "v23-r3",
+        "v23-r4"
+      ],
+      "diagrams": false
+    },
     {
       "date": "2026-11-06",
       "path": "archives/2026-11-06.html.gz.b64.txt",
