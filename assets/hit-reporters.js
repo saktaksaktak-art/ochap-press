@@ -80,7 +80,9 @@
         const doc = JSON.parse(text);
         if (doc.date !== date || doc.reporter !== 'gemi' || !doc.races || Array.isArray(doc.races)) return forecasts;
         for (const [id,rec] of Object.entries(doc.races)) {
-          if (rec.status !== 'published' || rec.retrospective === true) continue;
+          if (issue.gemi_publication_pending === true || rec.status !== 'published' || rec.retrospective === true || rec.frozen_before_race_closing === false || String(rec.m0_status||'').startsWith('POST_DEADLINE')) continue;
+          const firstPublication = issue.gemi_publication_timing_checked_at;
+          if(firstPublication && (!rec.closing_at || new Date(rec.closing_at)<=new Date(firstPublication))) continue;
           const bets = normalize({...rec.bets,main_pick:rec.marks?.main});
           if (bets) (forecasts[id] ||= {}).gemi = bets;
         }
