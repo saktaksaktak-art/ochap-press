@@ -90,8 +90,7 @@ function OCHAP_PRESS_GITHUB_PUBLISH_TICK(explicitDates, forcePublish) {
       if (!bundle) continue;
       var existingReceipt = OCHAP_PRESS_READ_RECEIPT_(folder, dateStr, cfg);
       if (!forcePublish && existingReceipt &&
-          existingReceipt.html_gz_b64_sha256 === bundle.htmlGzB64Sha256 &&
-          existingReceipt.gemi_gz_b64_sha256 === bundle.gemiGzB64Sha256 &&
+          existingReceipt.drive_input_fingerprint === bundle.driveInputFingerprint &&
           existingReceipt.status === 'PUBLISHED_AND_GIT_COMMIT_VERIFIED') {
         console.log('IDEMPOTENT_SKIP for ' + dateStr + ' (commit ' + existingReceipt.git_commit_sha + ')');
         continue;
@@ -113,6 +112,7 @@ function OCHAP_PRESS_GITHUB_PUBLISH_TICK(explicitDates, forcePublish) {
       var b = toPublish[j];
       var receipt = {
         schema: cfg.receiptSchema,
+        drive_input_fingerprint: b.driveInputFingerprint,
         date: b.date,
         published_at_jst: OCHAP_PRESS_NOW_JST_(),
         repository: cfg.owner + '/' + cfg.repo,
@@ -135,6 +135,7 @@ function OCHAP_PRESS_GITHUB_PUBLISH_TICK(explicitDates, forcePublish) {
       OCHAP_PRESS_WRITE_RECEIPT_(folder, b.date, receipt, cfg);
     }
 
+    PropertiesService.getScriptProperties().setProperty('OCHAP_PRESS_WRITE_VERIFIED', 'true');
     console.log(JSON.stringify(publishResult));
     return publishResult;
   } finally {
@@ -146,6 +147,7 @@ function OCHAP_PRESS_GITHUB_PUBLISH_TICK(explicitDates, forcePublish) {
  * Installs an idempotent 15-minute trigger so newly created Drive issues auto-publish to GitHub Pages.
  */
 function OCHAP_PRESS_INSTALL_AUTO_TRIGGER() {
+  if (PropertiesService.getScriptProperties().getProperty('OCHAP_PRESS_WRITE_VERIFIED') !== 'true') throw new Error('Run and verify one successful publish before installing the auto trigger');
   var handler = 'OCHAP_PRESS_GITHUB_PUBLISH_TICK';
   var triggers = ScriptApp.getProjectTriggers();
   for (var i = 0; i < triggers.length; i++) {
@@ -233,6 +235,7 @@ function OCHAP_PRESS_LOAD_DRIVE_ISSUE_BUNDLE_(folder, dateStr, cfg) {
     date: dateStr,
     label: label,
     htmlFileId: htmlFile.getId(),
+    driveInputFingerprint: OCHAP_PRESS_SHA256_HEX_(Utilities.newBlob(JSON.stringify([rawHtml, htmlGzB64Text, gemiGzB64Text, gemiPublicText, consText])).getBytes()),
     rawHtml: rawHtml,
     htmlGzB64FileId: htmlGzB64FileId,
     htmlGzB64Text: htmlGzB64Text,
