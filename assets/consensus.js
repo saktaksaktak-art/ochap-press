@@ -6,6 +6,31 @@
   const yen=n=>n==null?'保留':n.toLocaleString('ja-JP')+'円';
   const label={2:'2連単',3:'3連単'};
   const ticketKey=k=>k===2?'exacta':'trifecta';
+  const categoryNames=[['main','本線'],['reverse','逆張り'],['navi','舟券ナビ']];
+  function ticketRoles(r,ticket,kind,reporter,forecasts){
+    // Membership comes from the dated frozen source, never the result or the active reporter tab.
+    if(kind===2)return r.reporters?.[reporter]?.['2']?.includes(ticket)?['本線']:[];
+    const bets=r.reporters?.[reporter]?.categories||forecasts?.[r.race_id]?.[reporter];
+    if(!bets)return [];
+    return categoryNames.filter(([key])=>Array.isArray(bets[key])&&bets[key].includes(ticket)).map(([,name])=>name);
+  }
+  function commonTickets(r,kind,forecasts){
+    const list=element('div',undefined,'consensus-ticket-list');
+    for(const ticket of r[ticketKey(kind)]){
+      const row=element('div',undefined,'consensus-ticket-row');
+      row.append(ticketList([ticket]));
+      const labels=element('div',undefined,'consensus-ticket-categories');
+      for(const [reporter,name] of [['ocha','お茶P'],['gemi','Gemi兄']]){
+        const line=element('div',undefined,'consensus-category-line');
+        line.append(element('strong',name,'consensus-reporter-name'));
+        const roles=ticketRoles(r,ticket,kind,reporter,forecasts);
+        for(const role of roles.length?roles:['区分未確認'])line.append(element('span',role,'consensus-category-badge'));
+        labels.append(line);
+      }
+      row.append(labels);list.append(row);
+    }
+    return list;
+  }
   function ticketList(tickets){
     const wrap=element('div',undefined,'consensus-tickets');
     for(const ticket of tickets){
@@ -45,6 +70,8 @@
       root.replaceChildren(element('h2','お茶P Gemi兄　予想一致レース'),element('p','この日の一致予想は未集計です。'));
       root.dataset.consensusDate='';cache.delete(date);return;
     }
+    let forecasts;
+    try{forecasts=await window.OchaPHitReporters?.load(date);}catch(_){/* Explicit source categories remain usable. */}
     if(root.dataset.consensusDate!==date)return;
     let kind=new URL(location.href).searchParams.get('bet')==='2'?2:3,venue='',status='',page=0;
     function render(){
@@ -81,7 +108,7 @@
       rows.slice(page*12,page*12+12).forEach(r=>{
         const c=element('article',undefined,'public-card consensus-race');const head=element('div',undefined,'consensus-race-heading');
         head.append(element('h3',r.venue+' '+r.race_no+'R'),element('span',resultStatus(r,kind),'consensus-result'));c.append(head);
-        c.append(element('p','共通 '+r[key].length+'点','public-note'),ticketList(r[key]));
+        c.append(element('p','共通 '+r[key].length+'点','public-note'),commonTickets(r,kind,forecasts));
         if(r.result)c.append(element('p','結果 '+r.result.order.slice(0,kind).join('-')+' ／ '+yen(r.result[kind===2?'exacta_payout_yen':'trifecta_payout_yen'])));
         const d=element('details');d.append(element('summary','両記者の掲載券'));
         [['ocha','お茶P'],['gemi','Gemi兄']].forEach(([a,n])=>{d.append(element('h4',n),ticketList(r.reporters[a][String(kind)]));});c.append(d);list.append(c);
@@ -91,6 +118,6 @@
       [['前へ',-1,page===0],['次へ',1,(page+1)*12>=rows.length]].forEach(([n,delta,disabled])=>{const b=element('button',n);b.type='button';b.disabled=disabled;b.onclick=()=>{page+=delta;render();root.querySelector('.consensus-races')?.scrollIntoView({block:'start'});};pagination.append(b);});root.append(pagination);
     }render();
   }
-  window.OchaPConsensus={mount};
+  window.OchaPConsensus={mount,ticketRoles};
 })();
 

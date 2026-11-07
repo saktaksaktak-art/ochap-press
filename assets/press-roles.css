@@ -4,6 +4,14 @@
 .consensus-kind button[aria-pressed="true"]{background:#174c3a;color:#fff}
 .consensus-kind button{min-width:100px;cursor:pointer}
 .consensus-tickets{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
+.consensus-ticket-list{display:grid;gap:8px;min-width:0}
+.consensus-ticket-row{display:grid;grid-template-columns:max-content minmax(0,1fr);align-items:center;gap:10px;padding:9px 0;border-top:1px solid #e1e6db;min-width:0}
+.consensus-ticket-row .consensus-tickets{margin:0}
+.consensus-ticket-categories{display:grid;gap:5px;min-width:0}
+.consensus-category-line{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:12px;line-height:1.45}
+.consensus-reporter-name{min-width:3.5em;color:#174c3a}
+.consensus-category-badge{display:inline-block;padding:2px 6px;border-radius:4px;background:#eaf2eb;color:#244b3c;overflow-wrap:anywhere}
+@media(max-width:360px){.consensus-ticket-row{grid-template-columns:1fr;gap:6px}.consensus-ticket-categories{grid-template-columns:1fr}}
 .consensus-races{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:12px}
 #ochap-public-panels .consensus-race{margin:0}
 .consensus-race-heading{display:flex;align-items:center;justify-content:space-between;gap:8px}

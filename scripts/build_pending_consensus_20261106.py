@@ -24,6 +24,7 @@ for r in o['races']:
  out['races'].append({'race_id':r['race_id'],'venue':r['venue_name'],'venue_code':r['venue_number'],
   'race_no':r['race_number'],'deadline':r['closed_at_jst'],'pair_timing_eligible':eligible,
   'exacta':sorted(sets[2][0]&sets[2][1]),'trifecta':sorted(sets[3][0]&sets[3][1]),
-  'reporters':{a:{str(k):sorted(sets[k][i]) for k in [2,3]} for i,a in enumerate(['ocha','gemi'])},'result':None})
+  'reporters':{a:{**{str(k):sorted(sets[k][i]) for k in [2,3]},
+    'categories':({group:['-'.join(map(str,t)) for t in (r['navi']['tickets'] if group=='navi' else r[group])] for group in ['main','reverse','navi']} if a=='ocha' else {group:list(x['bets'][group]) for group in ['main','reverse','navi']})} for i,a in enumerate(['ocha','gemi'])},'result':None})
 dest=ROOT/'data/consensus/2026-11-06.json';dest.write_text(json.dumps(out,ensure_ascii=False,separators=(',',':')))
 print({k:sum(bool(r[k]) for r in out['races']) for k in ['exacta','trifecta']})

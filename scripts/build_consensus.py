@@ -87,7 +87,8 @@ def build(source, root):
             'deadline':f['deadline'],'pair_timing_eligible':f['two_hour_gate'],
             'exacta':['-'.join(map(str,t)) for t in sorted(common(f,2))],
             'trifecta':['-'.join(map(str,t)) for t in sorted(common(f,3))],
-            'reporters':{a:{str(kind):['-'.join(map(str,t)) for t in sorted(tickets(f,a,kind))] for kind in (2,3)} for a in ('ocha','gemi')},
+            'reporters':{a:{**{str(kind):['-'.join(map(str,t)) for t in sorted(tickets(f,a,kind))] for kind in (2,3)},
+                'categories':{group:['-'.join(map(str,t)) for t in sorted(scoring.bets(f[a],group,3))] for group in ('main','reverse','navi')}} for a in ('ocha','gemi')},
             'result':({'order':r['order'],'excluded_reason':r['accuracy_excluded_reason'],
                        'refunded_boats':r['refunded_boats'], 'exacta_payout_yen':r['exacta_payout_yen'],
                        'trifecta_payout_yen':r['trifecta_payout_yen']} if r else None)})
