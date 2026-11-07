@@ -6,8 +6,8 @@
       "date": "2026-11-07",
       "path": "archives/2026-11-07.html.gz.b64.txt",
       "compression": "base64gzip",
-      "gemi_tabs": false,
-      "edition_status": "ocha_forecast_with_separate_postdeadline_reference",
+      "gemi_tabs": true,
+      "edition_status": "dual_reporter_frozen_forecasts_published",
       "venues": 11,
       "races": 132,
       "forecast_frozen_at_jst": "2026-11-07T09:52:02+09:00",
@@ -18,6 +18,10 @@
         "ocha": {
           "frozen_at_jst": "2026-11-07T09:52:02+09:00",
           "input_sha256": "a3fabbdfea84966cb10ed85562c15d0fd8f03c20973505f48f058cdeecd0e60f"
+        },
+        "gemi": {
+          "recorded_freeze_at_jst": "2026-11-07T09:40:00+09:00",
+          "input_sha256": "3f3bf900a760e8722ec43ff0f714b018a2e00340ce295b699c11b7c7b0a77b91"
         }
       },
       "post_deadline_reference_races": [
@@ -32,7 +36,13 @@
       "diagrams": true,
       "first_prediction_public_availability_confirmed_at_jst": "2026-11-07T09:58:15.890311+09:00",
       "first_publication_timestamp_semantics": "conservative first verified public availability; never backdated",
-      "diagrams_count": 396
+      "diagrams_count": 396,
+      "gemi_json": "data/gemi/2026-11-07.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-07.json",
+      "gemi_original_sha256": "fad87d3cef8e4683189307a8616ed5d4800f04f470c379b3a26667555ceff5e5",
+      "gemi_script": "assets/20261107/gemi-reporter.js",
+      "pair_comparison_eligible": false,
+      "gemi_publication_pending": true
     },
     {
       "date": "2026-11-06",
@@ -61,7 +71,8 @@
       "gemi_original_sha256": "23d9b3f75297d7d396a71ff8499ac02cc328d1e318b5578c058bee0d64937f9f",
       "gemi_public_sha256": "23d9b3f75297d7d396a71ff8499ac02cc328d1e318b5578c058bee0d64937f9f",
       "reporter_input_versions_differ": true,
-      "pair_comparison_eligible": false
+      "pair_comparison_eligible": false,
+      "gemi_data": "./data/gemi/2026-11-06.json"
     },
     {
       "date": "2026-11-05",
@@ -182,5 +193,6 @@
       "compression": "base64gzip",
       "gemi_tabs": false
     }
-  ]
+  ],
+  "latest": "2026-11-07"
 }
