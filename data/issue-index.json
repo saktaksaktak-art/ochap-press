@@ -11,7 +11,7 @@
       "venues": 11,
       "races": 132,
       "forecast_frozen_at_jst": "2026-11-07T09:52:02+09:00",
-      "publication_timing_checked_at": "2026-11-07T00:55:05.940Z",
+      "publication_timing_checked_at": "2026-11-07T09:58:15.890311+09:00",
       "forecast_sha256": "612651f542927010c3e7405d56f1fa2fc36157ee2786702c98af684433be6918",
       "formal_bc_eligible": false,
       "reporters": {
@@ -29,7 +29,10 @@
         "v23-r3",
         "v23-r4"
       ],
-      "diagrams": false
+      "diagrams": true,
+      "first_prediction_public_availability_confirmed_at_jst": "2026-11-07T09:58:15.890311+09:00",
+      "first_publication_timestamp_semantics": "conservative first verified public availability; never backdated",
+      "diagrams_count": 396
     },
     {
       "date": "2026-11-06",
