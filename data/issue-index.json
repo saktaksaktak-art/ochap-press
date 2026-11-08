@@ -18,22 +18,33 @@
         "ocha": {
           "frozen_at_jst": "2026-11-09T06:05:37+09:00",
           "input_sha256": "bfe3c5e310ff5ad6a33265c83d3ff0d133fc79d44e20380636c42de524d5fb6d"
+        },
+        "gemi": {
+          "recorded_freeze_at_jst": "2026-11-09T05:56:00+09:00",
+          "input_sha256": "64c21137e45e3a268f7ef20dbf72bc98acbb553200b0b66bbda318b749c6cc4c"
         }
       },
       "post_deadline_reference_races": [],
       "diagrams": true,
       "diagram_policy": "slit-only.v1",
       "turn_diagrams": false,
-      "label": "2026年11月9日 全国予想",
-      "gemi_status": "live_m0_pre_deadline",
-      "ochap_status": "frozen_original_saved",
+      "label": "2026-11-09 全国11場132R【両記者M0・参考一致券・本線4点順位】",
+      "gemi_status": "published_independent_input_versions_differ",
+      "ochap_status": "published_original_preserved",
       "unissued_races": 0,
       "missing_races": 0,
-      "gemi_publication_pending": true,
+      "gemi_publication_pending": false,
       "diagrams_count": 132,
       "gemi_json": "data/gemi/2026-11-09.json.gz.b64.txt",
       "gemi_data": "./data/gemi/2026-11-09.json",
-      "gemi_first_publication_confirmed_at_jst": "2026-11-09T06:17:18+09:00"
+      "gemi_first_publication_confirmed_at_jst": "2026-11-09T06:17:18+09:00",
+      "consensus_json": "data/consensus/2026-11-09.json",
+      "gemi_original_sha256": "7d0871595a9baf48e251c2d561e9f1e27ff187ee08de4db70317e4ed78ccb7da",
+      "pair_comparison_eligible": false,
+      "reporter_input_versions_differ": true,
+      "first_prediction_public_availability_confirmed_at_jst": "2026-11-09T06:12:00+09:00",
+      "publication_receipt_drive_id": "1uAIKb5Wns5VrSzSxqEJQbYQjoLdq5kUe",
+      "issue_index_drive_id": "1YCEndwB-0VXQ91aQr0skxVKqnLLf0qbv"
     },
     {
       "date": "2026-11-08",
