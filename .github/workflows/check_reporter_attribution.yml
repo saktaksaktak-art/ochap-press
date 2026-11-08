@@ -18,6 +18,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify ranked and legacy published forecast ticket loading
+        run: |
+          node scripts/test_ticket_loading.js
+          node scripts/test_hit_reporters.js
+          python3 scripts/check_published_ticket_loading.py
       - name: Check Gemini frontend JavaScript syntax
         run: node --check assets/gemi-reporter.js
       - name: Check reporter attribution and shared-table headings
@@ -37,3 +45,4 @@ jobs:
           node scripts/test_public_scorecard.js
       - name: Check Python publication validator syntax
         run: python3 -m py_compile scripts/validate_gemi_press_issue.py
+

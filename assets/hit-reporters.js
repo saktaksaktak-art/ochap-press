@@ -4,6 +4,21 @@
   const labels = {ocha:'お茶P記者',gemi:'Gemi兄記者'};
   const groups = [['main','本線'],['reverse','逆張り'],['navi','舟券ナビ']];
   const validTicket = x => typeof x === 'string' && /^[1-6]-[1-6]-[1-6]$/.test(x) && new Set(x.split('-')).size === 3;
+  // Ranking and editorial copy belong to the reader, never to the bet key.
+  // Read explicit numeric fields, or the legacy plain-ticket representation.
+  function readTicket(node) {
+    const declared = node.getAttribute('data-ticket');
+    const boats = [...node.querySelectorAll(':scope > .bnum')].map(x=>x.textContent.trim());
+    const colored = boats.join('-');
+    if (declared !== null) {
+      return validTicket(declared) && (!boats.length || colored === declared) ? declared : null;
+    }
+    if (boats.length) return boats.length === 3 && validTicket(colored) ? colored : null;
+    const plain = node.cloneNode(true);
+    plain.querySelectorAll('small,.ticket-rank,.ticket-reason').forEach(x=>x.remove());
+    const ticket = plain.textContent.trim();
+    return validTicket(ticket) ? ticket : null;
+  }
   function normalize(bets) {
     if (!bets || !Array.isArray(bets.main) || !bets.main.length) return null;
     const out = {};
@@ -44,7 +59,7 @@
           : /^舟券ナビ/.test(node.textContent.trim()) ? 'navi' : null;
         const list = node.nextElementSibling;
         if (key && list?.classList.contains('tickets')) {
-          bets[key] = [...list.querySelectorAll('.ticket')].map(x=>x.textContent.trim());
+          bets[key] = [...list.querySelectorAll('.ticket')].map(readTicket);
         }
       }
       const parsed = normalize(bets);
@@ -79,10 +94,17 @@
         }
         const doc = JSON.parse(text);
         if (doc.date !== date || doc.reporter !== 'gemi' || !doc.races || Array.isArray(doc.races)) return forecasts;
+        // A completed publication receipt may coexist with an older pending flag
+        // preserved by the publisher. Only a dated, observed receipt clears it.
+        const firstPublication = issue.gemi_first_publication_confirmed_at_jst || issue.gemi_publication_timing_checked_at;
+        const publishedAt = Date.parse(firstPublication);
+        const receiptVerified = typeof firstPublication === 'string' &&
+          /(?:Z|[+-]\d{2}:\d{2})$/.test(firstPublication) &&
+          Number.isFinite(publishedAt) && publishedAt <= Date.now() &&
+          new Date(publishedAt+9*60*60*1000).toISOString().slice(0,10) === date;
         for (const [id,rec] of Object.entries(doc.races)) {
-          if (issue.gemi_publication_pending === true || rec.status !== 'published' || rec.retrospective === true || rec.frozen_before_race_closing === false || String(rec.m0_status||'').startsWith('POST_DEADLINE')) continue;
-          const firstPublication = issue.gemi_publication_timing_checked_at;
-          if(firstPublication && (!rec.closing_at || new Date(rec.closing_at)<=new Date(firstPublication))) continue;
+          if ((issue.gemi_publication_pending === true && !receiptVerified) || rec.status !== 'published' || rec.retrospective === true || rec.frozen_before_race_closing === false || String(rec.m0_status||'').startsWith('POST_DEADLINE')) continue;
+          if(firstPublication && (!receiptVerified || !rec.closing_at || !Number.isFinite(Date.parse(rec.closing_at)) || Date.parse(rec.closing_at)<=publishedAt)) continue;
           const bets = normalize({...rec.bets,main_pick:rec.marks?.main});
           if (bets) (forecasts[id] ||= {}).gemi = bets;
         }
@@ -136,5 +158,6 @@
     out.roi=out.stake?out.payout/out.stake*100:null;
     return out;
   }
-  window.OchaPHitReporters = Object.freeze({load,match,score});
+  window.OchaPHitReporters = Object.freeze({load,match,score,readTicket});
 })();
+

@@ -154,6 +154,8 @@
         updatedAt:data?.checked_at_jst,onRefresh:showResults});
       return;
     }
+    const issue = window.__OCHAP_ISSUE_INDEX__?.issues?.find(x=>x.date===date);
+    const forecastLoadFailed = !!issue?.forecast_sha256 && !hasPublishedTickets;
     const panel = card();
     if (entries.length) {
       const yen = amount => Number(amount).toLocaleString('ja-JP') + '円';
@@ -279,7 +281,9 @@
     const scorecard=document.createElement('div');
     scorecard.className='ochap-scorecard-mount';
     results.replaceChildren(h2('結果速報'),p('対象日：'+date.replaceAll('-','/'),'public-note'),scorecard,panel);
-    if(window.OchaPScorecard?.mount)window.OchaPScorecard.mount(scorecard,date);
+    if (forecastLoadFailed) {
+      scorecard.append(p('予想データを読み込めませんでした。ページを再読み込みしてください。','public-status'));
+    } else if(window.OchaPScorecard?.mount)window.OchaPScorecard.mount(scorecard,date);
   }
   // Check on returning to the tab and while the bulletin is open.
   setInterval(() => {
@@ -586,5 +590,6 @@
   const requested=new URL(location.href).searchParams.get('view');
   switchView(['versus','results','consensus'].includes(requested)?requested:'forecast');
 })();
+
 
 
