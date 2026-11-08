@@ -44,7 +44,12 @@
       "reporter_input_versions_differ": true,
       "first_prediction_public_availability_confirmed_at_jst": "2026-11-09T06:12:00+09:00",
       "publication_receipt_drive_id": "1uAIKb5Wns5VrSzSxqEJQbYQjoLdq5kUe",
-      "issue_index_drive_id": "1YCEndwB-0VXQ91aQr0skxVKqnLLf0qbv"
+      "issue_index_drive_id": "1YCEndwB-0VXQ91aQr0skxVKqnLLf0qbv",
+      "editorial_revision": "editorial-rich.v1",
+      "editorial_updated_at_jst": "2026-11-09T07:06:37+09:00",
+      "editorial_data": "data/editorial/2026-11-09-d9699e1ce3a2.json.gz.b64.txt",
+      "editorial_data_sha256": "d9699e1ce3a298728feea4bf4b39542563e89a6585d8ae6e64d17e81690445b5",
+      "editorial_fragments": 396
     },
     {
       "date": "2026-11-08",

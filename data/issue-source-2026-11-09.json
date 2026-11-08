@@ -23,7 +23,7 @@
   "forecast_drive_id": "1pU7Y74ymlfwcPI2FBd6fP2EWFwBVVcX_",
   "shared_input_drive_id": "1XAO3uL4Lh259rsEKZI5HZgg4oO47nQYI",
   "prepared_at_jst": "2026-11-08T21:08:27.407Z",
-  "html_sha256": "d1de4341dbfa687b12bdf9d47ca75145cf9b05bab0e0da340eb590ff3c81c389",
+  "html_sha256": "6f6802cce261e03d94a9c35a49e91abd93fea943b02e28f35267e4093080a9a4",
   "model": "current Codex session, exact model ID unverified; no model switch claimed",
   "label": "2026-11-09 全国11場132R【両記者M0・参考一致券・本線4点順位】",
   "gemi_status": "published_independent_input_versions_differ",
@@ -49,5 +49,10 @@
   "reporter_input_versions_differ": true,
   "first_prediction_public_availability_confirmed_at_jst": "2026-11-09T06:12:00+09:00",
   "publication_receipt_drive_id": "1uAIKb5Wns5VrSzSxqEJQbYQjoLdq5kUe",
-  "issue_index_drive_id": "1YCEndwB-0VXQ91aQr0skxVKqnLLf0qbv"
+  "issue_index_drive_id": "1YCEndwB-0VXQ91aQr0skxVKqnLLf0qbv",
+  "editorial_revision": "editorial-rich.v1",
+  "editorial_updated_at_jst": "2026-11-09T07:06:37+09:00",
+  "editorial_data": "data/editorial/2026-11-09-d9699e1ce3a2.json.gz.b64.txt",
+  "editorial_data_sha256": "d9699e1ce3a298728feea4bf4b39542563e89a6585d8ae6e64d17e81690445b5",
+  "editorial_fragments": 396
 }
