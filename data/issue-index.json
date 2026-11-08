@@ -6,7 +6,7 @@
       "date": "2026-11-09",
       "path": "archives/2026-11-09.html.gz.b64.txt",
       "compression": "base64gzip",
-      "gemi_tabs": false,
+      "gemi_tabs": true,
       "edition_status": "ocha_pre_deadline_reference_m0",
       "venues": 11,
       "races": 132,
@@ -24,13 +24,16 @@
       "diagrams": true,
       "diagram_policy": "slit-only.v1",
       "turn_diagrams": false,
-      "label": "2026-11-09 全国11場132R【本線4点順位・Gemi兄準備中】",
-      "gemi_status": "preparing_original_not_received",
+      "label": "2026年11月9日 全国予想",
+      "gemi_status": "live_m0_pre_deadline",
       "ochap_status": "frozen_original_saved",
       "unissued_races": 0,
       "missing_races": 0,
       "gemi_publication_pending": true,
-      "diagrams_count": 132
+      "diagrams_count": 132,
+      "gemi_json": "data/gemi/2026-11-09.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-09.json",
+      "gemi_first_publication_confirmed_at_jst": "2026-11-09T06:17:18+09:00"
     },
     {
       "date": "2026-11-08",
