@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-09",
+  "path": "archives/2026-11-09.html.gz.b64.txt",
+  "compression": "base64gzip",
+  "gemi_tabs": false,
+  "edition_status": "ocha_pre_deadline_reference_m0",
+  "venues": 11,
+  "races": 132,
+  "forecast_frozen_at_jst": "2026-11-09T06:05:37+09:00",
+  "publication_timing_checked_at": "2026-11-08T21:08:27.309Z",
+  "forecast_sha256": "a06ff38d8e431643098aeb3e0f6e115ddaacadce0a06487e782eacd1f13e490f",
+  "formal_bc_eligible": false,
+  "reporters": {
+    "ocha": {
+      "frozen_at_jst": "2026-11-09T06:05:37+09:00",
+      "input_sha256": "bfe3c5e310ff5ad6a33265c83d3ff0d133fc79d44e20380636c42de524d5fb6d"
+    }
+  },
+  "post_deadline_reference_races": [],
+  "diagrams": true,
+  "diagram_policy": "slit-only.v1",
+  "turn_diagrams": false,
+  "forecast_drive_id": "1pU7Y74ymlfwcPI2FBd6fP2EWFwBVVcX_",
+  "shared_input_drive_id": "1XAO3uL4Lh259rsEKZI5HZgg4oO47nQYI",
+  "prepared_at_jst": "2026-11-08T21:08:27.407Z",
+  "html_sha256": "0767899a93b1c20f85be6357249ed1fbbf97a4288903f31931d1aa19c0d16a41",
+  "model": "current Codex session, exact model ID unverified; no model switch claimed",
+  "label": "2026-11-09 全国11場132R【本線4点順位・Gemi兄準備中】",
+  "gemi_status": "preparing_original_not_received",
+  "ochap_status": "frozen_original_saved",
+  "unissued_races": 0,
+  "missing_races": 0,
+  "gemi_publication_pending": true,
+  "diagrams_count": 132,
+  "frozen_bundle_library_id": "libfile_99dd946df7f08191906f876cee312fe5",
+  "data_limitations": [
+    "保存出走表とSTの全R・6艇・登録番号を照合済み。ST資料のcompleteは個別数値の全取得を保証しない。",
+    "当地保存分は取得日時・期間・節内鮮度の確認を残す。未取得・未接続を当地苦手や0%にしない。",
+    "SG/G1保存値は対象期間・今節での有効性を06:00共通入力確定時に再確認。",
+    "05:00共通入力生成・05:30原本確認・06:00Gate0確定前の候補。双方は後続担当が確定する同一Gate0/SHAを使用する。",
+    "全国の取得失敗は既存再試行間隔・クールダウンを継承。不足だけ既存経路で補完し、全国再取得や追加トリガーを行わない。",
+    "節間・当日気象・展示の確定値は本入力で未確認。全国24名が72h超、当地370名欠測。G1原期間・鮮度未確認は正式判定に使用しない。公式PC原本由来・当日Gate0正本の正式検収未確認。"
+  ]
+}

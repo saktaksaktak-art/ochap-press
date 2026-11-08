@@ -1,7 +1,37 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-08",
+  "default_date": "2026-11-09",
   "issues": [
+    {
+      "date": "2026-11-09",
+      "path": "archives/2026-11-09.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": false,
+      "edition_status": "ocha_pre_deadline_reference_m0",
+      "venues": 11,
+      "races": 132,
+      "forecast_frozen_at_jst": "2026-11-09T06:05:37+09:00",
+      "publication_timing_checked_at": "2026-11-08T21:08:27.309Z",
+      "forecast_sha256": "a06ff38d8e431643098aeb3e0f6e115ddaacadce0a06487e782eacd1f13e490f",
+      "formal_bc_eligible": false,
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-09T06:05:37+09:00",
+          "input_sha256": "bfe3c5e310ff5ad6a33265c83d3ff0d133fc79d44e20380636c42de524d5fb6d"
+        }
+      },
+      "post_deadline_reference_races": [],
+      "diagrams": true,
+      "diagram_policy": "slit-only.v1",
+      "turn_diagrams": false,
+      "label": "2026-11-09 全国11場132R【本線4点順位・Gemi兄準備中】",
+      "gemi_status": "preparing_original_not_received",
+      "ochap_status": "frozen_original_saved",
+      "unissued_races": 0,
+      "missing_races": 0,
+      "gemi_publication_pending": true,
+      "diagrams_count": 132
+    },
     {
       "date": "2026-11-08",
       "path": "archives/2026-11-08.html.gz.b64.txt",
@@ -278,5 +308,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-08"
+  "latest": "2026-11-09"
 }
