@@ -23,6 +23,7 @@ jobs:
           node-version: '22'
       - name: Verify ranked and legacy published forecast ticket loading
         run: |
+          node scripts/test_reader_presentation.js
           node scripts/test_ticket_loading.js
           node scripts/test_hit_reporters.js
           python3 scripts/check_published_ticket_loading.py
