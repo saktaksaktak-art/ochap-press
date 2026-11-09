@@ -3,89 +3,81 @@ on:
   push:
     branches: [main]
     paths:
+      - 'scripts/results_flash.py'
       - 'scripts/publish_public_results.py'
-      - 'tests/test_public_results.py'
-      - 'tests/test_public_results_merge.py'
       - 'scripts/reconcile_public_results.py'
+      - 'tests/test_public_results*.py'
       - '.github/workflows/publish_official_public_results.yml'
+  # Retain existing cron until GAS dispatch + Actions/HTTP success is verified.
+  # After handover, remove only these two schedule lines.
   schedule:
-    # UTC 00:00-14:45 = JST 09:00-23:45, 15-minute ticks
     - cron: '*/15 0-14 * * *'
   workflow_dispatch:
     inputs:
-      issue_date:
-        description: 'Optional JST date YYYY-MM-DD; blank means current day'
+      target_date:
+        description: 'JST YYYY-MM-DD; blank means current day'
         required: false
+        type: string
+      issue_date:
+        description: 'Legacy alias for target_date'
+        required: false
+        type: string
+      scheduled_slot_jst:
+        description: 'Scheduled JST slot, distinct from actual start time'
+        required: false
+        type: string
+      dispatched_at_jst:
+        description: 'Actual dispatcher start time'
+        required: false
+        type: string
+      trigger_source:
+        description: 'gas_80slot_scheduler or manual_recovery'
+        required: false
+        default: 'manual_recovery'
         type: string
 permissions:
   contents: write
+  pages: write
 concurrency:
   group: ochap-official-public-results
   cancel-in-progress: false
 jobs:
   official-results:
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    timeout-minutes: 10
     steps:
-      - name: Checkout published newspaper
-        uses: actions/checkout@v4
-      - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+          # Avoid PAT push auto-build plus an explicit duplicate build.
+          token: ${{ github.token }}
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Syntax and safety checks
+      - name: Verify production parser, merge, recovery and scheduler
         run: |
-          python -m py_compile scripts/publish_public_results.py
-          node --check assets/press-roles.js
+          python -m py_compile scripts/results_flash.py scripts/publish_public_results.py scripts/reconcile_public_results.py
           python -m unittest discover -s tests -p 'test_public_results*.py' -v
-      - name: Fetch internally validated API race results (no official-page checks)
+          node scripts/test_results_flash_dispatcher.js
+      - name: Acquire, save, publish and independently read back
         env:
-          TARGET_DATE: ${{ inputs.issue_date }}
+          GH_TOKEN: ${{ github.token }}
+          TARGET_DATE: ${{ inputs.target_date || inputs.issue_date }}
+          SCHEDULED_SLOT: ${{ inputs.scheduled_slot_jst }}
+          DISPATCHED_AT: ${{ inputs.dispatched_at_jst }}
+          TRIGGER_SOURCE: ${{ inputs.trigger_source || github.event_name }}
         run: |
-          if [ -z "$TARGET_DATE" ]; then
-            python scripts/publish_public_results.py
-          else
-            python scripts/publish_public_results.py --date "$TARGET_DATE"
-          fi
-      - name: Commit referenced results JSON only
-        run: |
-          set -euo pipefail
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/public-results/*.json 2>/dev/null || true
-          if git diff --cached --quiet; then
-            echo 'NO_NEW_OFFICIAL_DATA_TO_PUBLISH'
-            exit 0
-          fi
-          # Concurrent push updates may land between checkout and commit.
-          # Preserve previous rows, fetch fresh main, and reconcile strictly.
-          # Never silently overwrite a different official result.
-          mkdir -p "$RUNNER_TEMP/ochap-results-proposed"
-          mapfile -t changed < <(git diff --cached --name-only -- data/public-results/)
-          for file in "${changed[@]}"; do
-            cp "$file" "$RUNNER_TEMP/ochap-results-proposed/$(basename "$file")"
-          done
-          for attempt in 1 2 3; do
-            git fetch origin main
-            git reset --hard origin/main
-            for proposal in "$RUNNER_TEMP"/ochap-results-proposed/*.json; do
-              name="$(basename "$proposal")"
-              python scripts/reconcile_public_results.py \
-                --current "data/public-results/$name" \
-                --incoming "$proposal" \
-                --output "data/public-results/$name"
-            done
-            git add data/public-results/*.json
-            if git diff --cached --quiet; then
-              echo 'ALREADY_PUBLISHED_BY_ANOTHER_RUN'
-              exit 0
-            fi
-            git commit -m 'data(results): update API newspaper bulletin (not formal BC)'
-            if git push origin HEAD:main; then
-              echo 'CONCURRENT_SAFE_API_RESULTS_PUBLISHED'
-              exit 0
-            fi
-            echo "Push raced with another update, retrying ($attempt/3)"
-          done
-          echo 'Unable to publish safely after three retries' >&2
-          exit 1
+          python scripts/results_flash.py \
+            --date "$TARGET_DATE" \
+            --scheduled-slot-jst "$SCHEDULED_SLOT" \
+            --dispatched-at-jst "$DISPATCHED_AT" \
+            --trigger-source "$TRIGGER_SOURCE"
+      - name: Save internal four-stage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: public-results-4stage-${{ github.run_id }}
+          path: /tmp/public-results-4stage.json
+          if-no-files-found: warn
+          retention-days: 7
