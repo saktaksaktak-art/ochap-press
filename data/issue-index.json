@@ -1,7 +1,19 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-09",
+  "default_date": "2026-11-10",
   "issues": [
+    {
+      "date": "2026-11-10",
+      "label": "2026年11月10日 全国13場・156R（v7本線4点順位・ナビ3着流し・スリット図対応）",
+      "path": "archives/2026-11-10.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": true,
+      "gemi_json": "data/gemi/2026-11-10.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-10.json",
+      "ochap_status": "missing_official_m0",
+      "gemi_status": "live_m0_pre_deadline",
+      "gemi_first_publication_confirmed_at_jst": "2026-11-10T08:47:08+09:00"
+    },
     {
       "date": "2026-11-09",
       "path": "archives/2026-11-09.html.gz.b64.txt",
@@ -327,5 +339,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-09"
+  "latest": "2026-11-10"
 }
