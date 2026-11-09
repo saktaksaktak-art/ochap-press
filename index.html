@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>お茶P新聞</title><style>body{font:14px/1.7 system-ui,sans-serif;background:#faf8f0;color:#203e36;padding:22px}#ochap-loading{max-width:680px;margin:20px auto}</style><script src="./assets/reader-presentation.js?v=1"></script></head>
+<html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>お茶P新聞</title><style>body{font:14px/1.7 system-ui,sans-serif;background:#faf8f0;color:#203e36;padding:22px}#ochap-loading{max-width:680px;margin:20px auto}</style><script src="./assets/reader-presentation.js?v=2"></script></head>
 <body><p id="ochap-loading">お茶P新聞を読み込んでいます。</p>
 <script>
 (async function(){
@@ -47,7 +47,7 @@
       (issue.gemi_tabs&&!bundledGemiStyle?'<link rel="stylesheet" href="./assets/gemi-reporter.css?v=20261101-floating-v2">':'');
     const encoded=JSON.stringify(manifest).replace(/</g,'\\u003c');
     const setGlobals='<script>window.__OCHAP_ISSUE_INDEX__='+encoded+';window.__OCHAP_SELECTED_DATE__='+JSON.stringify(date)+';</'+'script>';
-    const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./'+gemiScript+'?v=20261105-tables-v2"></'+'script>':'')+
+    const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./'+gemiScript+'?v=20261109-reader-v3"></'+'script>':'')+
       '<script src="./assets/public-scorecard.js?v=1"></'+'script>'+
       '<script src="./assets/hit-reporters.js?v=7"></'+'script>'+
       '<script src="./assets/live-results.js?v=2"></'+'script>'+

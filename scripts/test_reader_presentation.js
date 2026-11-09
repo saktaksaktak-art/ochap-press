@@ -12,6 +12,10 @@ assert.equal(clean('<details><summary>05 データの母数・期間・取得日
 assert.equal(clean('<p class="small">朝刊の凍結原本と保存入力にある役割。再予想や順位変更は行っていません。</p>'),'');
 assert.match(clean('<p>Gemi兄入力ハッシュ不一致のため表示を停止しました。</p>'),/予想を表示できません/,'integrity failure is not changed into an empty or successful forecast');
 assert.equal(clean('<p>2連対率・3連対率（直近6か月）</p>'),'<p>2連対率・3連対率（直近6か月）</p>');
+assert.equal(clean('<span class="note">【当日締切前M0凍結】</span>'),'','no repeated freeze badge after reporter switching');
+assert.equal(clean('<span class="note">見送り</span>'),'<span class="note">見送り</span>');
+assert.equal(clean('<span class="note">【締切後・参考】</span>'),'<span class="note">【締切後・参考】</span>');
+assert.equal(clean('<span class="note">【締切後・緊急復旧参照検証：正式M0対象外】</span>'),'<span class="note">締切後の参考予想</span>');
 const scripts=s=>s.match(/<(?:script|style)\b[^>]*>[\s\S]*?<\/(?:script|style)>/gi)||[];
 function tickets(s){
   const out=[],stack=[];

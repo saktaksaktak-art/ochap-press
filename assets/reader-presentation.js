@@ -9,6 +9,12 @@
   const audit=/(?:SHA-?256|入力ハッシュ|Gate\s*\d|正式\s*(?:BC|バックチェック|M0)|検収|凍結予想原本|入力原本|原本凍結|共通入力[：:]|再予想や順位変更|朝刊の凍結原本と保存入力|解説・データ表示充実版)/i;
   const sourceTitle=/^(?:05\s+データの母数・期間・取得日|根拠と資料条件)/;
   function cleanPart(html){
+    html=html.replace(/<span\b[^>]*class=["']note["'][^>]*>([^<]*)<\/span>/gi,(all,label)=>{
+      if(!/凍結|正式|事後検証|M0予想原稿/.test(label))return all;
+      if(/締切後/.test(label))return '<span class="note">締切後の参考予想</span>';
+      if(/事後検証/.test(label))return '<span class="note">事後検証</span>';
+      return '';
+    });
     // Keep the masthead/date and reader-facing coverage, dropping audit paragraphs.
     html=html.replace(/<header\b([^>]*\bid=["']top["'][^>]*)>([\s\S]*?)<\/header>/gi,(all,attrs,body)=>{
       let coverage=false;
@@ -25,7 +31,7 @@
       if(/(?:不一致|表示を停止)/.test(text(p)))return p.replace(/>[^<]*(?:SHA|ハッシュ)[\s\S]*<\/p>$/i,'>予想を表示できません。時間をおいて再読み込みしてください。</p>');
       return '';
     });
-    return html.replace(/原本の受益候補/g,'受益候補').replace(/原本の2着候補順/g,'2着候補順').replace(/原本の役割/g,'役割');
+    return html.replace(/原本の受益候補/g,'受益候補').replace(/原本の2着候補順/g,'2着候補順').replace(/原本の役割/g,'役割').replace(/実際の踏込みを確定する値ではありません。/g,'');
   }
   function cleanMarkup(html){
     // Opaque scripts include frozen inputs, lazy fragments and integrity checks.
@@ -34,13 +40,13 @@
       .map((s,i)=>i%2?s:cleanPart(s)).join('');
   }
   function install(doc){
-    const selectors='p,details,.ochap-gemi-details,[data-public-audit]';
+    const selectors='p,details,.ochap-gemi-details,.ochap-gemi-quickrow > .note,.rich-fragment th,[data-public-audit]';
     function cleanElement(el){
       if(el.matches('[data-public-audit]')){el.remove();return;}
       if(el.matches('.ochap-gemi-details')){el.remove();return;}
       if(el.matches('header#top > p')&&!/^全国\s*\d+場[・･]\s*\d+R[｜|]/.test(el.textContent.trim())){el.remove();return;}
       if(el.matches('details')&&sourceTitle.test(el.querySelector(':scope > summary')?.textContent.trim()||'')){el.remove();return;}
-      if(!el.matches('p,.ochap-gemi-details'))return;
+      if(!el.matches('p,.ochap-gemi-quickrow > .note,.rich-fragment th'))return;
       const before=el.outerHTML,after=cleanMarkup(before);
       if(after===before)return;
       if(!after){el.remove();return;}

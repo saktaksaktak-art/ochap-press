@@ -267,7 +267,7 @@
       <div class="ochap-gemi-quickrow">
         <span><b>✦ Gemi兄 印</b>：<b>◎</b> ${boatBadge(marks.main)}　<b>○</b> ${boatBadge(marks.second)}　<b>▲</b> ${boatBadge(marks.third)}　<b>△</b> ${boatBadge(marks.fourth)}</span>
         <span><b>決まり手</b>：${boatBadge(marks.main)} <b>${esc(rec.predicted_method || '—')}</b></span>
-        <span><b>本線3点</b>：${renderComboList(bets.main)}</span>
+        <span><b>本線${Array.isArray(bets.main)?bets.main.length:0}点</b>：${renderComboList(bets.main)}</span>
         <span><b>逆張り</b>：${formatAxisInline(revSummary.axis || (Array.isArray(bets.reverse) && bets.reverse[0] ? bets.reverse[0].slice(0,3)+'-流' : ''))}</span>
         <span><b>舟券ナビ</b>：${naviDetails.status === 'recommended' ? formatAxisInline(naviDetails.axis || (Array.isArray(bets.navi) && bets.navi[0] ? bets.navi[0].slice(0,3)+'-流' : '')) : '<span class="note">見送り</span>'}</span>
         ${issueDate === '2026-11-01' ? '' : `<span class="note">${esc(modeBadgeText(rec))}</span>`}
