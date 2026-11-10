@@ -1,0 +1,10 @@
+# Public-facing presentation and publication logic require explicit owner review.
+# Enforcement needs GitHub branch rules requiring PR and Code Owner review.
+/index.html @saktaksaktak-art
+/assets/*.js @saktaksaktak-art
+/assets/*.css @saktaksaktak-art
+/scripts/render_ochap_frozen.mjs @saktaksaktak-art
+/scripts/check_press_ui_lock.sh @saktaksaktak-art
+/gas/PressPublisher.gs @saktaksaktak-art
+/.github/workflows/ @saktaksaktak-art
+/.github/CODEOWNERS @saktaksaktak-art
