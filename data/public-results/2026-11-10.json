@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "date": "2026-11-10",
   "status": "API_RESULTS_REFERENCE_ONLY",
-  "checked_at_jst": "2026-11-10T16:41:24+09:00",
+  "checked_at_jst": "2026-11-10T18:33:51+09:00",
   "not_formal_m0": true,
   "not_formal_bc": true,
   "races": [
@@ -437,6 +437,70 @@
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
       "source_observed_at_jst": "2026-11-10T16:41:24+09:00"
+    },
+    {
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 4,
+      "order": [
+        3,
+        5,
+        6
+      ],
+      "method": "まくり",
+      "trifecta_payout_yen": 96110,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 5,
+      "order": [
+        1,
+        2,
+        3
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 1270,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 6,
+      "order": [
+        2,
+        6,
+        4
+      ],
+      "method": "まくり",
+      "trifecta_payout_yen": 4480,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 7,
+      "order": [
+        3,
+        1,
+        6
+      ],
+      "method": "まくり差し",
+      "trifecta_payout_yen": 12180,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
     },
     {
       "venue": "常滑",
@@ -1239,6 +1303,70 @@
       "source_observed_at_jst": "2026-11-10T16:41:24+09:00"
     },
     {
+      "venue": "住之江",
+      "venue_code": 12,
+      "race_no": 3,
+      "order": [
+        1,
+        2,
+        3
+      ],
+      "method": "抜き",
+      "trifecta_payout_yen": 750,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
+      "venue": "住之江",
+      "venue_code": 12,
+      "race_no": 4,
+      "order": [
+        4,
+        5,
+        6
+      ],
+      "method": "まくり差し",
+      "trifecta_payout_yen": 24590,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
+      "venue": "住之江",
+      "venue_code": 12,
+      "race_no": 5,
+      "order": [
+        4,
+        6,
+        1
+      ],
+      "method": "まくり",
+      "trifecta_payout_yen": 63940,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
+      "venue": "住之江",
+      "venue_code": 12,
+      "race_no": 6,
+      "order": [
+        1,
+        4,
+        2
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 1950,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
       "venue": "鳴門",
       "venue_code": 14,
       "race_no": 1,
@@ -1671,6 +1799,70 @@
       "source_observed_at_jst": "2026-11-10T16:41:24+09:00"
     },
     {
+      "venue": "下関",
+      "venue_code": 19,
+      "race_no": 4,
+      "order": [
+        2,
+        1,
+        5
+      ],
+      "method": "差し",
+      "trifecta_payout_yen": 1380,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
+      "venue": "下関",
+      "venue_code": 19,
+      "race_no": 5,
+      "order": [
+        1,
+        4,
+        2
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 960,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
+      "venue": "下関",
+      "venue_code": 19,
+      "race_no": 6,
+      "order": [
+        3,
+        1,
+        6
+      ],
+      "method": "まくり差し",
+      "trifecta_payout_yen": 2630,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
+      "venue": "下関",
+      "venue_code": 19,
+      "race_no": 7,
+      "order": [
+        1,
+        4,
+        3
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 3340,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
+    },
+    {
       "venue": "芦屋",
       "venue_code": 21,
       "race_no": 1,
@@ -2037,8 +2229,24 @@
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
       "source_observed_at_jst": "2026-11-10T16:41:24+09:00"
+    },
+    {
+      "venue": "福岡",
+      "venue_code": 22,
+      "race_no": 12,
+      "order": [
+        2,
+        5,
+        4
+      ],
+      "method": "差し",
+      "trifecta_payout_yen": 71530,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T18:33:51+09:00"
     }
   ],
   "source_policy": "Unified third-party API; formal BC is separate.",
-  "result_changed_at_jst": "2026-11-10T16:41:24+09:00"
+  "result_changed_at_jst": "2026-11-10T18:33:51+09:00"
 }
