@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "date": "2026-11-10",
   "status": "API_RESULTS_REFERENCE_ONLY",
-  "checked_at_jst": "2026-11-10T20:31:51+09:00",
+  "checked_at_jst": "2026-11-10T21:33:49+09:00",
   "not_formal_m0": true,
   "not_formal_bc": true,
   "races": [
@@ -565,6 +565,22 @@
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
       "source_observed_at_jst": "2026-11-10T20:31:51+09:00"
+    },
+    {
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "race_no": 12,
+      "order": [
+        1,
+        2,
+        3
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 650,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T21:33:49+09:00"
     },
     {
       "venue": "常滑",
@@ -1495,6 +1511,22 @@
       "source_observed_at_jst": "2026-11-10T20:31:51+09:00"
     },
     {
+      "venue": "住之江",
+      "venue_code": 12,
+      "race_no": 11,
+      "order": [
+        1,
+        2,
+        4
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 830,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T21:33:49+09:00"
+    },
+    {
       "venue": "鳴門",
       "venue_code": 14,
       "race_no": 1,
@@ -2055,6 +2087,22 @@
       "source_observed_at_jst": "2026-11-10T20:31:51+09:00"
     },
     {
+      "venue": "下関",
+      "venue_code": 19,
+      "race_no": 12,
+      "order": [
+        1,
+        4,
+        3
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 930,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261110.json",
+      "source_observed_at_jst": "2026-11-10T21:33:49+09:00"
+    },
+    {
       "venue": "芦屋",
       "venue_code": 21,
       "race_no": 1,
@@ -2440,5 +2488,5 @@
     }
   ],
   "source_policy": "Unified third-party API; formal BC is separate.",
-  "result_changed_at_jst": "2026-11-10T20:31:51+09:00"
+  "result_changed_at_jst": "2026-11-10T21:33:50+09:00"
 }
