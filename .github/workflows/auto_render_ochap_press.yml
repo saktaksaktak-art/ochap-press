@@ -1,0 +1,85 @@
+name: OchaP Auto-Render Newspaper HTML (B-2 Frozen Renderer Only)
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: Target date (YYYY-MM-DD)
+        required: true
+        type: string
+  push:
+    branches: [main]
+    paths:
+      - "data/ochap/*_render_source.json"
+permissions:
+  contents: write
+  pages: write
+concurrency:
+  group: ochap-press-frozen-render
+  cancel-in-progress: false
+jobs:
+  render_frozen_html:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Verify approved renderer and publish only matched frozen originals
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_DATE: ${{ inputs.date }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          bash scripts/check_press_ui_lock.sh
+          node --check scripts/render_ochap_frozen.mjs
+          if [[ "$GITHUB_EVENT_NAME" == workflow_dispatch ]]; then
+            [[ "$TARGET_DATE" =~ ^20[0-9]{2}-[0-9]{2}-[0-9]{2}$ ]]
+            dates="$TARGET_DATE"
+          else
+            dates="$(git diff --name-only --diff-filter=AM "$BEFORE" "$AFTER" -- data/ochap/ |
+              sed -nE 's|^data/ochap/(20[0-9]{2}-[0-9]{2}-[0-9]{2})_render_source\.json$|\1|p' | sort -u)"
+          fi
+          for DATE in $dates; do
+            if jq -e --arg day "$DATE" '.issues[] | select(.date == $day)' data/issue-index.json >/dev/null; then
+              echo "Already registered, preserving $DATE."
+              continue
+            fi
+            MANIFEST="data/ochap/${DATE}_render_source.json"
+            if [[ ! -s "$MANIFEST" ]]; then
+              echo "::error::No verified frozen OchaP source for $DATE"
+              exit 1
+            fi
+            PRED="data/ochap/${DATE}_prediction.json"
+            INPUT="data/ochap/${DATE}_input.json"
+            EXPECTED_PRED="$(jq -er '.prediction_sha256 | select(test("^[0-9a-f]{64}$"))' "$MANIFEST")"
+            EXPECTED_INPUT="$(jq -er '.input_sha256 | select(test("^[0-9a-f]{64}$"))' "$MANIFEST")"
+            printf '%s  %s\n' "$EXPECTED_PRED" "$PRED" "$EXPECTED_INPUT" "$INPUT" | sha256sum --check --status
+            jq -e --arg day "$DATE" --arg input "$EXPECTED_INPUT" '
+              .date == $day and .mode == "M0" and .reporter == "おちゃっぴー" and
+              .instruction_version == "ochap.prediction.approved.v7" and
+              .instruction_sha256 == "821033172f86c6d359309b9b25dbb2e13f90635060a2b845e752726b04b40b02" and
+              .shared_input_sha256 == $input and
+              (.frozen_at_jst | type == "string") and (.races | length > 0)
+            ' "$PRED" >/dev/null
+            jq -e --arg day "$DATE" '.date == $day and (.races | length > 0)' "$INPUT" >/dev/null
+            [[ ! -e "archives/${DATE}.html" && ! -e "archives/${DATE}.html.gz.b64.txt" ]]
+            OCHAP_PREDICTION_JSON="$PRED" OCHAP_INPUT_JSON="$INPUT" \
+              node scripts/render_ochap_frozen.mjs --diagrams
+            test -s "archives/${DATE}.html"
+            test -s "archives/${DATE}.html.gz.b64.txt"
+            git add -- "archives/${DATE}.html.gz.b64.txt" data/issue-index.json \
+              "data/issue-source-${DATE}.json" data/editorial/"${DATE}"-*.json.gz.b64.txt
+          done
+          bash scripts/check_press_ui_lock.sh
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Render verified frozen OchaP newspaper issues"
+          git push origin HEAD:main
+          gh api --method POST "repos/$GITHUB_REPOSITORY/pages/builds" --silent
