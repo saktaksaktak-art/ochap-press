@@ -1,7 +1,48 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-10",
+  "default_date": "2026-11-14",
   "issues": [
+    {
+      "date": "2026-11-14",
+      "path": "archives/2026-11-14.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": true,
+      "editorial_data": "data/editorial/2026-11-14-d8cbe8ea883f.json.gz.b64.txt",
+      "editorial_data_sha256": "d8cbe8ea883f9761f7dace9d0a4d319726bfa8cb76ca912822f9641cbc616d34",
+      "editorial_fragments": 96,
+      "edition_status": "manual_partial_predeadline_reference_m0",
+      "venues": 14,
+      "races": 32,
+      "forecast_frozen_at_jst": "2026-11-14T10:25:31+09:00",
+      "publication_timing_checked_at": "2026-11-14T01:25:59.983Z",
+      "forecast_sha256": "6d2747125a6818b8e0382ef53ce9c4ecb5c806d112d29d5412fcd9570d5c1d7f",
+      "formal_bc_eligible": false,
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-14T10:25:31+09:00",
+          "input_sha256": "0aacf7adcb7a515e8badd0a2a150195a5ef2d1763ef10d272e048eadfc83f6f4"
+        },
+        "gemi": {
+          "recorded_freeze_at_jst": "2026-11-14T05:40:00+09:00",
+          "input_sha256": "0aacf7adcb7a515e8badd0a2a150195a5ef2d1763ef10d272e048eadfc83f6f4"
+        }
+      },
+      "post_deadline_reference_races": [],
+      "diagrams": true,
+      "diagram_policy": "slit-only.v1",
+      "turn_diagrams": false,
+      "label": "2026年11月14日 全国14場・32R（締切前参考M0）",
+      "expected_races": 168,
+      "unissued_races": 136,
+      "gemi_json": "data/gemi/2026-11-14.json.gz.b64.txt",
+      "gemi_original_sha256": "1fc7dbcbcd51db675ab23e728f88b280eb1695ec97e68541ab714f065a6b6a72",
+      "gemi_reported_frozen_races": 168,
+      "gemi_html_races": 32,
+      "gemi_status": "frozen_pre_deadline_first_publication_timing_unverified",
+      "ochap_status": "manual_partial_predeadline_reference_m0",
+      "pair_comparison_eligible": false,
+      "data_limitations_present": true
+    },
     {
       "date": "2026-11-10",
       "label": "2026年11月10日 全国13場・156R（v7本線4点順位・ナビ3着流し・スリット図対応）",
