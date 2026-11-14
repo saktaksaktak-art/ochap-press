@@ -1,7 +1,40 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-14",
+  "default_date": "2026-11-15",
   "issues": [
+    {
+      "date": "2026-11-15",
+      "path": "archives/2026-11-15.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": false,
+      "editorial_data": "data/editorial/2026-11-15-4e7725ee0786.json.gz.b64.txt",
+      "editorial_data_sha256": "4e7725ee07868fff976316887b5664244118e6985ac9710396d9c3d2ffd1877e",
+      "editorial_fragments": 42,
+      "edition_status": "partial_predeadline_reference_m0",
+      "venues": 6,
+      "races": 14,
+      "forecast_frozen_at_jst": "2026-11-15T06:11:26+09:00",
+      "publication_timing_checked_at": "2026-11-14T21:11:56.017Z",
+      "forecast_sha256": "4497a6e8dfa978d232f1705d0955b4a4a4a28ba838bd63fbf919beec9a8d96ae",
+      "formal_bc_eligible": false,
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-15T06:11:26+09:00",
+          "input_sha256": "662160660fdfdd45656b8f6630ed7b65284a4c8a18be8a2f233cab50ff360191"
+        }
+      },
+      "post_deadline_reference_races": [],
+      "diagrams": true,
+      "diagram_policy": "slit-only.v1",
+      "turn_diagrams": false,
+      "label": "2026年11月15日 締切前参考M0 14/156R",
+      "expected_races": 156,
+      "unissued_races": 142,
+      "ochap_status": "predeadline_reference_m0",
+      "gemi_status": "not_verified",
+      "pair_comparison_eligible": false,
+      "data_limitations_present": true
+    },
     {
       "date": "2026-11-14",
       "path": "archives/2026-11-14.html.gz.b64.txt",
@@ -382,5 +415,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-14"
+  "latest": "2026-11-15"
 }
