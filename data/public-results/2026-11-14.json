@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "date": "2026-11-14",
   "status": "API_RESULTS_REFERENCE_ONLY",
-  "checked_at_jst": "2026-11-14T15:08:34+09:00",
+  "checked_at_jst": "2026-11-14T15:18:35+09:00",
   "not_formal_m0": true,
   "not_formal_bc": true,
   "races": [
@@ -149,6 +149,22 @@
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261114.json",
       "source_observed_at_jst": "2026-11-14T14:48:27+09:00"
+    },
+    {
+      "venue": "戸田",
+      "venue_code": 2,
+      "race_no": 10,
+      "order": [
+        3,
+        1,
+        4
+      ],
+      "method": "差し",
+      "trifecta_payout_yen": 4880,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261114.json",
+      "source_observed_at_jst": "2026-11-14T15:18:35+09:00"
     },
     {
       "venue": "江戸川",
@@ -1672,5 +1688,5 @@
     }
   ],
   "source_policy": "Unified third-party API; formal BC is separate.",
-  "result_changed_at_jst": "2026-11-14T15:08:35+09:00"
+  "result_changed_at_jst": "2026-11-14T15:18:36+09:00"
 }
