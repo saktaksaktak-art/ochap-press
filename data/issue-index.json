@@ -31,17 +31,19 @@
       "diagrams": true,
       "diagram_policy": "slit-only.v1",
       "turn_diagrams": false,
-      "label": "2026年11月14日 全国14場・32R（締切前参考M0）",
+      "label": "2026年11月14日 全国予想",
       "expected_races": 168,
       "unissued_races": 136,
       "gemi_json": "data/gemi/2026-11-14.json.gz.b64.txt",
       "gemi_original_sha256": "1fc7dbcbcd51db675ab23e728f88b280eb1695ec97e68541ab714f065a6b6a72",
       "gemi_reported_frozen_races": 168,
       "gemi_html_races": 32,
-      "gemi_status": "frozen_pre_deadline_first_publication_timing_unverified",
+      "gemi_status": "live_m0_pre_deadline",
       "ochap_status": "manual_partial_predeadline_reference_m0",
       "pair_comparison_eligible": false,
-      "data_limitations_present": true
+      "data_limitations_present": true,
+      "gemi_data": "./data/gemi/2026-11-14.json",
+      "gemi_first_publication_confirmed_at_jst": "2026-11-14T21:48:37+09:00"
     },
     {
       "date": "2026-11-10",
@@ -380,5 +382,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-10"
+  "latest": "2026-11-14"
 }
