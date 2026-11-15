@@ -43,7 +43,10 @@
       "gemi_data": "./data/gemi/2026-11-15.json",
       "gemi_reported_frozen_races": 156,
       "gemi_html_races": 156,
-      "gemi_original_sha256": "aeb23eb0d5aed5043b44a74aa8905d213e66512c2f1be49a39dc752c5e9878a1"
+      "gemi_original_sha256": "aeb23eb0d5aed5043b44a74aa8905d213e66512c2f1be49a39dc752c5e9878a1",
+      "gemi_json": "data/gemi/2026-11-15.json.gz.b64.txt",
+      "consensus_json": "data/consensus/2026-11-15.json",
+      "gemi_first_publication_confirmed_at_jst": "2026-11-15T09:02:41+09:00"
     },
     {
       "date": "2026-11-14",
