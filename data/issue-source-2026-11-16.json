@@ -1,0 +1,49 @@
+{
+  "date": "2026-11-16",
+  "path": "archives/2026-11-16.html.gz.b64.txt",
+  "compression": "base64gzip",
+  "gemi_tabs": true,
+  "editorial_data": "data/editorial/2026-11-16-be7262969b54.json.gz.b64.txt",
+  "editorial_data_sha256": "be7262969b5466a95ca24cf75f1e904a5437cc8c5a908c7e19cdecdb7fcf9d21",
+  "editorial_fragments": 360,
+  "edition_status": "full_predeadline_reference_m0",
+  "venues": 10,
+  "races": 120,
+  "forecast_frozen_at_jst": "2026-11-16T06:11:37+09:00",
+  "publication_timing_checked_at": "2026-11-15T21:11:37.918Z",
+  "forecast_sha256": "7abb3586ae1fc744c4dce8b6d49e495cb7cb6fe9edaca1ed345de598c5c2d2e7",
+  "formal_bc_eligible": false,
+  "reporters": {
+    "ocha": {
+      "frozen_at_jst": "2026-11-16T06:11:37+09:00",
+      "input_sha256": "c6d76be3b2669072f244645f03e9411f78bd3e86c3a28cff7261dcd6bfeb705b"
+    },
+    "gemi": {
+      "recorded_freeze_at_jst": "2026-11-16T05:35:30+09:00",
+      "input_sha256": "c6d76be3b2669072f244645f03e9411f78bd3e86c3a28cff7261dcd6bfeb705b",
+      "races": 120
+    }
+  },
+  "post_deadline_reference_races": [],
+  "diagrams": true,
+  "diagram_policy": "slit-only.v1",
+  "turn_diagrams": false,
+  "forecast_drive_id": "1jg7iGsRg54bWj8B8XrhFcfP4SdnjXI9J",
+  "shared_input_drive_id": "1FyGVq72xIsSF7BC6Du5U5W7eoC8p2Cs3",
+  "prepared_at_jst": "2026-11-15T21:11:38.062Z",
+  "html_sha256": "db10a384a7c841e16ebe5d4a66dbbf5ae3be7487898f6a5b0e6f28ae71e38dc0",
+  "model": "GPT-6 family Codex; exact variant unverified",
+  "label": "2026年11月16日 締切前参考M0 120/120R",
+  "expected_races": 120,
+  "unissued_races": 0,
+  "ochap_status": "predeadline_reference_m0",
+  "gemi_json": "data/gemi/2026-11-16.json.gz.b64.txt",
+  "gemi_status": "independent_predeadline_reference_pair",
+  "gemi_reported_frozen_races": 120,
+  "gemi_html_races": 120,
+  "gemi_original_sha256": "e85f3236a9010a26480288492498e300b45f99377ecc8658ed9de69b79f63f4d",
+  "consensus_json": "data/consensus/2026-11-16.json",
+  "consensus_reference_only": true,
+  "pair_comparison_eligible": false,
+  "data_limitations_present": true
+}
