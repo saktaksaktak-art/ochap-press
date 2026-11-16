@@ -7,6 +7,32 @@
   const oldEditorialNote='朝刊の凍結原本と保存入力にある役割・候補順・数値を展開した詳報です。更新時点の結果・オッズ・直前情報による再予想や順位変更は行っていません。';
   const copy=node=>node.textContent.trim();
 
+  function formatCourseRates(table){
+    const headers=table.tHead?.rows[0]?.cells;
+    if(!headers)return;
+    const rateColumns=[...headers].flatMap((header,index)=>
+      /^(?:[123]着|[23]連対)[%％]※?$/.test(copy(header))?[index]:[]);
+    if(!rateColumns.length)return;
+    for(const body of table.tBodies){
+      for(const row of body.rows){
+        if(row.cells.length!==headers.length)continue;
+        for(const index of rateColumns){
+          for(const node of row.cells[index].childNodes){
+            if(node.nodeType!==Node.TEXT_NODE)continue;
+            const match=node.nodeValue.match(/^(\s*)(\d+(?:\.\d+)?)([%％]?)(\s*)$/);
+            if(!match || Number(match[2])>100)continue;
+            const formatted=match[1]+Number(match[2]).toFixed(1)+match[3]+match[4];
+            if(node.nodeValue!==formatted)node.nodeValue=formatted;
+          }
+        }
+      }
+    }
+  }
+
+  const isCourseSection=section=>{
+    const heading=section?.querySelector(':scope > summary');
+    return heading&&/^02\s.*コース.*決まり手$/.test(copy(heading));
+  };
   function cleanCourse(section){
     for(const note of section.querySelectorAll(':scope > p.small')){
       if(copy(note)!==oldCourseNote)continue;
@@ -16,6 +42,7 @@
       note.remove();
     }
     for(const table of section.querySelectorAll('table')){
+      formatCourseRates(table);
       const labels=[...table.querySelectorAll('thead th')].map(copy);
       if(!labels.includes('差し/差され')||!labels.includes('2C逃し'))continue;
       for(const cell of table.querySelectorAll('tbody td')){
@@ -44,12 +71,21 @@
     }
   }
   for(const section of archive.querySelectorAll('article details')){
-    const heading=section.querySelector(':scope > summary');
-    if(heading&&/^02\s.*コース.*決まり手$/.test(copy(heading)))cleanCourse(section);
+    if(isCourseSection(section))cleanCourse(section);
   }
   const noteSelector='details[data-rich-key$=":notes"] > .rich-fragment';
   archive.querySelectorAll(noteSelector).forEach(cleanEditorial);
   new MutationObserver(records=>{
-    for(const {target} of records)if(target.matches?.(noteSelector))cleanEditorial(target);
+    for(const {target,addedNodes} of records){
+      if(target.matches?.(noteSelector))cleanEditorial(target);
+      // SG/G1 tables can be inserted after the archived article was formatted.
+      for(const node of addedNodes){
+        if(node.nodeType!==Node.ELEMENT_NODE)continue;
+        const tables=node.matches('table')?[node]:node.querySelectorAll('table');
+        for(const table of tables){
+          if(isCourseSection(table.closest('details')))formatCourseRates(table);
+        }
+      }
+    }
   }).observe(archive,{childList:true,subtree:true});
 })();

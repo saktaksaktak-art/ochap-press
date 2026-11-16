@@ -45,6 +45,10 @@ with ThreadingHTTPServer(('127.0.0.1',0), partial(SimpleHTTPRequestHandler,direc
                     expect(course.locator('tbody tr').nth(1)).to_contain_text('本橋 克洋')
                     expect(course.locator('tbody tr').nth(2)).to_contain_text('生方 靖亜')
                     expect(course.locator('tbody tr').first.locator('td').nth(1)).to_have_text('20')
+                    expect(course.locator('tbody tr').first.locator('td').nth(2)).to_have_text('55.01位')
+                    expect(course.locator('tbody tr').nth(1).locator('td').nth(2)).to_have_text('7.1')
+                    expect(course.locator('tbody tr').nth(1).locator('td').nth(3)).to_have_text('0.0')
+                    expect(course.locator('tbody tr').first.locator('td').nth(7)).to_have_text('0.151位')
                     expect(course.locator('td.rank1').first).to_have_css('background-color','rgb(255, 223, 184)')
                     expect(course.locator('td.rank2').first).to_have_css('background-color','rgb(229, 237, 247)')
                 first = data['groups'][scope]['6']['courses'][0]
@@ -53,6 +57,11 @@ with ThreadingHTTPServer(('127.0.0.1',0), partial(SimpleHTTPRequestHandler,direc
                 expect(row).to_contain_text(f"{first['win_rates_pct']['nige']}%")
                 if scope=='sg_g1':
                     expect(race.locator('.ochap-grade-course tbody td').first).not_to_have_text('未取得')
+                    assert course.evaluate(r"""t => {
+                        const rates=[...t.tBodies[0].rows].flatMap(r=>[...r.cells].slice(2,5))
+                          .map(c=>c.firstChild.textContent.trim()).filter(v=>v!=='未取得');
+                        return rates.length>0 && rates.every(v=>/^\d+\.\d$/.test(v));
+                    }""")
                 race.locator('[data-ochap-baseline-picker]').select_option('2')
                 if scope=='sg_g1':
                     reference = data['groups'][scope]['6']['nigashi_reference']
