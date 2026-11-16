@@ -67,6 +67,12 @@
   }
   const boat=n=>Number.isInteger(n)&&n>=1&&n<=6;
   const raceKey=r=>r.venue_code+':'+r.race_no;
+  function eligibleRaces(data,issue){
+    const cutoff=referenceCutoff(data,issue);
+    const late=new Set(issue?.post_deadline_reference_races||[]);
+    return r=>Number.isFinite(readTime(r.deadline))&&!late.has(r.race_id)&&
+      (r.pair_timing_eligible===true||(!r.input_versions_differ&&cutoff<readTime(r.deadline)));
+  }
   function attachLiveResults(data,feed,issue){
     if(feed?.date!==data.date||feed.schema_version!=='1.0'||!Array.isArray(feed.races))return null;
     const cutoff=referenceCutoff(data,issue);
@@ -244,6 +250,6 @@
     }
     await state.refresh();
   }
-  window.OchaPConsensus={mount,ticketRoles,attachLiveResults,liveMetrics};
+  window.OchaPConsensus={mount,ticketRoles,attachLiveResults,liveMetrics,eligibleRaces};
 })();
 

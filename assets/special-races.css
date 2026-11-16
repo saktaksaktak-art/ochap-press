@@ -1,0 +1,17 @@
+.special-badges,.special-tickets{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center}
+.race-head h2>.special-badges{margin-top:.35rem}
+.special-badge{display:inline-flex;align-items:center;padding:.12rem .55rem;border-radius:999px;border:1px solid currentColor;font-size:.76rem;font-weight:750;line-height:1.5;white-space:nowrap}
+.special_teppan{color:#164d36;background:#e5f6ec}
+.special_myoumi{color:#813c10;background:#fff1d9}
+.special-hit{font-weight:800}
+.special-cards,.lr-special-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));gap:.65rem}
+.special-card{min-width:0}
+.special-card h3,.special-card p{margin:.15rem 0 .4rem}
+.special-card>a{display:inline-block;margin-top:.6rem}
+.special-picks{margin-top:.6rem;overflow-wrap:anywhere}
+.special-picks strong{font-size:.83rem}
+.special-tickets span{padding:.06rem .4rem;border:1px solid #b9c9ca;border-radius:.35rem;font-variant-numeric:tabular-nums}
+.lr-special-grid article{min-width:0}
+.lr-special-grid h4{font-size:.88rem;margin:.1rem 0 .35rem}
+.lr-race>.special-badges{margin:.35rem 0}
+.lr-compact .special-badge{white-space:normal;overflow-wrap:anywhere;padding:.08rem .28rem}
