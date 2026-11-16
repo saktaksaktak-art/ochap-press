@@ -4,6 +4,7 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import re
+import json
 from threading import Thread
 from playwright.sync_api import expect, sync_playwright
 
@@ -19,6 +20,17 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
     page.set_default_timeout(12000)
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
+
+    # Exercise both UI states without changing production receipt evidence. The live
+    # 11/16 index may record a post-close observation, which correctly hides picks.
+    page.goto(url + "2026-11-16")
+    expect(page.locator("#v18-r1")).to_be_visible()
+    expect(page.locator('script[src*="20261116-editorial-clean"]')).to_have_count(1)
+    expect(page.locator('article details[data-rich-key$=":sources"]')).to_have_count(0)
+    index_fixture = json.loads((ROOT / "data/issue-index.json").read_text())
+    first_issue = next(issue for issue in index_fixture["issues"] if issue["date"] == "2026-11-16")
+    first_issue.pop("gemi_first_publication_confirmed_at_jst", None)
+    page.route("**/data/issue-index.json", lambda route: route.fulfill(json=index_fixture))
 
     page.goto(url + "2026-11-16&view=special")
     cards = page.locator(".special-card")
