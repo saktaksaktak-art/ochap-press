@@ -206,7 +206,7 @@
         (m.missingPayout?'払戻確認待ち '+m.missingPayout+'R。':'')+
         (m.refundUnknown?'返還未確認 '+m.refundUnknown+'Rは返還額を含みません。':''):'照合できた結果を受信すると、速報収支を表示します。';
       root.append(element('p',live?liveNote:m.n===0?'成績は結果確定後に集計します。':'成績は'+snapshot+'時点の参考集計。的中率は通常レース、収支は事故・返還分を含む'+m.finance_races+'R・'+m.ticket_points+'点。一致して外れたRも含みます。','public-note'));
-      if(!live&&m.n>0){const evaluation=element('div',undefined,'public-card');evaluation.append(element('h3','一致予想は有効か'));
+      if(!live&&m.n>0){const evaluation=element('details',undefined,'public-card');evaluation.append(element('summary','一致予想は有効か'));
       const g=m.agreement_selection_test.gemi;
       const selectionSignal=g.holm_adjusted_p_four_tests<.05 && g.with_common_hits/g.with_common_n>g.without_common_hits/g.without_common_n;
       evaluation.append(element('p',selectionSignal?'レースを絞る手掛かりはありますが、共通券購入の優位性は未確認です。':'共通券購入の優位性は未確認です。共通券なしの比較群は'+g.without_common_n+'R。継続して検証します。'));
@@ -230,7 +230,10 @@
       rows.slice(page*12,page*12+12).forEach(r=>{
         const c=element('article',undefined,'public-card consensus-race');const head=element('div',undefined,'consensus-race-heading');
         head.append(element('h3',r.venue+' '+r.race_no+'R'),element('span',resultStatus(r,kind),'consensus-result'));c.append(head);
-        c.append(element('p','共通 '+r[key].length+'点','public-note'),commonTickets(r,kind,forecasts));
+        c.append(element('p','共通 '+r[key].length+'点','public-note'),ticketList(r[key]));
+        const categories=element('details');
+        categories.append(element('summary','買い目ごとの記者別区分'),commonTickets(r,kind,forecasts));
+        c.append(categories);
         if(r.result)c.append(element('p','結果 '+r.result.order.slice(0,kind).join('-')+' ／ '+yen(r.result[kind===2?'exacta_payout_yen':'trifecta_payout_yen'])));
         const d=element('details');d.append(element('summary','両記者の掲載券'));
         [['ocha','お茶P'],['gemi','Gemi兄']].forEach(([a,n])=>{d.append(element('h4',n),ticketList(r.reporters[a][String(kind)]));});c.append(d);list.append(c);

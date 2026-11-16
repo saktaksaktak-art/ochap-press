@@ -40,18 +40,21 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
     page.get_by_role("button", name="特選レースのみ表示").click()
     expect(page.locator("#lr-list .lr-race")).to_have_count(12)
     expect(page.locator("#lr-list h3")).to_have_text("特選レース｜結果一覧")
+    page.locator('details[data-drawer=high] > summary').click()
     expect(page.locator(".lr-compact table")).to_be_visible()
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     assert page.locator(".lr-compact table").evaluate(
         "(table) => table.getBoundingClientRect().width <= table.parentElement.clientWidth + 1"
     )
-    page.get_by_role("button", name="おちゃっぴー vs Gemini", exact=True).click()
+    page.get_by_role("button", name="記者比較", exact=True).click()
+    expect(page.locator(".ochap-score-compact")).to_be_visible()
+    page.locator('details[data-drawer=categories] > summary').click()
     expect(page.locator(".ochap-score-by-group")).to_be_visible()
     expect(page.locator(".ochap-score-by-group .ochap-score-denom").first).to_be_visible()
     assert page.locator(".ochap-score-by-group").evaluate(
         "(t) => t.getBoundingClientRect().width < 700")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
-    page.get_by_role("button", name="お茶P Gemi兄　予想一致レース").click()
+    page.get_by_role("button", name="買い目一致", exact=True).click()
     expect(page.locator("#ochap-consensus-view .public-number").filter(has_text="円")).to_be_visible()
     page.get_by_role("button", name="2連単", exact=True).click()
     expect(page.locator("#ochap-consensus-view .public-number").filter(has_text="円")).to_be_visible()
@@ -75,8 +78,16 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         page.get_by_role("button", name="予想", exact=True).click()
         page.get_by_role("button", name="レース詳報", exact=True).click()
         page.locator("#ochap-jump-open").click()
-        dialog.get_by_role("button", name="出走表", exact=True).click()
-        expect(page.locator("summary:visible", has_text="01 出走表").first).to_be_focused()
+        dialog.get_by_role("button", name="出走表・コース成績", exact=True).click()
+        expect(page.locator(".compact-docket:visible > summary").first).to_be_focused()
+        assert page.locator('.compact-forecast:visible').first.evaluate("""copy => {
+          const picks=[...copy.querySelectorAll(':scope > h3')].map(x=>x.textContent);
+          const details=[...copy.querySelectorAll(':scope > details > summary')].map(x=>x.textContent);
+          const order=details.filter(x=>['出走表・コース成績','展開解説','ST・スリット'].includes(x));
+          return /^本線/.test(picks[0]) && /^舟券ナビ/.test(picks[1]) && /^逆張り/.test(picks[2]) &&
+            !!copy.querySelector(':scope > .tickets') && order.join('|')==='出走表・コース成績|展開解説|ST・スリット';
+        }""")
+        assert page.locator(".compact-forecast:visible .ticket").count() >= 10
         assert page.locator("summary:visible", has_text="01 出走表").first.evaluate("(e) => e.parentElement.open")
         expect(page.locator('article[id^="v"]:visible .ticket .b6').first).to_have_css("background-color", "rgb(37, 133, 91)")
         expect(page.locator('#ochap-issue-date')).to_be_visible()
@@ -90,6 +101,17 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
             expect(source_summary).not_to_have_css("display", "none")
             page.emulate_media(media="screen")
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        expect(page.locator('.compact-forecast:visible details[data-rich-key$=":st"]').first).not_to_have_attribute("open", "")
+        page.locator('.compact-forecast:visible details[data-rich-key$=":st"] > summary').first.click()
+        expect(page.locator('.compact-forecast:visible details[data-rich-key$=":st"] table').first).to_be_visible()
+        gemi=page.get_by_role("button", name="全レースをGemi兄記者に切り替え")
+        gemi.click()
+        pane=page.locator(".ochap-gemi-pane:visible").first
+        expect(pane.locator(".compact-gemi-detail")).to_have_count(2)
+        assert pane.locator(".picks").evaluate("""p => {
+          const labels=[...p.querySelectorAll('h3')].map(x=>x.textContent.trim());
+          return labels.join('|')==='本線|舟券ナビ|逆張り';
+        }""")
         page.locator("#ochap-jump-open").click()
         page.keyboard.press("Escape")
         expect(dialog).not_to_be_visible()

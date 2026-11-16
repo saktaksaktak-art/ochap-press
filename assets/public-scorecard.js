@@ -146,9 +146,14 @@
       card("お茶P｜平買い収支",a.n?yen(a.profit):"—",a.n+"R対象"),
       card("お茶P｜回収率",a.roi===null?"—":a.roi.toFixed(1)+"%",a.n+"R対象"),
       card("Gemi兄｜3連単",pct(b.three,b.n),b.n+"R対象"));
-    if(live)tiles.append(card("Gemi兄｜平買い収支",yen(b.profit),b.n+"R対象"),
-      card("Gemi兄｜回収率",b.roi===null?"—":b.roi.toFixed(1)+"%",b.n+"R対象"));
-    area.append(tiles);
+    if(live){
+      const display=s=>[pct(s.three,s.n),s.roi===null?"—":s.roi.toFixed(1)+"%",yen(s.profit)];
+      const values=[display(a),display(b)];
+      const top=table([gname,"お茶P","Gemi兄"],
+        ["3連単的中率","回収率","平買い収支"].map((label,i)=>[label,values[0][i],values[1][i]]),"compact");
+      top.classList.add("ochap-score-grid","ochap-score-compact-grid");
+      area.append(top);
+    }else area.append(tiles);
     // Restore the old newspaper's all-category comparison at a glance.
     // A separate line for each journalist keeps historical one-sided
     // reference scores visible without inventing a head-to-head match.
@@ -219,12 +224,30 @@
         r.result.order.join("-"),yen(r.result.trifecta_payout_yen),
         hitAt(r,"ocha","main"),hitAt(r,"ocha","reverse"),hitAt(r,"ocha","nav"),
         hitAt(r,"gemi","main"),hitAt(r,"gemi","reverse"),hitAt(r,"gemi","nav")]),"by-race"));
+    if(live){
+      const open=new Set([...host.querySelectorAll('details.ochap-score-drawer[open]')].map(d=>d.dataset.drawer));
+      const fold=(key,label,nodes)=>{
+        const drawer=make("details","ochap-score-drawer");
+        drawer.dataset.drawer=key;
+        drawer.open=open.has(key);
+        nodes[0].before(drawer);
+        drawer.append(make("summary","",label),...nodes);
+      };
+      fold("categories","本線・逆張り・舟券ナビ別",[categories]);
+      const high=area.querySelector(".ochap-score-high")?.parentElement;
+      if(high)fold("high","高配当の的中",[high.previousElementSibling,high]);
+      const races=area.querySelector(".ochap-score-by-race")?.parentElement;
+      if(races)fold("races","全レースの明細",[races.previousElementSibling,races]);
+      const foot=[...area.querySelectorAll(":scope > .ochap-score-note")];
+      if(foot.length)fold("notes","対象数・投資と払戻",foot);
+    }
     const old=host.querySelector(".ochap-score-body");
     if(old)old.replaceWith(area);else host.append(area);
   }
   function renderLive(host,date,rows,checkedAt) {
     if(!rows.some(r=>r.venue===ui.venue))ui.venue="";
     const update=new Intl.DateTimeFormat("ja-JP",{timeZone:"Asia/Tokyo",hour:"2-digit",minute:"2-digit"}).format(new Date(checkedAt));
+    const previous=host.querySelector(".ochap-score-body");
     host.replaceChildren(make("h3","ochap-score-title","結果速報｜記者別参考成績"),
       make("p","ochap-score-note",date.replaceAll("-","/")+" "+update+" 更新・照合 "+rows.length+"R。締切前の掲載予想を結果に照合した速報値です。正式バックチェック・正式比較には加算しません。"));
     if(!rows.length){
@@ -232,6 +255,7 @@
       return;
     }
     host.append(buildControls(host,rows,true));
+    if(previous)host.append(previous);
     render(host,rows,true);
   }
   async function mount(host,date,{deferEmpty=false}={}) {
