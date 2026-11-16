@@ -50,10 +50,10 @@
 #ochap-public-panels .lr-compact td,#ochap-public-panels .lr-compact th{position:static;background:none;white-space:normal;overflow-wrap:anywhere;padding:9px 6px;text-align:left;vertical-align:middle;border-bottom:1px solid #e1e6d9;font-weight:500}
 #ochap-public-panels .lr-compact th{background:#e9efe3;font-size:12px;color:#48624b}
 #ochap-public-panels .lr-compact td:first-child b{display:block}
-#ochap-public-panels .lr-col-race{width:17%}
-#ochap-public-panels .lr-col-order{width:22%}
-#ochap-public-panels .lr-col-pay{width:22%}
-#ochap-public-panels .lr-col-author{width:39%}
+#ochap-public-panels .lr-col-race{width:4em}
+#ochap-public-panels .lr-col-order{width:6.7em}
+#ochap-public-panels .lr-col-pay{width:6.2em}
+#ochap-public-panels .lr-col-author{width:auto}
 #ochap-public-panels .lr-payout{font-weight:800;font-variant-numeric:tabular-nums;text-align:right}
 #ochap-public-panels .lr-order{display:inline-flex;gap:2px;white-space:nowrap;vertical-align:middle}
 #ochap-public-panels .lr-boat{display:inline-grid;place-items:center;width:23px;height:24px;border:1px solid #b7bcb5;border-radius:4px;font-weight:800;font-size:14px;line-height:1;color:#142318;background:white}
@@ -138,4 +138,15 @@
  #ochap-public-panels .lr-race-top strong{font-size:12px}
  #ochap-public-panels .lr-race-top small{font-size:10px}
  #ochap-public-panels .lr-rates b{font-size:14px}
+}
+
+/* Give the reporter column the remaining width, not the short numeric columns. */
+#ochap-public-panels .lr-compact .lr-payout{white-space:nowrap;text-align:right}
+#ochap-public-panels .lr-compact .special-badges{margin-top:5px}
+@media(max-width:430px){
+  #ochap-public-panels .lr-compact :is(td,th){padding-inline:4px}
+  #ochap-public-panels .lr-col-race{width:3.6em}
+  #ochap-public-panels .lr-col-order{width:5em}
+  #ochap-public-panels .lr-col-pay{width:4.8em}
+  #ochap-public-panels .lr-compact .lr-boat{width:17px;height:19px;font-size:12px}
 }

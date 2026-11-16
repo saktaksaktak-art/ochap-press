@@ -12,8 +12,12 @@
 .ochap-score-stat-value{display:block;font-size:25px;line-height:1.4;font-variant-numeric:tabular-nums;overflow-wrap:anywhere;color:#174a34}
 .ochap-score-stat small{display:block;font-size:11px;color:#63786b}
 .ochap-score-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:8px 0 16px}
-.ochap-score-table{width:100%;min-width:700px;border-collapse:collapse;font-size:12px}
-.ochap-score-table td,.ochap-score-table th{padding:9px 8px;border:1px solid #d0dbcf;text-align:left}
+#ochap-public-panels .ochap-score-table{width:max-content;max-width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+#ochap-public-panels .ochap-score-table :is(td,th){padding:5px 6px;border:1px solid #d0dbcf;text-align:left;white-space:nowrap}
+#ochap-public-panels .ochap-score-by-group :is(td,th):nth-child(n+3){text-align:right}
+#ochap-public-panels .ochap-score-denom{display:block;font-size:10px;line-height:1.2}
+#ochap-public-panels .ochap-score-by-race th:nth-child(n+5){max-width:4.5em;white-space:normal;line-height:1.25}
+@media(max-width:430px){#ochap-public-panels .ochap-score-table :is(td,th){padding:5px 4px;font-size:11px}}
 .ochap-score-table th{background:#eaf2e9;color:#264a36;font-weight:700;white-space:nowrap}
 .ochap-score-table tr:nth-child(even){background:#f8faf6}
 .ochap-score-original{display:inline-block;margin:10px 0;padding:9px 12px;color:#125236;text-decoration:underline;font-weight:700}

@@ -62,11 +62,13 @@
     return [...map.values()].sort((a,b)=>Number(!!b.order)-Number(!!a.order)||
       String(a.closing_time||'99:99').localeCompare(String(b.closing_time||'99:99'))||a.venue_code-b.venue_code||a.race_no-b.race_no);
   }
-  function mount(host,{date,rows,forecasts,issue,updatedAt,onRefresh}){
+  function mount(host,{date,rows,forecasts,issue,specials,updatedAt,onRefresh}){
     const engine=window.OchaPHitReporters;
     if(!engine?.score)return;
+    const feature=window.OchaPSpecial;
     if(!states.has(date))states.set(date,{author:'both',venue:'all',session:'all',band:'all',decision:'all',group:'all',list:'all',bet:'three',page:0,extra:false});
     const state=states.get(date),all=makeRows(rows,forecasts);
+    if(!specials&&state.list==='special')state.list='all';
     const availableVenues=[...new Set(all.map(r=>r.venue).filter(Boolean))];
     if(state.venue!=='all'&&!availableVenues.includes(state.venue))state.venue='all';
     const authorsNow=()=>selectedAuthors(state);
@@ -82,8 +84,38 @@
     }
     function score(rs,author,group,bet=state.bet){return engine.score(rs,forecasts,author,group,bet);}
     function hasHit(row){return authorsNow().some(([author])=>matching(row,forecasts,author,state.group).three);}
+    function specialMarks(row){
+      const pick=specials?.get(recordKey(row));
+      if(!pick)return '';
+      const payout=Number.isInteger(row.trifecta_payout_yen)&&row.trifecta_payout_yen>=100;
+      const marks=feature.activeTypes(pick).map(group=>{
+        const hit=pick[group].includes(row.order?.join('-'));
+        const label=hit?(group==='special_teppan'?'🎯 鉄板的中':'🔥 妙味クロス的中'):'';
+        return '<span class="special-badge '+group+(hit?' special-hit':'')+'">'+
+          esc(hit?label+' '+(payout?yen(row.trifecta_payout_yen):'払戻待ち'):feature.labels[group])+'</span>';
+      }).join('');
+      return '<div class="special-badges">'+marks+'</div>';
+    }
+    function specialSummary(scoped){
+      if(!specials)return '';
+      if(!specials.size)return '<section class="lr-section"><h3>特選レース</h3><p class="lr-empty">この号に該当する特選レースはありません。</p></section>';
+      const cards=['special_teppan','special_myoumi','main_x_reverse','reverse_x_main'].map(group=>{
+        const s=feature.score(scoped,specials,group);
+        const settled=s.financeN>0&&s.missingPayout===0;
+        const label=group==='main_x_reverse'||group==='reverse_x_main'?feature.labels[group]+'（妙味の内訳）':feature.labels[group];
+        return '<article class="lr-category"><h4>'+esc(label)+'</h4><p>対象 '+s.target+'R ／ 結果取得 '+s.n+
+          'R（公式確認 '+s.confirmed+'R）</p><p>的中 '+s.three+'R（'+rate(s.three,s.n)+'） ／ '+s.totalStake/100+
+          '点</p><dl class="lr-finance"><div><dt>投資額</dt><dd>'+yen(s.totalStake)+'</dd></div>'+
+          '<div><dt>回収額（払戻＋返還）</dt><dd>'+yen(settled?s.payout:null)+'</dd></div>'+
+          '<div><dt>回収率</dt><dd>'+(settled?s.roi.toFixed(2)+'%':'—')+'</dd></div></dl>'+
+          (s.missingPayout?'<p class="lr-caption">払戻確認待ち '+s.missingPayout+'R</p>':'')+
+          (s.refundUnknown?'<p class="lr-caption">返還未確認 '+s.refundUnknown+'R</p>':'')+'</article>';
+      }).join('');
+      return '<section class="lr-section"><h3>特選レース</h3><p class="lr-caption">3連単・各点100円。点数・投資額は結果取得分。公式確認前は速報値です。</p>'+
+        '<div class="lr-special-grid">'+cards+'</div></section>';
+    }
     function compactTable(rs){
-      return '<div class="lr-compact"><table><colgroup><col class="lr-col-race"><col class="lr-col-order"><col class="lr-col-pay"><col class="lr-col-author"></colgroup><thead><tr><th>場・R</th><th>出目</th><th>払戻</th><th>的中記者</th></tr></thead><tbody>'+rs.map(r=>'<tr><td>'+esc(r.venue)+'<b>'+r.race_no+'R</b></td><td>'+order(r)+'</td><td class="lr-payout">'+yen(r.trifecta_payout_yen)+'</td><td>'+reporterLines(r,forecasts,state,true)+'</td></tr>').join('')+'</tbody></table></div>';
+      return '<div class="lr-compact"><table><colgroup><col class="lr-col-race"><col class="lr-col-order"><col class="lr-col-pay"><col class="lr-col-author"></colgroup><thead><tr><th>場・R</th><th>出目</th><th>払戻</th><th>的中記者</th></tr></thead><tbody>'+rs.map(r=>'<tr><td>'+esc(r.venue)+'<b>'+r.race_no+'R</b></td><td>'+order(r)+'</td><td class="lr-payout">'+yen(r.trifecta_payout_yen)+'</td><td>'+reporterLines(r,forecasts,state,true)+specialMarks(r)+'</td></tr>').join('')+'</tbody></table></div>';
     }
     function raceCards(rs){
       return '<div class="lr-races">'+rs.map(r=>{
@@ -95,7 +127,7 @@
           const s=r.order?score([r],a,state.group):null;
           return '<div class="lr-pick-detail lr-'+a+'"><h4>'+label+'</h4>'+list+(s?.financeN?'<p>投資 '+yen(s.stake)+' ／ 払戻 '+yen(s.payout)+' ／ 収支 <b class="'+(s.profit>=0?'lr-positive':'lr-negative')+'">'+signed(s.profit)+'</b></p>':'')+'</div>';
         }).join('');
-        return '<article class="lr-race"><div class="lr-race-top"><div><strong>'+esc(r.venue)+' '+r.race_no+'R</strong>'+(r.closing_time?'<small>締切 '+esc(r.closing_time)+'</small>':'')+'</div><div>'+order(r)+(r.method?'<small>'+esc(r.method)+'</small>':'')+'</div><div class="lr-payout">'+(r.order?yen(r.trifecta_payout_yen):'—')+'<small>3連単・100円</small></div></div><div class="lr-race-reporters">'+checks+'</div><details><summary>掲載買い目・このRの収支</summary>'+details+'</details></article>';
+        return '<article class="lr-race"><div class="lr-race-top"><div><strong>'+esc(r.venue)+' '+r.race_no+'R</strong>'+(r.closing_time?'<small>締切 '+esc(r.closing_time)+'</small>':'')+'</div><div>'+order(r)+(r.method?'<small>'+esc(r.method)+'</small>':'')+'</div><div class="lr-payout">'+(r.order?yen(r.trifecta_payout_yen):'—')+'<small>3連単・100円</small></div></div>'+specialMarks(r)+'<div class="lr-race-reporters">'+checks+'</div><details><summary>掲載買い目・このRの収支</summary>'+details+'</details></article>';
       }).join('')+'</div>';
     }
     function pagination(total){
@@ -118,21 +150,32 @@
       const financeTop=who.map(([a,label])=>{const s=score(finished,a,'all');return '<div class="lr-total-finance lr-'+a+'"><h3>'+label+'<small>全区分・'+(state.bet==='three'?'3連単':'2連単')+'</small></h3>'+finance(s)+'</div>';}).join('');
       const high=finished.filter(r=>r.trifecta_payout_yen>=2000&&hasHit(r)).sort((a,b)=>b.trifecta_payout_yen-a.trifecta_payout_yen);
       const jointCount=scoped.filter(r=>isJointHit(r,forecasts,state.group)).length;
-      const listed=scoped.filter(r=>state.list==='joint'?isJointHit(r,forecasts,state.group):state.list==='hits'?hasHit(r):state.list==='pending'?!r.order:true);
+      const listed=scoped.filter(r=>state.list==='joint'?isJointHit(r,forecasts,state.group):state.list==='hits'?hasHit(r):state.list==='pending'?!r.order:
+        state.list==='special'?specials?.has(recordKey(r)):true);
       const pages=pagination(listed.length);
       const categoryCards=groups.map(([g,label])=>'<section class="lr-category"><h3>'+label+'</h3>'+who.map(([a,name])=>{
         const s=score(finished,a,g);
         return '<div class="lr-category-author lr-'+a+'"><h4>'+name+'<small>対象 '+s.n+'R</small></h4><div class="lr-rates"><div><span>1着</span><b>'+rate(s.one,s.n)+'</b><small>'+s.one+'/'+s.n+'R</small></div><div><span>2連単</span><b>'+rate(s.two,s.n)+'</b><small>'+s.two+'/'+s.n+'R</small></div><div><span>3連単</span><b>'+rate(s.three,s.n)+'</b><small>'+s.three+'/'+s.n+'R</small></div></div>'+finance(s)+'</div>';
       }).join('')+'</section>').join('');
       const summaryFoot=who.some(([a])=>score(finished,a,'all').refundUnknown>0)?'返還未確認分は返還を含まない速報値です。':'';
-      host.innerHTML='<div class="lr-dashboard" id="lr-top"><header class="lr-header"><div><h2>結果速報</h2><p>'+esc(date.replaceAll('-','/'))+'<span>'+(time?time+' 更新':'結果待ち')+'</span></p></div><button type="button" data-action="refresh" class="lr-refresh">更新</button></header><nav class="lr-tabs" aria-label="速報の記者">'+toggle('author','both','両記者',state.author==='both')+authors.map(([a,n])=>toggle('author',a,n,state.author===a)).join('')+'</nav><div class="lr-filters">'+filters+'<button type="button" data-action="extra" aria-expanded="'+state.extra+'">絞り込み '+(state.extra?'−':'＋')+'</button></div>'+(state.extra?'<div class="lr-filters lr-extra">'+extras+'<button type="button" data-action="reset">条件解除</button></div>':'')+'<div class="lr-summary">'+summary+'</div><div class="lr-finance-overview">'+financeTop+'</div><nav class="lr-jumps" aria-label="結果速報の項目"><a href="#lr-high">高配当的中</a><a href="#lr-list">レース一覧</a><a href="#lr-performance">区分別成績</a></nav><section id="lr-high" class="lr-section"><div class="lr-section-title"><h3>2,000円以上の的中速報</h3><span>'+high.length+'R</span></div>'+(high.length?compactTable(high):'<p class="lr-empty">この条件では、2,000円以上の的中はまだありません。</p>')+'</section><section id="lr-list" class="lr-section"><div class="lr-section-title"><h3>'+(state.list==='hits'?'的中一覧｜全国レース結果':'全国レース結果一覧')+'</h3><span>'+listed.length+'R</span></div><div class="lr-tabs lr-list-tabs" aria-label="レース一覧の表示">'+toggle('list','all','全レース',state.list==='all')+toggle('list','hits','的中一覧',state.list==='hits')+toggle('list','pending','結果待ち',state.list==='pending')+'</div>'+pages+(listed.length?raceCards(listed.slice(state.page*12,(state.page+1)*12)):'<p class="lr-empty">この条件に該当するレースはありません。</p>')+pages+'</section><section id="lr-performance" class="lr-section"><div class="lr-section-title"><h3>予想区分ごとの成績</h3></div><div class="lr-tabs lr-bet-tabs" aria-label="収支の券種">'+toggle('bet','three','3連単・各点100円',state.bet==='three')+toggle('bet','two','2連単・各点100円',state.bet==='two')+'</div><div class="lr-categories">'+categoryCards+'</div></section><details class="lr-howto"><summary>集計の見方</summary><p>結果取得済みのレースを集計。1着・2連単は掲載買い目の先頭1艇・2艇、3連単は3艇すべての一致です。2連単の買い目は区分内で重複を除きます。全区分は区分ごとの購入を合算し、区分をまたぐ同じ券は別々に各100円購入として計算します。予想なし・見送り・結果待ちは的中率の分母に含めません。</p><p>'+esc(summaryFoot)+'払戻未取得の的中Rは収支集計を保留します。</p></details><a class="lr-back-top" href="#lr-top" aria-label="結果速報の上へ">↑ 上へ</a></div>';
+      host.innerHTML='<div class="lr-dashboard" id="lr-top"><header class="lr-header"><div><h2>結果速報</h2><p>'+esc(date.replaceAll('-','/'))+'<span>'+(time?time+' 更新':'結果待ち')+'</span></p></div><button type="button" data-action="refresh" class="lr-refresh">更新</button></header><nav class="lr-tabs" aria-label="速報の記者">'+toggle('author','both','両記者',state.author==='both')+authors.map(([a,n])=>toggle('author',a,n,state.author===a)).join('')+'</nav><div class="lr-filters">'+filters+'<button type="button" data-action="extra" aria-expanded="'+state.extra+'">絞り込み '+(state.extra?'−':'＋')+'</button></div>'+(state.extra?'<div class="lr-filters lr-extra">'+extras+'<button type="button" data-action="reset">条件解除</button></div>':'')+'<div class="lr-summary">'+summary+'</div><div class="lr-finance-overview">'+financeTop+'</div>'+specialSummary(scoped)+'<nav class="lr-jumps" aria-label="結果速報の項目"><a href="#lr-high">高配当的中</a><a href="#lr-list">レース一覧</a><a href="#lr-performance">区分別成績</a></nav><section id="lr-high" class="lr-section"><div class="lr-section-title"><h3>2,000円以上の的中速報</h3><span>'+high.length+'R</span></div>'+(high.length?compactTable(high):'<p class="lr-empty">この条件では、2,000円以上の的中はまだありません。</p>')+'</section><section id="lr-list" class="lr-section"><div class="lr-section-title"><h3>'+(state.list==='hits'?'的中一覧｜全国レース結果':'全国レース結果一覧')+'</h3><span>'+listed.length+'R</span></div><div class="lr-tabs lr-list-tabs" aria-label="レース一覧の表示">'+toggle('list','all','全レース',state.list==='all')+toggle('list','hits','的中一覧',state.list==='hits')+toggle('list','pending','結果待ち',state.list==='pending')+'</div>'+pages+(listed.length?raceCards(listed.slice(state.page*12,(state.page+1)*12)):'<p class="lr-empty">この条件に該当するレースはありません。</p>')+pages+'</section><section id="lr-performance" class="lr-section"><div class="lr-section-title"><h3>予想区分ごとの成績</h3></div><div class="lr-tabs lr-bet-tabs" aria-label="収支の券種">'+toggle('bet','three','3連単・各点100円',state.bet==='three')+toggle('bet','two','2連単・各点100円',state.bet==='two')+'</div><div class="lr-categories">'+categoryCards+'</div></section><details class="lr-howto"><summary>集計の見方</summary><p>結果取得済みのレースを集計。1着・2連単は掲載買い目の先頭1艇・2艇、3連単は3艇すべての一致です。2連単の買い目は区分内で重複を除きます。全区分は区分ごとの購入を合算し、区分をまたぐ同じ券は別々に各100円購入として計算します。予想なし・見送り・結果待ちは的中率の分母に含めません。</p><p>'+esc(summaryFoot)+'払戻未取得の的中Rは収支集計を保留します。</p></details><a class="lr-back-top" href="#lr-top" aria-label="結果速報の上へ">↑ 上へ</a></div>';
       const listTabs=host.querySelector('.lr-list-tabs');
       const jointButton=document.createElement('button');
       jointButton.type='button';jointButton.dataset.action='list';jointButton.dataset.value='joint';
       jointButton.textContent='両記者ともに的中（'+jointCount+'R）';
       jointButton.setAttribute('aria-pressed',String(state.list==='joint'));
       listTabs.insertBefore(jointButton,listTabs.lastElementChild);
+      if(specials?.size){
+        const button=document.createElement('button');
+        button.type='button';
+        button.textContent='特選レースのみ表示';
+        button.dataset.action='list';
+        button.dataset.value='special';
+        button.setAttribute('aria-pressed',String(state.list==='special'));
+        listTabs.append(button);
+      }
       if(state.list==='joint')host.querySelector('#lr-list h3').textContent='両記者ともに的中｜全国レース結果';
+      if(state.list==='special')host.querySelector('#lr-list h3').textContent='特選レース｜結果一覧';
       host.querySelectorAll('[data-filter]').forEach(el=>el.addEventListener('change',()=>{state[el.dataset.filter]=el.value;state.page=0;render();}));
       host.querySelectorAll('[data-action]').forEach(el=>el.addEventListener('click',()=>{
         const action=el.dataset.action,value=el.dataset.value;

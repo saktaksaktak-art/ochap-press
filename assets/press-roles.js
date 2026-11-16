@@ -11,6 +11,7 @@
   nav.setAttribute('aria-label', 'お茶P新聞の表示切り替え');
   const choices = [
     ['forecast', '予想'],
+    ['special', '特選レース'],
     ['consensus', 'お茶P Gemi兄　予想一致レース'],
     ['results', '結果速報'],
     ['versus', 'おちゃっぴー vs Gemini']
@@ -19,6 +20,7 @@
   for (const [key, text] of choices) {
     const btn = document.createElement('button');
     btn.type = 'button';
+    btn.dataset.view = key;
     btn.textContent = text;
     btn.setAttribute('aria-pressed', 'false');
     btn.addEventListener('click', () => switchView(key));
@@ -44,7 +46,10 @@
   const consensus = document.createElement('section');
   consensus.id = 'ochap-consensus-view';
   consensus.hidden = true;
-  panels.append(results, versus, consensus);
+  const special = document.createElement('section');
+  special.id = 'ochap-special-view';
+  special.hidden = true;
+  panels.append(results, versus, consensus, special);
 
   const h2 = (label) => {const x = document.createElement('h2');x.textContent = label;return x;};
   const p = (label, className = '') => {const x = document.createElement('p');x.textContent = label;if(className)x.className=className;return x;};
@@ -73,6 +78,44 @@
     const r = await fetch(url, {cache: 'no-store'});
     if (!r.ok) return null;
     return r.json();
+  }
+  const issueFor = date => window.__OCHAP_ISSUE_INDEX__?.issues?.find(issue=>issue.date===date);
+  const loadSpecial = (date,forecasts) => window.OchaPSpecial?.load(date,issueFor(date),forecasts);
+  const loadForecasts = date => window.OchaPHitReporters?.load(date).catch(()=>null) || Promise.resolve(null);
+  let newspaperSpecial;
+  function loadNewspaperSpecial(){
+    return newspaperSpecial ||= loadForecasts(issueDate).then(forecasts=>loadSpecial(issueDate,forecasts)).then(picks=>{
+      if(picks)window.OchaPSpecial.tagForecastCards(picks);
+      else newspaperSpecial=null;
+      return picks;
+    }).catch(()=>{newspaperSpecial=null;return null;});
+  }
+  loadNewspaperSpecial();
+  let specialRendered = false;
+  function showSpecial() {
+    if(specialRendered)return;
+    special.replaceChildren(h2('特選レース'),p('一致予想を確認しています。','public-note'));
+    loadNewspaperSpecial().then(picks=>{
+      if(special.hidden)return;
+      window.OchaPSpecial?.mount(special,picks,jumpToForecast);
+      specialRendered=!!picks;
+    });
+  }
+  function jumpToForecast(id) {
+    const target=document.getElementById(id);
+    if(!target)return false;
+    switchView('forecast');
+    const url=new URL(location.href);
+    url.hash=id;
+    history.replaceState(null,'',url.pathname+url.search+url.hash);
+    const venue=document.getElementById('venue'),race=document.getElementById('race'),query=document.getElementById('query');
+    if(query)query.value='';
+    if(venue&&target.dataset.venue)venue.value=target.dataset.venue;
+    if(race&&target.dataset.race)race.value=target.dataset.race;
+    (race||venue)?.dispatchEvent(new Event('input',{bubbles:true}));
+    document.getElementById('cardsBtn')?.click();
+    requestAnimationFrame(()=>target.scrollIntoView({block:'start'}));
+    return true;
   }
   function externalResultsLink() {
     if (!originalResultsUrl) return null;
@@ -140,7 +183,7 @@
     results.setAttribute('aria-busy','true');
     const [data, forecasts] = await Promise.all([
       fetchJson('./data/public-results/' + date + '.json').catch(() => null),
-      window.OchaPHitReporters?.load(date).catch(() => null) || null
+      loadForecasts(date)
     ]);
     if (serial !== resultsFetchSerial || results.hidden) return;
     const entries = data && data.schema_version === '1.0' && data.date === date && Array.isArray(data.races)
@@ -148,8 +191,10 @@
     results.setAttribute('aria-busy','false');
     const hasPublishedTickets=forecasts&&Object.values(forecasts).some(x=>x.ocha);
     if(window.OchaPLiveResults?.mount&&hasPublishedTickets){
+      const specials=date===issueDate?await loadNewspaperSpecial():null;
+      if(serial!==resultsFetchSerial||results.hidden)return;
       window.OchaPLiveResults.mount(results,{date,rows:entries,forecasts,
-        issue:window.__OCHAP_ISSUE_INDEX__?.issues?.find(x=>x.date===date),
+        issue:issueFor(date),specials,
         updatedAt:data?.checked_at_jst,onRefresh:showResults});
       return;
     }
@@ -618,14 +663,15 @@
   function switchView(which){
     for(const [key,button] of Object.entries(controls))button.setAttribute('aria-pressed',String(key===which));
     for(const node of originals)node.classList.toggle('ochap-public-original-hidden',which!=='forecast');
-    panels.hidden=which==='forecast';results.hidden=which!=='results';versus.hidden=which!=='versus';consensus.hidden=which!=='consensus';
+    panels.hidden=which==='forecast';results.hidden=which!=='results';versus.hidden=which!=='versus';consensus.hidden=which!=='consensus';special.hidden=which!=='special';
     if(which==='consensus')window.OchaPConsensus?.mount(consensus,issueDate);
+    if(which==='special')showSpecial();
     if(which==='results')showResults();if(which==='versus')showComparison();
     const current=new URL(location.href);if(which==='forecast')current.searchParams.delete('view');else current.searchParams.set('view',which);
     if(location.protocol==='http:' || location.protocol==='https:') history.replaceState(null,'',current.pathname+current.search+current.hash);
   }
   const requested=new URL(location.href).searchParams.get('view');
-  switchView(['versus','results','consensus'].includes(requested)?requested:'forecast');
+  switchView(['versus','results','consensus','special'].includes(requested)?requested:'forecast');
 })();
 
 
