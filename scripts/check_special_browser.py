@@ -52,10 +52,15 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
     page.get_by_role("button", name="結果速報", exact=True).click()
     expect(page.locator(".lr-special-grid .lr-category")).to_have_count(4)
     expect(page.locator(".lr-special-grid:visible .lr-category")).to_have_count(2)
-    assert page.locator("#lr-list").evaluate("(list) => list.compareDocumentPosition(document.querySelector('#lr-high')) === Node.DOCUMENT_POSITION_FOLLOWING")
+    expected_bulletin_order = ["performance", "high", "bulletin-summary", "lr-list"]
+    def bulletin_order():
+        return page.locator(".lr-dashboard > [data-drawer], .lr-dashboard > #lr-list").evaluate_all(
+            "(sections) => sections.map(section => section.dataset.drawer || section.id)")
+    assert bulletin_order() == expected_bulletin_order
     page.get_by_role("button", name="特選レースのみ表示").click()
     expect(page.locator("#lr-list .lr-race")).to_have_count(12)
     expect(page.locator("#lr-list h3")).to_have_text("特選レース｜結果一覧")
+    assert bulletin_order() == expected_bulletin_order
     page.locator('details[data-drawer=high] > summary').click()
     expect(page.locator(".lr-compact table")).to_be_visible()
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
@@ -89,6 +94,9 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         dialog.get_by_role("button", name="結果速報", exact=True).click()
         expect(page.locator(".lr-special-grid:visible")).to_be_visible()
         page.locator("#ochap-jump-open").click()
+        expect(dialog.locator(".ochap-jump-buttons").first.locator("button")).to_have_text([
+            "ページの先頭", "記者・区分別の成績", "高配当の的中", "速報の集計・平買い収支",
+            "レース結果一覧", "特選レースの成績", "集計の見方"])
         dialog.get_by_role("button", name="特選レースの成績", exact=True).click()
         expect(page.locator(".lr-section:has(.lr-special-grid)")).to_be_focused()
         page.get_by_role("button", name="予想", exact=True).click()
