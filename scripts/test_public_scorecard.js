@@ -60,12 +60,16 @@ const forecasts=Object.fromEntries(common.races.map(r=>[r.race_id,{
 }]));
 const bulletin=readBulletin(feed,date),rows=liveRecords(bulletin,forecasts,issue,date);
 const resultRaces=attachLiveResults(common,feed,issue);
+// A later publication receipt can legitimately exclude Gemi without changing any frozen tickets.
+const gemiObserved=Date.parse(issue.gemi_first_publication_confirmed_at_jst||issue.gemi_publication_timing_checked_at||issue.publication_timing_checked_at);
+assert.ok(Number.isFinite(gemiObserved));
 assert.ok(rows.length>=102);
 for(const author of ['ocha','gemi']){
  const s=liveScore(rows,author,'all');
- assert.equal(s.n,rows.length);
+ const eligible=rows.filter(r=>author==='ocha'||gemiObserved<Date.parse(forecasts['v'+r.venue_code+'-r'+r.race_no].meta.closing_at));
+ assert.equal(s.n,eligible.length);
  const manual={stake:0,payout:0,hits:0};
- for(const r of rows){
+ for(const r of eligible){
   const tickets=Object.values(r.reporters[author]).flat();
   const hits=tickets.filter(t=>t===r.order.join('-')).length;
   const refunds=tickets.filter(t=>t.split('-').some(n=>r.refund_boats?.includes(Number(n)))).length;
@@ -74,11 +78,15 @@ for(const author of ['ocha','gemi']){
   manual.hits+=Number(hits>0);
  }
  assert.equal(s.stake,manual.stake);
- assert.equal(s.gross,manual.payout);
+ assert.equal(s.gross,eligible.length?manual.payout:null);
  assert.equal(s.three,manual.hits);
- assert.equal(s.profit,manual.payout-manual.stake);
+ assert.equal(s.profit,eligible.length?manual.payout-manual.stake:null);
 }
-for(const k of [2,3])assert.ok(Number.isInteger(liveMetrics(resultRaces,k).profit_yen));
+for(const k of [2,3]){
+ const actual=liveMetrics(resultRaces,k).profit_yen;
+ if(common.races.every(r=>!r.pair_timing_eligible&&gemiObserved>=Date.parse(r.deadline)))assert.equal(actual,null);
+ else assert.ok(Number.isInteger(actual));
+}
 const late={...issue,gemi_first_publication_confirmed_at_jst:'2026-11-16T23:59:00+09:00'};
 assert.ok(liveRecords(bulletin,forecasts,late,date).every(r=>!r.reporters.gemi&&r.reporters.ocha));
 const postDeadlineIds=common.races.map(r=>r.race_id);

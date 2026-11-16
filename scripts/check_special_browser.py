@@ -3,6 +3,8 @@
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+import re
+import json
 from threading import Thread
 from playwright.sync_api import expect, sync_playwright
 
@@ -18,6 +20,17 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
     page.set_default_timeout(12000)
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
+
+    # Exercise both UI states without changing production receipt evidence. The live
+    # 11/16 index may record a post-close observation, which correctly hides picks.
+    page.goto(url + "2026-11-16")
+    expect(page.locator("#v18-r1")).to_be_visible()
+    expect(page.locator('script[src*="20261116-editorial-clean"]')).to_have_count(1)
+    expect(page.locator('article details[data-rich-key$=":sources"]')).to_have_count(0)
+    index_fixture = json.loads((ROOT / "data/issue-index.json").read_text())
+    first_issue = next(issue for issue in index_fixture["issues"] if issue["date"] == "2026-11-16")
+    first_issue.pop("gemi_first_publication_confirmed_at_jst", None)
+    page.route("**/data/issue-index.json", lambda route: route.fulfill(json=index_fixture))
 
     page.goto(url + "2026-11-16&view=special")
     cards = page.locator(".special-card")
@@ -58,9 +71,9 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         "(t) => t.getBoundingClientRect().width < 700")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     page.get_by_role("button", name="買い目一致", exact=True).click()
-    expect(page.locator("#ochap-consensus-view .public-number").filter(has_text="円")).to_be_visible()
+    expect(page.locator("#ochap-consensus-view .public-number").filter(has_text=re.compile(r"^(?:[+−-]?[\d,]+円|保留)$"))).to_be_visible()
     page.get_by_role("button", name="2連単", exact=True).click()
-    expect(page.locator("#ochap-consensus-view .public-number").filter(has_text="円")).to_be_visible()
+    expect(page.locator("#ochap-consensus-view .public-number").filter(has_text=re.compile(r"^(?:[+−-]?[\d,]+円|保留)$"))).to_be_visible()
 
     if page.locator("script[src*=reader-jump]").count():
         expect(page.locator("body")).to_have_css("background-color", "rgb(247, 250, 255)")
@@ -95,14 +108,12 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         expect(page.locator('article[id^="v"]:visible .ticket .b6').first).to_have_css("background-color", "rgb(37, 133, 91)")
         expect(page.locator('#ochap-issue-date')).to_be_visible()
         if page.locator('link[href*="navy-reader.css?v=2"]').count():
-            source_summary = page.locator('article:visible details[data-rich-key$=":sources"] > summary').first
-            expect(source_summary).to_have_text("05 データの母数・期間・取得日")
-            expect(source_summary).to_be_hidden()
+            expect(page.locator('article details[data-rich-key$=":sources"]')).to_have_count(0)
+            expect(page.locator('#top', has_text="締切前参考M0・対象")).to_have_count(0)
+            expect(page.locator('footer', has_text="PDF準備中")).to_have_count(0)
             expect(page.locator('article:visible details[data-rich-key$=":st"] > summary').first).to_be_visible()
             expect(page.locator('article:visible details[data-rich-key$=":notes"] > summary').first).to_be_visible()
-            page.emulate_media(media="print")
-            expect(source_summary).not_to_have_css("display", "none")
-            page.emulate_media(media="screen")
+            assert page.locator('script:not([src])').evaluate_all("scripts => scripts.every(s => !s.textContent.includes('forecast_sha256'))")
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
         expect(page.locator('.compact-forecast:visible details[data-rich-key$=":st"]').first).not_to_have_attribute("open", "")
         page.locator('.compact-forecast:visible details[data-rich-key$=":st"] > summary').first.click()
@@ -111,6 +122,15 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         gemi.click()
         pane=page.locator(".ochap-gemi-pane:visible").first
         expect(pane.locator(".compact-gemi-detail")).to_have_count(2)
+        g_race=page.locator('article[data-ochap-reporter-active="gemi"]:visible').first
+        expect(g_race.locator('.compact-docket > summary')).to_be_visible()
+        docket=g_race.locator('.compact-docket')
+        if docket.get_attribute('open') is None:
+            docket.locator(':scope > summary').click()
+        expect(docket.get_by_text('01 出走表', exact=True)).to_be_visible()
+        expect(docket.get_by_text('02 コースデータ・決まり手', exact=True)).to_be_visible()
+        expect(docket.locator('table').first).to_be_visible()
+        expect(pane.get_by_text('共通入力SHA-256', exact=False)).to_have_count(0)
         assert pane.locator(".picks").evaluate("""p => {
           const labels=[...p.querySelectorAll('h3')].map(x=>x.textContent.trim());
           return labels.join('|')==='本線|舟券ナビ|逆張り';
@@ -139,6 +159,8 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         note = first.locator('details[data-rich-key$=":notes"] .rich-fragment')
         expect(note.get_by_text("全6艇の比較", exact=True)).to_be_visible()
         expect(note.get_by_text("朝刊の凍結原本と保存入力", exact=False)).to_have_count(0)
+        expect(note.get_by_text("原本の役割", exact=False)).to_have_count(0)
+        expect(note.get_by_text("実際の踏込みを確定する値ではありません。", exact=False)).to_have_count(0)
 
     if page.locator("script[src*=reader-registration-search]").count():
         page.goto(url + "2026-11-16")

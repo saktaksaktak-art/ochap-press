@@ -13,8 +13,9 @@
     const query=new URL(location.href).searchParams.get('date');
     const date=manifest.issues.some(x=>x.date===query)?query:manifest.default_date;
     const issue=manifest.issues.find(x=>x.date===date);
-    if(!issue || !/^[a-zA-Z0-9._/-]+$/.test(issue.path) || issue.path.startsWith('/'))throw new Error('選択日の新聞が見つかりません');
-    const result=await fetch('./'+issue.path,{cache:'no-store'});
+    const issuePath=issue?.reader_path||issue?.path;
+    if(!issuePath || !/^[a-zA-Z0-9._/-]+$/.test(issuePath) || issuePath.startsWith('/') || issuePath.split('/').includes('..'))throw new Error('選択日の新聞が見つかりません');
+    const result=await fetch('./'+issuePath,{cache:'no-store'});
     if(!result.ok)throw new Error('新聞HTMLを取得できません（HTTP '+result.status+'）');
     let source;
     if(issue.compression==='base64gzip'){
@@ -54,9 +55,11 @@
     });
     // Historical newspaper HTML can bundle its own Gemini reporter assets.
     // Inject only assets missing from the source; otherwise tabs initialize twice.
+    const cleanGemi = date >= '2026-11-16';
+    if(cleanGemi && issue.gemi_tabs)source=source.replace(/<script\b[^>]*\bsrc\s*=\s*["'][^"']*gemi-reporter\.js(?:\?[^"']*)?["'][^>]*>\s*<\/script>/gi,'');
     const bundledGemiScript=/<script\b[^>]*\bsrc\s*=\s*["'][^"']*gemi-reporter\.js(?:\?[^"']*)?["']/i.test(source);
     const bundledGemiStyle=/<link\b[^>]*\bhref\s*=\s*["'][^"']*gemi-reporter\.css(?:\?[^"']*)?["']/i.test(source);
-    const gemiScript = /^assets\/(?:\d{8}\/)?gemi-reporter\.js$/.test(issue.gemi_script || '')
+    const gemiScript = !cleanGemi && /^assets\/(?:\d{8}\/)?gemi-reporter\.js$/.test(issue.gemi_script || '')
       ? issue.gemi_script : 'assets/gemi-reporter.js';
     const headTags='<link rel="stylesheet" href="./assets/date-nav.css">'+
       '<link rel="stylesheet" href="./assets/press-roles.css?v=5">'+
@@ -69,9 +72,7 @@
       '<link rel="stylesheet" href="./assets/compact-reader.css?v=1">'+
       '<link rel="stylesheet" href="./assets/favorite-venues.css?v=1">'+
       '<script src="./assets/reader-registration-search.js?v=1"></'+'script>';
-    const encoded=JSON.stringify(manifest).replace(/</g,'\\u003c');
-    const setGlobals='<script>window.__OCHAP_ISSUE_INDEX__='+encoded+';window.__OCHAP_SELECTED_DATE__='+JSON.stringify(date)+';</'+'script>';
-    const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./'+gemiScript+'?v=20261105-tables-v2"></'+'script>':'')+
+    const extraScripts='<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./'+gemiScript+(cleanGemi?'?v=20261116-editorial-clean':'?v=20261105-tables-v2')+'"></'+'script>':'')+
       '<script src="./assets/public-scorecard.js?v=5"></'+'script>'+
       '<script src="./assets/hit-reporters.js?v=9"></'+'script>'+
       '<script src="./assets/live-results.js?v=4"></'+'script>'+
@@ -85,7 +86,11 @@
       '<script src="./assets/reader-course-copy.js?v=1"></'+'script>';
     source=source.replace(/<\/head>/i,headTags+'</head>');
     source=source.replace(/<\/body>/i,extraScripts+'</'+'body>');
-    document.open();document.write(source);document.close();
+    // Keep publication evidence in its JSON response and runtime state, never in a DOM script element.
+    document.open();
+    window.__OCHAP_ISSUE_INDEX__=manifest;
+    window.__OCHAP_SELECTED_DATE__=date;
+    document.write(source);document.close();
   }catch(err){showError(err.message||String(err));}
 })();
 </script>

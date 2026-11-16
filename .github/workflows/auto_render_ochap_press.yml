@@ -61,18 +61,19 @@ jobs:
             EXPECTED_INPUT="$(jq -er '.input_sha256 | select(test("^[0-9a-f]{64}$"))' "$MANIFEST")"
             printf '%s  %s\n' "$EXPECTED_PRED" "$PRED" "$EXPECTED_INPUT" "$INPUT" | sha256sum --check --status
             jq -e --arg day "$DATE" --arg input "$EXPECTED_INPUT" '
-              .date == $day and .mode == "M0" and .reporter == "おちゃっぴー" and
+              .date == $day and .mode == "M0" and (.reporter == "おちゃっぴー" or .reporter == "ocha") and
               .instruction_version == "ochap.prediction.approved.v7" and
               .instruction_sha256 == "821033172f86c6d359309b9b25dbb2e13f90635060a2b845e752726b04b40b02" and
               .shared_input_sha256 == $input and
               (.frozen_at_jst | type == "string") and (.races | length > 0)
             ' "$PRED" >/dev/null
-            jq -e --arg day "$DATE" '.date == $day and (.races | length > 0)' "$INPUT" >/dev/null
+            jq -e --arg day "$DATE" '(.date // .target_date) == $day and (.date == null or .target_date == null or .date == .target_date) and (.races | length > 0)' "$INPUT" >/dev/null
             [[ ! -e "archives/${DATE}.html" && ! -e "archives/${DATE}.html.gz.b64.txt" ]]
             OCHAP_PREDICTION_JSON="$PRED" OCHAP_INPUT_JSON="$INPUT" \
               node scripts/render_ochap_frozen.mjs --diagrams
             test -s "archives/${DATE}.html"
             test -s "archives/${DATE}.html.gz.b64.txt"
+            python3 scripts/check_public_editorial.py --date "$DATE" --html "archives/${DATE}.html.gz.b64.txt"
             git add -- "archives/${DATE}.html.gz.b64.txt" data/issue-index.json \
               "data/issue-source-${DATE}.json" data/editorial/"${DATE}"-*.json.gz.b64.txt
           done
