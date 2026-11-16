@@ -38,3 +38,53 @@ assert.equal(score(nov.records,'gemi','all').n,158,'Late Gemi 8 after-close and 
 assert.equal(nov.not_formal_m0,true);
 assert.equal(old.not_formal_bc,true);
 console.log('PASS: old paper all/main/reverse/nav 100-yen math, dayparts, exclusions and reporter eligibility');
+
+// The production 11/16 bulletin and immutable shared-ticket snapshot also
+// exercise the current reader without requiring a separate scorecard JSON.
+context.URL=URL;
+for(const file of ['hit-reporters','consensus']){
+ vm.runInNewContext(fs.readFileSync('assets/'+file+'.js','utf8'),context);
+}
+const {readBulletin,attachLiveResults,liveMetrics}=context.window.OchaPConsensus;
+const {liveRecords,liveScore}=context.window.OchaPScorecard;
+const date='2026-11-16';
+const feed=JSON.parse(fs.readFileSync('data/public-results/'+date+'.json'));
+const common=JSON.parse(fs.readFileSync('data/consensus/'+date+'.json'));
+const manifest=JSON.parse(fs.readFileSync('data/issue-index.json'));
+const issue=manifest.issues.find(x=>x.date===date);
+const gemi=JSON.parse(fs.readFileSync('data/gemi/'+date+'.json'));
+const forecasts=Object.fromEntries(common.races.map(r=>[r.race_id,{
+ ocha:r.reporters.ocha.categories,gemi:r.reporters.gemi.categories,
+ gemiTiming:{freeze_at:gemi.races[r.race_id].freeze_at,closing_at:gemi.races[r.race_id].closing_at},
+ meta:{closing_at:r.deadline,venue:r.venue,race_no:r.race_no}
+}]));
+const bulletin=readBulletin(feed,date),rows=liveRecords(bulletin,forecasts,issue,date);
+const resultRaces=attachLiveResults(common,feed,issue);
+assert.ok(rows.length>=102);
+for(const author of ['ocha','gemi']){
+ const s=liveScore(rows,author,'all');
+ assert.equal(s.n,rows.length);
+ const manual={stake:0,payout:0,hits:0};
+ for(const r of rows){
+  const tickets=Object.values(r.reporters[author]).flat();
+  const hits=tickets.filter(t=>t===r.order.join('-')).length;
+  const refunds=tickets.filter(t=>t.split('-').some(n=>r.refund_boats?.includes(Number(n)))).length;
+  manual.stake+=100*tickets.length;
+  manual.payout+=(hits?r.trifecta_payout_yen*hits:0)+100*refunds;
+  manual.hits+=Number(hits>0);
+ }
+ assert.equal(s.stake,manual.stake);
+ assert.equal(s.gross,manual.payout);
+ assert.equal(s.three,manual.hits);
+ assert.equal(s.profit,manual.payout-manual.stake);
+}
+for(const k of [2,3])assert.ok(Number.isInteger(liveMetrics(resultRaces,k).profit_yen));
+const late={...issue,gemi_first_publication_confirmed_at_jst:'2026-11-16T23:59:00+09:00'};
+assert.ok(liveRecords(bulletin,forecasts,late,date).every(r=>!r.reporters.gemi&&r.reporters.ocha));
+const postDeadlineIds=common.races.map(r=>r.race_id);
+assert.equal(liveRecords(bulletin,forecasts,{...issue,post_deadline_reference_races:postDeadlineIds},date).length,0);
+assert.equal(liveRecords(bulletin,forecasts,{...issue,date:'2026-11-15'},date).length,0);
+const hit=rows.find(r=>r.reporters.ocha.main.includes(r.order.join('-')));
+const unsettled=liveScore([{...hit,trifecta_payout_yen:null}],'ocha','main');
+assert.equal(unsettled.three,1);assert.equal(unsettled.profit,null);
+console.log('PASS: production 11/16 reference scorecards and agreement, both journalists, deadlines, missing payouts and excluded races');

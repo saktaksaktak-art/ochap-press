@@ -68,7 +68,6 @@
     return (issueDate === currentDefault && today >= issueDate) ? today : issueDate;
   }
   let performance = null;
-  let performanceLoaded = false;
 
   async function fetchJson(url) {
     const r = await fetch(url, {cache: 'no-store'});
@@ -438,6 +437,7 @@
   }
   function renderComparison(){
     versus.replaceChildren(h2('お茶P記者 vs Gemi兄記者'),p('同一M0入力・同一レース・締切前凍結の両記者予想だけを比較。事後検証は対象外。','public-note'));
+    if(comparison?.host)versus.prepend(comparison.host);
     const control=document.createElement('div');control.className='public-controls';
     control.append(
       makeSelect(periodNames,chosenPeriod,v=>{chosenPeriod=v;renderComparison()},'集計期間'),
@@ -566,18 +566,55 @@
     definitions.append(p('着順だけからA〜Dを決めません。記者の得意不得意は公開可能な検証済み集計だけで示します。','public-note'));
     versus.append(definitions);
   }
-  async function showComparison(){
-    if(!performanceLoaded){performance=await fetchJson('./data/public-performance.json').catch(()=>null);performanceLoaded=true;}
-    if(!performance || performance.schema_version!=='1.0'||!Array.isArray(performance.records))performance={records:[]};
-    if (!performance.records.length && window.OchaPScorecard?.mount) {
-      const scorecard = document.createElement('div');
-      scorecard.className = 'ochap-scorecard-mount';
-      versus.replaceChildren(h2('記者別成績・比較'), scorecard);
-      window.OchaPScorecard.mount(scorecard, resultsDate());
-      return;
+  let comparison;
+  async function refreshComparison(state){
+    if(state.archived||state.loading)return;
+    state.loading=true;
+    const date=state.date;
+    try {
+      const [data,forecasts]=await Promise.all([
+        fetchJson('./data/public-results/'+date+'.json'),
+        window.OchaPHitReporters?.load(date)
+      ]);
+      if(comparison!==state||versus.hidden)return;
+      const bulletin=window.OchaPConsensus?.readBulletin?.(data,date);
+      if(!bulletin){
+        if(!state.signature)state.host.replaceChildren(p('この日の照合済み速報はまだありません。','public-status'));
+        return;
+      }
+      const issue=window.__OCHAP_ISSUE_INDEX__?.issues?.find(x=>x.date===date);
+      const rows=window.OchaPScorecard.liveRecords(bulletin,forecasts,issue,date);
+      if(bulletin.checkedAt<(state.checkedAt??-Infinity)||(state.count&&!rows.length))return;
+      const signature=JSON.stringify([bulletin.checkedAt,rows]);
+      if(signature===state.signature)return;
+      window.OchaPScorecard.renderLive(state.host,date,rows,bulletin.checkedAt);
+      Object.assign(state,{signature,checkedAt:bulletin.checkedAt,count:rows.length});
+    } catch (_) {
+      if(comparison===state&&!state.signature&&!versus.hidden)state.host.replaceChildren(p('速報を取得できませんでした。次の更新で再試行します。','public-status'));
+    } finally {
+      state.loading=false;
     }
-    renderComparison();
   }
+  async function showComparison(){
+    // Compare the selected edition, even if the independent results tab has rolled over.
+    if(comparison){await refreshComparison(comparison);return;}
+    const host=document.createElement('div');
+    host.className='ochap-scorecard-mount';
+    const state={date:issueDate,host,loading:true};
+    comparison=state;
+    versus.replaceChildren(h2('記者別成績・比較'),host);
+    const [data,archived]=await Promise.all([
+      fetchJson('./data/public-performance.json').catch(()=>null),
+      window.OchaPScorecard?.mount(host,issueDate,{deferEmpty:true})
+    ]);
+    performance=data?.schema_version==='1.0'&&Array.isArray(data.records)?data:{records:[]};
+    state.archived=archived;state.loading=false;
+    if(performance.records.length)renderComparison();
+    if(!archived&&!versus.hidden)await refreshComparison(state);
+  }
+  setInterval(()=>{
+    if(comparison?.date===resultsDate()&&!versus.hidden&&document.visibilityState==='visible')refreshComparison(comparison);
+  },90000);
   function switchView(which){
     for(const [key,button] of Object.entries(controls))button.setAttribute('aria-pressed',String(key===which));
     for(const node of originals)node.classList.toggle('ochap-public-original-hidden',which!=='forecast');
