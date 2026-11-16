@@ -4,6 +4,7 @@ from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 import json
 from pathlib import Path
 from threading import Thread
+import re
 from playwright.sync_api import expect, sync_playwright
 
 root = Path(__file__).resolve().parents[1]
@@ -78,5 +79,13 @@ with ThreadingHTTPServer(('127.0.0.1',0), partial(SimpleHTTPRequestHandler,direc
                       t.getBoundingClientRect().width<=t.parentElement.clientWidth+1 &&
                       document.documentElement.scrollWidth<=innerWidth+1;
                 }""")
+            st_race = page.locator('#v18-r1')
+            st_race.get_by_text('ST・スリット',exact=True).filter(visible=True).last.click()
+            note = st_race.locator('.ochap-st-supplement-note')
+            expect(note).to_contain_text('締切前に取得した参考データ', timeout=15000)
+            st_table = note.locator('xpath=following-sibling::*[1]').locator('table')
+            expect(st_table.locator('tbody tr')).to_have_count(6)
+            assert st_table.locator('[data-ochap-st-added]').count() > 0
+            assert all(re.fullmatch(r'\d+\.\d', v) for v in st_table.locator('[data-ochap-st-added]').all_text_contents())
             page.close()
         browser.close()
