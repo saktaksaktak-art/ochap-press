@@ -64,12 +64,13 @@
       }
       const parsed = normalize(bets);
       if (parsed) {
-        const head=copy.querySelector('.lead')?.textContent.match(/◎\s*([1-6])/);
+        const lead=copy.querySelector('.lead');
+        const head=lead?.textContent.match(/◎\s*([1-6])/);
         if(head)parsed.main_pick=head[1];
         ocha[article.id] = article.dataset.postdeadlineReference==='true' ? null : parsed;
         const heading=article.querySelector('.race-head h2')?.textContent || '';
         const race=heading.match(/(.+?)\s+(\d+)R.*締切\s*(\d{1,2}:\d{2})/);
-        if(race)metadata[article.id]={venue:race[1].replace(/^注目\s*/,''),race_no:Number(race[2]),closing_time:race[3],session:article.dataset.session||null,session_verified:article.dataset.sessionVerified==='true'};
+        if(race)metadata[article.id]={venue:race[1].replace(/^注目\s*/,''),race_no:Number(race[2]),closing_time:race[3],closing_at:article.dataset.deadline,session:article.dataset.session||null,session_verified:article.dataset.sessionVerified==='true'};
       }
     }
   }
@@ -106,7 +107,9 @@
           if ((issue.gemi_publication_pending === true && !receiptVerified) || rec.status !== 'published' || rec.retrospective === true || rec.frozen_before_race_closing === false || String(rec.m0_status||'').startsWith('POST_DEADLINE')) continue;
           if(firstPublication && (!receiptVerified || !rec.closing_at || !Number.isFinite(Date.parse(rec.closing_at)) || Date.parse(rec.closing_at)<=publishedAt)) continue;
           const bets = normalize({...rec.bets,main_pick:rec.marks?.main});
-          if (bets) (forecasts[id] ||= {}).gemi = bets;
+          if (bets) Object.assign(forecasts[id] ||= {}, {
+            gemi:bets,gemiTiming:{closing_at:rec.closing_at,freeze_at:rec.freeze_at}
+          });
         }
       } catch (_) { /* Missing input stays unknown rather than an attributed miss. */ }
       return forecasts;
