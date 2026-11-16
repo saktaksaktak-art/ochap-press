@@ -12,7 +12,7 @@ check() {
     return 1
   fi
 }
-check "index.html" "01aa158f4a8c34f702c3538fe58577b8c0c4a7d1"
+check "index.html" "05f46889f9aa6a24b443faa7f9687e4e05f50c6e"
 check "scripts/render_ochap_frozen.mjs" "a1241ffaf1617e396a4b8601f9544d4a1438056f"
 if grep -Eq 'OchaPReaderPresentation\.(cleanMarkup|install)|readerPresentation\.cleanMarkup' index.html scripts/render_ochap_frozen.mjs; then
   echo "::error::Unapproved HTML filtering is active"
