@@ -1,4 +1,4 @@
-/* Shared tickets come from frozen forecasts. Live results supply reference scoring. */
+/* Shared forecast tickets. Public data is built from frozen originals, never results. */
 (() => {
   'use strict';
   const element=(tag,text,cls)=>{const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n;};
@@ -43,74 +43,11 @@
   }
   function resultStatus(r,kind){
     if(!r.result)return '結果待ち';
-    if(!r.pair_timing_eligible&&!r.reference_timing_eligible)return '比較対象外';
+    if(!r.pair_timing_eligible)return '比較対象外';
     if(r.result.excluded_reason)return '参考';
     const ts=r[ticketKey(kind)];
     if(ts.every(t=>t.split('-').some(b=>r.result.refunded_boats.includes(Number(b)))))return '返還';
     return ts.includes(r.result.order.slice(0,kind).join('-'))?'的中':'不的中';
-  }
-  function readTime(value){
-    return typeof value==='string'&&/(Z|[+-]\d{2}:\d{2})$/.test(value)?Date.parse(value):NaN;
-  }
-  function referenceCutoff(data,issue){
-    if(issue?.date!==data.date||data.edition!=='M0'||data.input_versions_differ||
-      !/^[a-f0-9]{64}$/.test(data.source_hashes?.ocha)||!/^[a-f0-9]{64}$/.test(data.source_hashes?.gemi)||
-      issue.forecast_sha256!==data.source_hashes?.ocha||
-      issue.gemi_original_sha256!==data.source_hashes?.gemi||
-      !/^[a-f0-9]{64}$/.test(data.shared_candidate_sha256)||
-      issue.reporters?.ocha?.input_sha256!==data.shared_candidate_sha256||
-      issue.reporters?.gemi?.input_sha256!==data.shared_candidate_sha256)return NaN;
-    return Math.max(readTime(data.snapshot_at_jst),readTime(issue.publication_timing_checked_at),
-      readTime(issue.reporters.ocha.frozen_at_jst),readTime(issue.reporters.gemi.recorded_freeze_at_jst));
-  }
-  const boat=n=>Number.isInteger(n)&&n>=1&&n<=6;
-  const raceKey=r=>r.venue_code+':'+r.race_no;
-  function attachLiveResults(data,feed,issue){
-    if(feed?.date!==data.date||feed.schema_version!=='1.0'||!Array.isArray(feed.races))return null;
-    const cutoff=referenceCutoff(data,issue);
-    const checkedAt=readTime(feed.checked_at_jst);
-    const results=new Map();
-    for(const row of feed.races){
-      if(!Number.isInteger(row?.venue_code)||!Number.isInteger(row.race_no)||
-        !Array.isArray(row.order)||row.order.length!==3||!row.order.every(boat)||new Set(row.order).size!==3)continue;
-      const key=raceKey(row);
-      // A duplicate result key is ambiguous, even if either row looks usable.
-      results.set(key,results.has(key)?null:row);
-    }
-    return data.races.map(r=>{
-      if(r.result)return r;
-      const deadline=readTime(r.deadline);
-      const eligible=!r.input_versions_differ&&cutoff<deadline;
-      const result=results.get(raceKey(r));
-      if(!result||!(deadline<checkedAt)||(!r.pair_timing_eligible&&!eligible))return r;
-      const refunds=result.refund_boats;
-      const refundKnown=Array.isArray(refunds)&&refunds.every(boat);
-      return {...r,reference_timing_eligible:eligible,result:{
-        ...result,refund_known:refundKnown,refunded_boats:refundKnown?refunds:[]
-      }};
-    });
-  }
-  function liveMetrics(races,kind){
-    let n=0,hits=0,stake=0,payout=0,points=0,financeRaces=0,missingPayout=0,refundUnknown=0;
-    for(const race of races){
-      const result=race.result,tickets=[...new Set(race[ticketKey(kind)])];
-      if(!tickets.length||!result||result.excluded_reason||
-        (!race.pair_timing_eligible&&!race.reference_timing_eligible))continue;
-      const refunds=result.refunded_boats;
-      if(result.order.some(n=>refunds.includes(n))){missingPayout++;continue;}
-      const hit=tickets.includes(result.order.slice(0,kind).join('-'));
-      if(!refunds.length){n++;if(hit)hits++;}
-      const amount=result[ticketKey(kind)+'_payout_yen'];
-      if(hit&&(!Number.isInteger(amount)||amount<100)){missingPayout++;continue;}
-      const refunded=tickets.filter(t=>t.split('-').some(n=>refunds.includes(Number(n)))).length;
-      if(!result.refund_known)refundUnknown++;
-      financeRaces++;
-      points+=tickets.length;
-      stake+=tickets.length*100;
-      payout+=(hit?amount:0)+refunded*100;
-    }
-    return {n,hits,hit_rate_pct:n?100*hits/n:null,finance_races:financeRaces,ticket_points:points,
-      return_rate_pct:stake?100*payout/stake:null,profit_yen:stake?payout-stake:null,missingPayout,refundUnknown};
   }
   function table(headers,rows){
     const wrap=element('div',undefined,'public-table-wrap'),t=element('table'),head=element('thead'),tr=element('tr');
@@ -120,41 +57,25 @@
     t.append(body);wrap.append(t);return wrap;
   }
   const cache=new Map();
-  const mounting=new WeakMap();
-  const getJSON=path=>fetch(path,{cache:'no-store'}).then(r=>r.ok?r.json():null);
   async function mount(root,date){
-    const request={date};
-    if(mounting.get(root)?.date===date)return;
-    mounting.set(root,request);
-    try{await renderDate(root,date,request);}finally{
-      if(mounting.get(root)===request)mounting.delete(root);
-    }
-  }
-  async function renderDate(root,date,request){
+    if(root.dataset.consensusDate===date)return;
+    root.dataset.consensusDate=date;
     root.replaceChildren(element('h2','お茶P Gemi兄　予想一致レース'),element('p','読み込み中…'));
     let data;
     try{
-      if(!cache.has(date))cache.set(date,getJSON('./data/consensus/'+date+'.json'));
+      if(!cache.has(date))cache.set(date,fetch('./data/consensus/'+date+'.json',{cache:'no-store'}).then(r=>r.ok?r.json():null));
       data=await cache.get(date);
       if(!data||data.schema_version!=='ochap.public.consensus.v1'||data.date!==date||!Array.isArray(data.races))throw Error();
     }catch(_){
-      cache.delete(date);
-      if(mounting.get(root)===request)root.replaceChildren(element('h2','お茶P Gemi兄　予想一致レース'),element('p','この日の一致予想は未集計です。'));
-      return;
+      root.replaceChildren(element('h2','お茶P Gemi兄　予想一致レース'),element('p','この日の一致予想は未集計です。'));
+      root.dataset.consensusDate='';cache.delete(date);return;
     }
-    const emptySnapshot=data.reference_only&&data.metrics['2'].n===0&&data.metrics['3'].n===0&&
-      data.races.every(r=>!r.result);
-    const [forecasts,feed,manifest]=await Promise.all([
-      Promise.resolve().then(()=>window.OchaPHitReporters?.load(date)).catch(()=>null),
-      emptySnapshot?getJSON('./data/public-results/'+date+'.json').catch(()=>null):null,
-      emptySnapshot?getJSON('./data/issue-index.json').catch(()=>null):null
-    ]);
-    if(mounting.get(root)!==request)return;
-    const live=emptySnapshot?attachLiveResults(data,feed,manifest?.issues?.find(x=>x.date===date)):null;
-    const races=live||data.races;
+    let forecasts;
+    try{forecasts=await window.OchaPHitReporters?.load(date);}catch(_){/* Explicit source categories remain usable. */}
+    if(root.dataset.consensusDate!==date)return;
     let kind=new URL(location.href).searchParams.get('bet')==='2'?2:3,venue='',status='',page=0;
     function render(){
-      const m=live?liveMetrics(races,kind):data.metrics[String(kind)],key=ticketKey(kind),available=races.filter(r=>r[key].length);
+      const m=data.metrics[String(kind)],key=ticketKey(kind),available=data.races.filter(r=>r[key].length);
       root.replaceChildren(element('h2','お茶P Gemi兄　予想一致レース'));
       const tabs=element('div',undefined,'public-controls consensus-kind');
       [2,3].forEach(k=>{const b=element('button',label[k]);b.type='button';b.setAttribute('aria-pressed',String(kind===k));b.onclick=()=>{kind=k;page=0;const u=new URL(location.href);u.searchParams.set('bet',String(k));history.replaceState(null,'',u.pathname+u.search+u.hash);render();};tabs.append(b);});root.append(tabs);
@@ -162,11 +83,8 @@
       const summary=element('div',undefined,'public-grid');
       [['一致レース',available.length+'R'],['共通券的中',m.hits+'/'+m.n+'R（'+pct(m.hit_rate_pct)+'）'],['100円平買い回収率',pct(m.return_rate_pct)],['平買い収支',(m.profit_yen>0?'+':'')+yen(m.profit_yen)]].forEach(([title,value])=>{const c=element('div',undefined,'public-card');c.append(element('span',title),element('strong',value,'public-number'));summary.append(c);});root.append(summary);
       const snapshot=new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',month:'numeric',day:'numeric',hour:'2-digit',minute:'2-digit',hourCycle:'h23'}).format(new Date(data.snapshot_at_jst));
-      const liveNote=m.finance_races||m.missingPayout?'結果速報の参考集計。収支は'+m.finance_races+'R・'+m.ticket_points+'点。'+
-        (m.missingPayout?'払戻確認待ち '+m.missingPayout+'R。':'')+
-        (m.refundUnknown?'返還未確認 '+m.refundUnknown+'Rは返還額を含みません。':''):'照合できた結果を受信すると、速報収支を表示します。';
-      root.append(element('p',live?liveNote:m.n===0?'成績は結果確定後に集計します。':'成績は'+snapshot+'時点の参考集計。的中率は通常レース、収支は事故・返還分を含む'+m.finance_races+'R・'+m.ticket_points+'点。一致して外れたRも含みます。','public-note'));
-      if(!live&&m.n>0){const evaluation=element('div',undefined,'public-card');evaluation.append(element('h3','一致予想は有効か'));
+      root.append(element('p',m.n===0?'成績は結果確定後に集計します。':'成績は'+snapshot+'時点の参考集計。的中率は通常レース、収支は事故・返還分を含む'+m.finance_races+'R・'+m.ticket_points+'点。一致して外れたRも含みます。','public-note'));
+      if(m.n>0){const evaluation=element('div',undefined,'public-card');evaluation.append(element('h3','一致予想は有効か'));
       const g=m.agreement_selection_test.gemi;
       const selectionSignal=g.holm_adjusted_p_four_tests<.05 && g.with_common_hits/g.with_common_n>g.without_common_hits/g.without_common_n;
       evaluation.append(element('p',selectionSignal?'レースを絞る手掛かりはありますが、共通券購入の優位性は未確認です。':'共通券購入の優位性は未確認です。共通券なしの比較群は'+g.without_common_n+'R。継続して検証します。'));
@@ -200,6 +118,6 @@
       [['前へ',-1,page===0],['次へ',1,(page+1)*12>=rows.length]].forEach(([n,delta,disabled])=>{const b=element('button',n);b.type='button';b.disabled=disabled;b.onclick=()=>{page+=delta;render();root.querySelector('.consensus-races')?.scrollIntoView({block:'start'});};pagination.append(b);});root.append(pagination);
     }render();
   }
-  window.OchaPConsensus={mount,ticketRoles,attachLiveResults,liveMetrics};
+  window.OchaPConsensus={mount,ticketRoles};
 })();
 
