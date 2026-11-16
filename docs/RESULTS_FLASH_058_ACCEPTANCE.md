@@ -58,6 +58,26 @@ switch to a weaker parser when Actions permission is absent. Requires existing
 test-only `_RUN_` accepts a Date. Installer preserves other handlers and reuses one
 existing result handler, deleting only duplicates of this exact handler.
 
+## 2026-11-16 production handover
+
+Verified same-day results in the GAS-started 22:00, 22:20 and 22:40 slots.
+Acquisition, saved JSON and HTTP readback were successful at 120 races.
+The old Actions cron also fetched the same 120 already-public races at 22:10,
+less than two minutes after the GAS-started 22:00 slot completed.
+The redundant scheduled path is removed. Manual dispatch inputs and the final
+23:20 GAS slot remain unchanged. Offline tests now run in pull request CI or
+an explicit check, never at every publication slot or as a side effect of merging code.
+
+Evidence:
+- https://github.com/saktaksaktak-art/ochap-press/actions/runs/43872911066
+- https://github.com/saktaksaktak-art/ochap-press/actions/runs/43873114988
+- https://github.com/saktaksaktak-art/ochap-press/actions/runs/43876057147
+- https://github.com/saktaksaktak-art/ochap-press/actions/runs/43879314445
+
+This verifies the handover path, not the exact timing or completion of all 80 slots.
+If it fails, the existing workflow dispatch is the immediate manual recovery;
+restore the previous cron with a reviewed revert if scheduled recovery is needed.
+
 ## Validation
 
 31 production Python tests pass, including a real local bare-Git concurrent push
