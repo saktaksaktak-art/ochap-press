@@ -4,7 +4,9 @@
   const visited = new WeakSet();
   function adapt(table) {
     const headers = table.tHead?.rows[0]?.cells;
-    if (visited.has(table) || !headers || headers.length < 7 ||
+    // Course stats are a six-boat comparison, even when they have many metrics.
+    if (visited.has(table) || table.matches('.rich-course,.ochap-grade-course') ||
+        !headers || headers.length < 7 ||
         [...headers].some(cell => cell.colSpan !== 1 || cell.rowSpan !== 1)) return;
     const rows = [...table.tBodies, ...(table.tFoot ? [table.tFoot] : [])].flatMap(group => [...group.rows]);
     if (!rows.length || rows.some(row => row.cells.length !== headers.length ||

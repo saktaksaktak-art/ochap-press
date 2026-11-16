@@ -61,8 +61,12 @@ with sync_playwright() as pw:
           return problems;
         }""")
         assert not failures, (width, failures)
-        if width<600:
-            assert page.locator('table.rich-course[data-ochap-wide]').first.is_visible()
+        comparison = page.locator('table.rich-course').first
+        assert comparison.is_visible()
+        assert comparison.get_attribute('data-ochap-wide') is None
+        assert comparison.locator('thead').evaluate("h => getComputedStyle(h).display === 'table-header-group'")
+        assert comparison.locator('tbody tr').count() == 6
+        assert comparison.locator('tbody tr').first.evaluate("r => getComputedStyle(r).display === 'table-row'")
         page.close()
     browser.close()
-print('PASS: visible newspaper tables, grid lines, wide-table labels, and full national counts at 320/390/760 px')
+print('PASS: course comparison rows, table rules, and full national counts at 320/390/760 px')

@@ -27,12 +27,31 @@ with ThreadingHTTPServer(('127.0.0.1',0), partial(SimpleHTTPRequestHandler,direc
                 table = race.locator('.ochap-method-table')
                 expect(table).to_be_visible()
                 expect(table.locator('thead th')).to_have_count(6)
+                course = race.locator('table.ochap-grade-course' if scope=='sg_g1' else 'table.rich-course').first
+                expect(course).to_be_visible()
+                expect(course.locator('tbody tr')).to_have_count(6)
+                assert course.evaluate("""t => {
+                    const body=t.tBodies[0], first=body.rows[0], last=body.rows[5];
+                    const box=t.getBoundingClientRect(), parent=t.parentElement.getBoundingClientRect();
+                    return !t.hasAttribute('data-ochap-wide') &&
+                      getComputedStyle(t.tHead).display==='table-header-group' &&
+                      getComputedStyle(first).display==='table-row' &&
+                      first.cells[1].getBoundingClientRect().left===last.cells[1].getBoundingClientRect().left &&
+                      box.width<=parent.width+1 && box.right<=innerWidth+1 && t.scrollWidth<=t.clientWidth+1 &&
+                      getComputedStyle(first.cells[1]).borderRightStyle==='solid';
+                }""")
+                if scope=='all':
+                    expect(course.locator('tbody tr').nth(0)).to_contain_text('山下 友貴')
+                    expect(course.locator('tbody tr').nth(1)).to_contain_text('本橋 克洋')
+                    expect(course.locator('tbody tr').nth(2)).to_contain_text('生方 靖亜')
+                    expect(course.locator('tbody tr').first.locator('td').nth(1)).to_have_text('20')
+                    expect(course.locator('td.rank1').first).to_have_css('background-color','rgb(255, 223, 184)')
+                    expect(course.locator('td.rank2').first).to_have_css('background-color','rgb(229, 237, 247)')
                 first = data['groups'][scope]['6']['courses'][0]
                 row = table.locator('tfoot tr:visible')
                 expect(row).to_contain_text(f"{first['sample_count']:,}")
                 expect(row).to_contain_text(f"{first['win_rates_pct']['nige']}%")
                 if scope=='sg_g1':
-                    expect(race.locator('.ochap-grade-course')).to_be_visible()
                     expect(race.locator('.ochap-grade-course tbody td').first).not_to_have_text('未取得')
                 race.locator('[data-ochap-baseline-picker]').select_option('2')
                 if scope=='sg_g1':

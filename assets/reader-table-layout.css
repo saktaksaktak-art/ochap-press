@@ -27,12 +27,20 @@ html body table.ochap-method-table tfoot > tr > *{border-top:2px solid #152c4c !
   html body table :is(.bnum,.boat){max-width:100%}
   html body table :is(svg,img){max-width:100%;height:auto}
   html body .ochap-method-table :is(td,th){padding:4px 1px}
-  html body table[data-ochap-wide]{display:block}
-  html body table[data-ochap-wide] thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
-  html body table[data-ochap-wide] :is(tbody,tfoot){display:block;min-width:0}
-  html body table[data-ochap-wide] :is(tbody,tfoot) tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0 0 5px}
-  html body table[data-ochap-wide] :is(tbody,tfoot) :is(th,td),
-  html body #ochap-public-panels table[data-ochap-wide] :is(tbody,tfoot) :is(th,td){position:static;width:auto;text-align:left;vertical-align:top}
-  html body table[data-ochap-wide] :is(th,td)[data-ochap-field]::before{content:attr(data-ochap-field);display:block;color:var(--muted,#506585);font-size:11px;font-weight:650;line-height:1.2;margin-bottom:2px}
-  html body table[data-ochap-wide] :is(tbody,tfoot) tr > :first-child{grid-column:1/-1}
+  /* One header and one row per boat, even with a cached earlier layout script. */
+  html body table.rich-course :is(th,td){padding:4px 1px;text-align:center;vertical-align:middle;line-height:1.25;font-variant-numeric:tabular-nums}
+  html body table.rich-course thead th:first-child{width:20%}
+  html body table.rich-course thead :is(th:nth-child(2),th:nth-child(3),th:nth-child(4),th:nth-child(5)){width:9%}
+  html body table.rich-course thead :is(th:nth-child(6),th:nth-child(7)){width:11%}
+  html body table.rich-course thead th:nth-child(8){width:12%}
+  html body table.rich-course tbody td:first-child{text-align:left;padding-inline:2px}
+  html body table.rich-course tbody small{font-size:inherit;line-height:inherit}
+  html body table[data-ochap-wide]:not(.rich-course,.ochap-grade-course){display:block}
+  html body table[data-ochap-wide]:not(.rich-course,.ochap-grade-course) thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  html body table[data-ochap-wide]:not(.rich-course,.ochap-grade-course) :is(tbody,tfoot){display:block;min-width:0}
+  html body table[data-ochap-wide]:not(.rich-course,.ochap-grade-course) :is(tbody,tfoot) tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0 0 5px}
+  html body table[data-ochap-wide]:not(.rich-course,.ochap-grade-course) :is(tbody,tfoot) :is(th,td),
+  html body #ochap-public-panels table[data-ochap-wide]:not(.rich-course,.ochap-grade-course) :is(tbody,tfoot) :is(th,td){position:static;width:auto;text-align:left;vertical-align:top}
+  html body table[data-ochap-wide]:not(.rich-course,.ochap-grade-course) :is(th,td)[data-ochap-field]::before{content:attr(data-ochap-field);display:block;color:var(--muted,#506585);font-size:11px;font-weight:650;line-height:1.2;margin-bottom:2px}
+  html body table[data-ochap-wide]:not(.rich-course,.ochap-grade-course) :is(tbody,tfoot) tr > :first-child{grid-column:1/-1}
 }
