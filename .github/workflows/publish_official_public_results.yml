@@ -1,17 +1,6 @@
 name: Publish API race results for newspaper
 on:
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/results_flash.py'
-      - 'scripts/publish_public_results.py'
-      - 'scripts/reconcile_public_results.py'
-      - 'tests/test_public_results*.py'
-      - '.github/workflows/publish_official_public_results.yml'
-  # Retain existing cron until GAS dispatch + Actions/HTTP success is verified.
-  # After handover, remove only these two schedule lines.
-  schedule:
-    - cron: '*/15 0-14 * * *'
+  # Production cadence is owned by the verified GAS 80-slot dispatcher.
   workflow_dispatch:
     inputs:
       target_date:
@@ -55,11 +44,6 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Verify production parser, merge, recovery and scheduler
-        run: |
-          python -m py_compile scripts/results_flash.py scripts/publish_public_results.py scripts/reconcile_public_results.py
-          python -m unittest discover -s tests -p 'test_public_results*.py' -v
-          node scripts/test_results_flash_dispatcher.js
       - name: Acquire, save, publish and independently read back
         env:
           GH_TOKEN: ${{ github.token }}

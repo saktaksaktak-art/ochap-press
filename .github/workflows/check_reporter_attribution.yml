@@ -51,6 +51,13 @@ jobs:
         run: python3 -m py_compile scripts/validate_gemi_press_issue.py
 
 
+      - name: Verify result acquisition, merge, recovery and scheduler offline
+        if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+        run: |
+          python -m py_compile scripts/results_flash.py scripts/publish_public_results.py scripts/reconcile_public_results.py
+          python -m unittest discover -s tests -p 'test_public_results*.py' -v
+          node scripts/test_results_flash_dispatcher.js
+
       - name: Verify the 390px newspaper layout in Chrome
         if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'fix/special-races') || startsWith(github.head_ref, 'feat/navy-newspaper') || startsWith(github.head_ref, 'fix/reader-race-source-details') || startsWith(github.head_ref, 'feat/compact-reader') || startsWith(github.head_ref, 'fix/reader-course-copy') || startsWith(github.head_ref, 'fix/reader-registration-search') || startsWith(github.head_ref, 'feat/reader-favorite-venues') || startsWith(github.head_ref, 'feat/public-editorial-cleanup'))
         run: |
