@@ -70,3 +70,4 @@ jobs:
         run: |
           python3 -m pip install --quiet playwright
           python3 scripts/check_reader_table_browser.py
+          python3 scripts/check_published_course_baseline.py

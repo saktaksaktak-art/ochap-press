@@ -1,19 +1,19 @@
 /* Reader tables stay within their card. No clipping or horizontal scrolling. */
 html body table{width:100%;min-width:0;max-width:100%;border-collapse:collapse;table-layout:fixed}
-html body table :is(th,td){min-width:0;max-width:100%;border:1px solid var(--divider,#bdcbe0);white-space:normal;overflow-wrap:anywhere;word-break:normal}
+html body table :is(th,td){min-width:0;max-width:100%;border:1px solid #8fa3bd !important;white-space:normal;overflow-wrap:anywhere;word-break:normal}
 html body #ochap-public-panels table,
 html body #ochap-public-panels .ochap-score-table{width:100%;min-width:0;max-width:100%;table-layout:fixed}
-html body #ochap-public-panels table :is(th,td){min-width:0;border:1px solid var(--divider,#bdcbe0);white-space:normal;overflow-wrap:anywhere}
+html body #ochap-public-panels table :is(th,td){min-width:0;white-space:normal;overflow-wrap:anywhere}
 html body .ochap-method-table{background:white;color:#172a45}
 html body .ochap-method-table thead th{background:#152c4c;color:#fff;text-align:center}
 html body .ochap-method-table :is(td,th){padding:4px 1px;text-align:center;font-variant-numeric:tabular-nums}
 .ochap-method-table :is(.method-kind,.method-rank){display:block;font-size:11px;line-height:1.2}
-.ochap-method-table .method-1{background:#ffdfb8;color:#743100;font-weight:700}
-.ochap-method-table .method-2{background:#e5edf7;color:#19365c;font-weight:700}
+:is(.ochap-method-table,.ochap-grade-course) .method-1{background:#ffdfb8;color:#743100;font-weight:700}
+:is(.ochap-method-table,.ochap-grade-course) .method-2{background:#e5edf7;color:#19365c;font-weight:700}
 html body .rich-course .rank1{background:#ffdfb8;color:#743100}
 html body .rich-course .rank2{background:#e5edf7;color:#19365c}
 .ochap-method-table tfoot{background:#f2f6fc}
-.ochap-method-table tfoot > :first-child > *{border-top:2px solid #152c4c}
+html body table.ochap-method-table tfoot > tr > *{border-top:2px solid #152c4c !important}
 .ochap-method-table .method-muted{color:#566781}
 .ochap-method-table .method-boat{display:inline-block;font-size:11px}
 .ochap-method-table tbody th .bnum{width:19px;height:19px;line-height:17px}
