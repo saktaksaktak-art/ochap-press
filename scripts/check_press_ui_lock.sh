@@ -12,7 +12,7 @@ check() {
     return 1
   fi
 }
-check "index.html" "224f90d7ec35dde7443bbbd94913d181e85bee60"
+check "index.html" "a816532ff8445e9b45022782c101b7e0a93a49ac"
 check "scripts/render_ochap_frozen.mjs" "33f1c2875a102af88c2dc3305ebede115b6b0f99"
 check "scripts/reader_methods.mjs" "d2edb8daca1304a50cb0b6622ab3fcda62ce1869"
 check "assets/reader-table-layout.css" "0b40143871f02904994db96051e36ef3482fedae"

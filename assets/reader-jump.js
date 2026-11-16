@@ -89,9 +89,10 @@
       favorites:[['開催場を選ぶ','.favorite-venue-picker'],['お気に入りのレース一覧','.favorite-race-list:has(article)']],
       special:[['開催場・特選区分','.public-controls'],['特選レース一覧','.special-cards']],
       consensus:[['一致成績','.public-grid'],['開催場・結果の絞り込み','.public-controls:has(select)'],['一致レース一覧','.consensus-races']],
-      results:[['速報の集計','.lr-summary'],['100円平買い収支','.lr-finance-overview'],
-        ['特選レースの成績','.lr-section:has(.lr-special-grid)'],['高配当的中','#lr-high'],
-        ['レース結果一覧','#lr-list'],['区分別成績','#lr-performance'],['集計の見方','.lr-howto>summary']],
+      results:[['記者・区分別の成績','#lr-performance'],['高配当の的中','#lr-high'],
+        ['速報の集計・平買い収支','details[data-drawer="bulletin-summary"] > summary'],
+        ['レース結果一覧','#lr-list'],['特選レースの成績','#lr-special'],
+        ['集計の見方','.lr-howto>summary']],
       versus:[['記者別成績','.ochap-score-grid'],['予想区分別 成績比較','.ochap-score-categories'],
         ['高配当的中','.ochap-score-high'],['全レース的中一覧','.ochap-score-by-race'],
         ['比較スコアボード','.public-card:has(>h2)']]

@@ -99,7 +99,7 @@
     }
     function specialSummary(scoped){
       if(!specials)return '';
-      if(!specials.size)return '<section class="lr-section"><h3>特選レース</h3><p class="lr-empty">この号に該当する特選レースはありません。</p></section>';
+      if(!specials.size)return '<section id="lr-special" class="lr-section"><h3>特選レース</h3><p class="lr-empty">この号に該当する特選レースはありません。</p></section>';
       const cards=['special_teppan','special_myoumi','main_x_reverse','reverse_x_main'].map(group=>{
         const s=feature.score(scoped,specials,group);
         const settled=s.financeN>0&&s.missingPayout===0;
@@ -112,7 +112,7 @@
           (s.missingPayout?'<p class="lr-caption">払戻確認待ち '+s.missingPayout+'R</p>':'')+
           (s.refundUnknown?'<p class="lr-caption">返還未確認 '+s.refundUnknown+'R</p>':'')+'</article>';
       }).join('');
-      return '<section class="lr-section"><h3>特選レース</h3><p class="lr-caption">3連単・各点100円。点数・投資額は結果取得分。公式確認前は速報値です。</p>'+
+      return '<section id="lr-special" class="lr-section"><h3>特選レース</h3><p class="lr-caption">3連単・各点100円。点数・投資額は結果取得分。公式確認前は速報値です。</p>'+
         '<div class="lr-special-grid">'+cards+'</div></section>';
     }
     function compactTable(rs){
@@ -178,27 +178,25 @@
       const dashboard=host.querySelector('.lr-dashboard');
       const summaryGrid=host.querySelector('.lr-summary');
       const list=host.querySelector('#lr-list');
-      const raceTotals=summaryGrid.firstElementChild;
-      summaryGrid.before(raceTotals);
-      raceTotals.classList.add('lr-lead-count');
-      const specialSection=host.querySelector('.lr-section:has(.lr-special-grid)');
-      if(specialSection){
-        const grid=specialSection.querySelector('.lr-special-grid');
+      const specialSection=host.querySelector('#lr-special');
+      const grid=specialSection?.querySelector('.lr-special-grid');
+      if(grid){
         const breakdown=document.createElement('div');
         breakdown.className='lr-special-grid';
         breakdown.append(...[...grid.children].slice(2));
         grid.after(breakdown);
         drawer('special-breakdown','妙味の方向別内訳',breakdown);
-        raceTotals.after(specialSection);
       }
-      (specialSection||raceTotals).after(list);
       const financeHost=host.querySelector('.lr-finance-overview');
-      drawer('bulletin-summary','速報の集計・平買い収支',summaryGrid)?.append(financeHost);
+      const summaryDrawer=drawer('bulletin-summary','速報の集計・平買い収支',summaryGrid);
+      summaryDrawer.append(financeHost);
       const jumpLinks=dashboard.querySelector('.lr-jumps');
       // The persistent Page Jump menu already offers the same destinations.
-      if(jumpLinks)jumpLinks.hidden=true;
-      drawer('high','高配当の的中',host.querySelector('#lr-high'));
-      drawer('performance','記者・区分別の成績',host.querySelector('#lr-performance'));
+      jumpLinks?.remove();
+      const highDrawer=drawer('high','高配当の的中',host.querySelector('#lr-high'));
+      const performanceDrawer=drawer('performance','記者・区分別の成績',host.querySelector('#lr-performance'));
+      dashboard.querySelector('.lr-howto').before(performanceDrawer,highDrawer,summaryDrawer,list,
+        ...(specialSection?[specialSection]:[]));
       const listTabs=host.querySelector('.lr-list-tabs');
       const jointButton=document.createElement('button');
       jointButton.type='button';jointButton.dataset.action='list';jointButton.dataset.value='joint';
