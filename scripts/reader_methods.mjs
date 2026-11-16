@@ -74,6 +74,15 @@ function readBaseline(input, issueDate, scope, months) {
      group.courses.length!==6 || group.courses.some((row,i)=>row?.course!==i+1 || !(count(row.sample_count)>0))) return null;
   return group;
 }
+function gradeNigashiReference(group) {
+  const r=group?.nigashi_reference;
+  if(group?.race_class!=='sg_g1' || r?.definition!=='official_c1_c2_numeric_finish' ||
+     !(count(r.eligible_races)>0) ||
+     r.eligible_races>Math.min(group.courses[0].sample_count,group.courses[1].sample_count) ||
+     count(r.escape_wins)===null || r.escape_wins>r.eligible_races ||
+     pct(r.rate_pct)===null || Math.abs(100*r.escape_wins/r.eligible_races-r.rate_pct)>0.00500001) return null;
+  return r;
+}
 export function renderReaderMethods(race, issueDate, baseline, badge, months=displayMonths(race)) {
   const scope = courseScope(race);
   const rows = race.boats.map(b => ({
@@ -81,10 +90,14 @@ export function renderReaderMethods(race, issueDate, baseline, badge, months=dis
     method: scope==='sg_g1' ? gradeCourse(b,months,'expected_method_stats') : b.method
   }));
   const grouping = readBaseline(baseline,issueDate,scope,months);
+  const ref = gradeNigashiReference(grouping);
   const title = scope==='sg_g1'?'全国SG・G1のみ':'全国・全レース区分';
   const rowHtml = rows.map(({course,b,method})=> {
     const cells = Array.from({length:4},(_,i)=>{
       const item=metric(course,method,i);
+      if (ref && course===2 && i===0 && pct(item?.[1])===null) {
+        return rateCell(['全国参考',ref.rate_pct]);
+      }
       return rateCell(item,course>1&&count(method?.sample_count)>0?rankAt(rows,i,pct(item?.[1])):null);
     }).join('');
     return '<tr><th scope="row">'+badge(b.boat)+'<span class="method-boat">'+course+'C</span></th><td>'+
@@ -95,6 +108,7 @@ export function renderReaderMethods(race, issueDate, baseline, badge, months=dis
     return '<tr data-ochap-baseline-course="'+course+'"'+(i?' hidden':'')+'><th scope="row">全国<wbr>平均<small class="method-kind">'+course+'C</small></th>'+
       '<td>'+kind('集計走')+'<span>'+formatCount(m.sample_count)+'</span></td>'+
       Array.from({length:4},(_,j)=>{
+        if(ref && course===2 && j===0) return rateCell(['逃し（参考）',ref.rate_pct]);
         const item=metric(course,m,j);
         if(item && course>1 && j) item[0]=winnerLabels[j-1];
         return rateCell(item,null,course===2&&j===0&&grouping.nigashi_definition_verified!==true?'照合中':null);
@@ -107,5 +121,7 @@ export function renderReaderMethods(race, issueDate, baseline, badge, months=dis
     '</tr></thead><tbody>'+rowHtml+'</tbody><tfoot>'+foot+'</tfoot></table>'+
     (grouping?'<p class="ochap-method-controls"><label>全国平均の比較コース <select data-ochap-baseline-picker>'+options+'</select></label></p>':'')+
     '<p class="small">'+title+'・直近'+(months===12?'1年':'6か月')+
-    (grouping?'｜全国平均は公式結果の着順確定艇で集計':'')+'</p></div>';
+    (grouping?'｜全国平均は公式結果の着順確定艇で集計':'')+'</p>'+
+    (ref?'<p class="small">2C逃しの全国参考値は選手別の成績ではありません。1・2コースとも着順が確定した'+
+      formatCount(ref.eligible_races)+'レースのうち、1コースが逃げで勝った割合です。</p>':'')+'</div>';
 }

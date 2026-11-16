@@ -106,6 +106,20 @@ def fold(records, *, sparse=False, racer=None):
          'nigashi_rate_pct':None})
     return out
 
+def grade_nigashi_reference(records):
+    """Official SG/G1 comparison, not a reproduction of Hiyori's statistic."""
+    eligible = nige = 0
+    for method, entries in records:
+        courses = {entry[3] for entry in entries}
+        if not {1, 2}.issubset(courses):
+            continue
+        eligible += 1
+        nige += method == 'nige' and any(e[0] == 1 and e[3] == 1 for e in entries)
+    if not eligible:
+        return None
+    return {'definition':'official_c1_c2_numeric_finish', 'eligible_races':eligible,
+            'escape_wins':nige, 'rate_pct':round(100*nige/eligible,2)}
+
 def build(directory,schedules,issue):
     start,end=first_day(issue), issue-timedelta(days=1)
     all_rows=[];sg_rows=[];seen=set();missing=[];seen_grade=set();sha=sha256();excluded=Counter()
@@ -132,6 +146,8 @@ def build(directory,schedules,issue):
           'grades':['SG','G1'] if category=='sg_g1' else 'all',
           'courses':fold(recs),'races':len(recs),'nigashi_definition_verified':False,
           'officially_cancelled_venue_days':outages}}
+        if category == 'sg_g1':
+            groups[category]['6']['nigashi_reference'] = grade_nigashi_reference(recs)
     players={}
     index={}
     for method,entries in sg_rows:

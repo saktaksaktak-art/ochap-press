@@ -1,4 +1,4 @@
-import {renderReaderMethods} from '../scripts/reader_methods.mjs';
+import {renderReaderMethods} from '../scripts/reader_methods.mjs?v=2';
 
 const day=window.__OCHAP_SELECTED_DATE__;
 const archive=document.getElementById('cards') || document.querySelector('main');
