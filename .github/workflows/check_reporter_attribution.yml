@@ -27,6 +27,7 @@ jobs:
           node scripts/test_ticket_loading.js
           node scripts/test_hit_reporters.js
           node scripts/test_consensus_categories.js
+          node scripts/test_special_races.js
           python3 scripts/check_published_ticket_loading.py
       - name: Check Gemini frontend JavaScript syntax
         run: node --check assets/gemi-reporter.js
@@ -48,3 +49,9 @@ jobs:
       - name: Check Python publication validator syntax
         run: python3 -m py_compile scripts/validate_gemi_press_issue.py
 
+
+      - name: Verify the 390px newspaper layout in Chrome
+        if: github.event_name == 'pull_request' && startsWith(github.head_ref, 'fix/special-races')
+        run: |
+          python3 -m pip install --quiet playwright
+          python3 scripts/check_special_browser.py

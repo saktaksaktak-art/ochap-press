@@ -67,6 +67,15 @@
   }
   const boat=n=>Number.isInteger(n)&&n>=1&&n<=6;
   const raceKey=r=>r.venue_code+':'+r.race_no;
+  function eligibleRaces(data,issue){
+    const cutoff=referenceCutoff(data,issue);
+    const late=new Set(issue?.post_deadline_reference_races||[]);
+    const gemiPublication=issue?.gemi_first_publication_confirmed_at_jst||issue?.gemi_publication_timing_checked_at;
+    const publication=gemiPublication?readTime(gemiPublication):-Infinity;
+    return r=>Number.isFinite(readTime(r.deadline))&&!late.has(r.race_id)&&
+      (!issue?.gemi_publication_pending||!!gemiPublication)&&publication<readTime(r.deadline)&&
+      (r.pair_timing_eligible===true||(!r.input_versions_differ&&cutoff<readTime(r.deadline)));
+  }
   function readBulletin(feed,date){
     if(feed?.date!==date||feed.schema_version!=='1.0'||!Array.isArray(feed.races))return null;
     const checkedAt=readTime(feed.checked_at_jst);
@@ -263,6 +272,6 @@
     }
     await state.refresh();
   }
-  window.OchaPConsensus={mount,ticketRoles,attachLiveResults,liveMetrics,readBulletin};
+  window.OchaPConsensus={mount,ticketRoles,attachLiveResults,liveMetrics,readBulletin,eligibleRaces};
 })();
 

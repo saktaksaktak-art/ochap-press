@@ -93,13 +93,22 @@
       gross:finance?s.payout:null,profit:finance?s.profit:null,roi:finance?s.roi:null,
       hits:s.hits.map(record=>({record,hit:true}))};
   }
-  function table(cols,rows) {
-    const wrap=make("div","ochap-score-scroll"),t=make("table","ochap-score-table"),
+  function table(cols,rows,kind="") {
+    const wrap=make("div","ochap-score-scroll"),t=make("table","ochap-score-table"+(kind?" ochap-score-"+kind:"")),
       th=make("thead"),tr=make("tr"),body=make("tbody");
-    cols.forEach(c=>tr.append(make("th","",c)));th.append(tr);
+    cols.forEach(c=>{
+      const cell=make("th","",c);
+      cell.scope="col";
+      tr.append(cell);
+    });th.append(tr);
     for(const row of rows){
       const tr=make("tr");
-      row.forEach(value=>tr.append(make("td","",String(value))));
+      row.forEach(value=>{
+        const td=make("td"), fraction=typeof value==="string"&&value.match(/^(\d+(?:\.\d+)?%)（(\d+\/\d+R)）$/);
+        if(fraction)td.append(make("span","",fraction[1]),make("small","ochap-score-denom",fraction[2]));
+        else td.textContent=String(value);
+        tr.append(td);
+      });
       body.append(tr);
     }
     t.append(th,body);wrap.append(t);return wrap;
@@ -158,7 +167,7 @@
         ]);
       }
     }
-    categories.append(table(["記者","予想区分","対象",live?"◎1着":"1着","2連単","3連単","投資","払戻","収支","回収率"],categoryRows));
+    categories.append(table(["記者","予想区分","対象",live?"◎1着":"1着","2連単","3連単","投資","払戻","収支","回収率"],categoryRows,"by-group"));
     categories.append(make("p","ochap-score-note",
       "各買い目100円。全区分は本線・逆張り・舟券ナビを合算し、区分間で重なる買い目もそれぞれ1枚として計算。対象のない記者は未集計。"));
     area.append(categories);
@@ -209,7 +218,7 @@
       records.map(r=>[r.venue+" "+r.race_no+"R",r.daypart,
         r.result.order.join("-"),yen(r.result.trifecta_payout_yen),
         hitAt(r,"ocha","main"),hitAt(r,"ocha","reverse"),hitAt(r,"ocha","nav"),
-        hitAt(r,"gemi","main"),hitAt(r,"gemi","reverse"),hitAt(r,"gemi","nav")])));
+        hitAt(r,"gemi","main"),hitAt(r,"gemi","reverse"),hitAt(r,"gemi","nav")]),"by-race"));
     const old=host.querySelector(".ochap-score-body");
     if(old)old.replaceWith(area);else host.append(area);
   }
