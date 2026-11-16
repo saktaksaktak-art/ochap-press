@@ -1,10 +1,12 @@
+import base64
 from copy import deepcopy
 from datetime import date, datetime
 from hashlib import sha256
+import gzip
 import json
 import unittest
 
-from scripts.build_public_st_supplement import build
+from scripts.build_public_st_supplement import build, read_checkpoint
 
 
 class PublicST(unittest.TestCase):
@@ -54,3 +56,18 @@ class PublicST(unittest.TestCase):
             self.run_build(self.row,target_date_jst='20261117')
         with self.assertRaises(ValueError):
             build(b'{}','0'*64,self.html,self.day,self.now)
+
+    def test_private_checkpoint_roundtrip_and_clock(self):
+        raw=json.dumps(dict(schema='ochap.hiyori-st-daily.v1',target_date_jst='20261116',
+                            status='partial',records={'01:01':self.row})).encode()
+        digest=sha256(raw).hexdigest()
+        env=dict(schema='ochap.acquisition-checkpoint.v1',kind='st',date_jst='20261116',
+                 raw_sha256=digest,raw_bytes=len(raw),source_status='partial',
+                 checkpointed_at_jst='2026-11-16T14:01:00+09:00',
+                 gzip_base64=base64.b64encode(gzip.compress(raw)).decode())
+        self.assertEqual(read_checkpoint(json.dumps(env),self.day),(raw,digest))
+        for values in (dict(raw_sha256='0'*64),dict(raw_bytes=len(raw)-1),
+                       dict(date_jst='20261117'),dict(source_status='complete'),
+                       dict(checkpointed_at_jst='2026-11-16T13:59:59+09:00')):
+            with self.subTest(values=values), self.assertRaises(ValueError):
+                read_checkpoint(json.dumps({**env,**values}),self.day)

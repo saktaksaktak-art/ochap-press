@@ -8,6 +8,9 @@ from html.parser import HTMLParser
 import json
 from pathlib import Path
 import re
+import io
+import os
+import tempfile
 
 JST = timezone(timedelta(hours=9))
 KEYS = ('st_stability_pct', 'st_breakout_pct', 'st_late_pct')
@@ -22,6 +25,31 @@ def stamp(value, day):
     if t.date() != day:
         raise ValueError('Timestamp is not in target date')
     return t
+
+
+def read_checkpoint(encoded, day):
+    """Decode the private GitHub handoff without copying the envelope to Pages."""
+    envelope = json.loads(encoded)
+    digest = envelope.get('raw_sha256')
+    length = envelope.get('raw_bytes')
+    if (envelope.get('schema') != 'ochap.acquisition-checkpoint.v1' or envelope.get('kind') != 'st'
+        or envelope.get('date_jst') != day.strftime('%Y%m%d')
+        or not isinstance(digest, str) or re.fullmatch(r'[0-9a-f]{64}', digest) is None
+        or type(length) is not int or not 0 < length <= 20_000_000):
+        raise ValueError('Wrong ST checkpoint identity')
+    saved = stamp(envelope.get('checkpointed_at_jst'), day)
+    with gzip.GzipFile(fileobj=io.BytesIO(base64.b64decode(envelope['gzip_base64'], validate=True))) as z:
+        raw = z.read(length + 1)
+    if len(raw) != length or sha256(raw).hexdigest() != digest:
+        raise ValueError('ST checkpoint SHA/size mismatch')
+    snapshot = json.loads(raw)
+    status = snapshot.get('status')
+    records = snapshot.get('records')
+    if status not in ('partial','complete') or envelope.get('source_status') != status or not isinstance(records,dict):
+        raise ValueError('ST checkpoint content mismatch')
+    if any(stamp(r.get('fetched_at_jst'), day) > saved for r in records.values()):
+        raise ValueError('ST observation postdates the checkpoint')
+    return raw, digest
 
 
 class Reader(HTMLParser):
@@ -121,8 +149,10 @@ def build(raw, source_sha, html, day, now):
 def main():
     p = argparse.ArgumentParser()
     p.add_argument('--date', required=True, type=date.fromisoformat)
-    p.add_argument('--input', required=True, type=Path)
-    p.add_argument('--expected-sha', required=True)
+    source = p.add_mutually_exclusive_group(required=True)
+    source.add_argument('--input', type=Path)
+    source.add_argument('--checkpoint', type=Path)
+    p.add_argument('--expected-sha')
     p.add_argument('--reader', required=True, type=Path)
     p.add_argument('--output', required=True, type=Path)
     p.add_argument('--archive', action='store_true', help='Explicitly build a historical reader annotation')
@@ -133,7 +163,15 @@ def main():
     blob = args.reader.read_bytes()
     if args.reader.name.endswith('.gz.b64.txt'):
         blob = gzip.decompress(base64.b64decode(blob.strip(), validate=True))
-    payload = build(args.input.read_bytes(), args.expected_sha, blob.decode(), args.date, now)
+    if args.checkpoint:
+        raw,digest = read_checkpoint(args.checkpoint.read_bytes(),args.date)
+        if args.expected_sha and args.expected_sha != digest:
+            p.error('Unexpected checkpoint SHA')
+    else:
+        if not args.expected_sha:
+            p.error('--input requires --expected-sha')
+        raw,digest = args.input.read_bytes(),args.expected_sha
+    payload = build(raw, digest, blob.decode(), args.date, now)
     if args.output.exists():
         old = json.loads(args.output.read_text())
         if (old.get('schema'), old.get('date'), old.get('source')) != (payload['schema'], payload['date'], payload['source']):
@@ -152,7 +190,16 @@ def main():
     if not payload['races']:
         p.error('No verified usable records; nothing to publish')
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    args.output.write_text(json.dumps(payload, ensure_ascii=False, separators=(',', ':'), sort_keys=True)+'\n')
+    encoded = (json.dumps(payload, ensure_ascii=False, separators=(',', ':'), sort_keys=True)+'\n').encode()
+    if not args.output.exists() or args.output.read_bytes() != encoded:
+        with tempfile.NamedTemporaryFile(dir=args.output.parent, delete=False) as stream:
+            temp = Path(stream.name)
+            try:
+                stream.write(encoded)
+                stream.close()
+                os.replace(temp,args.output)
+            finally:
+                temp.unlink(missing_ok=True)
     print(f"{len(payload['races'])} verified reader ST records")
 
 if __name__ == '__main__':
