@@ -3,6 +3,7 @@
 from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
+import re
 from threading import Thread
 from playwright.sync_api import expect, sync_playwright
 
@@ -58,9 +59,9 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         "(t) => t.getBoundingClientRect().width < 700")
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     page.get_by_role("button", name="買い目一致", exact=True).click()
-    expect(page.locator("#ochap-consensus-view .public-number").filter(has_text="円")).to_be_visible()
+    expect(page.locator("#ochap-consensus-view .public-number").filter(has_text=re.compile(r"^(?:[+−-]?[\d,]+円|保留)$"))).to_be_visible()
     page.get_by_role("button", name="2連単", exact=True).click()
-    expect(page.locator("#ochap-consensus-view .public-number").filter(has_text="円")).to_be_visible()
+    expect(page.locator("#ochap-consensus-view .public-number").filter(has_text=re.compile(r"^(?:[+−-]?[\d,]+円|保留)$"))).to_be_visible()
 
     if page.locator("script[src*=reader-jump]").count():
         expect(page.locator("body")).to_have_css("background-color", "rgb(247, 250, 255)")
