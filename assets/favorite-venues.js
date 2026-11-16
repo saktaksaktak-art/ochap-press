@@ -86,6 +86,7 @@
     for(const [code,venue] of venues){
       const button=element('button',venue);
       button.type='button';
+      button.setAttribute('aria-label',venue);
       button.addEventListener('click',()=>{
         if(selected.has(code))selected.delete(code);else selected.add(code);
         try {localStorage.setItem(key,JSON.stringify([...selected]));}
