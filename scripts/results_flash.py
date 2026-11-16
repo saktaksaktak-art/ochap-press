@@ -15,7 +15,7 @@ import time
 from urllib.error import HTTPError
 
 from publish_public_results import fetch, unified_v1_results, JST
-from reconcile_public_results import checked, merge, CORE
+from reconcile_public_results import checked, merge, CORE, OPTIONAL_SETTLEMENT
 
 PUBLIC_BASE = 'https://saktaksaktak-art.github.io/ochap-press'
 
@@ -26,7 +26,7 @@ def stamp():
 
 def fingerprint(payload):
     day, rows = checked(payload)
-    core = [[key[0], key[1], *[r.get(k) for k in CORE[2:]],
+    core = [[key[0], key[1], *[r.get(k) for k in CORE[2:]+OPTIONAL_SETTLEMENT],
              r['official_confirmed']] for key, r in sorted(rows.items())]
     return hashlib.sha256(json.dumps([day, core], ensure_ascii=False,
                                     separators=(',', ':')).encode()).hexdigest()

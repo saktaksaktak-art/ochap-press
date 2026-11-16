@@ -32,6 +32,25 @@ class ApiResultsTests(unittest.TestCase):
         self.assertNotIn('official_result_source_ref',x)
     def test_result_not_yet_reported(self):
         self.assertEqual(unified_v1_results(feed(None),DAY,URL,AT),[])
+    def test_optional_settlement(self):
+        r=result()
+        r['payouts']['exacta']=[{'combination':'1-5','amount':1350}]
+        r['refunds']=[6]
+        row=parse_api_result(r,DAY,14,1,URL,AT)
+        self.assertEqual(row['exacta_payout_yen'],1350)
+        self.assertEqual(row['refund_boats'],[6])
+        r['payouts']['exacta'][0]['combination']='5-1'
+        r['refunds']=[5]
+        row=parse_api_result(r,DAY,14,1,URL,AT)
+        self.assertNotIn('exacta_payout_yen',row)
+        self.assertNotIn('refund_boats',row)
+    def test_result_before_betting_deadline_is_not_published(self):
+        payload=feed(result())
+        race=payload['programs']['stadiums']['14']['races']['1']
+        race['closed_at']='2026-11-01 20:00:00'
+        self.assertEqual(unified_v1_results(payload,DAY,URL,AT),[])
+        race['closed_at']='2026-11-01 19:59:00'
+        self.assertEqual(len(unified_v1_results(payload,DAY,URL,AT)),1)
     def test_invalid_date_rejected(self):
         r=result();r['date']='2026-10-31'
         self.assertIsNone(parse_api_result(r,DAY,14,1,URL,AT))

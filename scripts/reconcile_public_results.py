@@ -11,6 +11,7 @@ SOURCE_RE=re.compile(r'^https://www\.boatrace\.jp/owpc/pc/race/raceresult\?')
 API_RE=re.compile(r'^https://boatraceopenapi\.github\.io/api/v1/\d{4}/\d{8}\.json$')
 DATE_RE=re.compile(r'^\d{4}-\d{2}-\d{2}$')
 CORE=('venue_code','race_no','order','method','trifecta_payout_yen')
+OPTIONAL_SETTLEMENT=('exacta_payout_yen','refund_boats')
 def checked(payload):
     if not isinstance(payload,dict) or payload.get('schema_version')!='1.0':
         raise ValueError('Invalid public results format')
@@ -30,6 +31,12 @@ def checked(payload):
             raise ValueError('Invalid result method')
         if type(r.get('trifecta_payout_yen'))!=int or r['trifecta_payout_yen']<100:
             raise ValueError('Invalid payout')
+        if 'exacta_payout_yen' in r and (type(r['exacta_payout_yen']) is not int or r['exacta_payout_yen']<100):
+            raise ValueError('Invalid exacta payout')
+        if 'refund_boats' in r:
+            boats=r['refund_boats']
+            if not isinstance(boats,list) or any(type(boat) is not int or not 1<=boat<=6 for boat in boats) or set(boats).intersection(order):
+                raise ValueError('Invalid refund boats')
         if r.get('official_confirmed') is True:
             if not r.get('method') or not SOURCE_RE.match(str(r.get('official_result_source_ref',''))):
                 raise ValueError('Official row missing original evidence')
@@ -66,7 +73,9 @@ def merge(current, proposed):
         if new['official_confirmed'] is True:
             joined[key]=new;changes+=1
             continue
-        if all(old.get(x)==new.get(x) for x in CORE):
+        if old['order']==new['order']:
+            new={**{field:old[field] for field in OPTIONAL_SETTLEMENT if field in old},**new}
+        if all(old.get(x)==new.get(x) for x in CORE+OPTIONAL_SETTLEMENT):
             continue  # unchanged result should not trigger extra Git commits
         old_at=datetime.fromisoformat(old['source_observed_at_jst'])
         new_at=datetime.fromisoformat(new['source_observed_at_jst'])

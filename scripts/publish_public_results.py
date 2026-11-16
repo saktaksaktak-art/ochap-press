@@ -58,12 +58,23 @@ def parse_api_result(result, date, venue, rno, source_url, observed_at):
     if tf[0].get('combination')!='-'.join(map(str,order)): return None
     method=result.get('technique_number_source')
     if method not in METHODS: method=None
-    return {
+    row = {
         'venue':VENUES[venue], 'venue_code':venue, 'race_no':rno,
         'order':order, 'method':method, 'trifecta_payout_yen':price,
         'official_confirmed':False, 'result_status':'API_REPORTED',
         'result_source_ref':source_url, 'source_observed_at_jst':observed_at
     }
+    exacta = payouts.get('exacta')
+    if isinstance(exacta, list) and len(exacta) == 1 and isinstance(exacta[0], dict):
+        amount = exacta[0].get('amount')
+        if exacta[0].get('combination') == '-'.join(map(str, order[:2])) and type(amount) is int and 100 <= amount <= 100_000_000:
+            row['exacta_payout_yen'] = amount
+    refunds = result.get('refunds')
+    if isinstance(refunds, list) and all(type(boat) is int and 1 <= boat <= 6 for boat in refunds):
+        refund_boats = sorted(set(refunds))
+        if not set(refund_boats).intersection(order):
+            row['refund_boats'] = refund_boats
+    return row
 
 def unified_v1_results(payload, date, source_url, observed_at):
     if not isinstance(payload,dict): raise ValueError('Not an API object')
@@ -71,6 +82,7 @@ def unified_v1_results(payload, date, source_url, observed_at):
     venues=prog.get('stadiums') if isinstance(prog,dict) else None
     if not isinstance(venues,dict) or not venues:
         raise ValueError('No API stadiums; schema may have changed')
+    observed = datetime.fromisoformat(observed_at).astimezone(JST)
     rows={}
     for key,stadium in venues.items():
         if not isinstance(key,str) or not key.isdecimal() or int(key) not in VENUES:
@@ -84,6 +96,16 @@ def unified_v1_results(payload, date, source_url, observed_at):
             rno=int(rkey)
             result=race.get('result') if isinstance(race,dict) else None
             if result is None: continue
+            closing = race.get('closed_at')
+            if closing:
+                try:
+                    deadline = datetime.fromisoformat(closing)
+                    if deadline.tzinfo is None:
+                        deadline = deadline.replace(tzinfo=JST)
+                    if deadline.astimezone(JST).date().isoformat() != date or deadline >= observed:
+                        continue
+                except (TypeError, ValueError):
+                    continue
             row=parse_api_result(result,date,venue,rno,source_url,observed_at)
             if row is not None:
                 if (venue,rno) in rows:raise ValueError('Duplicate API race')

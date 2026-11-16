@@ -2,6 +2,7 @@ import sys,unittest
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]/'scripts'))
 from reconcile_public_results import merge
+from results_flash import same_results
 def row(no,order,pay):
     return {'venue':'鳴門','venue_code':14,'race_no':no,'official_confirmed':True,
             'order':order,'trifecta_payout_yen':pay,'method':'逃げ',
@@ -62,6 +63,15 @@ class ApiMergeTests(unittest.TestCase):
         a=pack([api_row(1,[1,2,3],1230)])
         b=pack([api_row(1,[1,2,3],1230,'2026-11-01T20:05:00+09:00')])
         self.assertEqual(merge(a,b),a)
+    def test_api_adds_settlement_without_changing_result(self):
+        a=pack([api_row(1,[1,2,3],1230)])
+        b=pack([dict(api_row(1,[1,2,3],1230,'2026-11-01T20:05:00+09:00'),
+                     exacta_payout_yen=450,refund_boats=[])])
+        c=pack([api_row(1,[1,2,3],1230,'2026-11-01T20:10:00+09:00')])
+        out=merge(a,b)
+        self.assertEqual(out,b)
+        self.assertFalse(same_results(a,out))
+        self.assertEqual(merge(out,c),out)
     def test_stale_api_correction_does_not_revert(self):
         a=pack([api_row(1,[1,3,2],3330,'2026-11-01T20:10:00+09:00')])
         b=pack([api_row(1,[1,2,3],1230,'2026-11-01T20:05:00+09:00')])

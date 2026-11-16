@@ -20,7 +20,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:28:25+09:00"
+      "source_observed_at_jst": "2026-11-16T11:28:25+09:00",
+      "exacta_payout_yen": 2390,
+      "refund_boats": []
     },
     {
       "venue": "江戸川",
@@ -36,7 +38,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:58:25+09:00"
+      "source_observed_at_jst": "2026-11-16T11:58:25+09:00",
+      "exacta_payout_yen": 1260,
+      "refund_boats": []
     },
     {
       "venue": "江戸川",
@@ -52,7 +56,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:18:28+09:00"
+      "source_observed_at_jst": "2026-11-16T12:18:28+09:00",
+      "exacta_payout_yen": 520,
+      "refund_boats": []
     },
     {
       "venue": "江戸川",
@@ -68,7 +74,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:48:26+09:00"
+      "source_observed_at_jst": "2026-11-16T12:48:26+09:00",
+      "exacta_payout_yen": 620,
+      "refund_boats": []
     },
     {
       "venue": "江戸川",
@@ -84,7 +92,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:08:24+09:00"
+      "source_observed_at_jst": "2026-11-16T13:08:24+09:00",
+      "exacta_payout_yen": 350,
+      "refund_boats": []
     },
     {
       "venue": "江戸川",
@@ -100,7 +110,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:38:25+09:00"
+      "source_observed_at_jst": "2026-11-16T13:38:25+09:00",
+      "exacta_payout_yen": 1030,
+      "refund_boats": []
     },
     {
       "venue": "江戸川",
@@ -116,7 +128,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:58:24+09:00"
+      "source_observed_at_jst": "2026-11-16T13:58:24+09:00",
+      "exacta_payout_yen": 1980,
+      "refund_boats": []
     },
     {
       "venue": "江戸川",
@@ -132,7 +146,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:28:24+09:00"
+      "source_observed_at_jst": "2026-11-16T14:28:24+09:00",
+      "exacta_payout_yen": 9280,
+      "refund_boats": []
     },
     {
       "venue": "江戸川",
@@ -148,7 +164,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:58:25+09:00"
+      "source_observed_at_jst": "2026-11-16T14:58:25+09:00",
+      "exacta_payout_yen": 1520,
+      "refund_boats": []
     },
     {
       "venue": "江戸川",
@@ -180,7 +198,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T10:58:24+09:00"
+      "source_observed_at_jst": "2026-11-16T10:58:24+09:00",
+      "exacta_payout_yen": 250,
+      "refund_boats": []
     },
     {
       "venue": "常滑",
@@ -196,7 +216,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:08:27+09:00"
+      "source_observed_at_jst": "2026-11-16T11:08:27+09:00",
+      "exacta_payout_yen": 10260,
+      "refund_boats": []
     },
     {
       "venue": "常滑",
@@ -212,7 +234,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:38:26+09:00"
+      "source_observed_at_jst": "2026-11-16T11:38:26+09:00",
+      "exacta_payout_yen": 1450,
+      "refund_boats": []
     },
     {
       "venue": "常滑",
@@ -228,7 +252,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:08:25+09:00"
+      "source_observed_at_jst": "2026-11-16T12:08:25+09:00",
+      "exacta_payout_yen": 310,
+      "refund_boats": []
     },
     {
       "venue": "常滑",
@@ -244,7 +270,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:48:26+09:00"
+      "source_observed_at_jst": "2026-11-16T12:48:26+09:00",
+      "exacta_payout_yen": 1680,
+      "refund_boats": []
     },
     {
       "venue": "常滑",
@@ -260,7 +288,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:08:24+09:00"
+      "source_observed_at_jst": "2026-11-16T13:08:24+09:00",
+      "exacta_payout_yen": 170,
+      "refund_boats": []
     },
     {
       "venue": "常滑",
@@ -276,7 +306,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:38:25+09:00"
+      "source_observed_at_jst": "2026-11-16T13:38:25+09:00",
+      "exacta_payout_yen": 710,
+      "refund_boats": []
     },
     {
       "venue": "常滑",
@@ -292,7 +324,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:08:35+09:00"
+      "source_observed_at_jst": "2026-11-16T14:08:35+09:00",
+      "exacta_payout_yen": 2320,
+      "refund_boats": []
     },
     {
       "venue": "常滑",
@@ -308,7 +342,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:38:31+09:00"
+      "source_observed_at_jst": "2026-11-16T14:38:31+09:00",
+      "exacta_payout_yen": 840,
+      "refund_boats": []
     },
     {
       "venue": "常滑",
@@ -324,7 +360,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T15:08:28+09:00"
+      "source_observed_at_jst": "2026-11-16T15:08:28+09:00",
+      "exacta_payout_yen": 510,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -340,7 +378,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T10:58:24+09:00"
+      "source_observed_at_jst": "2026-11-16T10:58:24+09:00",
+      "exacta_payout_yen": 3050,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -356,7 +396,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:28:25+09:00"
+      "source_observed_at_jst": "2026-11-16T11:28:25+09:00",
+      "exacta_payout_yen": 3510,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -372,7 +414,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:58:25+09:00"
+      "source_observed_at_jst": "2026-11-16T11:58:25+09:00",
+      "exacta_payout_yen": 1630,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -388,7 +432,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:18:28+09:00"
+      "source_observed_at_jst": "2026-11-16T12:18:28+09:00",
+      "exacta_payout_yen": 860,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -404,7 +450,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:48:26+09:00"
+      "source_observed_at_jst": "2026-11-16T12:48:26+09:00",
+      "exacta_payout_yen": 1700,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -420,7 +468,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:18:25+09:00"
+      "source_observed_at_jst": "2026-11-16T13:18:25+09:00",
+      "exacta_payout_yen": 730,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -436,7 +486,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:48:24+09:00"
+      "source_observed_at_jst": "2026-11-16T13:48:24+09:00",
+      "exacta_payout_yen": 2010,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -452,7 +504,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:28:24+09:00"
+      "source_observed_at_jst": "2026-11-16T14:28:24+09:00",
+      "exacta_payout_yen": 320,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -468,7 +522,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:58:25+09:00"
+      "source_observed_at_jst": "2026-11-16T14:58:25+09:00",
+      "exacta_payout_yen": 400,
+      "refund_boats": []
     },
     {
       "venue": "びわこ",
@@ -500,7 +556,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:08:27+09:00"
+      "source_observed_at_jst": "2026-11-16T11:08:27+09:00",
+      "exacta_payout_yen": 560,
+      "refund_boats": []
     },
     {
       "venue": "尼崎",
@@ -516,7 +574,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:38:26+09:00"
+      "source_observed_at_jst": "2026-11-16T11:38:26+09:00",
+      "exacta_payout_yen": 250,
+      "refund_boats": []
     },
     {
       "venue": "尼崎",
@@ -532,7 +592,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:08:25+09:00"
+      "source_observed_at_jst": "2026-11-16T12:08:25+09:00",
+      "exacta_payout_yen": 570,
+      "refund_boats": []
     },
     {
       "venue": "尼崎",
@@ -548,7 +610,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:28:32+09:00"
+      "source_observed_at_jst": "2026-11-16T12:28:32+09:00",
+      "exacta_payout_yen": 200,
+      "refund_boats": []
     },
     {
       "venue": "尼崎",
@@ -564,7 +628,11 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:58:24+09:00"
+      "source_observed_at_jst": "2026-11-16T12:58:24+09:00",
+      "exacta_payout_yen": 6790,
+      "refund_boats": [
+        3
+      ]
     },
     {
       "venue": "尼崎",
@@ -580,7 +648,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:28:24+09:00"
+      "source_observed_at_jst": "2026-11-16T13:28:24+09:00",
+      "exacta_payout_yen": 7940,
+      "refund_boats": []
     },
     {
       "venue": "尼崎",
@@ -596,7 +666,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:58:24+09:00"
+      "source_observed_at_jst": "2026-11-16T13:58:24+09:00",
+      "exacta_payout_yen": 160,
+      "refund_boats": []
     },
     {
       "venue": "尼崎",
@@ -612,7 +684,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:38:31+09:00"
+      "source_observed_at_jst": "2026-11-16T14:38:31+09:00",
+      "exacta_payout_yen": 700,
+      "refund_boats": []
     },
     {
       "venue": "尼崎",
@@ -628,7 +702,11 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T15:08:28+09:00"
+      "source_observed_at_jst": "2026-11-16T15:08:28+09:00",
+      "exacta_payout_yen": 300,
+      "refund_boats": [
+        6
+      ]
     },
     {
       "venue": "児島",
@@ -644,7 +722,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:18:24+09:00"
+      "source_observed_at_jst": "2026-11-16T11:18:24+09:00",
+      "exacta_payout_yen": 160,
+      "refund_boats": []
     },
     {
       "venue": "児島",
@@ -660,7 +740,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:48:25+09:00"
+      "source_observed_at_jst": "2026-11-16T11:48:25+09:00",
+      "exacta_payout_yen": 1750,
+      "refund_boats": []
     },
     {
       "venue": "児島",
@@ -676,7 +758,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:18:28+09:00"
+      "source_observed_at_jst": "2026-11-16T12:18:28+09:00",
+      "exacta_payout_yen": 470,
+      "refund_boats": []
     },
     {
       "venue": "児島",
@@ -692,7 +776,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:48:26+09:00"
+      "source_observed_at_jst": "2026-11-16T12:48:26+09:00",
+      "exacta_payout_yen": 980,
+      "refund_boats": []
     },
     {
       "venue": "児島",
@@ -708,7 +794,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:28:24+09:00"
+      "source_observed_at_jst": "2026-11-16T13:28:24+09:00",
+      "exacta_payout_yen": 240,
+      "refund_boats": []
     },
     {
       "venue": "児島",
@@ -724,7 +812,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:48:24+09:00"
+      "source_observed_at_jst": "2026-11-16T13:48:24+09:00",
+      "exacta_payout_yen": 12910,
+      "refund_boats": []
     },
     {
       "venue": "児島",
@@ -740,7 +830,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:28:24+09:00"
+      "source_observed_at_jst": "2026-11-16T14:28:24+09:00",
+      "exacta_payout_yen": 2010,
+      "refund_boats": []
     },
     {
       "venue": "児島",
@@ -756,7 +848,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:48:37+09:00"
+      "source_observed_at_jst": "2026-11-16T14:48:37+09:00",
+      "exacta_payout_yen": 3660,
+      "refund_boats": []
     },
     {
       "venue": "児島",
@@ -772,7 +866,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T15:18:32+09:00"
+      "source_observed_at_jst": "2026-11-16T15:18:32+09:00",
+      "exacta_payout_yen": 410,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -788,7 +884,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T09:08:26+09:00"
+      "source_observed_at_jst": "2026-11-16T09:08:26+09:00",
+      "exacta_payout_yen": 1500,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -804,7 +902,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T09:28:25+09:00"
+      "source_observed_at_jst": "2026-11-16T09:28:25+09:00",
+      "exacta_payout_yen": 640,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -820,7 +920,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T09:58:25+09:00"
+      "source_observed_at_jst": "2026-11-16T09:58:25+09:00",
+      "exacta_payout_yen": 2010,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -836,7 +938,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T10:28:24+09:00"
+      "source_observed_at_jst": "2026-11-16T10:28:24+09:00",
+      "exacta_payout_yen": 2290,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -852,7 +956,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T10:58:24+09:00"
+      "source_observed_at_jst": "2026-11-16T10:58:24+09:00",
+      "exacta_payout_yen": 9070,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -868,7 +974,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:18:24+09:00"
+      "source_observed_at_jst": "2026-11-16T11:18:24+09:00",
+      "exacta_payout_yen": 410,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -884,7 +992,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:48:25+09:00"
+      "source_observed_at_jst": "2026-11-16T11:48:25+09:00",
+      "exacta_payout_yen": 970,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -900,7 +1010,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:28:32+09:00"
+      "source_observed_at_jst": "2026-11-16T12:28:32+09:00",
+      "exacta_payout_yen": 5510,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -916,7 +1028,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:58:24+09:00"
+      "source_observed_at_jst": "2026-11-16T12:58:24+09:00",
+      "exacta_payout_yen": 4640,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -932,7 +1046,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:38:25+09:00"
+      "source_observed_at_jst": "2026-11-16T13:38:25+09:00",
+      "exacta_payout_yen": 3610,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -948,7 +1064,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:08:35+09:00"
+      "source_observed_at_jst": "2026-11-16T14:08:35+09:00",
+      "exacta_payout_yen": 830,
+      "refund_boats": []
     },
     {
       "venue": "徳山",
@@ -964,7 +1082,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:38:31+09:00"
+      "source_observed_at_jst": "2026-11-16T14:38:31+09:00",
+      "exacta_payout_yen": 1440,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -980,7 +1100,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T09:08:26+09:00"
+      "source_observed_at_jst": "2026-11-16T09:08:26+09:00",
+      "exacta_payout_yen": 1410,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -996,7 +1118,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T09:38:25+09:00"
+      "source_observed_at_jst": "2026-11-16T09:38:25+09:00",
+      "exacta_payout_yen": 190,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -1012,7 +1136,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T10:08:24+09:00"
+      "source_observed_at_jst": "2026-11-16T10:08:24+09:00",
+      "exacta_payout_yen": 290,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -1028,7 +1154,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T10:28:24+09:00"
+      "source_observed_at_jst": "2026-11-16T10:28:24+09:00",
+      "exacta_payout_yen": 310,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -1044,7 +1172,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T10:58:24+09:00"
+      "source_observed_at_jst": "2026-11-16T10:58:24+09:00",
+      "exacta_payout_yen": 520,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -1060,7 +1190,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:28:25+09:00"
+      "source_observed_at_jst": "2026-11-16T11:28:25+09:00",
+      "exacta_payout_yen": 530,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -1076,7 +1208,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T11:58:25+09:00"
+      "source_observed_at_jst": "2026-11-16T11:58:25+09:00",
+      "exacta_payout_yen": 230,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -1092,7 +1226,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:28:32+09:00"
+      "source_observed_at_jst": "2026-11-16T12:28:32+09:00",
+      "exacta_payout_yen": 990,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -1108,7 +1244,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T12:58:24+09:00"
+      "source_observed_at_jst": "2026-11-16T12:58:24+09:00",
+      "exacta_payout_yen": 360,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -1124,7 +1262,11 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T13:28:24+09:00"
+      "source_observed_at_jst": "2026-11-16T13:28:24+09:00",
+      "exacta_payout_yen": 150,
+      "refund_boats": [
+        5
+      ]
     },
     {
       "venue": "唐津",
@@ -1140,7 +1282,9 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:08:35+09:00"
+      "source_observed_at_jst": "2026-11-16T14:08:35+09:00",
+      "exacta_payout_yen": 180,
+      "refund_boats": []
     },
     {
       "venue": "唐津",
@@ -1156,9 +1300,11 @@
       "official_confirmed": false,
       "result_status": "API_REPORTED",
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261116.json",
-      "source_observed_at_jst": "2026-11-16T14:48:37+09:00"
+      "source_observed_at_jst": "2026-11-16T14:48:37+09:00",
+      "exacta_payout_yen": 360,
+      "refund_boats": []
     }
   ],
   "source_policy": "Unified third-party API; formal BC is separate.",
-  "result_changed_at_jst": "2026-11-16T15:28:25+09:00"
+  "result_changed_at_jst": "2026-11-16T15:29:56+09:00"
 }
