@@ -44,7 +44,9 @@
       "consensus_json": "data/consensus/2026-11-16.json",
       "consensus_reference_only": true,
       "pair_comparison_eligible": false,
-      "data_limitations_present": true
+      "data_limitations_present": true,
+      "gemi_data": "./data/gemi/2026-11-16.json",
+      "gemi_first_publication_confirmed_at_jst": "2026-11-16T22:03:23+09:00"
     },
     {
       "date": "2026-11-15",
