@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import zlib from 'node:zlib';
 import crypto from 'node:crypto';
+import {courseScope,displayMonths,gradeCourse,renderReaderMethods} from './reader_methods.mjs';
 const root=new URL('../',import.meta.url).pathname,work=new URL('../../',import.meta.url).pathname;
 const predictionPath=process.env.OCHAP_PREDICTION_JSON||work+'forecast1106/OchaP_predictions_20261106_M0_v1.json';
 const inputPath=process.env.OCHAP_INPUT_JSON||work+'forecast1106/OCHAP_SHARED_INPUT_20261106_M0_v1.json';
@@ -51,9 +52,10 @@ function dataTables(d,r){
  const keys=['starts','firstRate','secondRate','thirdRate','averageST','averageSTRank'];
  const ranks=keys.map(k=>ranked(d.boats,b=>b.course?.starts>0&&(k!=='averageST'||b.course[k]>0)?b.course[k]:null,k==='averageST'||k==='averageSTRank'));
  const course=d.boats.map(b=>`<tr><td>${badge(b.boat)} / ${b.boat}C</td>${keys.map((k,i)=>{const rank=i? ranks[i](b):null;return `<td class="${rank===1?'rank1':rank===2?'rank2':''}">${fmt(k==='averageST'&&!(b.course?.[k]>0)?null:b.course?.[k])}${rank===1||rank===2?`<small>${rank}位</small>`:''}</td>`;}).join('')}</tr>`).join('');
- const meth=d.boats.map(b=>{const m=b.method,w=m?.win_rates_pct||{},l=m?.loss_rates_pct||{},cell=(v,label='',applicable=true)=>`<td>${v==null?(applicable?'未取得':'-'):label+fmt(v)+'%'}</td>`;return `<tr><td>${badge(b.boat)}/${b.boat}C</td><td>${fmt(m?.sample_count)}</td>${cell(w.nige,'',b.boat===1)}${b.boat===1?cell(l.sasare,'差され '):cell(w.sashi)}${b.boat===1?cell(l.makurare,'まくられ '):cell(w.makuri)}${b.boat===1?cell(l.makuraresashi,'まくり差され '):cell(w.makurisashi)}${cell(m?.nigashi_rate_pct,'',b.boat===2)}</tr>`;}).join('');
- const scopes=['local_course','sg_g1_course'].map(scope=>{
-  if(scope==='sg_g1_course'&&!d.is_sg_g1_venue)return '';
+ const gradeOnly=courseScope(d)==='sg_g1',months=displayMonths(d);
+ const mainCourse=gradeOnly?gradeTable(d,months):richCourseTable(d);
+ const meth=renderReaderMethods(d,issueDate,courseBenchmark,badge,months);
+ const scopes=(gradeOnly?[]:['local_course']).map(scope=>{
   const values=d.boats.map(b=>({b,c:b.course_stats_by_scope?.[scope]?.expected_course_stats}));
   if(scope==='local_course'&&values.every(({c})=>!c||([c.starts,c.first_rate_pct,c.second_rate_pct_estimated,c.third_rate_pct_estimated,c.average_st].every(v=>v==null)&&!c.cell_status?.includes('SOURCE_DASH'))))return '<h3>当地コース成績</h3><p class="small">データなし</p>';
   const ks=['starts','first_rate_pct','second_rate_pct_estimated','third_rate_pct_estimated','average_st'];
@@ -63,7 +65,25 @@ function dataTables(d,r){
  }).join('');
  const st=d.boats.map(b=>`<tr><td>${badge(b.boat)}</td><td>${fmt(b.st_metrics.st_stability_pct)}</td><td>${fmt(b.st_metrics.st_breakout_pct)}</td><td>${fmt(b.st_metrics.st_late_pct)}</td></tr>`).join('');
 
- return `<details><summary>01 出走表</summary>${table(['艇','選手・印','平均ST','全国勝率','機番・2連/3連'],rows)}</details><details><summary>02 🍵Pコースデータ・決まり手</summary><p class="small">全国直近6か月・想定コース別</p>${richCourseTable(d)}${table(['艇/C','母数','逃げ','差し/差され','まくり/まくられ','まくり差し/まくり差され','2C逃し'],meth)}${scopes}</details><details open><summary>03 ST詳細・スリット隊形</summary>${table(['艇','ST安定%','抜出%','出遅%'],st)}${diagrams?slit(r,d):''}</details>`;
+ return `<details><summary>01 出走表</summary>${table(['艇','選手・印','平均ST','全国勝率','機番・2連/3連'],rows)}</details><details><summary>02 🍵Pコースデータ・決まり手</summary>${mainCourse}${meth}${scopes}</details><details open><summary>03 ST詳細・スリット隊形</summary>${table(['艇','ST安定%','抜出%','出遅%'],st)}${diagrams?slit(r,d):''}</details>`;
+}
+const benchmarkPath=root+'data/course-national/'+issueDate+'.json';
+let courseBenchmark=null;
+if(fs.existsSync(benchmarkPath)){try{courseBenchmark=JSON.parse(fs.readFileSync(benchmarkPath,'utf8'));}
+catch{console.warn('Invalid optional national course benchmark; continuing without it.');}}
+function gradeTable(d,months){
+ const fields=[['母数','starts'],['1着%','first_rate_pct'],['2着%','second_rate_pct_estimated'],
+  ['3着%','third_rate_pct_estimated'],['2連対%','top2_rate_pct'],['3連対%','top3_rate_pct'],['C平均ST','average_st'],['ST順位','average_st_rank']];
+ const data=d.boats.map(b=>({b,c:gradeCourse(b,months,'expected_course_stats')}));
+ const get=(c,key)=>c?.starts>0&&num(c[key])!==null&&(key!=='average_st'&&key!=='average_st_rank'||c[key]>0)?c[key]:null;
+ const ranks=fields.map(([_,k],i)=>ranked(data,x=>get(x.c,k),i>=6));
+ return '<h3>SG/G1コース成績</h3><div class="table-scroll"><table class="rich-course"><thead><tr><th>艇/C・選手</th>'+
+  fields.map(([h])=>'<th>'+h+'</th>').join('')+'</tr></thead><tbody>'+data.map(x=>{
+   return '<tr><td>'+badge(x.b.boat)+' / '+x.b.boat+'C<small>'+e(x.b.name)+'</small></td>'+
+    fields.map(([_,k],i)=>{const v=i?get(x.c,k):x.c?.starts,r=i?ranks[i](x):null;
+     return '<td class="'+(r&&r<=2?'rank'+r:'')+'">'+(v==null?'未取得':i===6?stfmt(v):e(v))+
+      (r&&r<=2?'<small>'+r+'位</small>':'')+'</td>';}).join('')+'</tr>';
+  }).join('')+'</tbody></table></div>';
 }
 const sourcePath=process.env.OCHAP_SOURCE_JSON;
 const source=sourcePath?JSON.parse(fs.readFileSync(sourcePath)):null;

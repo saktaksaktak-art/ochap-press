@@ -71,6 +71,7 @@
       '<link rel="stylesheet" href="./assets/navy-reader.css?v=2">'+
       '<link rel="stylesheet" href="./assets/compact-reader.css?v=1">'+
       '<link rel="stylesheet" href="./assets/favorite-venues.css?v=1">'+
+      '<link rel="stylesheet" href="./assets/reader-table-layout.css?v=1">'+
       '<script src="./assets/reader-registration-search.js?v=1"></'+'script>';
     const extraScripts='<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./'+gemiScript+(cleanGemi?'?v=20261116-editorial-clean':'?v=20261105-tables-v2')+'"></'+'script>':'')+
       '<script src="./assets/public-scorecard.js?v=5"></'+'script>'+
@@ -83,7 +84,8 @@
       '<script src="./assets/ticket-colors.js?v=1"></'+'script>'+
       '<script src="./assets/compact-reader.js?v=1"></'+'script>'+
       '<script src="./assets/reader-jump.js?v=3"></'+'script>'+
-      '<script src="./assets/reader-course-copy.js?v=1"></'+'script>';
+      '<script src="./assets/reader-course-copy.js?v=1"></'+'script>'+
+      '<script src="./assets/reader-table-layout.js?v=1"></'+'script>';
     source=source.replace(/<\/head>/i,headTags+'</head>');
     source=source.replace(/<\/body>/i,extraScripts+'</'+'body>');
     // Keep publication evidence in its JSON response and runtime state, never in a DOM script element.

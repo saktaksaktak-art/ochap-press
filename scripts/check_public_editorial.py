@@ -92,6 +92,7 @@ def renderer_test():
             (root/d).mkdir()
         renderer = root/'scripts/render.mjs'
         renderer.write_bytes((ROOT/'scripts/render_ochap_frozen.mjs').read_bytes())
+        (root/'scripts/reader_methods.mjs').write_bytes((ROOT/'scripts/reader_methods.mjs').read_bytes())
         (root/'data/issue-index.json').write_text('{"issues": []}')
         (root/'input.json').write_text(json.dumps(evidence))
         (root/'pred.json').write_text(json.dumps(pred))

@@ -1,0 +1,38 @@
+/* Reader tables stay within their card. No clipping or horizontal scrolling. */
+html body table{width:100%;min-width:0;max-width:100%;border-collapse:collapse;table-layout:fixed}
+html body table :is(th,td){min-width:0;max-width:100%;border:1px solid var(--divider,#bdcbe0);white-space:normal;overflow-wrap:anywhere;word-break:normal}
+html body #ochap-public-panels table,
+html body #ochap-public-panels .ochap-score-table{width:100%;min-width:0;max-width:100%;table-layout:fixed}
+html body #ochap-public-panels table :is(th,td){min-width:0;border:1px solid var(--divider,#bdcbe0);white-space:normal;overflow-wrap:anywhere}
+html body .ochap-method-table{background:white;color:#172a45}
+html body .ochap-method-table thead th{background:#152c4c;color:#fff;text-align:center}
+html body .ochap-method-table :is(td,th){padding:4px 1px;text-align:center;font-variant-numeric:tabular-nums}
+.ochap-method-table :is(.method-kind,.method-rank){display:block;font-size:11px;line-height:1.2}
+.ochap-method-table .method-1{background:#ffdfb8;color:#743100;font-weight:700}
+.ochap-method-table .method-2{background:#e5edf7;color:#19365c;font-weight:700}
+html body .rich-course .rank1{background:#ffdfb8;color:#743100}
+html body .rich-course .rank2{background:#e5edf7;color:#19365c}
+.ochap-method-table tfoot{background:#f2f6fc}
+.ochap-method-table tfoot > :first-child > *{border-top:2px solid #152c4c}
+.ochap-method-table .method-muted{color:#566781}
+.ochap-method-table .method-boat{display:inline-block;font-size:11px}
+.ochap-method-table tbody th .bnum{width:19px;height:19px;line-height:17px}
+.ochap-method-controls{margin:.35rem 0 0;color:#19365c;font-size:12px}
+.ochap-method-controls select{max-width:100%;min-height:44px;font-size:16px}
+@media(max-width:600px){
+  html body :is(.table-scroll,.public-table-wrap,.ochap-score-scroll,.scroll,.rich-fragment):has(table){max-width:100%;overflow:visible}
+  html body .slit{min-width:0;max-width:100%}
+  html body table :is(th,td),html body #ochap-public-panels table :is(th,td){padding:4px 2px;font-size:11px}
+  html body table :is(.ticket,.combo){padding:2px;white-space:normal;overflow-wrap:anywhere}
+  html body table :is(.bnum,.boat){max-width:100%}
+  html body table :is(svg,img){max-width:100%;height:auto}
+  html body .ochap-method-table :is(td,th){padding:4px 1px}
+  html body table[data-ochap-wide]{display:block}
+  html body table[data-ochap-wide] thead{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  html body table[data-ochap-wide] :is(tbody,tfoot){display:block;min-width:0}
+  html body table[data-ochap-wide] :is(tbody,tfoot) tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0 0 5px}
+  html body table[data-ochap-wide] :is(tbody,tfoot) :is(th,td),
+  html body #ochap-public-panels table[data-ochap-wide] :is(tbody,tfoot) :is(th,td){position:static;width:auto;text-align:left;vertical-align:top}
+  html body table[data-ochap-wide] :is(th,td)[data-ochap-field]::before{content:attr(data-ochap-field);display:block;color:var(--muted,#506585);font-size:11px;font-weight:650;line-height:1.2;margin-bottom:2px}
+  html body table[data-ochap-wide] :is(tbody,tfoot) tr > :first-child{grid-column:1/-1}
+}
