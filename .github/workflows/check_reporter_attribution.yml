@@ -51,7 +51,7 @@ jobs:
 
 
       - name: Verify the 390px newspaper layout in Chrome
-        if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'fix/special-races') || startsWith(github.head_ref, 'feat/navy-newspaper') || startsWith(github.head_ref, 'fix/reader-race-source-details') || startsWith(github.head_ref, 'feat/compact-reader') || startsWith(github.head_ref, 'fix/reader-course-copy') || startsWith(github.head_ref, 'fix/reader-registration-search'))
+        if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'fix/special-races') || startsWith(github.head_ref, 'feat/navy-newspaper') || startsWith(github.head_ref, 'fix/reader-race-source-details') || startsWith(github.head_ref, 'feat/compact-reader') || startsWith(github.head_ref, 'fix/reader-course-copy') || startsWith(github.head_ref, 'fix/reader-registration-search') || startsWith(github.head_ref, 'feat/reader-favorite-venues'))
         run: |
           python3 -m pip install --quiet playwright
           python3 scripts/check_special_browser.py
