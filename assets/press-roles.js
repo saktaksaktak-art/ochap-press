@@ -11,6 +11,7 @@
   nav.setAttribute('aria-label', 'お茶P新聞の表示切り替え');
   const choices = [
     ['forecast', '予想'],
+    ...(window.OchaPFavoriteVenues ? [['favorites','お気に入り場']] : []),
     ['special', '特選レース'],
     ['consensus', '買い目一致'],
     ['results', '結果速報'],
@@ -57,7 +58,10 @@
   const special = document.createElement('section');
   special.id = 'ochap-special-view';
   special.hidden = true;
-  panels.append(results, versus, consensus, special);
+  const favorites=document.createElement('section');
+  favorites.id='ochap-favorites-view';
+  favorites.hidden=true;
+  panels.append(results, versus, consensus, special, favorites);
 
   const h2 = (label) => {const x = document.createElement('h2');x.textContent = label;return x;};
   const p = (label, className = '') => {const x = document.createElement('p');x.textContent = label;if(className)x.className=className;return x;};
@@ -674,12 +678,14 @@
     panels.hidden=which==='forecast';results.hidden=which!=='results';versus.hidden=which!=='versus';consensus.hidden=which!=='consensus';special.hidden=which!=='special';
     if(which==='consensus')window.OchaPConsensus?.mount(consensus,issueDate);
     if(which==='special')showSpecial();
+    favorites.hidden=which!=='favorites';
+    if(which==='favorites')window.OchaPFavoriteVenues?.mount(favorites,{date:issueDate,jumpToForecast});
     if(which==='results')showResults();if(which==='versus')showComparison();
     const current=new URL(location.href);if(which==='forecast')current.searchParams.delete('view');else current.searchParams.set('view',which);
     if(location.protocol==='http:' || location.protocol==='https:') history.replaceState(null,'',current.pathname+current.search+current.hash);
   }
   const requested=new URL(location.href).searchParams.get('view');
-  switchView(['versus','results','consensus','special'].includes(requested)?requested:'forecast');
+  switchView(controls[requested]?.dataset?.view===requested?requested:'forecast');
 })();
 
 

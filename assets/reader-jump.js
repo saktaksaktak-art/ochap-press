@@ -20,7 +20,7 @@
   const visible=el=>!!el&&el.getClientRects().length>0;
   const first=(root,selector)=>[...root.querySelectorAll(selector)].find(visible);
   const items=[
-    ['予想','forecast'],['特選レース','special'],['買い目一致','consensus'],
+    ['予想','forecast'],['お気に入り場','favorites'],['特選レース','special'],['買い目一致','consensus'],
     ['結果速報','results'],['記者比較','versus']
   ];
   const open=button('ページ内移動 ▾',show);
@@ -86,6 +86,7 @@
     }
     if(!root)return [];
     const anchors={
+      favorites:[['開催場を選ぶ','.favorite-venue-picker'],['お気に入りのレース一覧','.favorite-race-list:has(article)']],
       special:[['開催場・特選区分','.public-controls'],['特選レース一覧','.special-cards']],
       consensus:[['一致成績','.public-grid'],['開催場・結果の絞り込み','.public-controls:has(select)'],['一致レース一覧','.consensus-races']],
       results:[['速報の集計','.lr-summary'],['100円平買い収支','.lr-finance-overview'],
@@ -132,7 +133,7 @@
     categoryButtons('このタブ', [['ページの先頭',()=>window.scrollTo(0,0)],...viewAnchors(view)]);
     const race=view==='forecast'?raceAnchors():null;
     if(race)categoryButtons(race.title+' の詳報',race.entries);
-    categoryButtons('別のタブ',items.filter(([,key])=>key!==view).map(([label,key])=>[
+    categoryButtons('別のタブ',items.filter(([,key])=>key!==view&&tabs.querySelector('button[data-view="'+key+'"]')).map(([label,key])=>[
       label,()=>tabs.querySelector('button[data-view="'+key+'"]')?.click()
     ]));
     dialog.showModal();
