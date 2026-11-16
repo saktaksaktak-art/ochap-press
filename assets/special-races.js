@@ -158,9 +158,17 @@
         const heading=element('h3',pick.venue+' '+pick.race_no+'R');
         const badges=element('div',undefined,'special-badges');
         badges.append(...activeTypes(pick).map(type=>badge(type)));
-        card.append(heading,element('p','締切 '+pick.closing_time,'public-note'),badges,
-          element('p','お茶P ◎'+(pick.ochaMark??'—')+'・'+(pick.ochaMethod||'—')+
-            ' ／ Gemi兄 ◎'+(pick.gemiMark??'—')+'・'+(pick.gemiMethod||'—')));
+        const head=element('div',undefined,'special-card-head');
+        head.append(heading,element('span','締切 '+pick.closing_time,'public-note'),badges);
+        card.append(head);
+        const summaryTickets=[...new Set([...pick.special_teppan,...pick.special_myoumi])];
+        const tickets=element('div',undefined,'special-tickets');
+        tickets.append(...summaryTickets.map(ticket=>element('span',ticket)));
+        card.append(tickets);
+        const detail=element('details');
+        detail.append(element('summary','両記者の予想・内訳'));
+        detail.append(element('p','お茶P ◎'+(pick.ochaMark??'—')+'・'+(pick.ochaMethod||'—')+
+          ' ／ Gemi兄 ◎'+(pick.gemiMark??'—')+'・'+(pick.gemiMethod||'—')));
         for(const group of ['special_teppan',...directions]){
           if(!pick[group].length)continue;
           const label=group==='special_teppan'?'一致本線4点':labels[group];
@@ -168,8 +176,9 @@
           const chips=element('div',undefined,'special-tickets');
           chips.append(...pick[group].map(ticket=>element('span',ticket)));
           line.append(element('strong',label),chips);
-          card.append(line);
+          detail.append(line);
         }
+        card.append(detail);
         const link=element('a','レース詳報');
         const url=new URL(location.href);
         url.searchParams.delete('view');

@@ -20,8 +20,8 @@
   const visible=el=>!!el&&el.getClientRects().length>0;
   const first=(root,selector)=>[...root.querySelectorAll(selector)].find(visible);
   const items=[
-    ['予想','forecast'],['特選レース','special'],['予想一致レース','consensus'],
-    ['結果速報','results'],['記者別成績・比較','versus']
+    ['予想','forecast'],['特選レース','special'],['買い目一致','consensus'],
+    ['結果速報','results'],['記者比較','versus']
   ];
   const open=button('ページ内移動 ▾',show);
   open.id='ochap-jump-open';
@@ -51,6 +51,10 @@
   }else window.addEventListener('resize',offsets,{passive:true});
 
   function to(target){
+    if(!target)return;
+    for(let parent=target.parentElement;parent;parent=parent.parentElement){
+      if(parent.tagName==='DETAILS')parent.open=true;
+    }
     if(!visible(target))return;
     if(target.tagName==='SUMMARY'&&target.parentElement.tagName==='DETAILS')target.parentElement.open=true;
     target.dataset.ochapJumpTarget='';
@@ -92,8 +96,8 @@
         ['比較スコアボード','.public-card:has(>h2)']]
     };
     return (anchors[view]||[]).flatMap(([label,selector])=>{
-      const target=first(root,selector);
-      return target?[[label,()=>to(first(root,selector))]]:[];
+      const target=root.querySelector(selector);
+      return target?[[label,()=>to(root.querySelector(selector))]]:[];
     });
   }
   function raceAnchors(){
@@ -105,9 +109,10 @@
     if(!article)return null;
     const headings=[...article.querySelectorAll('h3,summary')].filter(visible);
     const labels=[
-      ['出走表',/^(?:01\s*)?出走表/],['コースデータ',/^(?:02\s*)?.*コースデータ/],
-      ['ST・スリット',/^(?:03\s*)?.*(?:ST詳細|スリット隊形)/],['展開・解説',/^(?:04\s*)?(?:展開予想|解説詳報)/],
-      ['本線',/^本線/],['逆張り',/^逆張り/],['舟券ナビ',/^舟券ナビ/]
+      ['本線',/^本線/],['舟券ナビ',/^舟券ナビ/],['逆張り',/^逆張り/],
+      ['出走表・コース成績',/^(?:01\s*)?出走表/],['コースデータ',/^(?:02\s*)?.*コース(?:別|データ)/],
+      ['展開解説',/^(?:04\s*)?(?:展開予想|展開解説|解説詳報)/],
+      ['ST・スリット',/^(?:03\s*)?.*(?:ST詳細|スリット隊形|ST・スリット)/]
     ];
     const entries=labels.flatMap(([label,pattern])=>{
       const h=headings.find(el=>pattern.test(el.textContent.trim()));

@@ -12,9 +12,9 @@
   const choices = [
     ['forecast', '予想'],
     ['special', '特選レース'],
-    ['consensus', 'お茶P Gemi兄　予想一致レース'],
+    ['consensus', '買い目一致'],
     ['results', '結果速報'],
-    ['versus', 'おちゃっぴー vs Gemini']
+    ['versus', '記者比較']
   ];
   const controls = {};
   for (const [key, text] of choices) {
