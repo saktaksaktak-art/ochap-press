@@ -59,6 +59,19 @@ const forecasts=Object.fromEntries(common.races.map(r=>[r.race_id,{
  meta:{closing_at:r.deadline,venue:r.venue,race_no:r.race_no}
 }]));
 const bulletin=readBulletin(feed,date),rows=liveRecords(bulletin,forecasts,issue,date);
+const evidence=issue.gemi_first_publication_evidence;
+const {createHash}=require('node:crypto');
+const packed=fs.readFileSync(issue.gemi_json);
+assert.equal(createHash('sha1').update('blob '+packed.length+'\0').update(packed).digest('hex'),evidence.gemi_gzip_base64_blob_sha);
+assert.equal(issue.gemi_first_publication_confirmed_at_jst,'2026-11-16T06:15:21+09:00');
+assert.ok(Date.parse(issue.gemi_last_synced_at_jst)>Date.parse(issue.gemi_first_publication_confirmed_at_jst));
+assert.equal(rows.filter(r=>r.reporters.gemi).length,120,'real index must not erase the 120 reference Gemi results');
+assert.equal(issue.formal_bc_eligible,false);
+vm.runInNewContext(fs.readFileSync('assets/special-races.js','utf8'),context);
+const specials=[...context.window.OchaPSpecial.select(common,issue,forecasts).values()];
+assert.equal(specials.length,12);
+assert.equal(specials.filter(x=>x.special_teppan.length).length,6);
+assert.equal(specials.filter(x=>x.special_myoumi.length).length,6);
 const resultRaces=attachLiveResults(common,feed,issue);
 // A later publication receipt can legitimately exclude Gemi without changing any frozen tickets.
 const gemiObserved=Date.parse(issue.gemi_first_publication_confirmed_at_jst||issue.gemi_publication_timing_checked_at||issue.publication_timing_checked_at);

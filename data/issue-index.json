@@ -46,7 +46,14 @@
       "pair_comparison_eligible": false,
       "data_limitations_present": true,
       "gemi_data": "./data/gemi/2026-11-16.json",
-      "gemi_first_publication_confirmed_at_jst": "2026-11-16T22:03:23+09:00",
+      "gemi_first_publication_confirmed_at_jst": "2026-11-16T06:15:21+09:00",
+      "gemi_last_synced_at_jst": "2026-11-16T22:03:23+09:00",
+      "gemi_first_publication_evidence": {
+        "pages_deployment_id": 7810051412,
+        "pages_run_id": 43762584459,
+        "commit_sha": "d08cf7c42d9b03bf7c8efdb3930ef09a4752158d",
+        "gemi_gzip_base64_blob_sha": "842550bd13d2819d89d226ecfbd7347b1a1a0626"
+      },
       "reader_path": "archives/2026-11-16.reader.html.gz.b64.txt"
     },
     {
