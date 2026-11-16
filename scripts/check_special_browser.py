@@ -140,6 +140,38 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         expect(note.get_by_text("全6艇の比較", exact=True)).to_be_visible()
         expect(note.get_by_text("朝刊の凍結原本と保存入力", exact=False)).to_have_count(0)
 
+    if page.locator("script[src*=reader-registration-search]").count():
+        page.goto(url + "2026-11-16")
+        q = page.get_by_role("searchbox", name="検索", exact=True)
+        expect(q).to_have_attribute("placeholder", "場・選手名・登録番号")
+        matching_races = page.locator("#cards > article:visible")
+        wanted = ["v18-r1", "v18-r12"]
+        for query in ["4464", "４４６４", "登録番号：４４６４"]:
+            q.fill(query)
+            expect(matching_races).to_have_count(2)
+            assert matching_races.evaluate_all("(races) => races.map(race => race.id)") == wanted
+        page.get_by_role("combobox", name="レースを選ぶ").select_option("12")
+        expect(matching_races).to_have_count(1)
+        expect(matching_races.first).to_have_attribute("id", "v18-r12")
+        page.get_by_role("combobox", name="場を選ぶ").select_option("13")
+        expect(matching_races).to_have_count(0)
+        page.get_by_role("button", name="条件解除", exact=True).click()
+        expect(q).to_have_value("")
+        q.fill("山下友貴")
+        expect(matching_races).to_have_count(2)
+        q.fill("4464")
+        page.get_by_role("button", name="全体ダイジェスト", exact=True).click()
+        digest = page.locator("#digest tbody tr:visible a.racejump")
+        expect(digest).to_have_count(2)
+        assert digest.evaluate_all("(links) => links.map(a => a.hash.slice(1))") == wanted
+        q.fill("2026")
+        expect(digest).to_have_count(0)
+
+        page.goto(url + "2026-10-30")
+        q = page.locator("#query")
+        q.fill("３３４９")
+        expect(page.locator("#v14-r1")).to_be_visible()
+
     page.goto(url + "2026-11-15&view=special")
     expect(cards).to_have_count(28)
     expect(cards.filter(has_text="🔥 妙味特選")).to_have_count(13)
