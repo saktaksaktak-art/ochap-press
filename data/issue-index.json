@@ -46,7 +46,8 @@
       "pair_comparison_eligible": false,
       "data_limitations_present": true,
       "gemi_data": "./data/gemi/2026-11-16.json",
-      "gemi_first_publication_confirmed_at_jst": "2026-11-16T22:03:23+09:00"
+      "gemi_first_publication_confirmed_at_jst": "2026-11-16T22:03:23+09:00",
+      "reader_path": "archives/2026-11-16.reader.html.gz.b64.txt"
     },
     {
       "date": "2026-11-15",

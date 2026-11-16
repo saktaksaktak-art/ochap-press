@@ -1,4 +1,4 @@
-/* OchaP Press: Gemini reporter tab (v1.2.3)
+/* OchaP Press: Gemini reporter tab (v1.2.5)
  * - Compatible with date-restore-20261101 (window.__OCHAP_SELECTED_DATE__) & reader-three-views-20261101
  * - Neutralizes shared Section 02 heading while in Gemi兄 tab (Gate 5)
  * - Enforces shared_input.sha256 match, retrospective vs pre-deadline M0 labeling, and missed_cutoff handling (Gates 1, 3, 4)
@@ -7,17 +7,35 @@
  */
 (() => {
   'use strict';
-  const title = document.querySelector('header#top > p')?.textContent || '';
-  const dateMatch = title.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-  const parsedHeaderDate = dateMatch ? `${dateMatch[1]}-${dateMatch[2].padStart(2,'0')}-${dateMatch[3].padStart(2,'0')}` : null;
+  const headerText = [
+    document.querySelector('header#top > p')?.textContent || '',
+    document.querySelector('header#top')?.textContent || '',
+    document.title || ''
+  ].join(' ');
+  const slashMatch = headerText.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+  const jpMatch = headerText.match(/(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日/);
+  const isoMatch = headerText.match(/(\d{4})-(\d{2})-(\d{2})/);
+  const parsedHeaderDate = slashMatch
+    ? `${slashMatch[1]}-${slashMatch[2].padStart(2,'0')}-${slashMatch[3].padStart(2,'0')}`
+    : (jpMatch
+      ? `${jpMatch[1]}-${jpMatch[2].padStart(2,'0')}-${jpMatch[3].padStart(2,'0')}`
+      : (isoMatch ? `${isoMatch[1]}-${isoMatch[2]}-${isoMatch[3]}` : null));
+  const urlDateParam = (() => {
+    try {
+      const d = new URLSearchParams(window.location.search).get('date');
+      return (d && /^\d{4}-\d{2}-\d{2}$/.test(d)) ? d : null;
+    } catch (_) { return null; }
+  })();
   const issueDate = (typeof window.__OCHAP_SELECTED_DATE__ === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(window.__OCHAP_SELECTED_DATE__))
     ? window.__OCHAP_SELECTED_DATE__
-    : parsedHeaderDate;
+    : (urlDateParam || parsedHeaderDate);
   const articleNodes = Array.from(document.querySelectorAll('main article[id]'));
-  if (!articleNodes.length || window.__OCHAP_GEMI_REPORTER_INITIALIZED__) return;
+  const alreadyHasTabs = articleNodes.some(a => a.dataset.ochapGemiSetup === '1' || a.querySelector(':scope > .ochap-report-tabs'));
+  if (!articleNodes.length || (window.__OCHAP_GEMI_REPORTER_INITIALIZED__ && alreadyHasTabs)) return;
   // One initialization per document even if old archives and the entry page
   // both include the reporter script.
   window.__OCHAP_GEMI_REPORTER_INITIALIZED__ = true;
+  window.__OCHAP_GEMI_REPORTER_VERSION__ = '1.2.10-consensus-and-date-sync';
 
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
@@ -97,10 +115,10 @@
           <path d="M-23 -14H9Q21 -14 31 0Q21 14 9 14H-23Z" fill="${pal.fill}" stroke="${pal.stroke}" stroke-width="1.6"/>
           <text x="1" y="7" text-anchor="middle" font-size="20" font-weight="800" fill="${pal.text}">${bNo}</text>
         </g>
-        <text x="596" y="${yText - 1}" font-size="15" font-weight="700" fill="#3c6147">${esc(row.label || '同体圏')}</text>`;
+        <text x="596" y="${yText - 1}" font-size="15" font-weight="700" fill="#3c6147">${esc(row.label || '未取得')}</text>`;
     }).join('');
 
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 410" role="img" aria-label="${esc(raceTitle)} Gemi兄予想スリット隊形">
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 410" class="slit-svg" role="img" aria-label="${esc(raceTitle)} Gemi兄予想スリット隊形">
       <style>text{font-family:system-ui,-apple-system,sans-serif}</style>
       <rect width="720" height="410" rx="12" fill="#f4f5e9"/>
       <text x="18" y="30" font-size="13" font-weight="700" fill="#5b7360">進入</text>
@@ -114,93 +132,251 @@
     </svg>`;
   }
 
+  // Extract per-boat course win-method stats (sashi, makuri, makurisashi) from Section 02 table if present
+  function parseCourseWinMethods(article) {
+    const wm = {};
+    if (!article) return wm;
+    const tables = article.querySelectorAll('table');
+    if (tables.length < 2) return wm;
+    const pNum = (s) => {
+      const m = String(s || '').match(/([0-9]+(?:\.[0-9]+)?)/);
+      return m ? parseFloat(m[1]) : 0.0;
+    };
+    tables[1].querySelectorAll('tbody tr, tr').forEach(tr => {
+      const tds = tr.querySelectorAll('td');
+      if (tds.length >= 6) {
+        const bMatch = String(tds[0].textContent || '').match(/([1-6])\s*\//);
+        if (bMatch) {
+          const bNo = parseInt(bMatch[1], 10);
+          wm[bNo] = {
+            nige: pNum(tds[2].textContent),
+            sashi: pNum(tds[3].textContent),
+            makuri: pNum(tds[4].textContent),
+            makurisashi: pNum(tds[5].textContent)
+          };
+        }
+      }
+    });
+    return wm;
+  }
+
   // Build Gemi兄's independent 1M Turn Trajectory SVG (viewBox 0 0 560 465)
-  function buildGemi1MSvg(raceTitle, branchTitle, branchSpec, entryOrder) {
+  // - OchaP-reference geometry: straight stand approach (M36..L286), circular 8-segment Bezier turn around (286,235), straight horizontal backstretch (L286..LxLineEnd)
+  // - Course 1..6 tactical scenario engine with realistic post-turn trajectory crossings (差し / まくり / まくり差し / 二番差し / 最内小回り)
+  function buildGemi1MSvg(raceTitle, branchTitle, branchSpec, entryOrder, slitCourses, article) {
     if (!branchSpec || !branchSpec.winner) return '';
     const winner = Number(branchSpec.winner);
-    const method = String(branchSpec.method || '逃げ');
+    const method = String(branchSpec.method || '');
     const order2 = Array.isArray(branchSpec.order_2nd) ? branchSpec.order_2nd.map(Number) : [];
+    const order3 = Array.isArray(branchSpec.order_3rd) ? branchSpec.order_3rd.map(Number) : [];
     const fullOrder = [winner, ...order2.filter(b => b !== winner)];
+    for (const b of order3) {
+      if (!fullOrder.includes(b)) fullOrder.push(b);
+    }
     for (let b = 1; b <= 6; b++) {
       if (!fullOrder.includes(b)) fullOrder.push(b);
     }
-
     const courses = Array.isArray(entryOrder) && entryOrder.length === 6 ? entryOrder.map(Number) : [1, 2, 3, 4, 5, 6];
     const rankIndex = new Map();
     fullOrder.forEach((b, idx) => rankIndex.set(b, idx));
 
+    const stMap = new Map();
+    if (Array.isArray(slitCourses)) {
+      slitCourses.forEach(sc => {
+        const b = Number(sc?.boat);
+        const stVal = parseFloat(sc?.c_st ?? sc?.off_st);
+        if (b >= 1 && b <= 6 && !Number.isNaN(stVal)) stMap.set(b, stVal);
+      });
+    }
+    const wmMap = parseCourseWinMethods(article);
+
+    const baseRIn = [72.0, 94.0, 116.0, 138.0, 160.0, 182.0];
+    const rOuts = new Array(6).fill(0);
+
+    // Compute tactical exit radius rOut[cIdx] for each course (0..5) based on Boat Race 1M scenario patterns
+    courses.forEach((bNo, cIdx) => {
+      const rnk = rankIndex.get(bNo) ?? cIdx;
+      const isWinner = (bNo === winner);
+      const st = stMap.get(bNo) ?? 0.16;
+      const wm = wmMap[bNo] || { nige: 0, sashi: 0, makuri: 0, makurisashi: 0 };
+      const secondBoat = fullOrder[1];
+      const thirdBoat = fullOrder[2];
+
+      if (cIdx === 0) {
+        // 1コース: 逃げ成立時は72.0先マイ、逃げ崩壊時（差され・まくられ・まくり差され）は106.0へ膨らむ
+        rOuts[0] = isWinner ? 72.0 : 106.0;
+      } else if (cIdx === 1) {
+        // 2コース: 差し1着=78.0（1コース106.0の内をクロス差し抜け）、ジカまくり1着=112.0
+        if (isWinner) {
+          rOuts[1] = (method === 'まくり') ? 112.0 : 78.0;
+        } else if (winner === courses[0]) {
+          // イン逃げ成立時: 3コースがまくり差し2着(secondBoat===courses[2] && wm3.makurisashi>=wm3.makuri)なら2コースが112.0へ膨らみ3コース(106.0)とクロス
+          const b3 = courses[2];
+          const wm3 = wmMap[b3] || { sashi: 0, makuri: 0, makurisashi: 0 };
+          if (secondBoat === b3 && (wm3.makurisashi > wm3.makuri || rnk >= 3)) {
+            rOuts[1] = 112.0;
+          } else if (rnk === 1 || wm.sashi >= 7.0) {
+            rOuts[1] = 87.0; // コンパクトな差し追走
+          } else if (wm.makuri >= 10.0 && st <= 0.14) {
+            rOuts[1] = 112.0;
+          } else {
+            rOuts[1] = 94.0;
+          }
+        } else {
+          rOuts[1] = (rnk === 1 && wm.sashi >= wm.makuri) ? 87.0 : 94.0;
+        }
+      } else if (cIdx === 2) {
+        // 3コース: まくり差し1着=84.0（1・2コースをクロス割り）、差し1着=99.0、まくり1着=134.0
+        if (isWinner) {
+          if (method === 'まくり') rOuts[2] = 134.0;
+          else if (method === '差し') rOuts[2] = 99.0;
+          else rOuts[2] = 84.0;
+        } else if (winner === courses[0]) {
+          // イン逃げ成立時: 2コースが膨らみ(112.0)で3コースがまくり差し2着なら106.0/99.0で内へクロス、それ以外は外マイ握り(134.0/124.0)
+          if (rOuts[1] >= 112.0 && rnk <= 2) {
+            rOuts[2] = wm.sashi >= 4.5 ? 99.0 : 106.0;
+          } else if (wm.sashi >= 4.5 && wm.sashi > wm.makuri && rnk <= 2) {
+            rOuts[2] = 99.0;
+          } else if (wm.makurisashi > wm.makuri && wm.makurisashi >= 11.0 && rnk === 1 && secondBoat === bNo && thirdBoat !== courses[3]) {
+            rOuts[2] = 106.0;
+          } else if (rnk <= 2 || wm.makuri >= 5.0 || st <= 0.15) {
+            rOuts[2] = 134.0; // 3コース外マイ・ツケマイ攻め
+          } else {
+            rOuts[2] = 124.0;
+          }
+        } else {
+          if (winner === courses[3] && method === 'まくり差し') {
+            rOuts[2] = 124.0; // 4コースに叩かれ外へ
+          } else if (rnk <= 2 && wm.makurisashi > wm.makuri && rOuts[1] >= 94.0) {
+            rOuts[2] = 106.0;
+          } else {
+            rOuts[2] = (rnk <= 2 || wm.makuri >= 8.0) ? 134.0 : 124.0;
+          }
+        }
+      } else if (cIdx === 3) {
+        // 4コース: カドまくり1着=156.0、カドまくり差し/差し1着=90.0（1〜3コースを斜めに横断クロス）
+        if (isWinner) {
+          rOuts[3] = (method === 'まくり') ? 156.0 : 90.0;
+        } else if (winner === courses[4] && method === 'まくり差し') {
+          rOuts[3] = 127.0; // 4コースがカドから仕掛けて5コースのまくり差しスペースを開ける
+        } else if (rOuts[2] >= 124.0 && (rnk <= 3 || wm.sashi + wm.makurisashi >= wm.makuri)) {
+          // 3コースが外マイ(124/134)で握った懐へ4コースが二番差し・まくり差し(119.0)でクロス切り込み！
+          rOuts[3] = (wm.sashi >= 6.0 && wm.makuri === 0) ? 111.0 : 119.0;
+        } else if (wm.makuri >= 7.0 || st <= 0.14 || (rnk === 1 && wm.makuri > wm.makurisashi)) {
+          rOuts[3] = 156.0; // カド外マイ強襲
+        } else {
+          rOuts[3] = 146.0;
+        }
+      } else if (cIdx === 4) {
+        // 5コース: まくり差し1着=96.0（内4艇の懐へ大クロス）、まくり1着=168.0
+        if (isWinner) {
+          rOuts[4] = (method === 'まくり') ? 168.0 : 96.0;
+        } else if ((rnk <= 2 && rOuts[3] >= 138.0) || (wm.makurisashi >= 4.8 && rOuts[3] >= 146.0)) {
+          // 4コースが外(138/146/156)へ行った内側へ5コースがまくり差し(132.0)でクロス切り込み！
+          rOuts[4] = 132.0;
+        } else if (rnk >= 4 || st >= 0.18) {
+          rOuts[4] = 168.0;
+        } else {
+          rOuts[4] = 160.0;
+        }
+      } else if (cIdx === 5) {
+        // 6コース: まくり差し/差し1着=102.0、2〜3着浮上時は最内小回り差し(135.0/145.0)で4・5コースの内へクロス！
+        if (isWinner) {
+          rOuts[5] = (method === 'まくり') ? 182.0 : 102.0;
+        } else if (rnk <= 2 || wm.sashi >= 4.5) {
+          rOuts[5] = (rnk === 1 || wm.sashi >= 4.5) ? 135.0 : 145.0;
+        } else {
+          rOuts[5] = 182.0;
+        }
+      }
+    });
+
+    const xBoatByRank = [68.0, 138.0, 208.0, 278.0, 168.0, 248.0];
     const pathsSvg = [];
     const boatsSvg = [];
+    const placedBoats = [];
 
     courses.forEach((bNo, cIdx) => {
-      const yStart = 301.24 + cIdx * 20.24;
+      const rIn = baseRIn[cIdx] || (72.0 + cIdx * 22.0);
+      const rOut = rOuts[cIdx] || rIn;
       const rnk = rankIndex.get(bNo) ?? cIdx;
       const isWinner = (bNo === winner);
       const pal = BOAT_PALETTE[bNo] || BOAT_PALETTE[1];
 
-      let xApex = 362 + cIdx * 19;
-      let yEnd = 165 - cIdx * 18;
-      if (isWinner) {
-        if (method === '逃げ') {
-          xApex = 358;
-          yEnd = 168.5;
-        } else if (method === '差し') {
-          xApex = 370;
-          yEnd = 164.0;
-        } else if (method === 'まくり差し') {
-          xApex = 384;
-          yEnd = 156.0;
-        } else {
-          xApex = 418;
-          yEnd = 104.0;
+      const yStart = 235.0 + 0.92 * rIn;
+      const yEnd = 235.0 - 0.92 * rOut;
+      let xBoat = xBoatByRank[rnk] || 208.0;
+      if (placedBoats.some(([px, py]) => Math.abs(yEnd - py) < 28.0 && Math.abs(xBoat - px) < 64.0)) {
+        const cands = [68.0, 138.0, 168.0, 208.0, 248.0, 278.0, 128.0, 303.0].sort((a, b) => Math.abs(a - xBoat) - Math.abs(b - xBoat));
+        for (const cand of cands) {
+          if (placedBoats.every(([qx, qy]) => !(Math.abs(yEnd - qy) < 28.0 && Math.abs(cand - qx) < 64.0))) {
+            xBoat = cand;
+            break;
+          }
         }
-      } else if (bNo === 1 && winner !== 1) {
-        if (method === 'まくり') {
-          xApex = 374;
-          yEnd = 142.0;
-        } else {
-          xApex = 376;
-          yEnd = 136.0;
-        }
-      } else {
-        yEnd = 160 - cIdx * 16 + (rnk - cIdx) * 4;
-        yEnd = Math.max(66, Math.min(176, yEnd));
+      }
+      placedBoats.push([xBoat, yEnd]);
+      const xLineEnd = xBoat - 23.0;
+
+      function evalPt(u) {
+        const s = 3.0 * u * u - 2.0 * u * u * u;
+        const ds = 6.0 * u * (1.0 - u);
+        const R = rIn + (rOut - rIn) * s;
+        const dR = (rOut - rIn) * ds;
+        const th = Math.PI * u;
+        const x = 286.0 + R * Math.sin(th);
+        const y = 235.0 + 0.92 * R * Math.cos(th);
+        const dx = dR * Math.sin(th) + Math.PI * R * Math.cos(th);
+        const dy = 0.92 * (dR * Math.cos(th) - Math.PI * R * Math.sin(th));
+        return [x, y, dx, dy];
       }
 
-      const xBoatByRank = [68, 128, 178, 224, 258, 284][rnk] || 240;
-      const xLineEnd = Math.max(44, xBoatByRank - 22);
+      const segs = [];
+      for (let k = 0; k < 8; k++) {
+        const u0 = k / 8.0, u1 = (k + 1) / 8.0;
+        const [x0, y0, dx0, dy0] = evalPt(u0);
+        const [x1, y1, dx1, dy1] = evalPt(u1);
+        const c1x = x0 + dx0 / 24.0, c1y = y0 + dy0 / 24.0;
+        const c2x = x1 - dx1 / 24.0, c2y = y1 - dy1 / 24.0;
+        segs.push(`C${c1x.toFixed(3)} ${c1y.toFixed(3)} ${c2x.toFixed(3)} ${c2y.toFixed(3)} ${x1.toFixed(3)} ${y1.toFixed(3)}`);
+      }
 
-      const cp1x = (286 + (xApex - 286) * 0.92).toFixed(1);
-      const cp2x = xApex.toFixed(1);
-      const dPath = `M36 ${yStart.toFixed(1)} L286 ${yStart.toFixed(1)} C${cp1x} ${yStart.toFixed(1)} ${cp2x} ${(yStart - 18).toFixed(1)} ${cp2x} 235.0 C${cp2x} ${(yEnd + 18).toFixed(1)} ${cp1x} ${yEnd.toFixed(1)} 286 ${yEnd.toFixed(1)} L${xLineEnd.toFixed(1)} ${yEnd.toFixed(1)}`;
+      const dPath = `M36 ${yStart.toFixed(3)}L286 ${yStart.toFixed(3)}${segs.join('')}L${xLineEnd.toFixed(3)} ${yEnd.toFixed(3)}`;
 
-      const outlineW = isWinner ? '8.4' : '5.5';
-      const mainW = isWinner ? '5.8' : '3.1';
+      const [xm, ym, dxm, dym] = evalPt(0.5);
+      const norm = Math.hypot(dxm, dym) || 1.0;
+      const tx = dxm / norm, ty = dym / norm;
+      const nx = -ty, ny = tx;
+      const bx = xm - 7.7 * tx, by = ym - 7.7 * ty;
+      const pLx = bx + 4.7 * nx, pLy = by + 4.7 * ny;
+      const pRx = bx - 4.7 * nx, pRy = by - 4.7 * ny;
+
+      const outlineW = isWinner ? '8.2' : '5.5';
+      const mainW = isWinner ? '5.7' : '3';
       const outlineColor = bNo === 1 ? '#889f98' : '#ffffff';
 
       pathsSvg.push(
         `<path d="${dPath}" fill="none" stroke="${outlineColor}" stroke-width="${outlineW}" stroke-linecap="round"/>`,
         `<path d="${dPath}" fill="none" stroke="${pal.fill}" stroke-width="${mainW}" stroke-linecap="round"/>`,
-        `<path d="M${xApex.toFixed(1)} 235.0 L${(xApex + 4.7).toFixed(1)} 242.7 L${(xApex - 4.7).toFixed(1)} 242.7 Z" fill="${pal.fill}" stroke="#526f66" stroke-width="0.6"/>`
+        `<path d="M${xm.toFixed(1)} ${ym.toFixed(1)}L${pLx.toFixed(1)} ${pLy.toFixed(1)}L${pRx.toFixed(1)} ${pRy.toFixed(1)}Z" fill="${pal.fill}" stroke="#526f66" stroke-width=".5"/>`
       );
 
       boatsSvg.push(
-        `<g transform="translate(${xBoatByRank.toFixed(1)} ${yEnd.toFixed(1)})">
-          <path transform="rotate(180)" d="M-23 -14H9Q21 -14 31 0Q21 14 9 14H-23Z" fill="${pal.fill}" stroke="${pal.stroke}" stroke-width="${isWinner ? '2.2' : '1.5'}"/>
+        `<g transform="translate(${xBoat.toFixed(2)} ${yEnd.toFixed(2)})">
+          <path transform="rotate(180)" d="M-23 -14H9Q21 -14 31 0Q21 14 9 14H-23Z" fill="${pal.fill}" stroke="${pal.stroke}" stroke-width="1.5"/>
           <text x="1" y="7" text-anchor="middle" font-size="21" font-weight="800" fill="${pal.text}">${bNo}</text>
         </g>`
       );
     });
 
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 465" role="img" aria-label="${esc(raceTitle)} ${esc(branchTitle)}">
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 465" class="turn-svg" role="img" aria-label="${esc(raceTitle)} ${esc(branchTitle)} ${winner}${esc(method)}">
       <style>text{font-family:system-ui,-apple-system,sans-serif}</style>
       <rect width="560" height="465" rx="12" fill="#dfedf0"/>
-      <text x="18" y="28" font-size="13" font-weight="700" fill="#2c5446">Gemi兄 独自1M展開図｜${esc(branchTitle)}（1着：${winner}号艇 ${esc(method)}）</text>
       ${pathsSvg.join('')}
       ${boatsSvg.join('')}
-      <circle cx="286" cy="235" r="15" fill="#fff5eb" stroke="#b54b43" stroke-width="1.5"/>
+      <circle cx="286" cy="235" r="15" fill="#fff5eb" stroke="#b54b43"/>
       <path d="M286 215L276 246H296Z" fill="#d54a45"/>
-      <text x="250" y="275" font-size="13" font-weight="700" fill="#526e68">1マーク</text>
+      <text x="250" y="275" font-size="13" fill="#526e68">1マーク</text>
     </svg>`;
   }
 
@@ -208,8 +384,6 @@
   let issueMeta = {};
   let sharedInputMeta = null;
   const panes = new Map();
-  // Refuse Gemini copy that claims to be an OchaP forecast.
-  const WRONG_REPORTER_LABEL = /(?:おちゃっぴー|お茶P記者|ChatGPT|🍵P)(?:の|による)?\s*予想/;
 
   function resolveRaceRecord(raceId) {
     if (!raceId) return null;
@@ -222,35 +396,13 @@
     return null;
   }
 
-  function modeBadgeText(rec) {
-    if (rec?.m0_status === 'LATE_RECOVERED_REFERENCE_NOT_FROZEN_M0' || issueMeta?.m0_status === 'LATE_RECOVERED_REFERENCE_NOT_FROZEN_M0') {
-      if (rec?.frozen_before_race_closing === true) {
-        return '【緊急復旧参照予想：09:17 JST遅延取得（07:00前正式M0対象外・当該R締切前凍結／日和不足238名は未取得明記）】';
-      }
-      return '【締切後・緊急復旧参照検証：09:17 JST遅延取得（07:00前正式M0/実戦集計対象外）】';
-    }
-    const isRetro = Boolean(
-      rec?.retrospective === true ||
-      issueMeta?.retrospective === true ||
-      issueMeta?.execution_mode === 'retrospective_m0_input_test' ||
-      String(issueMeta?.execution_mode || '').includes('retrospective')
-    );
-    if (isRetro) {
-      return '【事後検証：共通M0入力固定テスト（締切前実戦M0・vs集計対象外）】';
-    }
-    if (rec?.published_before_cutoff === true) {
-      return '【当日締切前M0凍結】';
-    }
-    return '【M0予想原稿】';
-  }
-
   function gemiQuickBanner(raceId) {
     const rec = resolveRaceRecord(raceId);
     if (!rec) {
       return `<div class="ochap-gemi-quickbar"><b>✦ Gemi兄記者</b>：このレースは原稿未登録です。</div>`;
     }
     if (rec.status === 'missed_cutoff') {
-      return `<div class="ochap-gemi-quickbar"><b>✦ Gemi兄記者</b>：締切前M0凍結に間に合わなかったため欠測（事後予想非掲載）です。</div>`;
+      return `<div class="ochap-gemi-quickbar"><b>✦ Gemi兄記者</b>：予想未掲載</div>`;
     }
     if (rec.status !== 'published' || !rec.freeze_at || !rec.source_ref) {
       return `<div class="ochap-gemi-quickbar"><b>✦ Gemi兄記者</b>：このレースは原稿未登録です。</div>`;
@@ -267,10 +419,9 @@
       <div class="ochap-gemi-quickrow">
         <span><b>✦ Gemi兄 印</b>：<b>◎</b> ${boatBadge(marks.main)}　<b>○</b> ${boatBadge(marks.second)}　<b>▲</b> ${boatBadge(marks.third)}　<b>△</b> ${boatBadge(marks.fourth)}</span>
         <span><b>決まり手</b>：${boatBadge(marks.main)} <b>${esc(rec.predicted_method || '—')}</b></span>
-        <span><b>本線${Array.isArray(bets.main)?bets.main.length:0}点</b>：${renderComboList(bets.main)}</span>
+        <span><b>本線${Array.isArray(bets.main) ? bets.main.length : 4}点</b>：${renderComboList(bets.main)}</span>
         <span><b>逆張り</b>：${formatAxisInline(revSummary.axis || (Array.isArray(bets.reverse) && bets.reverse[0] ? bets.reverse[0].slice(0,3)+'-流' : ''))}</span>
         <span><b>舟券ナビ</b>：${naviDetails.status === 'recommended' ? formatAxisInline(naviDetails.axis || (Array.isArray(bets.navi) && bets.navi[0] ? bets.navi[0].slice(0,3)+'-流' : '')) : '<span class="note">見送り</span>'}</span>
-        ${issueDate === '2026-11-01' ? '' : `<span class="note">${esc(modeBadgeText(rec))}</span>`}
       </div>
     </div>`;
   }
@@ -281,17 +432,13 @@
       return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">このレースは原稿未登録です。</p></section>`;
     }
     if (rec.status === 'missed_cutoff') {
-      return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">このレースは締切時刻（${esc(rec.closing_at || '締切')}）前に両記者のM0凍結が完了しなかったため欠測扱いとし、事後予想は掲載しません。</p></section>`;
+      return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">予想未掲載</p></section>`;
     }
     if (rec.status !== 'published' || !rec.freeze_at || !rec.source_ref) {
       return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">このレースは原稿未登録です。</p></section>`;
     }
     if (sharedInputMeta && sharedInputMeta.sha256 && rec.input_sha256 && rec.input_sha256 !== sharedInputMeta.sha256) {
       return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">共通入力ハッシュ不一致のため表示を停止しました。</p></section>`;
-    }
-    const editorialText = JSON.stringify({reason: rec.reason, scenarios: rec.scenarios, st_comment: rec.st_comment, first_mark: rec.first_mark, navi_details: rec.navi_details});
-    if (WRONG_REPORTER_LABEL.test(editorialText)) {
-      return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">記者名の整合性検査に失敗したため、この原稿の表示を停止しました。</p></section>`;
     }
     const raceTitle = article?.querySelector('.race-head h2')?.textContent || raceId;
     const bets = rec.bets || {};
@@ -303,9 +450,13 @@
     const colBranch = diag.collapse_branch || { winner: Number(marks.main) !== 1 ? Number(marks.main) : Number(marks.second) || 3, method: rec.predicted_method !== '逃げ' ? rec.predicted_method : 'まくり差し', order_2nd: [1,2,4,5,6], order_3rd: [2,1,4,5,6] };
     const entryOrder = diag.entry_order || [1, 2, 3, 4, 5, 6];
 
+    const pause1MTurnDiagrams = Boolean(
+      (issueDate && issueDate >= '2026-11-09') ||
+      diag.pause_1m_turn_svg === true
+    );
     const slitSvg = buildGemiSlitSvg(raceTitle, slitCourses);
-    const escSvg = buildGemi1MSvg(raceTitle, '①逃げ成立', escBranch, entryOrder);
-    const colSvg = buildGemi1MSvg(raceTitle, '①逃げ崩壊', colBranch, entryOrder);
+    const escSvg = pause1MTurnDiagrams ? '' : buildGemi1MSvg(raceTitle, '①逃げ成立', escBranch, entryOrder, slitCourses, article);
+    const colSvg = pause1MTurnDiagrams ? '' : buildGemi1MSvg(raceTitle, '①逃げ崩壊', colBranch, entryOrder, slitCourses, article);
 
     const slitTableRows = slitCourses.map(r => `
       <tr>
@@ -328,8 +479,7 @@
       ? `<div class="combo">${formatAxisInline(naviDetails.axis)}</div>`
       : `<div class="combo"><span class="note">見送り（推奨不成立）</span></div>`;
 
-    const shaShort = String(rec.input_sha256 || sharedInputMeta?.sha256 || '').slice(0, 12);
-    const snapId = sharedInputMeta?.snapshot_id || `OCHAP_SHARED_INPUT_${String(issueDate || '').replaceAll('-','')}_M0_v1`;
+
 
     return `
       <section class="section">
@@ -340,35 +490,35 @@
       </section>
 
       <section class="section">
-        <h3>04 展開予想（Gemi兄独自1M旋回図）</h3>
-        <div class="diagram-grid">
+        <h3>${pause1MTurnDiagrams ? '04 展開予想（①逃げ成立／①逃げ崩壊 シナリオ・着順比較）' : '04 展開予想（Gemi兄独自1M旋回図）'}</h3>
+        ${pause1MTurnDiagrams ? '' : `<div class="diagram-grid">
           <details class="diagram-branch" open>
             <summary>①逃げ成立｜予想決まり手：${boatBadge(1)} 逃げ</summary>
             ${escSvg ? `<figure>${escSvg}</figure>` : ''}
             <p>${esc(scenario.escape || '')}</p>
-            <p class="diagram-ranks">2着：${renderRankChain(escBranch.order_2nd)}<br>3着：${renderRankChain(escBranch.order_3rd)}</p>
+            <p class="diagram-ranks">2着：${renderRankChain(escBranch.order_2nd || escBranch.order2)}<br>3着：${renderRankChain(escBranch.order_3rd || escBranch.order3)}</p>
           </details>
           <details class="diagram-branch" open>
             <summary>①逃げ崩壊｜予想決まり手：${boatBadge(colBranch.winner)} ${esc(colBranch.method)}</summary>
             ${colSvg ? `<figure>${colSvg}</figure>` : ''}
             <p>${esc(scenario.collapse || '')}</p>
-            <p class="diagram-ranks">2着：${renderRankChain(colBranch.order_2nd)}<br>3着：${renderRankChain(colBranch.order_3rd)}</p>
+            <p class="diagram-ranks">2着：${renderRankChain(colBranch.order_2nd || colBranch.order2)}<br>3着：${renderRankChain(colBranch.order_3rd || colBranch.order3)}</p>
           </details>
-        </div>
+        </div>`}
         <p class="lead">${esc(rec.reason || '解説未登録')}</p>
         ${rec.first_mark ? `<p>${esc(rec.first_mark)}</p>` : ''}
         <div class="grid">
           <div class="panel">
             <h3>①逃げ成立｜予想決まり手：${boatBadge(1)} 逃げ</h3>
-            <p>${esc(escBranch.caption || '')}</p>
-            <p>2着：${renderRankChain(escBranch.order_2nd)}</p>
-            <p>3着：${renderRankChain(escBranch.order_3rd)}</p>
+            <p>${esc(scenario.escape || escBranch.caption || '')}</p>
+            <p>2着：${renderRankChain(escBranch.order_2nd || escBranch.order2)}</p>
+            <p>3着：${renderRankChain(escBranch.order_3rd || escBranch.order3)}</p>
           </div>
           <div class="panel">
             <h3>①逃げ崩壊｜予想決まり手：${boatBadge(colBranch.winner)} ${esc(colBranch.method)}</h3>
-            <p>${esc(colBranch.caption || '')}</p>
-            <p>2着：${renderRankChain(colBranch.order_2nd)}</p>
-            <p>3着：${renderRankChain(colBranch.order_3rd)}</p>
+            <p>${esc(scenario.collapse || colBranch.caption || '')}</p>
+            <p>2着：${renderRankChain(colBranch.order_2nd || colBranch.order2)}</p>
+            <p>3着：${renderRankChain(colBranch.order_3rd || colBranch.order3)}</p>
           </div>
         </div>
       </section>
@@ -395,30 +545,175 @@
             <p>${esc(naviDetails.reason || naviDetails.axis_reason || '')}</p>
           </div>
         </div>
-        ${issueDate === '2026-11-01' ? '' : `<p class="ochap-gemi-details">${esc(modeBadgeText(rec))} ｜ 予想凍結：${esc(rec.freeze_at)} ／ 共通入力：${esc(snapId)} (SHA256:${esc(shaShort)}…) ／ 原本：${esc(rec.source_ref)}</p>`}
       </section>`;
   }
 
-  function reporterView(article, showGemi) {
+  const WRONG_REPORTER_LABEL = /Gemi兄|Gemini/i;
+  let batchSwitch = false;
+  let floatingSwitch = null;
+
+  function scrollInstantBy(delta) {
+    if (!(Math.abs(delta) > 1)) return;
+    const htmlEl = document.documentElement;
+    const prev = htmlEl ? htmlEl.style.scrollBehavior : '';
+    if (htmlEl) htmlEl.style.scrollBehavior = 'auto';
+    window.scrollBy(0, delta);
+    if (htmlEl) htmlEl.style.scrollBehavior = prev;
+  }
+
+  const digestRows = new Map();
+
+  function bnumSpan(num) {
+    const n = String(num ?? '').trim();
+    return /^[1-6]$/.test(n) ? `<span class="bnum b${n}">${n}</span>` : esc(n || '—');
+  }
+
+  function renderDigestTicket(comboStr, rankNum, reasonStr, showRank) {
+    const parts = String(comboStr ?? '').trim().split('-');
+    const comboHtml = parts.length === 3
+      ? `${bnumSpan(parts[0])}-${bnumSpan(parts[1])}-${bnumSpan(parts[2])}`
+      : esc(comboStr);
+    const rankHtml = showRank ? `<small>${rankNum}位</small>` : '';
+    const rsnHtml = reasonStr ? `<small class="ticket-reason">${esc(reasonStr)}</small>` : '';
+    return `<b class="ticket">${rankHtml}${comboHtml}${rsnHtml}</b>`;
+  }
+
+  function detectArticleOchaUnissued(article, hiddenNodes) {
+    if (!article) return false;
+    if (article.dataset.ochaUnissued === 'true') return true;
+    const nodes = hiddenNodes || Array.from(article.children);
+    const text = nodes.map(n => n.textContent || '').join(' ');
+    if (/おちゃっぴー未発行|予想なし/.test(text)) return true;
+    const hasOchaTicket = nodes.some(n => n.querySelector && n.querySelector('.ticket, .picks'));
+    return !hasOchaTicket && /未発行/.test(text);
+  }
+
+  function initDigestRows() {
+    const digest = document.getElementById('digest');
+    if (!digest) return;
+    const ths = Array.from(digest.querySelectorAll('thead th')).map(th => (th.textContent || '').trim());
+    const hasReporterCol = ths.some(t => /記者/.test(t));
+    const supportsRankOrder = ths.some(t => /支持順|順位/.test(t));
+    for (const tr of digest.querySelectorAll('tbody tr')) {
+      let raceId = null;
+      const jumpLink = tr.querySelector('a.racejump[href^="#"], a[href^="#v"]');
+      if (jumpLink) {
+        raceId = jumpLink.getAttribute('href').slice(1);
+      } else if (tr.dataset.venue && tr.dataset.race) {
+        raceId = `v${tr.dataset.venue}-r${tr.dataset.race}`;
+      }
+      if (!raceId || digestRows.has(raceId)) continue;
+      const tds = Array.from(tr.children);
+      if (tds.length < 5) continue;
+      const article = document.getElementById(raceId);
+      const paneInfo = article ? panes.get(article) : null;
+      const rowText = tr.textContent || '';
+      const rowHasGemiLabel = WRONG_REPORTER_LABEL.test(rowText) || tr.dataset.reporter === 'gemi';
+      const ochaUnissued = detectArticleOchaUnissued(article, paneInfo?.hideInGemi) || rowHasGemiLabel || /おちゃっぴー未発行/.test(rowText);
+      const initialCells = tds.slice(2).map(td => td.innerHTML);
+      const initialHasTickets = tds.slice(2).some(td => td.querySelector('.ticket'));
+      digestRows.set(raceId, {
+        tr,
+        hasReporterCol: hasReporterCol || tds.length >= 6,
+        supportsRankOrder,
+        ochaUnissued,
+        ochaCells: (!ochaUnissued) ? initialCells : null,
+        gemiInitialCells: (ochaUnissued && initialHasTickets) ? initialCells : null,
+      });
+    }
+  }
+
+  function buildUnissuedOchaDigestCells(rowInfo) {
+    if (rowInfo.hasReporterCol) {
+      return ['お茶P', '—', '—', '<span class="note ochap-digest-unissued">おちゃっぴー未発行（予想なし）</span>'];
+    }
+    return ['—', '—', '<span class="note ochap-digest-unissued">おちゃっぴー未発行（予想なし）</span>'];
+  }
+
+  function buildGemiDigestCells(raceId, rowInfo) {
+    const rec = resolveRaceRecord(raceId);
+    if (!rec || rec.status !== 'published' || !rec.freeze_at || !rec.source_ref) {
+      if (rowInfo.gemiInitialCells) return rowInfo.gemiInitialCells;
+      const msg = rec?.status === 'missed_cutoff'
+        ? '<span class="note ochap-digest-unissued">Gemi兄 未掲載</span>'
+        : '<span class="note ochap-digest-unissued">Gemi兄 未発行（予想なし）</span>';
+      return rowInfo.hasReporterCol ? ['Gemi兄', '—', '—', msg] : ['—', '—', msg];
+    }
+    if (sharedInputMeta && sharedInputMeta.sha256 && rec.input_sha256 && rec.input_sha256 !== sharedInputMeta.sha256) {
+      const msg = '<span class="note ochap-digest-unissued">共通入力SHA-256不一致</span>';
+      return rowInfo.hasReporterCol ? ['Gemi兄', '—', '—', msg] : ['—', '—', msg];
+    }
+    if (rowInfo.gemiInitialCells) {
+      const restored = rowInfo.gemiInitialCells.slice();
+      if (rowInfo.hasReporterCol && restored.length >= 4) restored[0] = 'Gemi兄';
+      return restored;
+    }
+    const marks = rec.marks || {};
+    const bets = Array.isArray(rec.bets?.main) ? rec.bets.main : [];
+    const reasonsByTicket = (rec.main_rank_reasons_by_ticket && typeof rec.main_rank_reasons_by_ticket === 'object')
+      ? rec.main_rank_reasons_by_ticket
+      : {};
+    const reasonsArr = Array.isArray(rec.main_rank_reasons) ? rec.main_rank_reasons : [];
+    const showRank = Boolean(rowInfo.supportsRankOrder || reasonsArr.length || Object.keys(reasonsByTicket).length);
+    const ticketsHtml = bets.length
+      ? `<div class="tickets">${bets.map((combo, idx) => {
+          const rObj = reasonsArr[idx];
+          const reasonText = typeof rObj === 'string'
+            ? rObj
+            : (rObj?.reason || reasonsByTicket[combo] || '');
+          return renderDigestTicket(combo, idx + 1, reasonText, showRank);
+        }).join('')}</div>`
+      : '<span class="note">未登録</span>';
+    const markHtml = marks.main ? `◎${bnumSpan(marks.main)}` : '—';
+    const methodHtml = esc(rec.predicted_method || '—');
+    if (rowInfo.hasReporterCol) {
+      return ['Gemi兄', markHtml, methodHtml, ticketsHtml];
+    }
+    return [markHtml, methodHtml, ticketsHtml];
+  }
+
+  function syncDigestRow(raceId, showGemi) {
+    const rowInfo = digestRows.get(raceId);
+    if (!rowInfo) return;
+    const tds = Array.from(rowInfo.tr.children);
+    const targetCells = showGemi
+      ? buildGemiDigestCells(raceId, rowInfo)
+      : (rowInfo.ochaUnissued || !rowInfo.ochaCells ? buildUnissuedOchaDigestCells(rowInfo) : rowInfo.ochaCells);
+    for (let i = 0; i < targetCells.length && (i + 2) < tds.length; i++) {
+      tds[i + 2].innerHTML = targetCells[i];
+    }
+    rowInfo.tr.dataset.ochapReporterActive = showGemi ? 'gemi' : 'ocha';
+  }
+
+  function reporterView(article, showGemi, preserveScroll = false) {
     const info = panes.get(article);
     if (!info) return;
+    const prevTop = preserveScroll ? article.getBoundingClientRect().top : null;
+    const { ochaButton, gemiButton, gemiBanner, gemiPane, hideInGemi, headingRewrites } = info;
     article.dataset.ochapReporterActive = showGemi ? 'gemi' : 'ocha';
-    for (const node of info.hideInGemi) {
-      node.classList.toggle('ochap-ocha-only', showGemi);
+    for (const node of hideInGemi) {
       node.hidden = showGemi;
+      node.classList.toggle('ochap-ocha-only', showGemi);
     }
-    info.gemiBanner.hidden = !showGemi;
-    info.gemiPane.hidden = !showGemi;
-    // Gate 5: The shared Section 02 is factual and must not be attributed to either reporter.
-    const sharedHeadings = info.sec02Heading ? [{node: info.sec02Heading, original: info.sec02OriginalText, neutral: '02 コース別6か月データ・決まり手'}] : [];
-    for (const item of sharedHeadings) item.node.textContent = showGemi ? item.neutral : item.original;
-    info.ochaButton.setAttribute('aria-pressed', String(!showGemi));
-    info.gemiButton.setAttribute('aria-pressed', String(showGemi));
+    for (const item of headingRewrites) {
+      item.node.textContent = showGemi ? item.neutral : item.original;
+    }
+    gemiBanner.hidden = !showGemi;
+    gemiPane.hidden = !showGemi;
+    ochaButton.setAttribute('aria-pressed', String(!showGemi));
+    gemiButton.setAttribute('aria-pressed', String(showGemi));
+    syncDigestRow(article.id, showGemi);
+    if (preserveScroll && prevTop !== null) {
+      const nextTop = article.getBoundingClientRect().top;
+      scrollInstantBy(nextTop - prevTop);
+    }
+    if (!batchSwitch) syncFloatingSwitch();
   }
 
   function setup(article) {
     const raceHead = article.querySelector(':scope > .race-head');
-    if (!raceHead) return;
+    if (!raceHead || article.dataset.ochapGemiSetup === '1' || article.querySelector(':scope > .ochap-report-tabs')) return;
+    article.dataset.ochapGemiSetup = '1';
     const tabs = document.createElement('div');
     tabs.className = 'ochap-report-tabs';
     tabs.setAttribute('role', 'group');
@@ -444,39 +739,75 @@
       /^\s*0[12]\s/.test(section.querySelector('h3')?.textContent || '')
     );
     const sharedSections = new Set(sharedList);
-    const sec02 = sharedList.find(section => /^\s*02\s/.test(section.querySelector('h3')?.textContent || ''));
-    const sec02Heading = sec02 ? sec02.querySelector('h3') : null;
-    const sec02OriginalText = sec02Heading ? sec02Heading.textContent : '';
+    const sharedHeadings = [
+      { match: /^\s*02\s/, neutral: '02 コース別6か月データ・決まり手' }
+    ];
+    const headingRewrites = [];
+    for (const section of sharedList) {
+      const h3 = section.querySelector('h3');
+      if (!h3) continue;
+      for (const spec of sharedHeadings) {
+        if (spec.match.test(h3.textContent || '')) {
+          headingRewrites.push({ node: h3, original: h3.textContent, neutral: spec.neutral });
+        }
+      }
+    }
 
     const pane = document.createElement('div');
     pane.className = 'ochap-gemi-pane';
     pane.hidden = true;
     pane.innerHTML = gemiContent(article.id, article);
 
-    // Place 03/04/05 of Gemi兄 right after Section 02 (exact same flow as OchaP's 03/04/05)
     const lastShared = sharedList.length ? sharedList[sharedList.length - 1] : banner;
     lastShared.insertAdjacentElement('afterend', pane);
 
-    const hiddenNodes = Array.from(article.children).filter(
-      x => x !== raceHead && x !== tabs && x !== banner && x !== pane && !sharedSections.has(x)
-    );
+    const copyDiv = article.querySelector(':scope > .copy');
+    let hiddenNodes;
+    if (copyDiv && !sharedList.length) {
+      const copySharedDetails = Array.from(copyDiv.querySelectorAll(':scope > details')).filter(det =>
+        /^\s*0[12]\s/.test(det.querySelector('summary')?.textContent || '')
+      );
+      for (const det of copySharedDetails) {
+        const sumEl = det.querySelector('summary');
+        if (sumEl && /^\s*02\s/.test(sumEl.textContent || '')) {
+          headingRewrites.push({ node: sumEl, original: sumEl.textContent, neutral: '02 コースデータ・決まり手' });
+        }
+      }
+      const sharedDetSet = new Set(copySharedDetails);
+      hiddenNodes = [
+        ...Array.from(article.children).filter(
+          x => x !== raceHead && x !== tabs && x !== banner && x !== pane && x !== copyDiv && !sharedSections.has(x)
+        ),
+        ...Array.from(copyDiv.children).filter(x => !sharedDetSet.has(x))
+      ];
+    } else {
+      hiddenNodes = Array.from(article.children).filter(
+        x => x !== raceHead && x !== tabs && x !== banner && x !== pane && !sharedSections.has(x)
+      );
+    }
+    for (const node of hiddenNodes) {
+      const editorialText = node.textContent || '';
+      if (WRONG_REPORTER_LABEL.test(editorialText)) {
+        node.dataset.ochapAttributionWarning = 'true';
+      }
+    }
     panes.set(article, {
       ochaButton: ocha,
       gemiButton: gemi,
       gemiBanner: banner,
       gemiPane: pane,
       hideInGemi: hiddenNodes,
-      sec02Heading,
-      sec02OriginalText,
+      headingRewrites,
     });
-    // Start with OchaP on every race. Missing OchaP predictions remain
-    // explicitly "未登録" until the reader chooses Gemini themselves.
-    reporterView(article, false);
-    ocha.addEventListener('click', () => { reporterView(article, false); syncFloatingSwitch(); });
-    gemi.addEventListener('click', () => { reporterView(article, true); syncFloatingSwitch(); });
+    ocha.addEventListener('click', () => reporterView(article, false, true));
+    gemi.addEventListener('click', () => reporterView(article, true, true));
   }
 
   articleNodes.forEach(setup);
+  initDigestRows();
+  for (const [article] of panes) {
+    syncDigestRow(article.id, article.dataset.ochapReporterActive === 'gemi');
+  }
   if (!issueDate) return;
   async function loadGemiIssueData(date) {
     for (const path of [`./data/gemi/${date}.json`, `./data/gemi/${date}.json.gz.b64.txt`]) {
@@ -502,25 +833,36 @@
         }
       } catch (_) {}
     }
+    const inlineEl = document.getElementById('ochap-gemi-payload');
+    if (inlineEl && inlineEl.textContent) {
+      try {
+        const clean = inlineEl.textContent.trim().replace(/\s+/g, '');
+        if (clean && ('DecompressionStream' in window)) {
+          const bin = atob(clean);
+          const bytes = Uint8Array.from(bin, c => c.charCodeAt(0));
+          const stream = new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+          const decompressed = await new Response(stream).text();
+          const parsed = JSON.parse(decompressed);
+          if (parsed && parsed.races && Object.keys(parsed.races).length > 0) return parsed;
+        }
+      } catch (_) {}
+    }
     return null;
   }
 
-  // A fixed, accessible, two-reporter switch remains available while scrolling.
-  // Per-race tabs still work independently; the floating switch applies to all races.
-  let floatingSwitch = null;
-  let batchSwitch = false;
-
   function syncFloatingSwitch() {
-    if (!floatingSwitch || batchSwitch) return;
-    let ocha = 0;
-    let gemi = 0;
+    if (!floatingSwitch) return;
+    let gemiCount = 0;
+    let ochaCount = 0;
     for (const [article] of panes) {
-      if (article.dataset.ochapReporterActive === 'gemi') gemi++;
-      else ocha++;
+      if (article.dataset.ochapReporterActive === 'gemi') gemiCount++;
+      else ochaCount++;
     }
-    floatingSwitch.ocha.setAttribute('aria-pressed', String(ocha > 0 && gemi === 0));
-    floatingSwitch.gemi.setAttribute('aria-pressed', String(gemi > 0 && ocha === 0));
-    floatingSwitch.wrap.title = ocha && gemi
+    const allGemi = gemiCount > 0 && ochaCount === 0;
+    const allOcha = ochaCount > 0 && gemiCount === 0;
+    floatingSwitch.ocha.setAttribute('aria-pressed', String(allOcha));
+    floatingSwitch.gemi.setAttribute('aria-pressed', String(allGemi));
+    floatingSwitch.wrap.title = (!allGemi && !allOcha)
       ? 'レースごとに記者の表示が異なります。押すと全レースを統一します。'
       : '表示中の位置から全レースの記者を切り替えます';
   }
@@ -551,7 +893,7 @@
     if (anchor) {
       const now = anchor.getBoundingClientRect();
       const desiredTop = previousTop > viewportTop ? previousTop : viewportTop - fraction * now.height;
-      window.scrollBy(0, now.top - desiredTop);
+      scrollInstantBy(now.top - desiredTop);
     }
   }
 
@@ -607,6 +949,7 @@
           info.gemiPane.innerHTML = gemiContent(article.id, article);
           // Do not auto-switch to Gemini when OchaP's M0 is missing.
           // Both journalists' forecasts remain separately attributed.
+          syncDigestRow(article.id, article.dataset.ochapReporterActive === 'gemi');
         }
       } finally {
         batchSwitch = false;

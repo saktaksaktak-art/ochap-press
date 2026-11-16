@@ -2,10 +2,10 @@
 
 ## 正本・復元基準
 - 公開先: https://saktaksaktak-art.github.io/ochap-press/
-- レース別の「05 データの母数・期間・取得日」は承認済みの例外として閲覧画面だけ非表示。凍結原本・印刷・コースデータ等に含まれる数値は維持する。
+- 2026-11-16承認の両記者共通出力ルール。明日以降の生成HTMLと遅延展開ペイロードには監査ハッシュ・取得/凍結時刻・原本ID・内部モード・05資料欄・指定の定型免責文を載せない。準備中のPDF欄も出さない。監査情報は予想原本JSON・裏側のJSON・発行レシートに維持する。11/16号は既存公開原本とレシートを保持したまま、読者用HTMLのみ分岐する。それ以前の原本と表示版は従来通り。
 - 既存HTMLの項目・説明・日付選択・場/R切替・記者タブ・結果速報・比較・舟券を維持する。閲覧画面には承認済みの白・ネイビー配色とページ内移動を共通資産として追加する。凍結HTMLと印刷用原本は変更しない。
 - 2026-11-09導入の公開表示削除フィルタ（`assets/reader-presentation.js`）は **表示系・生成系から切断**。過去の凍結予想・原本・JSON・結果は変更しない。
-- 承認済みの復元基準は `index.html` blob `7712143ea9449f61c6a083f39818b1835e2e4d6b`、`scripts/render_ochap_frozen.mjs` blob `a1241ffaf1617e396a4b8601f9544d4a1438056f`。
+- 承認済みの復元基準は `index.html` blob `cdb4e5c95025bc6438354e5e95c85a1a17aa1d15`、`scripts/render_ochap_frozen.mjs` blob `24ed2e7b317c935871e5f177effe32363cd2d22a`。
 - 2026-11-16承認で `index.html` の一致タブのJS読込版を更新。差し戻し時はこの承認に対応するPRをrevertする。
 - `scripts/check_press_ui_lock.sh` と `.github/workflows/check_reporter_attribution.yml` が基準からの逸脱を検知する。
 
@@ -37,3 +37,5 @@ Repository Settings → Rules → Rulesets または Branch protection で`main`
 - 管理者/自動化を含め例外なく、直接push禁止にする（自動公開は保護されたデータ専用の経路に分離）
 - 公開自動同期は`data/issue-index.json`・`archives/`・`data/gemi/`などの所定データに限定し、HTML共通UI資産への変更を禁止する
 - 現行GASは`main`への直接pushで日次自動公開しているので、保護を有効化する前に自動同期用の許可経路（PR経由または別のデータ用ブランチ）を整備し、正常な朝刊発行を止めないこと
+
+- 新規発行の `#ochap-rich-payload` は `ochap.editorial-fragments.v2`（発行日とST/展開解説のみ）。`scripts/check_public_editorial.py` でHTMLソース・解凍後・監査証跡の分離を検査する。
