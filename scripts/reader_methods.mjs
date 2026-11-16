@@ -106,5 +106,6 @@ export function renderReaderMethods(race, issueDate, baseline, badge, months=dis
     '</colgroup><thead><tr>'+['艇/C','母数','逃げ／逃し','差し','まくり','まくり差し'].map(h=>'<th scope="col">'+h+'</th>').join('')+
     '</tr></thead><tbody>'+rowHtml+'</tbody><tfoot>'+foot+'</tfoot></table>'+
     (grouping?'<p class="ochap-method-controls"><label>全国平均の比較コース <select data-ochap-baseline-picker>'+options+'</select></label></p>':'')+
-    '<p class="small">'+title+'・直近'+(months===12?'1年':'6か月')+'</p></div>';
+    '<p class="small">'+title+'・直近'+(months===12?'1年':'6か月')+
+    (grouping?'｜全国平均は公式結果の着順確定艇で集計':'')+'</p></div>';
 }
