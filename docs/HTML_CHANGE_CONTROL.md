@@ -4,8 +4,9 @@
 - 公開先: https://saktaksaktak-art.github.io/ochap-press/
 - 既存HTMLの見た目・項目・説明・日付選択・場/R切替・記者タブ・結果速報・比較・舟券を維持する。
 - 2026-11-09導入の公開表示削除フィルタ（`assets/reader-presentation.js`）は **表示系・生成系から切断**。過去の凍結予想・原本・JSON・結果は変更しない。
-- 承認済みの復元基準は `index.html` blob `05f46889f9aa6a24b443faa7f9687e4e05f50c6e`、`scripts/render_ochap_frozen.mjs` blob `a1241ffaf1617e396a4b8601f9544d4a1438056f`。
+- 承認済みの復元基準は `index.html` blob `d9e9062de7c55723ef6f2dbe7b68f12c0fb59078`、`scripts/render_ochap_frozen.mjs` blob `a1241ffaf1617e396a4b8601f9544d4a1438056f`。
 - 2026-11-16承認で `index.html` の一致タブのJS読込版を更新。差し戻し時はこの承認に対応するPRをrevertする。
+- 2026-11-16の特選レース実装依頼に基づき、公開時の特集タブ・特選バッジ・結果速報集計を追加。既存号は公開時に同じ資産を読み、保存済みの発行HTMLとB-2レンダラのblobは保持する。
 - `scripts/check_press_ui_lock.sh` と `.github/workflows/check_reporter_attribution.yml` が基準からの逸脱を検知する。
 
 ## 変更権限
