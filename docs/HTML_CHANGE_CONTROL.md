@@ -2,9 +2,10 @@
 
 ## 正本・復元基準
 - 公開先: https://saktaksaktak-art.github.io/ochap-press/
+- レース別の「05 データの母数・期間・取得日」は承認済みの例外として閲覧画面だけ非表示。凍結原本・印刷・コースデータ等に含まれる数値は維持する。
 - 既存HTMLの項目・説明・日付選択・場/R切替・記者タブ・結果速報・比較・舟券を維持する。閲覧画面には承認済みの白・ネイビー配色とページ内移動を共通資産として追加する。凍結HTMLと印刷用原本は変更しない。
 - 2026-11-09導入の公開表示削除フィルタ（`assets/reader-presentation.js`）は **表示系・生成系から切断**。過去の凍結予想・原本・JSON・結果は変更しない。
-- 承認済みの復元基準は `index.html` blob `12d50f1628faf73f589f6c9e3c12f4e84a909760`、`scripts/render_ochap_frozen.mjs` blob `a1241ffaf1617e396a4b8601f9544d4a1438056f`。
+- 承認済みの復元基準は `index.html` blob `3b13bf60ab73292497942d337e0f3d55903bcb6a`、`scripts/render_ochap_frozen.mjs` blob `a1241ffaf1617e396a4b8601f9544d4a1438056f`。
 - 2026-11-16承認で `index.html` の一致タブのJS読込版を更新。差し戻し時はこの承認に対応するPRをrevertする。
 - `scripts/check_press_ui_lock.sh` と `.github/workflows/check_reporter_attribution.yml` が基準からの逸脱を検知する。
 
