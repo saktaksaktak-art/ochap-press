@@ -1,5 +1,8 @@
 /* Shared reader skin. The archived article, print generator and ticket palette stay unchanged. */
 @media screen {
+  /* Per-race source appendix stays in the frozen/print copy, not the reader. */
+  article[id] details[data-rich-key$=":sources"]{display:none}
+
   body.ochap-navy-reader{
     --paper:#f7faff;--surface:#fff;--soft:#edf4fd;--soft-strong:#e5eefb;
     --ink:#183c65;--accent:#163f73;--muted:#506780;--line:#adc1d9;--divider:#cfdae9;

@@ -46,7 +46,7 @@
       '<link rel="stylesheet" href="./assets/ticket-colors.css?v=1">'+
       '<link rel="stylesheet" href="./assets/public-scorecard.css?v=2">'+
       (issue.gemi_tabs&&!bundledGemiStyle?'<link rel="stylesheet" href="./assets/gemi-reporter.css?v=20261101-floating-v2">':'')+
-      '<link rel="stylesheet" href="./assets/navy-reader.css?v=1">';
+      '<link rel="stylesheet" href="./assets/navy-reader.css?v=2">';
     const encoded=JSON.stringify(manifest).replace(/</g,'\\u003c');
     const setGlobals='<script>window.__OCHAP_ISSUE_INDEX__='+encoded+';window.__OCHAP_SELECTED_DATE__='+JSON.stringify(date)+';</'+'script>';
     const extraScripts=setGlobals+'<script src="./assets/date-nav.js"></'+'script>'+ (issue.gemi_tabs&&!bundledGemiScript?'<script src="./'+gemiScript+'?v=20261105-tables-v2"></'+'script>':'')+
