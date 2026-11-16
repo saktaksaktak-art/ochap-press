@@ -205,7 +205,7 @@
       area.append(make("h4","","2,000円以上の的中（"+hits.length+"件）"));
       area.append(table(["記者","場・R","出目","3連単払戻"],hits.map(x=>[
         x.reporter,x.record.venue+" "+x.record.race_no+"R",x.record.result.order.join("-"),
-        yen(x.record.result.trifecta_payout_yen)])));
+        yen(x.record.result.trifecta_payout_yen)]),"high"));
     }
     area.append(make("h4","","全レース的中一覧"));
     const hitAt=(r,author,k)=>{

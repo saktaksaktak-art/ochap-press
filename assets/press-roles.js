@@ -23,7 +23,15 @@
     btn.dataset.view = key;
     btn.textContent = text;
     btn.setAttribute('aria-pressed', 'false');
-    btn.addEventListener('click', () => switchView(key));
+    btn.addEventListener('click', () => {
+      switchView(key);
+      if(location.hash && ['http:','https:'].includes(location.protocol)){
+        const url=new URL(location.href);
+        url.hash='';
+        history.replaceState(null,'',url.pathname+url.search);
+      }
+      window.scrollTo(0,0);
+    });
     controls[key] = btn;
     nav.append(btn);
   }
