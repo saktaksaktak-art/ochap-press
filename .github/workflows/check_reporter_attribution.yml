@@ -28,6 +28,7 @@ jobs:
           node scripts/test_hit_reporters.js
           node scripts/test_consensus_categories.js
           node scripts/test_special_races.js
+          node --test tests/test_press_publisher_timing.cjs
           python3 scripts/check_published_ticket_loading.py
           python3 scripts/check_public_editorial.py
           node --test tests/test_reader_methods.mjs
@@ -59,8 +60,8 @@ jobs:
           python -m unittest discover -s tests -p 'test_public_results*.py' -v
           node scripts/test_results_flash_dispatcher.js
 
-      - name: Verify the 390px newspaper layout in Chrome
-        if: github.event_name == 'pull_request' && (startsWith(github.head_ref, 'fix/special-races') || startsWith(github.head_ref, 'feat/navy-newspaper') || startsWith(github.head_ref, 'fix/reader-race-source-details') || startsWith(github.head_ref, 'feat/compact-reader') || startsWith(github.head_ref, 'fix/reader-course-copy') || startsWith(github.head_ref, 'fix/reader-registration-search') || startsWith(github.head_ref, 'feat/reader-favorite-venues') || startsWith(github.head_ref, 'feat/public-editorial-cleanup') || startsWith(github.head_ref, 'fix/results-section-order'))
+      - name: Verify production-shaped newspaper in Chrome
+        if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
         run: |
           python3 -m pip install --quiet playwright
           python3 scripts/check_special_browser.py

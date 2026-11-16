@@ -4,7 +4,6 @@ from functools import partial
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import re
-import json
 from threading import Thread
 from playwright.sync_api import expect, sync_playwright
 
@@ -21,16 +20,12 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
     errors = []
     page.on("pageerror", lambda error: errors.append(str(error)))
 
-    # Exercise both UI states without changing production receipt evidence. The live
-    # 11/16 index may record a post-close observation, which correctly hides picks.
+    # Read the unmodified production index, including real first-publication evidence.
     page.goto(url + "2026-11-16")
     expect(page.locator("#v18-r1")).to_be_visible()
     expect(page.locator('script[src*="20261116-editorial-clean"]')).to_have_count(1)
     expect(page.locator('article details[data-rich-key$=":sources"]')).to_have_count(0)
-    index_fixture = json.loads((ROOT / "data/issue-index.json").read_text())
-    first_issue = next(issue for issue in index_fixture["issues"] if issue["date"] == "2026-11-16")
-    first_issue.pop("gemi_first_publication_confirmed_at_jst", None)
-    page.route("**/data/issue-index.json", lambda route: route.fulfill(json=index_fixture))
+    expect(page.locator('#cards .special-badges')).to_have_count(12)
 
     page.goto(url + "2026-11-16&view=special")
     cards = page.locator(".special-card")
@@ -69,6 +64,9 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
     )
     page.get_by_role("button", name="記者比較", exact=True).click()
     expect(page.locator(".ochap-score-compact")).to_be_visible()
+    page.locator('details[data-drawer=notes] > summary').click()
+    expect(page.locator('.ochap-score-note').filter(has_text=re.compile(r'^Gemi兄：.*3連単 \d+/120'))).to_be_visible()
+    expect(page.locator('.ochap-score-empty').filter(has_text='Gemi兄')).to_have_count(0)
     page.locator('details[data-drawer=categories] > summary').click()
     expect(page.locator(".ochap-score-by-group")).to_be_visible()
     expect(page.locator(".ochap-score-by-group .ochap-score-denom").first).to_be_visible()
@@ -157,7 +155,7 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         course = first.locator(".compact-docket > details").nth(1)
         expect(course.get_by_text("データなし", exact=True)).to_be_visible()
         expect(course.get_by_text("対象外", exact=True)).to_have_count(0)
-        assert course.get_by_text("-", exact=True).count()
+        expect(course.locator('.ochap-method-table [aria-label="対象外"]').first).to_have_text(re.compile(r"^[-—]$"))
         assert course.get_by_text("未取得", exact=True).count()
         expect(course.get_by_text("保存元の連対率差分", exact=False)).to_have_count(0)
         expect(course.locator("th", has_text="2着%※")).to_have_count(0)

@@ -314,10 +314,12 @@ function OCHAP_PRESS_COMMIT_BUNDLES_TO_GITHUB_(bundles, token, cfg) {
     var directHtmlSha = OCHAP_PRESS_CREATE_BLOB_(apiBase, '<!doctype html><html lang="ja"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=./?date=' + b.date + '"><title>お茶P新聞</title><a href="./?date=' + b.date + '">新聞を開く</a></html>', token);
     treeEntries.push({ path: directHtmlPath, mode: '100644', type: 'blob', sha: directHtmlSha });
 
+    var sameGemiArtifact = false;
     // Stage data/gemi/YYYY-MM-DD.json.gz.b64.txt
     if (b.gemiGzB64Text) {
       var gemiB64Path = 'data/gemi/' + b.date + '.json.gz.b64.txt';
       var gemiB64Sha = OCHAP_PRESS_CREATE_BLOB_(apiBase, b.gemiGzB64Text, token);
+      sameGemiArtifact = OCHAP_PRESS_GEMI_ARTIFACT_MATCHES_(apiBase, headSha, preserved, gemiB64Path, gemiB64Sha, token);
       treeEntries.push({ path: gemiB64Path, mode: '100644', type: 'blob', sha: gemiB64Sha });
     }
 
@@ -359,7 +361,7 @@ function OCHAP_PRESS_COMMIT_BUNDLES_TO_GITHUB_(bundles, token, cfg) {
     }
     issueEntry.ochap_status = issueEntry.ochap_status || (issueEntry.forecast_sha256 ? 'published_original_preserved' : b.ochapStatus);
     issueEntry.gemi_status = b.gemiStatus;
-    if (b.gemiGzB64Text && !issueEntry.gemi_first_publication_confirmed_at_jst) issueEntry.gemi_first_publication_confirmed_at_jst = OCHAP_PRESS_NOW_JST_();
+    if (b.gemiGzB64Text) OCHAP_PRESS_RECORD_GEMI_SYNC_(issueEntry, sameGemiArtifact, OCHAP_PRESS_NOW_JST_());
 
     if (existingIdx >= 0) {
       manifest.issues[existingIdx] = issueEntry;
@@ -411,6 +413,34 @@ function OCHAP_PRESS_COMMIT_BUNDLES_TO_GITHUB_(bundles, token, cfg) {
     defaultDate: newestDate,
     publishedAtJst: OCHAP_PRESS_NOW_JST_()
   };
+}
+
+// Compare the compressed forecast at the pinned parent, not the Drive receipt's timestamp.
+function OCHAP_PRESS_GEMI_ARTIFACT_MATCHES_(apiBase, headSha, preserved, path, incomingSha, token) {
+  if (!preserved || preserved.gemi_json !== path) return false;
+  try {
+    var meta = OCHAP_PRESS_GH_REQ_(apiBase + '/contents/' + path + '?ref=' + headSha, 'get', null, token);
+    return meta.sha === incomingSha;
+  } catch (e) {
+    // Missing file can be republished. Other errors must not erase timing evidence.
+    if (String(e.message || e).indexOf('GitHub API HTTP 404 on GET ') === 0) return false;
+    throw e;
+  }
+}
+
+function OCHAP_PRESS_RECORD_GEMI_SYNC_(issue, sameArtifact, syncedAt) {
+  issue.gemi_last_synced_at_jst = syncedAt;
+  if (sameArtifact) {
+    if (!issue.gemi_first_publication_confirmed_at_jst && !issue.gemi_publication_timing_checked_at) {
+      issue.gemi_publication_timing_checked_at = syncedAt;
+    }
+    return;
+  }
+  // A sync observation is not a verified Pages deployment. A replacement must
+  // not inherit the previous artifact's earlier cutoff or deployment evidence.
+  delete issue.gemi_first_publication_confirmed_at_jst;
+  delete issue.gemi_first_publication_evidence;
+  issue.gemi_publication_timing_checked_at = syncedAt;
 }
 
 function OCHAP_PRESS_CREATE_BLOB_(apiBase, utf8Content, token) {
