@@ -35,7 +35,15 @@ with ThreadingHTTPServer(('127.0.0.1',0), partial(SimpleHTTPRequestHandler,direc
                     expect(race.locator('.ochap-grade-course')).to_be_visible()
                     expect(race.locator('.ochap-grade-course tbody td').first).not_to_have_text('未取得')
                 race.locator('[data-ochap-baseline-picker]').select_option('2')
-                expect(row).to_contain_text('照合中')
+                if scope=='sg_g1':
+                    reference = data['groups'][scope]['6']['nigashi_reference']
+                    expect(row).to_contain_text('逃し（参考）')
+                    expect(row).to_contain_text(f"{reference['rate_pct']:g}%")
+                    expect(table.locator('tbody tr').nth(1)).to_contain_text('全国参考')
+                    expect(table.locator('tbody tr').nth(1)).to_contain_text(f"{reference['rate_pct']:g}%")
+                else:
+                    expect(row).to_contain_text('照合中')
+                    expect(table.locator('tbody tr').nth(1)).not_to_contain_text('全国参考')
                 assert table.evaluate("""t => {
                     const h=t.querySelector('th'), c=getComputedStyle(h);
                     return c.borderRightStyle==='solid' && c.borderRightColor==='rgb(143, 163, 189)' &&

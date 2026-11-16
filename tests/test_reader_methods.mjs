@@ -49,6 +49,34 @@ test('SG/G1 rejects combined data with PG1, full fields without period evidence 
   assert.doesNotMatch(s,/52%|53%|27,412|data-ochap-baseline-picker/);
   assert.match(s,/method-1"><small class="method-rank">1位<\/small>3%/);
 });
+test('only matching SG/G1 uses the official 2C reference, without treating it as a player rate',()=>{
+  const data=baseline('sg_g1');
+  const group=data.groups.sg_g1[6];
+  const ref={definition:'official_c1_c2_numeric_finish',eligible_races:1376,escape_wins:860,rate_pct:62.5};
+  group.nigashi_reference=ref;
+  const grade={grade:'SG',boats};
+  const s=renderReaderMethods(grade,day,data,badge);
+  assert.match(s,/<tbody>.*全国参考<\/small>62\.5%.*<\/tbody>/);
+  assert.match(s,/<tfoot>.*逃し（参考）<\/small>62\.5%.*<\/tfoot>/);
+  assert.match(s,/選手別の成績ではありません。.*1,376レース/);
+  assert.doesNotMatch(s,/照合中|53%/);
+  const withOwn={...grade,boats:boats.map(b=>{
+    if(b.boat!==2)return b;
+    const stats=verified(2);
+    stats.expected_method_stats.nigashi_rate_pct=32.5;
+    return {...b,course_stats_by_scope:{sg_g1_course:stats}};
+  })};
+  assert.match(renderReaderMethods(withOwn,day,data,badge),/<tbody>.*逃し<\/small>32\.5%.*<\/tbody>/);
+  const other=baseline('all');
+  other.groups.all[6].nigashi_reference=ref;
+  assert.doesNotMatch(renderReaderMethods({boats},day,other,badge),/全国参考|62\.5%/);
+  assert.doesNotMatch(renderReaderMethods(grade,'2026-11-18',data,badge),/全国参考|62\.5%/);
+  const year=baseline('sg_g1',12);
+  year.groups.sg_g1[12].nigashi_reference=ref;
+  assert.doesNotMatch(renderReaderMethods(grade,day,year,badge),/全国参考|62\.5%/);
+  group.nigashi_reference={...ref,rate_pct:99};
+  assert.doesNotMatch(renderReaderMethods(grade,day,data,badge),/全国参考|99%/);
+});
 test('twelve-month SG/G1 window must apply to every cell and to the baseline',()=>{
   const b=boats.map(x=>({...x,course_stats_by_scope:{sg_g1_course:verified(x.boat,12)}}));
   b[0].course_stats_by_scope.sg_g1_course=verified(1,6);
