@@ -24,6 +24,20 @@
     url.hash = '';
     window.location.assign(url.href);
   });
-  toolbar.append(label,chooser);
+  const refresh = document.createElement('button');
+  refresh.type = 'button';
+  refresh.className = 'ochap-issue-refresh';
+  refresh.textContent = '更新';
+  refresh.setAttribute('aria-label', '表示中の新聞を更新');
+  refresh.addEventListener('click', () => {
+    const url = new URL(window.location.href);
+    url.searchParams.set('date', selected);
+    if (url.href === window.location.href) {
+      window.location.reload();
+      return;
+    }
+    window.location.replace(url.href);
+  });
+  toolbar.append(label,chooser,refresh);
   (document.querySelector('header#top') || document.querySelector('header') || document.querySelector('main') || document.body.firstElementChild || document.body).before(toolbar);
 })();
