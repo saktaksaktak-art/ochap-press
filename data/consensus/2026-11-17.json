@@ -60,7 +60,7 @@
       "race_number": 1,
       "deadline": "2026-11-17T15:18:00+09:00",
       "deadline_display": "15:18",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -269,7 +269,7 @@
       "race_number": 2,
       "deadline": "2026-11-17T15:47:00+09:00",
       "deadline_display": "15:47",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -431,7 +431,7 @@
       "race_number": 3,
       "deadline": "2026-11-17T16:14:00+09:00",
       "deadline_display": "16:14",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -670,7 +670,7 @@
       "race_number": 4,
       "deadline": "2026-11-17T16:43:00+09:00",
       "deadline_display": "16:43",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -891,7 +891,7 @@
       "race_number": 5,
       "deadline": "2026-11-17T17:10:00+09:00",
       "deadline_display": "17:10",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": false,
       "ocha_marks": [
@@ -1039,7 +1039,7 @@
       "race_number": 6,
       "deadline": "2026-11-17T17:37:00+09:00",
       "deadline_display": "17:37",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -1262,7 +1262,7 @@
       "race_number": 7,
       "deadline": "2026-11-17T18:04:00+09:00",
       "deadline_display": "18:04",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -1472,7 +1472,7 @@
       "race_number": 8,
       "deadline": "2026-11-17T18:33:00+09:00",
       "deadline_display": "18:33",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -1669,7 +1669,7 @@
       "race_number": 9,
       "deadline": "2026-11-17T19:04:00+09:00",
       "deadline_display": "19:04",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -1934,7 +1934,7 @@
       "race_number": 10,
       "deadline": "2026-11-17T19:36:00+09:00",
       "deadline_display": "19:36",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -2171,7 +2171,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T20:07:00+09:00",
       "deadline_display": "20:07",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -2367,7 +2367,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T20:38:00+09:00",
       "deadline_display": "20:38",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -3718,7 +3718,7 @@
       "race_number": 7,
       "deadline": "2026-11-17T13:35:00+09:00",
       "deadline_display": "13:35",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -3969,7 +3969,7 @@
       "race_number": 8,
       "deadline": "2026-11-17T14:02:00+09:00",
       "deadline_display": "14:02",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -4178,7 +4178,7 @@
       "race_number": 9,
       "deadline": "2026-11-17T14:30:00+09:00",
       "deadline_display": "14:30",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -4373,7 +4373,7 @@
       "race_number": 10,
       "deadline": "2026-11-17T14:59:00+09:00",
       "deadline_display": "14:59",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -4597,7 +4597,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T15:29:00+09:00",
       "deadline_display": "15:29",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -4787,7 +4787,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T16:00:00+09:00",
       "deadline_display": "16:00",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -6272,7 +6272,7 @@
       "race_number": 7,
       "deadline": "2026-11-17T13:35:00+09:00",
       "deadline_display": "13:35",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -6434,7 +6434,7 @@
       "race_number": 8,
       "deadline": "2026-11-17T14:05:00+09:00",
       "deadline_display": "14:05",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": false,
       "ocha_marks": [
@@ -6642,7 +6642,7 @@
       "race_number": 9,
       "deadline": "2026-11-17T14:33:00+09:00",
       "deadline_display": "14:33",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -6851,7 +6851,7 @@
       "race_number": 10,
       "deadline": "2026-11-17T15:04:00+09:00",
       "deadline_display": "15:04",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -7102,7 +7102,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T15:34:00+09:00",
       "deadline_display": "15:34",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -7353,7 +7353,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T16:05:00+09:00",
       "deadline_display": "16:05",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -8720,7 +8720,7 @@
       "race_number": 7,
       "deadline": "2026-11-17T13:20:00+09:00",
       "deadline_display": "13:20",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -8929,7 +8929,7 @@
       "race_number": 8,
       "deadline": "2026-11-17T13:48:00+09:00",
       "deadline_display": "13:48",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -9122,7 +9122,7 @@
       "race_number": 9,
       "deadline": "2026-11-17T14:17:00+09:00",
       "deadline_display": "14:17",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -9331,7 +9331,7 @@
       "race_number": 10,
       "deadline": "2026-11-17T14:49:00+09:00",
       "deadline_display": "14:49",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -9498,7 +9498,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T15:16:00+09:00",
       "deadline_display": "15:16",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -9660,7 +9660,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T15:57:00+09:00",
       "deadline_display": "15:57",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -11017,7 +11017,7 @@
       "race_number": 7,
       "deadline": "2026-11-17T13:26:00+09:00",
       "deadline_display": "13:26",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -11224,7 +11224,7 @@
       "race_number": 8,
       "deadline": "2026-11-17T13:56:00+09:00",
       "deadline_display": "13:56",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -11416,7 +11416,7 @@
       "race_number": 9,
       "deadline": "2026-11-17T14:28:00+09:00",
       "deadline_display": "14:28",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -11609,7 +11609,7 @@
       "race_number": 10,
       "deadline": "2026-11-17T15:00:00+09:00",
       "deadline_display": "15:00",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -11818,7 +11818,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T15:35:00+09:00",
       "deadline_display": "15:35",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -12013,7 +12013,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T16:10:00+09:00",
       "deadline_display": "16:10",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -13441,7 +13441,7 @@
       "race_number": 7,
       "deadline": "2026-11-17T13:33:00+09:00",
       "deadline_display": "13:33",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -13678,7 +13678,7 @@
       "race_number": 8,
       "deadline": "2026-11-17T14:10:00+09:00",
       "deadline_display": "14:10",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -13916,7 +13916,7 @@
       "race_number": 9,
       "deadline": "2026-11-17T14:38:00+09:00",
       "deadline_display": "14:38",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -14108,7 +14108,7 @@
       "race_number": 10,
       "deadline": "2026-11-17T15:11:00+09:00",
       "deadline_display": "15:11",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -14346,7 +14346,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T15:42:00+09:00",
       "deadline_display": "15:42",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -14569,7 +14569,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T16:07:00+09:00",
       "deadline_display": "16:07",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -14764,7 +14764,7 @@
       "race_number": 1,
       "deadline": "2026-11-17T15:20:00+09:00",
       "deadline_display": "15:20",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -14944,7 +14944,7 @@
       "race_number": 2,
       "deadline": "2026-11-17T15:52:00+09:00",
       "deadline_display": "15:52",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -15137,7 +15137,7 @@
       "race_number": 3,
       "deadline": "2026-11-17T16:23:00+09:00",
       "deadline_display": "16:23",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -15302,7 +15302,7 @@
       "race_number": 4,
       "deadline": "2026-11-17T16:52:00+09:00",
       "deadline_display": "16:52",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -15497,7 +15497,7 @@
       "race_number": 5,
       "deadline": "2026-11-17T17:19:00+09:00",
       "deadline_display": "17:19",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -15706,7 +15706,7 @@
       "race_number": 6,
       "deadline": "2026-11-17T17:46:00+09:00",
       "deadline_display": "17:46",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -15886,7 +15886,7 @@
       "race_number": 7,
       "deadline": "2026-11-17T18:13:00+09:00",
       "deadline_display": "18:13",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -16109,7 +16109,7 @@
       "race_number": 8,
       "deadline": "2026-11-17T18:43:00+09:00",
       "deadline_display": "18:43",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -16333,7 +16333,7 @@
       "race_number": 9,
       "deadline": "2026-11-17T19:14:00+09:00",
       "deadline_display": "19:14",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -16512,7 +16512,7 @@
       "race_number": 10,
       "deadline": "2026-11-17T19:47:00+09:00",
       "deadline_display": "19:47",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -16679,7 +16679,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T20:16:00+09:00",
       "deadline_display": "20:16",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -16904,7 +16904,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T20:45:00+09:00",
       "deadline_display": "20:45",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -18765,7 +18765,7 @@
       "race_number": 9,
       "deadline": "2026-11-17T13:53:00+09:00",
       "deadline_display": "13:53",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -19003,7 +19003,7 @@
       "race_number": 10,
       "deadline": "2026-11-17T14:20:00+09:00",
       "deadline_display": "14:20",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -19225,7 +19225,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T14:47:00+09:00",
       "deadline_display": "14:47",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": false,
       "ocha_marks": [
@@ -19435,7 +19435,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T15:28:00+09:00",
       "deadline_display": "15:28",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -21768,7 +21768,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T13:38:00+09:00",
       "deadline_display": "13:38",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -22005,7 +22005,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T14:13:00+09:00",
       "deadline_display": "14:13",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -22172,7 +22172,7 @@
       "race_number": 1,
       "deadline": "2026-11-17T15:19:00+09:00",
       "deadline_display": "15:19",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -22380,7 +22380,7 @@
       "race_number": 2,
       "deadline": "2026-11-17T15:45:00+09:00",
       "deadline_display": "15:45",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -22588,7 +22588,7 @@
       "race_number": 3,
       "deadline": "2026-11-17T16:09:00+09:00",
       "deadline_display": "16:09",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -22826,7 +22826,7 @@
       "race_number": 4,
       "deadline": "2026-11-17T16:35:00+09:00",
       "deadline_display": "16:35",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -23034,7 +23034,7 @@
       "race_number": 5,
       "deadline": "2026-11-17T17:01:00+09:00",
       "deadline_display": "17:01",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": false,
       "ocha_marks": [
@@ -23180,7 +23180,7 @@
       "race_number": 6,
       "deadline": "2026-11-17T17:28:00+09:00",
       "deadline_display": "17:28",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -23376,7 +23376,7 @@
       "race_number": 7,
       "deadline": "2026-11-17T17:55:00+09:00",
       "deadline_display": "17:55",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -23571,7 +23571,7 @@
       "race_number": 8,
       "deadline": "2026-11-17T18:23:00+09:00",
       "deadline_display": "18:23",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -23809,7 +23809,7 @@
       "race_number": 9,
       "deadline": "2026-11-17T18:54:00+09:00",
       "deadline_display": "18:54",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -23990,7 +23990,7 @@
       "race_number": 10,
       "deadline": "2026-11-17T19:25:00+09:00",
       "deadline_display": "19:25",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -24214,7 +24214,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T19:58:00+09:00",
       "deadline_display": "19:58",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -24422,7 +24422,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T20:30:00+09:00",
       "deadline_display": "20:30",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
@@ -26785,7 +26785,7 @@
       "race_number": 11,
       "deadline": "2026-11-17T13:42:00+09:00",
       "deadline_display": "13:42",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": false,
       "ocha_marks": [
@@ -26991,7 +26991,7 @@
       "race_number": 12,
       "deadline": "2026-11-17T14:21:00+09:00",
       "deadline_display": "14:21",
-      "pair_timing_eligible": false,
+      "pair_timing_eligible": true,
       "input_versions_differ": false,
       "honmei_match": true,
       "ocha_marks": [
