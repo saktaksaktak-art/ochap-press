@@ -1,0 +1,6519 @@
+{
+  "schema_version": "ochap.public.consensus.v1",
+  "schema_extension": "ochap.bc.consensus.followup.v1",
+  "date": "2026-11-14",
+  "edition": "M0",
+  "generated_at_jst": "2026-11-18T00:19:33+09:00",
+  "snapshot_at_jst": "2026-11-18T00:19:33+09:00",
+  "reference_only": true,
+  "formal_pair_verified": false,
+  "formal_bc_eligible": false,
+  "input_versions_differ": false,
+  "ocha_frozen_sha256": "6d2747125a6818b8e0382ef53ce9c4ecb5c806d112d29d5412fcd9570d5c1d7f",
+  "gemi_public_sha256": "f6cfe1b309b5ac95bde22ab88321f8a2ba5955eccac79835a9b93a38d9a083ae",
+  "source_hashes": {
+    "ocha": "6d2747125a6818b8e0382ef53ce9c4ecb5c806d112d29d5412fcd9570d5c1d7f",
+    "gemi": "f6cfe1b309b5ac95bde22ab88321f8a2ba5955eccac79835a9b93a38d9a083ae"
+  },
+  "total_races": 32,
+  "coverage": {
+    "expected_races": 32,
+    "paired_races": 32,
+    "missing_races": 0
+  },
+  "metrics": {
+    "2": {
+      "hits": 0,
+      "n": 0,
+      "hit_rate_pct": null,
+      "return_rate_pct": null,
+      "profit_yen": null,
+      "finance_races": 0,
+      "ticket_points": 59
+    },
+    "3": {
+      "hits": 0,
+      "n": 0,
+      "hit_rate_pct": null,
+      "return_rate_pct": null,
+      "profit_yen": null,
+      "finance_races": 0,
+      "ticket_points": 186
+    }
+  },
+  "summary": {
+    "honmei_agree_races": 31,
+    "exacta_common_races": 31,
+    "exacta_common_tickets": 59,
+    "trifecta_common_races": 32,
+    "trifecta_common_tickets": 186
+  },
+  "races": [
+    {
+      "race_id": "v2-r12",
+      "venue": "戸田",
+      "venue_code": 2,
+      "venue_number": 2,
+      "venue_name": "戸田",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T15:55:00+09:00",
+      "deadline_display": "15:55",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "4",
+        "3"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "4",
+        "5"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2",
+        "1-4"
+      ],
+      "exacta_common": [
+        "1-2",
+        "1-4"
+      ],
+      "trifecta": [
+        "1-2-4",
+        "1-2-5",
+        "1-4-2",
+        "1-2-6",
+        "1-4-5"
+      ],
+      "trifecta_common": [
+        "1-2-4",
+        "1-2-5",
+        "1-4-2",
+        "1-2-6",
+        "1-4-5"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "本線",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-5",
+          "ticket": "1-4-5",
+          "oc": "舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-4"
+          ],
+          "3": [
+            "1-2-4",
+            "1-2-5",
+            "1-4-2",
+            "1-2-6",
+            "2-1-4",
+            "2-4-1",
+            "1-4-3",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-4",
+              "1-2-5",
+              "1-4-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "2-1-4",
+              "2-4-1"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-4"
+          ],
+          "3": [
+            "1-2-4",
+            "1-2-5",
+            "1-4-2",
+            "1-4-5",
+            "4-1-2",
+            "4-1-5",
+            "4-2-1",
+            "4-2-5",
+            "1-2-3",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-4",
+              "1-2-5",
+              "1-4-2",
+              "1-4-5"
+            ],
+            "reverse": [
+              "4-1-2",
+              "4-1-5",
+              "4-2-1",
+              "4-2-5"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v3-r12",
+      "venue": "江戸川",
+      "venue_code": 3,
+      "venue_number": 3,
+      "venue_name": "江戸川",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T16:00:00+09:00",
+      "deadline_display": "16:00",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "5",
+        "4"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "5",
+        "6"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2",
+        "1-5"
+      ],
+      "exacta_common": [
+        "1-2",
+        "1-5"
+      ],
+      "trifecta": [
+        "1-2-5",
+        "1-2-6",
+        "1-5-2",
+        "1-5-3",
+        "1-5-4",
+        "1-5-6"
+      ],
+      "trifecta_common": [
+        "1-2-5",
+        "1-2-6",
+        "1-5-2",
+        "1-5-3",
+        "1-5-4",
+        "1-5-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-5-2",
+          "ticket": "1-5-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-5-3",
+          "ticket": "1-5-3",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-5-4",
+          "ticket": "1-5-4",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-5-6",
+          "ticket": "1-5-6",
+          "oc": "舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-5"
+          ],
+          "3": [
+            "1-2-5",
+            "1-2-6",
+            "1-5-2",
+            "1-2-4",
+            "4-1-5",
+            "4-5-1",
+            "1-5-3",
+            "1-5-4",
+            "1-5-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-5",
+              "1-2-6",
+              "1-5-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "4-1-5",
+              "4-5-1"
+            ],
+            "navi": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-5"
+          ],
+          "3": [
+            "1-2-5",
+            "1-2-6",
+            "1-5-2",
+            "1-5-6",
+            "5-1-6",
+            "5-1-4",
+            "5-2-6",
+            "5-2-1",
+            "1-5-3",
+            "1-5-4"
+          ],
+          "categories": {
+            "main": [
+              "1-2-5",
+              "1-2-6",
+              "1-5-2",
+              "1-5-6"
+            ],
+            "reverse": [
+              "5-1-6",
+              "5-1-4",
+              "5-2-6",
+              "5-2-1"
+            ],
+            "navi": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v4-r12",
+      "venue": "平和島",
+      "venue_code": 4,
+      "venue_number": 4,
+      "venue_name": "平和島",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T16:06:00+09:00",
+      "deadline_display": "16:06",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "4",
+        "3"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "6",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-2"
+      ],
+      "trifecta": [
+        "1-2-4",
+        "1-2-6",
+        "1-2-3",
+        "2-1-4",
+        "2-1-6"
+      ],
+      "trifecta_common": [
+        "1-2-4",
+        "1-2-6",
+        "1-2-3",
+        "2-1-4",
+        "2-1-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "2-1-4",
+          "ticket": "2-1-4",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "2-1-6",
+          "ticket": "2-1-6",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-4"
+          ],
+          "3": [
+            "1-2-4",
+            "1-2-6",
+            "1-2-3",
+            "1-4-2",
+            "2-1-4",
+            "2-1-6",
+            "1-4-3",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-4",
+              "1-2-6",
+              "1-2-3",
+              "1-4-2"
+            ],
+            "reverse": [
+              "2-1-4",
+              "2-1-6"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-6"
+          ],
+          "3": [
+            "1-2-6",
+            "1-2-4",
+            "1-6-2",
+            "1-6-4",
+            "2-1-4",
+            "2-1-6",
+            "2-6-4",
+            "2-6-1",
+            "1-2-3",
+            "1-2-5"
+          ],
+          "categories": {
+            "main": [
+              "1-2-6",
+              "1-2-4",
+              "1-6-2",
+              "1-6-4"
+            ],
+            "reverse": [
+              "2-1-4",
+              "2-1-6",
+              "2-6-4",
+              "2-6-1"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v7-r7",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "venue_number": 7,
+      "venue_name": "蒲郡",
+      "race_no": 7,
+      "race_number": 7,
+      "deadline": "2026-11-14T18:04:00+09:00",
+      "deadline_display": "18:04",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "4",
+        "2",
+        "3"
+      ],
+      "gemi_marks": [
+        "1",
+        "4",
+        "2",
+        "3"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-4",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-4",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-4-2",
+        "1-4-3",
+        "1-2-4",
+        "1-2-3",
+        "4-1-3",
+        "4-1-2",
+        "1-2-5",
+        "1-2-6"
+      ],
+      "trifecta_common": [
+        "1-4-2",
+        "1-4-3",
+        "1-2-4",
+        "1-2-3",
+        "4-1-3",
+        "4-1-2",
+        "1-2-5",
+        "1-2-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-4-3",
+          "ticket": "1-4-3",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "4-1-3",
+          "ticket": "4-1-3",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "4-1-2",
+          "ticket": "4-1-2",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-4-2",
+            "1-4-3",
+            "1-2-4",
+            "1-2-3",
+            "4-1-3",
+            "4-1-2",
+            "1-2-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-4-2",
+              "1-4-3",
+              "1-2-4",
+              "1-2-3"
+            ],
+            "reverse": [
+              "4-1-3",
+              "4-1-2"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-4-2",
+            "1-4-3",
+            "1-2-4",
+            "1-2-3",
+            "4-2-1",
+            "4-2-3",
+            "4-1-2",
+            "4-1-3",
+            "1-2-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-4-2",
+              "1-4-3",
+              "1-2-4",
+              "1-2-3"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-2-3",
+              "4-1-2",
+              "4-1-3"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v7-r8",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "venue_number": 7,
+      "venue_name": "蒲郡",
+      "race_no": 8,
+      "race_number": 8,
+      "deadline": "2026-11-14T18:33:00+09:00",
+      "deadline_display": "18:33",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "5",
+        "2",
+        "3"
+      ],
+      "gemi_marks": [
+        "1",
+        "5",
+        "2",
+        "3"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-5",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-5",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-5-2",
+        "1-5-3",
+        "1-2-5",
+        "1-2-3",
+        "1-2-4",
+        "1-2-6"
+      ],
+      "trifecta_common": [
+        "1-5-2",
+        "1-5-3",
+        "1-2-5",
+        "1-2-3",
+        "1-2-4",
+        "1-2-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-5-2",
+          "ticket": "1-5-2",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-5-3",
+          "ticket": "1-5-3",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-5",
+            "1-2",
+            "1-3"
+          ],
+          "3": [
+            "1-5-2",
+            "1-5-3",
+            "1-2-5",
+            "1-3-5",
+            "5-1-3",
+            "5-1-2",
+            "1-2-3",
+            "1-2-4",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-5-2",
+              "1-5-3",
+              "1-2-5",
+              "1-3-5"
+            ],
+            "reverse": [
+              "5-1-3",
+              "5-1-2"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-5",
+            "1-2"
+          ],
+          "3": [
+            "1-5-2",
+            "1-5-3",
+            "1-2-5",
+            "1-2-3",
+            "2-1-5",
+            "2-1-3",
+            "2-5-1",
+            "2-5-3",
+            "1-2-4",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-5-2",
+              "1-5-3",
+              "1-2-5",
+              "1-2-3"
+            ],
+            "reverse": [
+              "2-1-5",
+              "2-1-3",
+              "2-5-1",
+              "2-5-3"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v7-r9",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "venue_number": 7,
+      "venue_name": "蒲郡",
+      "race_no": 9,
+      "race_number": 9,
+      "deadline": "2026-11-14T19:04:00+09:00",
+      "deadline_display": "19:04",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "4",
+        "1",
+        "6",
+        "5"
+      ],
+      "gemi_marks": [
+        "4",
+        "1",
+        "6",
+        "5"
+      ],
+      "ocha_method": "まくり差し",
+      "gemi_method": "まくり差し",
+      "exacta": [
+        "4-1",
+        "4-6"
+      ],
+      "exacta_common": [
+        "4-1",
+        "4-6"
+      ],
+      "trifecta": [
+        "4-1-6",
+        "4-1-5",
+        "4-6-1",
+        "4-6-5",
+        "1-4-5",
+        "1-4-6",
+        "4-1-2",
+        "4-1-3"
+      ],
+      "trifecta_common": [
+        "4-1-6",
+        "4-1-5",
+        "4-6-1",
+        "4-6-5",
+        "1-4-5",
+        "1-4-6",
+        "4-1-2",
+        "4-1-3"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "4-1-6",
+          "ticket": "4-1-6",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "4-1-5",
+          "ticket": "4-1-5",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "4-6-1",
+          "ticket": "4-6-1",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "4-6-5",
+          "ticket": "4-6-5",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-4-5",
+          "ticket": "1-4-5",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-4-6",
+          "ticket": "1-4-6",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "4-1-2",
+          "ticket": "4-1-2",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "4-1-3",
+          "ticket": "4-1-3",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "4-1",
+            "4-6"
+          ],
+          "3": [
+            "4-1-6",
+            "4-1-5",
+            "4-6-1",
+            "4-6-5",
+            "1-4-5",
+            "1-4-6",
+            "4-1-2",
+            "4-1-3"
+          ],
+          "categories": {
+            "main": [
+              "4-1-6",
+              "4-1-5",
+              "4-6-1",
+              "4-6-5"
+            ],
+            "reverse": [
+              "1-4-5",
+              "1-4-6"
+            ],
+            "navi": [
+              "4-1-2",
+              "4-1-3",
+              "4-1-5",
+              "4-1-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "4-1",
+            "4-6"
+          ],
+          "3": [
+            "4-1-6",
+            "4-1-5",
+            "4-6-1",
+            "4-6-5",
+            "1-4-5",
+            "1-4-6",
+            "1-6-4",
+            "1-6-5",
+            "4-1-2",
+            "4-1-3"
+          ],
+          "categories": {
+            "main": [
+              "4-1-6",
+              "4-1-5",
+              "4-6-1",
+              "4-6-5"
+            ],
+            "reverse": [
+              "1-4-5",
+              "1-4-6",
+              "1-6-4",
+              "1-6-5"
+            ],
+            "navi": [
+              "4-1-2",
+              "4-1-3",
+              "4-1-5",
+              "4-1-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v7-r10",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "venue_number": 7,
+      "venue_name": "蒲郡",
+      "race_no": 10,
+      "race_number": 10,
+      "deadline": "2026-11-14T19:36:00+09:00",
+      "deadline_display": "19:36",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "2",
+        "5"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "2",
+        "5"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-3-2",
+        "1-3-5",
+        "1-2-3",
+        "1-2-5",
+        "2-1-3",
+        "2-3-1"
+      ],
+      "trifecta_common": [
+        "1-3-2",
+        "1-3-5",
+        "1-2-3",
+        "1-2-5",
+        "2-1-3",
+        "2-3-1"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "2-1-3",
+          "ticket": "2-1-3",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "2-3-1",
+          "ticket": "2-3-1",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-2",
+            "1-3-5",
+            "1-2-3",
+            "1-2-5",
+            "2-1-3",
+            "2-3-1",
+            "1-3-4",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-2",
+              "1-3-5",
+              "1-2-3",
+              "1-2-5"
+            ],
+            "reverse": [
+              "2-1-3",
+              "2-3-1"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-2",
+            "1-3-5",
+            "1-2-3",
+            "1-2-5",
+            "2-3-1",
+            "2-3-5",
+            "2-1-5",
+            "2-1-3",
+            "1-2-4",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-2",
+              "1-3-5",
+              "1-2-3",
+              "1-2-5"
+            ],
+            "reverse": [
+              "2-3-1",
+              "2-3-5",
+              "2-1-5",
+              "2-1-3"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v7-r11",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "venue_number": 7,
+      "venue_name": "蒲郡",
+      "race_no": 11,
+      "race_number": 11,
+      "deadline": "2026-11-14T20:07:00+09:00",
+      "deadline_display": "20:07",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "4",
+        "3"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "4",
+        "6"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2",
+        "1-4"
+      ],
+      "exacta_common": [
+        "1-2",
+        "1-4"
+      ],
+      "trifecta": [
+        "1-2-4",
+        "1-2-3",
+        "1-4-2",
+        "1-2-6",
+        "3-1-4",
+        "1-4-6"
+      ],
+      "trifecta_common": [
+        "1-2-4",
+        "1-2-3",
+        "1-4-2",
+        "1-2-6",
+        "3-1-4",
+        "1-4-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "3-1-4",
+          "ticket": "3-1-4",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-4-6",
+          "ticket": "1-4-6",
+          "oc": "舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-4"
+          ],
+          "3": [
+            "1-2-4",
+            "1-2-3",
+            "1-4-2",
+            "1-2-6",
+            "3-4-1",
+            "3-1-4",
+            "1-4-3",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-4",
+              "1-2-3",
+              "1-4-2",
+              "1-2-6"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-1-4"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-4"
+          ],
+          "3": [
+            "1-2-4",
+            "1-2-6",
+            "1-4-2",
+            "1-4-6",
+            "3-2-4",
+            "3-2-1",
+            "3-1-4",
+            "3-1-2",
+            "1-2-3",
+            "1-2-5"
+          ],
+          "categories": {
+            "main": [
+              "1-2-4",
+              "1-2-6",
+              "1-4-2",
+              "1-4-6"
+            ],
+            "reverse": [
+              "3-2-4",
+              "3-2-1",
+              "3-1-4",
+              "3-1-2"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v7-r12",
+      "venue": "蒲郡",
+      "venue_code": 7,
+      "venue_number": 7,
+      "venue_name": "蒲郡",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T20:38:00+09:00",
+      "deadline_display": "20:38",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-3-4",
+        "1-3-2",
+        "1-2-4",
+        "1-2-3"
+      ],
+      "trifecta_common": [
+        "1-3-4",
+        "1-3-2",
+        "1-2-4",
+        "1-2-3"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-2",
+            "1-2-4",
+            "1-2-3",
+            "3-4-1",
+            "3-1-4",
+            "1-4-2",
+            "1-4-3",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-2",
+              "1-2-4",
+              "1-2-3"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-1-4"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-2",
+            "1-3-4",
+            "1-2-3",
+            "1-2-4",
+            "2-1-4",
+            "2-1-3",
+            "2-3-1",
+            "2-3-4",
+            "1-2-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-2",
+              "1-3-4",
+              "1-2-3",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-1-4",
+              "2-1-3",
+              "2-3-1",
+              "2-3-4"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v8-r12",
+      "venue": "常滑",
+      "venue_code": 8,
+      "venue_number": 8,
+      "venue_name": "常滑",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T16:03:00+09:00",
+      "deadline_display": "16:03",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "4",
+        "5"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "4",
+        "6"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3"
+      ],
+      "exacta_common": [
+        "1-3"
+      ],
+      "trifecta": [
+        "1-3-4",
+        "1-3-6",
+        "1-3-5",
+        "1-3-2"
+      ],
+      "trifecta_common": [
+        "1-3-4",
+        "1-3-6",
+        "1-3-5",
+        "1-3-2"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-6",
+          "ticket": "1-3-6",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "本線＋舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-6",
+            "1-3-5",
+            "1-2-3",
+            "4-5-1",
+            "4-1-5",
+            "1-3-2"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-6",
+              "1-3-5",
+              "1-2-3"
+            ],
+            "reverse": [
+              "4-5-1",
+              "4-1-5"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-4"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-6",
+            "1-4-3",
+            "1-4-6",
+            "5-1-3",
+            "5-1-6",
+            "5-3-1",
+            "5-3-6",
+            "1-3-2",
+            "1-3-5"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-6",
+              "1-4-3",
+              "1-4-6"
+            ],
+            "reverse": [
+              "5-1-3",
+              "5-1-6",
+              "5-3-1",
+              "5-3-6"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v9-r12",
+      "venue": "津",
+      "venue_code": 9,
+      "venue_number": 9,
+      "venue_name": "津",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T16:05:00+09:00",
+      "deadline_display": "16:05",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "4",
+        "3",
+        "2"
+      ],
+      "gemi_marks": [
+        "1",
+        "4",
+        "2",
+        "5"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-4",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-4",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-4-3",
+        "1-4-2",
+        "1-2-4",
+        "1-4-5",
+        "1-4-6"
+      ],
+      "trifecta_common": [
+        "1-4-3",
+        "1-4-2",
+        "1-2-4",
+        "1-4-5",
+        "1-4-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-4-3",
+          "ticket": "1-4-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-4-5",
+          "ticket": "1-4-5",
+          "oc": "舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-6",
+          "ticket": "1-4-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-4",
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-4-3",
+            "1-4-2",
+            "1-3-4",
+            "1-2-4",
+            "4-1-3",
+            "4-3-1",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-4-3",
+              "1-4-2",
+              "1-3-4",
+              "1-2-4"
+            ],
+            "reverse": [
+              "4-1-3",
+              "4-3-1"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-4-2",
+            "1-4-5",
+            "1-2-4",
+            "1-2-5",
+            "4-1-2",
+            "4-1-5",
+            "4-2-1",
+            "4-2-5",
+            "1-4-3",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-4-2",
+              "1-4-5",
+              "1-2-4",
+              "1-2-5"
+            ],
+            "reverse": [
+              "4-1-2",
+              "4-1-5",
+              "4-2-1",
+              "4-2-5"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v10-r12",
+      "venue": "三国",
+      "venue_code": 10,
+      "venue_number": 10,
+      "venue_name": "三国",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T14:12:00+09:00",
+      "deadline_display": "14:12",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2",
+        "1-3"
+      ],
+      "exacta_common": [
+        "1-2",
+        "1-3"
+      ],
+      "trifecta": [
+        "1-2-4",
+        "1-2-3",
+        "1-3-2",
+        "3-1-4",
+        "1-3-4"
+      ],
+      "trifecta_common": [
+        "1-2-4",
+        "1-2-3",
+        "1-3-2",
+        "3-1-4",
+        "1-3-4"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "3-1-4",
+          "ticket": "3-1-4",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-3",
+            "1-4"
+          ],
+          "3": [
+            "1-2-4",
+            "1-2-3",
+            "1-3-2",
+            "1-4-2",
+            "3-4-1",
+            "3-1-4",
+            "1-3-4",
+            "1-3-5",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-4",
+              "1-2-3",
+              "1-3-2",
+              "1-4-2"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-1-4"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-2",
+            "1-3-4",
+            "1-2-3",
+            "1-2-4",
+            "3-1-2",
+            "3-1-4",
+            "3-2-1",
+            "3-2-4",
+            "1-2-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-2",
+              "1-3-4",
+              "1-2-3",
+              "1-2-4"
+            ],
+            "reverse": [
+              "3-1-2",
+              "3-1-4",
+              "3-2-1",
+              "3-2-4"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v11-r9",
+      "venue": "びわこ",
+      "venue_code": 11,
+      "venue_number": 11,
+      "venue_name": "びわこ",
+      "race_no": 9,
+      "race_number": 9,
+      "deadline": "2026-11-14T14:30:00+09:00",
+      "deadline_display": "14:30",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "2",
+        "5"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-3-2",
+        "1-2-3",
+        "1-3-4",
+        "1-2-4",
+        "1-2-5",
+        "1-2-6"
+      ],
+      "trifecta_common": [
+        "1-3-2",
+        "1-2-3",
+        "1-3-4",
+        "1-2-4",
+        "1-2-5",
+        "1-2-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-5",
+            "1-3-2",
+            "1-2-3",
+            "1-3-4",
+            "3-1-5",
+            "3-2-5",
+            "1-2-4",
+            "1-2-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-5",
+              "1-3-2",
+              "1-2-3",
+              "1-3-4"
+            ],
+            "reverse": [
+              "3-1-5",
+              "3-2-5"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-2",
+            "1-3-4",
+            "1-2-3",
+            "1-2-4",
+            "3-2-4",
+            "3-2-1",
+            "3-1-4",
+            "3-1-2",
+            "1-2-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-2",
+              "1-3-4",
+              "1-2-3",
+              "1-2-4"
+            ],
+            "reverse": [
+              "3-2-4",
+              "3-2-1",
+              "3-1-4",
+              "3-1-2"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v11-r10",
+      "venue": "びわこ",
+      "venue_code": 11,
+      "venue_number": 11,
+      "venue_name": "びわこ",
+      "race_no": 10,
+      "race_number": 10,
+      "deadline": "2026-11-14T15:00:00+09:00",
+      "deadline_display": "15:00",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2",
+        "1-3"
+      ],
+      "exacta_common": [
+        "1-2",
+        "1-3"
+      ],
+      "trifecta": [
+        "1-2-3",
+        "1-2-4",
+        "1-3-2",
+        "1-2-5",
+        "3-1-2",
+        "1-3-4"
+      ],
+      "trifecta_common": [
+        "1-2-3",
+        "1-2-4",
+        "1-3-2",
+        "1-2-5",
+        "3-1-2",
+        "1-3-4"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "本線",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "3-1-2",
+          "ticket": "3-1-2",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-3"
+          ],
+          "3": [
+            "1-2-3",
+            "1-2-4",
+            "1-3-2",
+            "1-2-5",
+            "3-1-2",
+            "3-4-2",
+            "1-3-4",
+            "1-3-5",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-3",
+              "1-2-4",
+              "1-3-2",
+              "1-2-5"
+            ],
+            "reverse": [
+              "3-1-2",
+              "3-4-2"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-3"
+          ],
+          "3": [
+            "1-2-3",
+            "1-2-4",
+            "1-3-2",
+            "1-3-4",
+            "3-2-1",
+            "3-2-4",
+            "3-1-2",
+            "3-1-4",
+            "1-2-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-3",
+              "1-2-4",
+              "1-3-2",
+              "1-3-4"
+            ],
+            "reverse": [
+              "3-2-1",
+              "3-2-4",
+              "3-1-2",
+              "3-1-4"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v11-r11",
+      "venue": "びわこ",
+      "venue_code": 11,
+      "venue_number": 11,
+      "venue_name": "びわこ",
+      "race_no": 11,
+      "race_number": 11,
+      "deadline": "2026-11-14T15:34:00+09:00",
+      "deadline_display": "15:34",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2",
+        "1-3"
+      ],
+      "exacta_common": [
+        "1-2",
+        "1-3"
+      ],
+      "trifecta": [
+        "1-2-3",
+        "1-3-2",
+        "1-2-4",
+        "1-3-4",
+        "4-3-1",
+        "1-3-5",
+        "1-3-6"
+      ],
+      "trifecta_common": [
+        "1-2-3",
+        "1-3-2",
+        "1-2-4",
+        "1-3-4",
+        "4-3-1",
+        "1-3-5",
+        "1-3-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "4-3-1",
+          "ticket": "4-3-1",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-6",
+          "ticket": "1-3-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-3"
+          ],
+          "3": [
+            "1-2-3",
+            "1-3-2",
+            "1-2-4",
+            "1-3-4",
+            "4-1-3",
+            "4-3-1",
+            "1-3-5",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-3",
+              "1-3-2",
+              "1-2-4",
+              "1-3-4"
+            ],
+            "reverse": [
+              "4-1-3",
+              "4-3-1"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-3"
+          ],
+          "3": [
+            "1-2-3",
+            "1-2-4",
+            "1-3-2",
+            "1-3-4",
+            "4-2-1",
+            "4-2-3",
+            "4-3-1",
+            "4-3-2",
+            "1-3-5",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-3",
+              "1-2-4",
+              "1-3-2",
+              "1-3-4"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-2-3",
+              "4-3-1",
+              "4-3-2"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v11-r12",
+      "venue": "びわこ",
+      "venue_code": 11,
+      "venue_number": 11,
+      "venue_name": "びわこ",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T16:10:00+09:00",
+      "deadline_display": "16:10",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "4",
+        "5"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-4"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-4"
+      ],
+      "trifecta": [
+        "1-3-4",
+        "1-3-5",
+        "1-4-3",
+        "3-4-1",
+        "1-4-2",
+        "1-4-5",
+        "1-4-6"
+      ],
+      "trifecta_common": [
+        "1-3-4",
+        "1-3-5",
+        "1-4-3",
+        "3-4-1",
+        "1-4-2",
+        "1-4-5",
+        "1-4-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-4-3",
+          "ticket": "1-4-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "3-4-1",
+          "ticket": "3-4-1",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-5",
+          "ticket": "1-4-5",
+          "oc": "舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-6",
+          "ticket": "1-4-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-5",
+            "1-4-3",
+            "1-2-4",
+            "3-1-5",
+            "3-4-1",
+            "1-4-2",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-5",
+              "1-4-3",
+              "1-2-4"
+            ],
+            "reverse": [
+              "3-1-5",
+              "3-4-1"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-4"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-5",
+            "1-4-3",
+            "1-4-5",
+            "3-4-1",
+            "3-4-5",
+            "3-2-1",
+            "3-2-4",
+            "1-4-2",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-5",
+              "1-4-3",
+              "1-4-5"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-4-5",
+              "3-2-1",
+              "3-2-4"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v13-r12",
+      "venue": "尼崎",
+      "venue_code": 13,
+      "venue_number": 13,
+      "venue_name": "尼崎",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T16:07:00+09:00",
+      "deadline_display": "16:07",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": false,
+      "ocha_marks": [
+        "3",
+        "1",
+        "5",
+        "6"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "5",
+        "4"
+      ],
+      "ocha_method": "まくり差し",
+      "gemi_method": "逃げ",
+      "exacta": [],
+      "exacta_common": [],
+      "trifecta": [
+        "3-1-5",
+        "3-5-1",
+        "1-3-5",
+        "1-3-6",
+        "3-1-4"
+      ],
+      "trifecta_common": [
+        "3-1-5",
+        "3-5-1",
+        "1-3-5",
+        "1-3-6",
+        "3-1-4"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "3-1-5",
+          "ticket": "3-1-5",
+          "oc": "本線＋舟券ナビ",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "3-5-1",
+          "ticket": "3-5-1",
+          "oc": "本線",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "逆張り",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-6",
+          "ticket": "1-3-6",
+          "oc": "逆張り",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "3-1-4",
+          "ticket": "3-1-4",
+          "oc": "舟券ナビ",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "3-1",
+            "3-5"
+          ],
+          "3": [
+            "3-1-5",
+            "3-1-6",
+            "3-5-1",
+            "3-5-6",
+            "1-3-5",
+            "1-3-6",
+            "3-1-2",
+            "3-1-4"
+          ],
+          "categories": {
+            "main": [
+              "3-1-5",
+              "3-1-6",
+              "3-5-1",
+              "3-5-6"
+            ],
+            "reverse": [
+              "1-3-5",
+              "1-3-6"
+            ],
+            "navi": [
+              "3-1-2",
+              "3-1-4",
+              "3-1-5",
+              "3-1-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-5"
+          ],
+          "3": [
+            "1-3-5",
+            "1-3-4",
+            "1-5-3",
+            "1-5-4",
+            "3-1-5",
+            "3-1-4",
+            "3-5-1",
+            "3-5-4",
+            "1-3-2",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-5",
+              "1-3-4",
+              "1-5-3",
+              "1-5-4"
+            ],
+            "reverse": [
+              "3-1-5",
+              "3-1-4",
+              "3-5-1",
+              "3-5-4"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v16-r12",
+      "venue": "児島",
+      "venue_code": 16,
+      "venue_number": 16,
+      "venue_name": "児島",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T16:22:00+09:00",
+      "deadline_display": "16:22",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "4",
+        "5"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "5",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-5"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-5"
+      ],
+      "trifecta": [
+        "1-3-4",
+        "1-3-5",
+        "1-5-3",
+        "1-3-2",
+        "1-3-6"
+      ],
+      "trifecta_common": [
+        "1-3-4",
+        "1-3-5",
+        "1-5-3",
+        "1-3-2",
+        "1-3-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-5-3",
+          "ticket": "1-5-3",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-6",
+          "ticket": "1-3-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-4",
+            "1-5"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-5",
+            "1-4-3",
+            "1-5-3",
+            "4-3-1",
+            "4-1-3",
+            "1-3-2",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-5",
+              "1-4-3",
+              "1-5-3"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-1-3"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-5"
+          ],
+          "3": [
+            "1-3-5",
+            "1-3-4",
+            "1-5-3",
+            "1-5-4",
+            "3-1-4",
+            "3-1-2",
+            "3-5-4",
+            "3-5-1",
+            "1-3-2",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-5",
+              "1-3-4",
+              "1-5-3",
+              "1-5-4"
+            ],
+            "reverse": [
+              "3-1-4",
+              "3-1-2",
+              "3-5-4",
+              "3-5-1"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v20-r7",
+      "venue": "若松",
+      "venue_code": 20,
+      "venue_number": 20,
+      "venue_name": "若松",
+      "race_no": 7,
+      "race_number": 7,
+      "deadline": "2026-11-14T17:55:00+09:00",
+      "deadline_display": "17:55",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "5",
+        "4",
+        "3"
+      ],
+      "gemi_marks": [
+        "1",
+        "5",
+        "4",
+        "3"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-5",
+        "1-4"
+      ],
+      "exacta_common": [
+        "1-5",
+        "1-4"
+      ],
+      "trifecta": [
+        "1-5-4",
+        "1-4-5",
+        "1-5-3",
+        "1-4-3",
+        "5-1-4",
+        "5-4-1",
+        "1-4-2",
+        "1-4-6"
+      ],
+      "trifecta_common": [
+        "1-5-4",
+        "1-4-5",
+        "1-5-3",
+        "1-4-3",
+        "5-1-4",
+        "5-4-1",
+        "1-4-2",
+        "1-4-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-5-4",
+          "ticket": "1-5-4",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-4-5",
+          "ticket": "1-4-5",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-5-3",
+          "ticket": "1-5-3",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-4-3",
+          "ticket": "1-4-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "5-1-4",
+          "ticket": "5-1-4",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "5-4-1",
+          "ticket": "5-4-1",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-6",
+          "ticket": "1-4-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-5",
+            "1-4"
+          ],
+          "3": [
+            "1-5-4",
+            "1-4-5",
+            "1-5-3",
+            "1-4-3",
+            "5-1-4",
+            "5-4-1",
+            "1-4-2",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-5-4",
+              "1-4-5",
+              "1-5-3",
+              "1-4-3"
+            ],
+            "reverse": [
+              "5-1-4",
+              "5-4-1"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-5",
+            "1-4"
+          ],
+          "3": [
+            "1-5-4",
+            "1-5-3",
+            "1-4-5",
+            "1-4-3",
+            "5-1-4",
+            "5-1-3",
+            "5-4-1",
+            "5-4-3",
+            "1-4-2",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-5-4",
+              "1-5-3",
+              "1-4-5",
+              "1-4-3"
+            ],
+            "reverse": [
+              "5-1-4",
+              "5-1-3",
+              "5-4-1",
+              "5-4-3"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v20-r8",
+      "venue": "若松",
+      "venue_code": 20,
+      "venue_number": 20,
+      "venue_name": "若松",
+      "race_no": 8,
+      "race_number": 8,
+      "deadline": "2026-11-14T18:23:00+09:00",
+      "deadline_display": "18:23",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-3-2",
+        "1-3-4",
+        "1-2-3",
+        "1-2-4",
+        "3-1-2"
+      ],
+      "trifecta_common": [
+        "1-3-2",
+        "1-3-4",
+        "1-2-3",
+        "1-2-4",
+        "3-1-2"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "3-1-2",
+          "ticket": "3-1-2",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-2",
+            "1-3-4",
+            "1-2-3",
+            "1-2-4",
+            "3-4-1",
+            "3-1-2",
+            "1-3-5",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-2",
+              "1-3-4",
+              "1-2-3",
+              "1-2-4"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-1-2"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-2",
+            "1-3-4",
+            "1-2-3",
+            "1-2-4",
+            "3-1-2",
+            "3-1-4",
+            "3-2-1",
+            "3-2-4",
+            "1-2-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-2",
+              "1-3-4",
+              "1-2-3",
+              "1-2-4"
+            ],
+            "reverse": [
+              "3-1-2",
+              "3-1-4",
+              "3-2-1",
+              "3-2-4"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v20-r9",
+      "venue": "若松",
+      "venue_code": 20,
+      "venue_number": 20,
+      "venue_name": "若松",
+      "race_no": 9,
+      "race_number": 9,
+      "deadline": "2026-11-14T18:54:00+09:00",
+      "deadline_display": "18:54",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "6",
+        "4"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "6",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2",
+        "1-6"
+      ],
+      "exacta_common": [
+        "1-2",
+        "1-6"
+      ],
+      "trifecta": [
+        "1-2-6",
+        "1-2-4",
+        "1-6-2",
+        "2-1-6",
+        "2-6-1",
+        "1-6-3",
+        "1-6-4",
+        "1-6-5"
+      ],
+      "trifecta_common": [
+        "1-2-6",
+        "1-2-4",
+        "1-6-2",
+        "2-1-6",
+        "2-6-1",
+        "1-6-3",
+        "1-6-4",
+        "1-6-5"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-6-2",
+          "ticket": "1-6-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "2-1-6",
+          "ticket": "2-1-6",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "2-6-1",
+          "ticket": "2-6-1",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-6-3",
+          "ticket": "1-6-3",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-6-4",
+          "ticket": "1-6-4",
+          "oc": "舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-6-5",
+          "ticket": "1-6-5",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-6",
+            "1-4"
+          ],
+          "3": [
+            "1-2-6",
+            "1-2-4",
+            "1-6-2",
+            "1-4-6",
+            "2-1-6",
+            "2-6-1",
+            "1-6-3",
+            "1-6-4",
+            "1-6-5"
+          ],
+          "categories": {
+            "main": [
+              "1-2-6",
+              "1-2-4",
+              "1-6-2",
+              "1-4-6"
+            ],
+            "reverse": [
+              "2-1-6",
+              "2-6-1"
+            ],
+            "navi": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-6"
+          ],
+          "3": [
+            "1-2-6",
+            "1-2-4",
+            "1-6-2",
+            "1-6-4",
+            "2-1-6",
+            "2-1-4",
+            "2-6-1",
+            "2-6-4",
+            "1-6-3",
+            "1-6-5"
+          ],
+          "categories": {
+            "main": [
+              "1-2-6",
+              "1-2-4",
+              "1-6-2",
+              "1-6-4"
+            ],
+            "reverse": [
+              "2-1-6",
+              "2-1-4",
+              "2-6-1",
+              "2-6-4"
+            ],
+            "navi": [
+              "1-6-2",
+              "1-6-3",
+              "1-6-4",
+              "1-6-5"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v20-r10",
+      "venue": "若松",
+      "venue_code": 20,
+      "venue_number": 20,
+      "venue_name": "若松",
+      "race_no": 10,
+      "race_number": 10,
+      "deadline": "2026-11-14T19:25:00+09:00",
+      "deadline_display": "19:25",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "5",
+        "2"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "2",
+        "5"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-3-5",
+        "1-3-2",
+        "1-2-3"
+      ],
+      "trifecta_common": [
+        "1-3-5",
+        "1-3-2",
+        "1-2-3"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-5",
+            "1-2"
+          ],
+          "3": [
+            "1-3-5",
+            "1-3-2",
+            "1-5-3",
+            "1-2-3",
+            "3-5-1",
+            "3-1-5",
+            "1-5-2",
+            "1-5-4",
+            "1-5-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-5",
+              "1-3-2",
+              "1-5-3",
+              "1-2-3"
+            ],
+            "reverse": [
+              "3-5-1",
+              "3-1-5"
+            ],
+            "navi": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-2",
+            "1-3-5",
+            "1-2-3",
+            "1-2-5",
+            "5-3-1",
+            "5-3-2",
+            "5-1-3",
+            "5-1-2",
+            "1-3-4",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-2",
+              "1-3-5",
+              "1-2-3",
+              "1-2-5"
+            ],
+            "reverse": [
+              "5-3-1",
+              "5-3-2",
+              "5-1-3",
+              "5-1-2"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v20-r11",
+      "venue": "若松",
+      "venue_code": 20,
+      "venue_number": 20,
+      "venue_name": "若松",
+      "race_no": 11,
+      "race_number": 11,
+      "deadline": "2026-11-14T19:58:00+09:00",
+      "deadline_display": "19:58",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-4"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-4"
+      ],
+      "trifecta": [
+        "1-3-4",
+        "1-3-6",
+        "1-4-3",
+        "1-3-2",
+        "1-4-2"
+      ],
+      "trifecta_common": [
+        "1-3-4",
+        "1-3-6",
+        "1-4-3",
+        "1-3-2",
+        "1-4-2"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-6",
+          "ticket": "1-3-6",
+          "oc": "本線",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-3",
+          "ticket": "1-4-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-4"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-6",
+            "1-4-3",
+            "1-3-2",
+            "4-3-1",
+            "4-1-3",
+            "1-4-2",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-6",
+              "1-4-3",
+              "1-3-2"
+            ],
+            "reverse": [
+              "4-3-1",
+              "4-1-3"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-4"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-2",
+            "1-4-3",
+            "1-4-2",
+            "3-4-1",
+            "3-4-2",
+            "3-1-2",
+            "3-1-4",
+            "1-3-5",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-2",
+              "1-4-3",
+              "1-4-2"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-4-2",
+              "3-1-2",
+              "3-1-4"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v20-r12",
+      "venue": "若松",
+      "venue_code": 20,
+      "venue_number": 20,
+      "venue_name": "若松",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T20:30:00+09:00",
+      "deadline_display": "20:30",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "2",
+        "4"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-3-4",
+        "1-3-2",
+        "1-2-3"
+      ],
+      "trifecta_common": [
+        "1-3-4",
+        "1-3-2",
+        "1-2-3"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-2",
+            "1-4-3",
+            "1-2-3",
+            "4-1-3",
+            "4-3-1",
+            "1-4-2",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-2",
+              "1-4-3",
+              "1-2-3"
+            ],
+            "reverse": [
+              "4-1-3",
+              "4-3-1"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-2",
+            "1-3-4",
+            "1-2-3",
+            "1-2-4",
+            "2-1-3",
+            "2-1-4",
+            "2-3-1",
+            "2-3-4",
+            "1-3-5",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-2",
+              "1-3-4",
+              "1-2-3",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-1-3",
+              "2-1-4",
+              "2-3-1",
+              "2-3-4"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v22-r12",
+      "venue": "福岡",
+      "venue_code": 22,
+      "venue_number": 22,
+      "venue_name": "福岡",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T16:30:00+09:00",
+      "deadline_display": "16:30",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "4",
+        "3"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "4",
+        "5"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2",
+        "1-4"
+      ],
+      "exacta_common": [
+        "1-2",
+        "1-4"
+      ],
+      "trifecta": [
+        "1-2-5",
+        "1-2-3",
+        "1-4-2",
+        "1-2-4",
+        "2-1-5",
+        "1-2-6"
+      ],
+      "trifecta_common": [
+        "1-2-5",
+        "1-2-3",
+        "1-4-2",
+        "1-2-4",
+        "2-1-5",
+        "1-2-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "2-1-5",
+          "ticket": "2-1-5",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-4"
+          ],
+          "3": [
+            "1-2-5",
+            "1-2-3",
+            "1-4-2",
+            "1-2-4",
+            "2-1-4",
+            "2-1-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-5",
+              "1-2-3",
+              "1-4-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-1-4",
+              "2-1-5"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-4"
+          ],
+          "3": [
+            "1-2-4",
+            "1-2-5",
+            "1-4-2",
+            "1-4-5",
+            "2-1-5",
+            "2-1-3",
+            "2-3-1",
+            "2-3-5",
+            "1-2-3",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-4",
+              "1-2-5",
+              "1-4-2",
+              "1-4-5"
+            ],
+            "reverse": [
+              "2-1-5",
+              "2-1-3",
+              "2-3-1",
+              "2-3-5"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v23-r12",
+      "venue": "唐津",
+      "venue_code": 23,
+      "venue_number": 23,
+      "venue_name": "唐津",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T14:24:00+09:00",
+      "deadline_display": "14:24",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "4",
+        "2",
+        "6"
+      ],
+      "gemi_marks": [
+        "1",
+        "4",
+        "2",
+        "3"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-4",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-4",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-4-2",
+        "1-2-4",
+        "1-2-6",
+        "4-2-1",
+        "4-1-2",
+        "1-4-3"
+      ],
+      "trifecta_common": [
+        "1-4-2",
+        "1-2-4",
+        "1-2-6",
+        "4-2-1",
+        "4-1-2",
+        "1-4-3"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "本線",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "4-2-1",
+          "ticket": "4-2-1",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "4-1-2",
+          "ticket": "4-1-2",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-4-3",
+          "ticket": "1-4-3",
+          "oc": "舟券ナビ",
+          "gc": "本線",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-4-2",
+            "1-2-4",
+            "1-4-6",
+            "1-2-6",
+            "4-2-1",
+            "4-1-2",
+            "1-4-3",
+            "1-4-5"
+          ],
+          "categories": {
+            "main": [
+              "1-4-2",
+              "1-2-4",
+              "1-4-6",
+              "1-2-6"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-1-2"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-4-2",
+            "1-4-3",
+            "1-2-4",
+            "1-2-3",
+            "4-2-1",
+            "4-2-3",
+            "4-1-2",
+            "4-1-3",
+            "1-2-5",
+            "1-2-6"
+          ],
+          "categories": {
+            "main": [
+              "1-4-2",
+              "1-4-3",
+              "1-2-4",
+              "1-2-3"
+            ],
+            "reverse": [
+              "4-2-1",
+              "4-2-3",
+              "4-1-2",
+              "4-1-3"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v24-r7",
+      "venue": "大村",
+      "venue_code": 24,
+      "venue_number": 24,
+      "venue_name": "大村",
+      "race_no": 7,
+      "race_number": 7,
+      "deadline": "2026-11-14T18:13:00+09:00",
+      "deadline_display": "18:13",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "2",
+        "6",
+        "4"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "4",
+        "6"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-2",
+        "1-4"
+      ],
+      "exacta_common": [
+        "1-2",
+        "1-4"
+      ],
+      "trifecta": [
+        "1-2-6",
+        "1-2-3",
+        "1-4-2",
+        "1-2-4",
+        "2-1-6",
+        "1-2-5"
+      ],
+      "trifecta_common": [
+        "1-2-6",
+        "1-2-3",
+        "1-4-2",
+        "1-2-4",
+        "2-1-6",
+        "1-2-5"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "2-1-6",
+          "ticket": "2-1-6",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-2",
+            "1-4"
+          ],
+          "3": [
+            "1-2-6",
+            "1-2-3",
+            "1-4-2",
+            "1-2-4",
+            "2-1-6",
+            "2-1-4",
+            "1-2-5"
+          ],
+          "categories": {
+            "main": [
+              "1-2-6",
+              "1-2-3",
+              "1-4-2",
+              "1-2-4"
+            ],
+            "reverse": [
+              "2-1-6",
+              "2-1-4"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-4"
+          ],
+          "3": [
+            "1-2-4",
+            "1-2-6",
+            "1-4-2",
+            "1-4-6",
+            "2-1-6",
+            "2-1-5",
+            "2-4-1",
+            "2-4-6",
+            "1-2-3",
+            "1-2-5"
+          ],
+          "categories": {
+            "main": [
+              "1-2-4",
+              "1-2-6",
+              "1-4-2",
+              "1-4-6"
+            ],
+            "reverse": [
+              "2-1-6",
+              "2-1-5",
+              "2-4-1",
+              "2-4-6"
+            ],
+            "navi": [
+              "1-2-3",
+              "1-2-4",
+              "1-2-5",
+              "1-2-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v24-r8",
+      "venue": "大村",
+      "venue_code": 24,
+      "venue_number": 24,
+      "venue_name": "大村",
+      "race_no": 8,
+      "race_number": 8,
+      "deadline": "2026-11-14T18:43:00+09:00",
+      "deadline_display": "18:43",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "4",
+        "2",
+        "6"
+      ],
+      "gemi_marks": [
+        "1",
+        "4",
+        "2",
+        "6"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-4",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-4",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-4-2",
+        "1-4-6",
+        "1-2-4",
+        "1-2-6",
+        "1-4-3",
+        "1-4-5"
+      ],
+      "trifecta_common": [
+        "1-4-2",
+        "1-4-6",
+        "1-2-4",
+        "1-2-6",
+        "1-4-3",
+        "1-4-5"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-6",
+          "ticket": "1-4-6",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-4",
+          "ticket": "1-2-4",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-6",
+          "ticket": "1-2-6",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-4-3",
+          "ticket": "1-4-3",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-5",
+          "ticket": "1-4-5",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-4-2",
+            "1-4-6",
+            "1-2-4",
+            "1-2-6",
+            "2-1-4",
+            "2-4-1",
+            "1-4-3",
+            "1-4-5"
+          ],
+          "categories": {
+            "main": [
+              "1-4-2",
+              "1-4-6",
+              "1-2-4",
+              "1-2-6"
+            ],
+            "reverse": [
+              "2-1-4",
+              "2-4-1"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-4-2",
+            "1-4-6",
+            "1-2-4",
+            "1-2-6",
+            "4-1-2",
+            "4-1-6",
+            "4-5-2",
+            "4-5-1",
+            "1-4-3",
+            "1-4-5"
+          ],
+          "categories": {
+            "main": [
+              "1-4-2",
+              "1-4-6",
+              "1-2-4",
+              "1-2-6"
+            ],
+            "reverse": [
+              "4-1-2",
+              "4-1-6",
+              "4-5-2",
+              "4-5-1"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v24-r9",
+      "venue": "大村",
+      "venue_code": 24,
+      "venue_number": 24,
+      "venue_name": "大村",
+      "race_no": 9,
+      "race_number": 9,
+      "deadline": "2026-11-14T19:14:00+09:00",
+      "deadline_display": "19:14",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "gemi_marks": [
+        "1",
+        "3",
+        "4",
+        "2"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-4"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-4"
+      ],
+      "trifecta": [
+        "1-3-4",
+        "1-4-3",
+        "1-3-2",
+        "1-4-2",
+        "3-1-4",
+        "3-4-1",
+        "1-3-5",
+        "1-3-6"
+      ],
+      "trifecta_common": [
+        "1-3-4",
+        "1-4-3",
+        "1-3-2",
+        "1-4-2",
+        "3-1-4",
+        "3-4-1",
+        "1-3-5",
+        "1-3-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-3",
+          "ticket": "1-4-3",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "3-1-4",
+          "ticket": "3-1-4",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "3-4-1",
+          "ticket": "3-4-1",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-6",
+          "ticket": "1-3-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-4"
+          ],
+          "3": [
+            "1-3-4",
+            "1-4-3",
+            "1-3-2",
+            "1-4-2",
+            "3-1-4",
+            "3-4-1",
+            "1-3-5",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-4-3",
+              "1-3-2",
+              "1-4-2"
+            ],
+            "reverse": [
+              "3-1-4",
+              "3-4-1"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-3",
+            "1-4"
+          ],
+          "3": [
+            "1-3-4",
+            "1-3-2",
+            "1-4-3",
+            "1-4-2",
+            "3-4-1",
+            "3-4-2",
+            "3-1-4",
+            "3-1-2",
+            "1-3-5",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-4",
+              "1-3-2",
+              "1-4-3",
+              "1-4-2"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-4-2",
+              "3-1-4",
+              "3-1-2"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v24-r10",
+      "venue": "大村",
+      "venue_code": 24,
+      "venue_number": 24,
+      "venue_name": "大村",
+      "race_no": 10,
+      "race_number": 10,
+      "deadline": "2026-11-14T19:47:00+09:00",
+      "deadline_display": "19:47",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "4",
+        "3",
+        "2"
+      ],
+      "gemi_marks": [
+        "1",
+        "4",
+        "2",
+        "3"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-4"
+      ],
+      "exacta_common": [
+        "1-4"
+      ],
+      "trifecta": [
+        "1-4-2",
+        "1-4-3",
+        "3-4-1",
+        "1-4-5",
+        "1-4-6"
+      ],
+      "trifecta_common": [
+        "1-4-2",
+        "1-4-3",
+        "3-4-1",
+        "1-4-5",
+        "1-4-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-4-2",
+          "ticket": "1-4-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-3",
+          "ticket": "1-4-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "3-4-1",
+          "ticket": "3-4-1",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-4-5",
+          "ticket": "1-4-5",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-4-6",
+          "ticket": "1-4-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-4",
+            "1-3"
+          ],
+          "3": [
+            "1-4-2",
+            "1-4-3",
+            "1-3-4",
+            "1-3-2",
+            "3-4-1",
+            "3-1-4",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-4-2",
+              "1-4-3",
+              "1-3-4",
+              "1-3-2"
+            ],
+            "reverse": [
+              "3-4-1",
+              "3-1-4"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-4",
+            "1-2"
+          ],
+          "3": [
+            "1-4-2",
+            "1-4-3",
+            "1-2-4",
+            "1-2-3",
+            "3-1-2",
+            "3-1-5",
+            "3-4-1",
+            "3-4-2",
+            "1-4-5",
+            "1-4-6"
+          ],
+          "categories": {
+            "main": [
+              "1-4-2",
+              "1-4-3",
+              "1-2-4",
+              "1-2-3"
+            ],
+            "reverse": [
+              "3-1-2",
+              "3-1-5",
+              "3-4-1",
+              "3-4-2"
+            ],
+            "navi": [
+              "1-4-2",
+              "1-4-3",
+              "1-4-5",
+              "1-4-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v24-r11",
+      "venue": "大村",
+      "venue_code": 24,
+      "venue_number": 24,
+      "venue_name": "大村",
+      "race_no": 11,
+      "race_number": 11,
+      "deadline": "2026-11-14T20:16:00+09:00",
+      "deadline_display": "20:16",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "5",
+        "3",
+        "2"
+      ],
+      "gemi_marks": [
+        "1",
+        "5",
+        "3",
+        "2"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-5",
+        "1-3"
+      ],
+      "exacta_common": [
+        "1-5",
+        "1-3"
+      ],
+      "trifecta": [
+        "1-5-3",
+        "1-5-2",
+        "1-3-5",
+        "3-1-5",
+        "3-5-1",
+        "1-5-4",
+        "1-5-6"
+      ],
+      "trifecta_common": [
+        "1-5-3",
+        "1-5-2",
+        "1-3-5",
+        "3-1-5",
+        "3-5-1",
+        "1-5-4",
+        "1-5-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-5-3",
+          "ticket": "1-5-3",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-5-2",
+          "ticket": "1-5-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "3-1-5",
+          "ticket": "3-1-5",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "3-5-1",
+          "ticket": "3-5-1",
+          "oc": "逆張り",
+          "gc": "逆張り",
+          "ocha_categories": [
+            "reverse"
+          ],
+          "gemi_categories": [
+            "reverse"
+          ]
+        },
+        {
+          "t": "1-5-4",
+          "ticket": "1-5-4",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-5-6",
+          "ticket": "1-5-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-5",
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-5-3",
+            "1-5-2",
+            "1-3-5",
+            "1-2-5",
+            "3-1-5",
+            "3-5-1",
+            "1-5-4",
+            "1-5-6"
+          ],
+          "categories": {
+            "main": [
+              "1-5-3",
+              "1-5-2",
+              "1-3-5",
+              "1-2-5"
+            ],
+            "reverse": [
+              "3-1-5",
+              "3-5-1"
+            ],
+            "navi": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-5",
+            "1-3"
+          ],
+          "3": [
+            "1-5-3",
+            "1-5-2",
+            "1-3-5",
+            "1-3-2",
+            "3-1-5",
+            "3-1-2",
+            "3-5-1",
+            "3-5-2",
+            "1-5-4",
+            "1-5-6"
+          ],
+          "categories": {
+            "main": [
+              "1-5-3",
+              "1-5-2",
+              "1-3-5",
+              "1-3-2"
+            ],
+            "reverse": [
+              "3-1-5",
+              "3-1-2",
+              "3-5-1",
+              "3-5-2"
+            ],
+            "navi": [
+              "1-5-2",
+              "1-5-3",
+              "1-5-4",
+              "1-5-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    },
+    {
+      "race_id": "v24-r12",
+      "venue": "大村",
+      "venue_code": 24,
+      "venue_number": 24,
+      "venue_name": "大村",
+      "race_no": 12,
+      "race_number": 12,
+      "deadline": "2026-11-14T20:45:00+09:00",
+      "deadline_display": "20:45",
+      "pair_timing_eligible": true,
+      "input_versions_differ": false,
+      "honmei_match": true,
+      "ocha_marks": [
+        "1",
+        "3",
+        "2",
+        "5"
+      ],
+      "gemi_marks": [
+        "1",
+        "2",
+        "3",
+        "5"
+      ],
+      "ocha_method": "逃げ",
+      "gemi_method": "逃げ",
+      "exacta": [
+        "1-3",
+        "1-2"
+      ],
+      "exacta_common": [
+        "1-3",
+        "1-2"
+      ],
+      "trifecta": [
+        "1-3-5",
+        "1-3-2",
+        "1-2-5",
+        "1-2-3",
+        "1-3-4",
+        "1-3-6"
+      ],
+      "trifecta_common": [
+        "1-3-5",
+        "1-3-2",
+        "1-2-5",
+        "1-2-3",
+        "1-3-4",
+        "1-3-6"
+      ],
+      "trifecta_categories": [
+        {
+          "t": "1-3-5",
+          "ticket": "1-3-5",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-2",
+          "ticket": "1-3-2",
+          "oc": "本線＋舟券ナビ",
+          "gc": "本線＋舟券ナビ",
+          "ocha_categories": [
+            "main",
+            "navi"
+          ],
+          "gemi_categories": [
+            "main",
+            "navi"
+          ]
+        },
+        {
+          "t": "1-2-5",
+          "ticket": "1-2-5",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-2-3",
+          "ticket": "1-2-3",
+          "oc": "本線",
+          "gc": "本線",
+          "ocha_categories": [
+            "main"
+          ],
+          "gemi_categories": [
+            "main"
+          ]
+        },
+        {
+          "t": "1-3-4",
+          "ticket": "1-3-4",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        },
+        {
+          "t": "1-3-6",
+          "ticket": "1-3-6",
+          "oc": "舟券ナビ",
+          "gc": "舟券ナビ",
+          "ocha_categories": [
+            "navi"
+          ],
+          "gemi_categories": [
+            "navi"
+          ]
+        }
+      ],
+      "reporters": {
+        "ocha": {
+          "2": [
+            "1-3",
+            "1-2"
+          ],
+          "3": [
+            "1-3-5",
+            "1-3-2",
+            "1-2-5",
+            "1-2-3",
+            "3-1-5",
+            "3-1-2",
+            "1-3-4",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-3-5",
+              "1-3-2",
+              "1-2-5",
+              "1-2-3"
+            ],
+            "reverse": [
+              "3-1-5",
+              "3-1-2"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        },
+        "gemi": {
+          "2": [
+            "1-2",
+            "1-3"
+          ],
+          "3": [
+            "1-2-3",
+            "1-2-5",
+            "1-3-2",
+            "1-3-5",
+            "2-1-5",
+            "2-1-3",
+            "2-3-1",
+            "2-3-5",
+            "1-3-4",
+            "1-3-6"
+          ],
+          "categories": {
+            "main": [
+              "1-2-3",
+              "1-2-5",
+              "1-3-2",
+              "1-3-5"
+            ],
+            "reverse": [
+              "2-1-5",
+              "2-1-3",
+              "2-3-1",
+              "2-3-5"
+            ],
+            "navi": [
+              "1-3-2",
+              "1-3-4",
+              "1-3-5",
+              "1-3-6"
+            ]
+          }
+        }
+      },
+      "result": null
+    }
+  ]
+}

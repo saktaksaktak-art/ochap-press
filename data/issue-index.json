@@ -186,7 +186,8 @@
       "pair_comparison_eligible": false,
       "data_limitations_present": true,
       "gemi_data": "./data/gemi/2026-11-14.json",
-      "gemi_first_publication_confirmed_at_jst": "2026-11-14T21:48:37+09:00"
+      "gemi_first_publication_confirmed_at_jst": "2026-11-14T21:48:37+09:00",
+      "consensus_json": "data/consensus/2026-11-14.json"
     },
     {
       "date": "2026-11-10",
@@ -369,7 +370,8 @@
       ],
       "label": "2026-11-07（土）全国11場・132R【Gemi兄M0予想・全国/当地/G1コース成績・艇番カラー】",
       "ochap_status": "published_original_preserved",
-      "gemi_status": "live_m0_pre_deadline"
+      "gemi_status": "live_m0_pre_deadline",
+      "consensus_json": "data/consensus/2026-11-07.json"
     },
     {
       "date": "2026-11-06",
@@ -403,7 +405,8 @@
       "label": "2026-11-06（金）全国13場・156R【両記者M0予想・予想一致レース・艇番カラー】",
       "ochap_status": "published_original_preserved",
       "gemi_status": "live_m0_pre_deadline",
-      "gemi_first_publication_confirmed_at_jst": "2026-11-07T15:23:49+09:00"
+      "gemi_first_publication_confirmed_at_jst": "2026-11-07T15:23:49+09:00",
+      "consensus_json": "data/consensus/2026-11-06.json"
     },
     {
       "date": "2026-11-05",
