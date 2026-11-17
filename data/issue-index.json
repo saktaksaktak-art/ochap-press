@@ -15,10 +15,31 @@
       "ochap_status": "predeadline_reference_m0",
       "formal_bc_eligible": false,
       "data_limitations_present": true,
-      "gemi_tabs": false,
+      "gemi_tabs": true,
       "diagrams": true,
       "diagram_policy": "slit-only.v1",
-      "turn_diagrams": false
+      "turn_diagrams": false,
+      "gemi_json": "data/gemi/2026-11-18.json.gz.b64.txt",
+      "gemi_status": "independent_predeadline_reference_pair",
+      "gemi_reported_frozen_races": 132,
+      "gemi_html_races": 132,
+      "consensus_json": "data/consensus/2026-11-18.json",
+      "consensus_reference_only": true,
+      "pair_comparison_eligible": false,
+      "forecast_sha256": "55523f55fe777705f46f56241f98411355d4bf3d9b4d265d73cdd8339a0875e6",
+      "gemi_original_sha256": "4870b615ed29d735cf69e42060a53d2cb9e20d535aece52d95c43997b7a4ce22",
+      "publication_timing_checked_at": "2026-11-18T07:13:26+09:00",
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-18T07:12:18+09:00",
+          "input_sha256": "589d1211b8ce8be64f140c236ef8c5ba4992ca627ae702ffc85e02d17ee3105f"
+        },
+        "gemi": {
+          "recorded_freeze_at_jst": "2026-11-18T05:25:30+09:00",
+          "input_sha256": "589d1211b8ce8be64f140c236ef8c5ba4992ca627ae702ffc85e02d17ee3105f",
+          "races": 132
+        }
+      }
     },
     {
       "date": "2026-11-17",
