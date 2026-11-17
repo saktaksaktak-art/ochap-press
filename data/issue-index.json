@@ -20,7 +20,7 @@
       "diagram_policy": "slit-only.v1",
       "turn_diagrams": false,
       "gemi_json": "data/gemi/2026-11-18.json.gz.b64.txt",
-      "gemi_status": "independent_predeadline_reference_pair",
+      "gemi_status": "live_m0_pre_deadline",
       "gemi_reported_frozen_races": 132,
       "gemi_html_races": 132,
       "consensus_json": "data/consensus/2026-11-18.json",
@@ -39,7 +39,9 @@
           "input_sha256": "589d1211b8ce8be64f140c236ef8c5ba4992ca627ae702ffc85e02d17ee3105f",
           "races": 132
         }
-      }
+      },
+      "gemi_data": "./data/gemi/2026-11-18.json",
+      "gemi_first_publication_confirmed_at_jst": "2026-11-18T07:20:21+09:00"
     },
     {
       "date": "2026-11-17",
@@ -567,5 +569,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-17"
+  "latest": "2026-11-18"
 }
