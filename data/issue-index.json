@@ -1,7 +1,25 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-17",
+  "default_date": "2026-11-18",
   "issues": [
+    {
+      "date": "2026-11-18",
+      "path": "archives/2026-11-18.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "label": "2026年11月18日 全国予想",
+      "venues": 8,
+      "races": 34,
+      "expected_races": 132,
+      "unissued_races": 98,
+      "edition_status": "partial_predeadline_reference_m0",
+      "ochap_status": "predeadline_reference_m0",
+      "formal_bc_eligible": false,
+      "data_limitations_present": true,
+      "gemi_tabs": false,
+      "diagrams": true,
+      "diagram_policy": "slit-only.v1",
+      "turn_diagrams": false
+    },
     {
       "date": "2026-11-17",
       "path": "archives/2026-11-17.html.gz.b64.txt",
