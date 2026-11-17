@@ -38,7 +38,12 @@
       "gemi_last_synced_at_jst": "2026-11-17T13:18:09+09:00",
       "gemi_publication_timing_checked_at": "2026-11-17T13:18:09+09:00",
       "consensus_json": "data/consensus/2026-11-17.json",
-      "gemi_first_publication_confirmed_at_jst": "2026-11-17T22:12:59+09:00"
+      "gemi_first_publication_confirmed_at_jst": "2026-11-17T13:19:08+09:00",
+      "gemi_first_publication_evidence": {
+        "pages_run_id": 44016258740,
+        "commit_sha": "56128c2b041529761b8a9b09ae70ff606fd724cc",
+        "gemi_gzip_base64_blob_sha": "92ce9d09752ca26c4a639bc1efaccbb7c2f424d7"
+      }
     },
     {
       "date": "2026-11-16",
