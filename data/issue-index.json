@@ -6,7 +6,7 @@
       "date": "2026-11-17",
       "path": "archives/2026-11-17.html.gz.b64.txt",
       "compression": "base64gzip",
-      "gemi_tabs": false,
+      "gemi_tabs": true,
       "editorial_data": "data/editorial/2026-11-17-a7a463d7af63.json.gz.b64.txt",
       "editorial_data_sha256": "a7a463d7af6360b757fb4359161ded01bd239bd196799b92684f5a7a8578354b",
       "editorial_fragments": 264,
@@ -31,7 +31,12 @@
       "expected_races": 132,
       "unissued_races": 0,
       "ochap_status": "predeadline_reference_m0",
-      "data_limitations_present": true
+      "data_limitations_present": true,
+      "gemi_json": "data/gemi/2026-11-17.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-17.json",
+      "gemi_status": "live_m0_pre_deadline",
+      "gemi_last_synced_at_jst": "2026-11-17T13:18:09+09:00",
+      "gemi_publication_timing_checked_at": "2026-11-17T13:18:09+09:00"
     },
     {
       "date": "2026-11-16",
@@ -513,5 +518,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-16"
+  "latest": "2026-11-17"
 }
