@@ -36,7 +36,9 @@
       "gemi_data": "./data/gemi/2026-11-17.json",
       "gemi_status": "live_m0_pre_deadline",
       "gemi_last_synced_at_jst": "2026-11-17T13:18:09+09:00",
-      "gemi_publication_timing_checked_at": "2026-11-17T13:18:09+09:00"
+      "gemi_publication_timing_checked_at": "2026-11-17T13:18:09+09:00",
+      "consensus_json": "data/consensus/2026-11-17.json",
+      "gemi_first_publication_confirmed_at_jst": "2026-11-17T22:12:59+09:00"
     },
     {
       "date": "2026-11-16",
