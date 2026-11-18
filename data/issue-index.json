@@ -50,7 +50,10 @@
       "reporter_input_versions_differ": false,
       "first_publication_confirmed_at_jst": "2026-11-19T07:23:11+09:00",
       "consensus_json": "data/consensus/2026-11-19.json",
-      "consensus_json_drive_file_id": "1dh9_6Rg6r1hk-hKIjs7A_oNB5mQ7aSLT"
+      "consensus_json_drive_file_id": "1dh9_6Rg6r1hk-hKIjs7A_oNB5mQ7aSLT",
+      "label": "2026年11月19日 全国予想",
+      "ochap_status": "published_original_preserved",
+      "gemi_status": "live_m0_pre_deadline"
     },
     {
       "date": "2026-11-18",
@@ -619,5 +622,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-18"
+  "latest": "2026-11-19"
 }
