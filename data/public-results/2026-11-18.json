@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "date": "2026-11-18",
   "status": "API_RESULTS_REFERENCE_ONLY",
-  "checked_at_jst": "2026-11-18T18:08:25+09:00",
+  "checked_at_jst": "2026-11-18T18:28:24+09:00",
   "not_formal_m0": true,
   "not_formal_bc": true,
   "races": [
@@ -76,6 +76,24 @@
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261118.json",
       "source_observed_at_jst": "2026-11-18T18:08:25+09:00",
       "exacta_payout_yen": 4420,
+      "refund_boats": []
+    },
+    {
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 7,
+      "order": [
+        3,
+        1,
+        5
+      ],
+      "method": "まくり差し",
+      "trifecta_payout_yen": 3470,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261118.json",
+      "source_observed_at_jst": "2026-11-18T18:28:24+09:00",
+      "exacta_payout_yen": 750,
       "refund_boats": []
     },
     {
@@ -1545,5 +1563,5 @@
     }
   ],
   "source_policy": "Unified third-party API; formal BC is separate.",
-  "result_changed_at_jst": "2026-11-18T18:08:25+09:00"
+  "result_changed_at_jst": "2026-11-18T18:28:24+09:00"
 }
