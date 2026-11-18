@@ -1,7 +1,54 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-18",
+  "default_date": "2026-11-19",
   "issues": [
+    {
+      "date": "2026-11-19",
+      "path": "archives/2026-11-19.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": true,
+      "editorial_data": "data/editorial/2026-11-19-b15b28447955.json.gz.b64.txt",
+      "editorial_data_sha256": "b15b28447955541fc9ec832c6e5ddcc65a4d0a8473b37540065951867052cbcf",
+      "editorial_fragments": 264,
+      "edition_status": "predeadline_reference",
+      "venues": 11,
+      "races": 132,
+      "forecast_frozen_at_jst": "2026-11-19T07:16:24+09:00",
+      "publication_timing_checked_at": null,
+      "forecast_sha256": "aff9ec1315e9240a8290a555626a57a9e3191d19e3c4edd5c28b81fd55b60f47",
+      "formal_bc_eligible": false,
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-19T07:16:24+09:00",
+          "input_sha256": "7664edc32da58c0127a6db987abd872b95dfc8e550333220a7b7d9622963ef0b",
+          "forecast_sha256": "aff9ec1315e9240a8290a555626a57a9e3191d19e3c4edd5c28b81fd55b60f47"
+        },
+        "gemi": {
+          "recorded_freeze_at_jst": "2026-11-19T05:35:30+09:00",
+          "frozen_at_jst": "2026-11-19T05:35:30+09:00",
+          "input_sha256": "7664edc32da58c0127a6db987abd872b95dfc8e550333220a7b7d9622963ef0b",
+          "public_sha256": "87610349fddb6390a2e48fdf0c1c690d7d09f42d31925372330affc488a94059"
+        }
+      },
+      "post_deadline_reference_races": [],
+      "diagrams": true,
+      "diagram_policy": "slit-only.v1",
+      "turn_diagrams": false,
+      "expected_races": 132,
+      "unissued_races": 0,
+      "formal_morning_certified": false,
+      "single_bc_eligible_races": 132,
+      "single_bc_status": "PENDING_OFFICIAL_RESULTS",
+      "formal_pair_verified": false,
+      "pair_comparison_eligible": false,
+      "gemi_json": "data/gemi/2026-11-19.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-19.json",
+      "gemi_script": "assets/gemi-reporter.js",
+      "gemi_public_sha256": "87610349fddb6390a2e48fdf0c1c690d7d09f42d31925372330affc488a94059",
+      "forecast_drive_id": "1Qbq7Cqy21mJJYfNEGCIVK0KDQSrnzZID",
+      "gemi_first_publication_confirmed_at_jst": null,
+      "reporter_input_versions_differ": false
+    },
     {
       "date": "2026-11-18",
       "path": "archives/2026-11-18.html.gz.b64.txt",
