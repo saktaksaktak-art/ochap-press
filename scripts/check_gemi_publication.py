@@ -51,7 +51,8 @@ def main():
         for rid, rec in doc['races'].items():
             assert rec['status'] == 'published' and rec['input_sha256'] == sha, rid
             assert rec['freeze_at'] == item['reporters']['gemi']['recorded_freeze_at_jst'], rid
-            assert len(rec['bets']['main']) == 3, rid
+            expected_main = 4 if doc.get('instructions', {}).get('version') == 'ochap.prediction.approved.v7' else 3
+            assert len(rec['bets']['main']) == expected_main, rid
             for tickets in rec['bets'].values():
                 assert all(re.fullmatch('[1-6]-[1-6]-[1-6]', t) and len(set(t.split('-'))) == 3 for t in tickets), rid
         count += len(ids)
@@ -59,4 +60,5 @@ def main():
 
 if __name__ == '__main__':
     main()
+
 

@@ -14,7 +14,7 @@
       "venues": 11,
       "races": 132,
       "forecast_frozen_at_jst": "2026-11-19T07:16:24+09:00",
-      "publication_timing_checked_at": null,
+      "publication_timing_checked_at": "2026-11-19T07:23:11+09:00",
       "forecast_sha256": "aff9ec1315e9240a8290a555626a57a9e3191d19e3c4edd5c28b81fd55b60f47",
       "formal_bc_eligible": false,
       "reporters": {
@@ -46,8 +46,11 @@
       "gemi_script": "assets/gemi-reporter.js",
       "gemi_public_sha256": "87610349fddb6390a2e48fdf0c1c690d7d09f42d31925372330affc488a94059",
       "forecast_drive_id": "1Qbq7Cqy21mJJYfNEGCIVK0KDQSrnzZID",
-      "gemi_first_publication_confirmed_at_jst": null,
-      "reporter_input_versions_differ": false
+      "gemi_first_publication_confirmed_at_jst": "2026-11-19T07:23:11+09:00",
+      "reporter_input_versions_differ": false,
+      "first_publication_confirmed_at_jst": "2026-11-19T07:23:11+09:00",
+      "consensus_json": "data/consensus/2026-11-19.json",
+      "consensus_json_drive_file_id": "1dh9_6Rg6r1hk-hKIjs7A_oNB5mQ7aSLT"
     },
     {
       "date": "2026-11-18",
