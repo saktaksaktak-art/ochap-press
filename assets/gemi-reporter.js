@@ -35,7 +35,7 @@
   // One initialization per document even if old archives and the entry page
   // both include the reporter script.
   window.__OCHAP_GEMI_REPORTER_INITIALIZED__ = true;
-  window.__OCHAP_GEMI_REPORTER_VERSION__ = '1.2.10-consensus-and-date-sync';
+  window.__OCHAP_GEMI_REPORTER_VERSION__ = '1.2.11-html-output-hardened';
 
   const esc = (value) => String(value ?? '').replace(/[&<>"']/g, ch => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
 
@@ -396,6 +396,27 @@
     return null;
   }
 
+  function isInputShaMismatch(rec) {
+    if (!sharedInputMeta || !rec) return false;
+    const allowed = [
+      sharedInputMeta.sha256,
+      sharedInputMeta.file_sha256,
+      sharedInputMeta.canonical_sha256,
+      sharedInputMeta.gate0_full_sha256,
+      sharedInputMeta.gate0_canonical_sha256,
+      sharedInputMeta.normalized_mode_c_json_sha256,
+      sharedInputMeta.normalized_mode_c_gz_sha256
+    ].filter(x => typeof x === 'string' && x.length >= 32);
+    if (!allowed.length) return false;
+    const recShas = [
+      rec.input_sha256,
+      rec.gate0_shared_input_sha256,
+      rec.normalized_mode_c_json_sha256
+    ].filter(x => typeof x === 'string' && x.length >= 32);
+    if (!recShas.length) return false;
+    return !recShas.some(s => allowed.includes(s));
+  }
+
   function gemiQuickBanner(raceId) {
     const rec = resolveRaceRecord(raceId);
     if (!rec) {
@@ -407,7 +428,7 @@
     if (rec.status !== 'published' || !rec.freeze_at || !rec.source_ref) {
       return `<div class="ochap-gemi-quickbar"><b>✦ Gemi兄記者</b>：このレースは原稿未登録です。</div>`;
     }
-    if (sharedInputMeta && sharedInputMeta.sha256 && rec.input_sha256 && rec.input_sha256 !== sharedInputMeta.sha256) {
+    if (isInputShaMismatch(rec)) {
       return `<div class="ochap-gemi-quickbar"><b>✦ Gemi兄記者</b>：共通入力SHA-256不一致のため表示を停止しました。</div>`;
     }
     const marks = rec.marks || {};
@@ -437,7 +458,7 @@
     if (rec.status !== 'published' || !rec.freeze_at || !rec.source_ref) {
       return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">このレースは原稿未登録です。</p></section>`;
     }
-    if (sharedInputMeta && sharedInputMeta.sha256 && rec.input_sha256 && rec.input_sha256 !== sharedInputMeta.sha256) {
+    if (isInputShaMismatch(rec)) {
       return `<section class="section"><h3>Gemi兄記者の予想</h3><p class="ochap-gemi-status">共通入力ハッシュ不一致のため表示を停止しました。</p></section>`;
     }
     const raceTitle = article?.querySelector('.race-head h2')?.textContent || raceId;
@@ -446,8 +467,25 @@
     const scenario = rec.scenarios || {};
     const diag = rec.diagrams || {};
     const slitCourses = diag.slit_courses || [];
-    const escBranch = diag.escape_branch || { winner: 1, method: '逃げ', order_2nd: [2,3,4,5,6], order_3rd: [3,2,4,5,6] };
-    const colBranch = diag.collapse_branch || { winner: Number(marks.main) !== 1 ? Number(marks.main) : Number(marks.second) || 3, method: rec.predicted_method !== '逃げ' ? rec.predicted_method : 'まくり差し', order_2nd: [1,2,4,5,6], order_3rd: [2,1,4,5,6] };
+    const rawEsc = diag.escape_branch || {};
+    const rawCol = diag.collapse_branch || {};
+    const revFirstHead = (Array.isArray(bets.reverse) && bets.reverse[0]) ? Number(String(bets.reverse[0]).split('-')[0]) : 0;
+    const escWinner = rawEsc.winner || rawEsc.paused_winner_reference || 1;
+    const colWinner = rawCol.winner || rawCol.paused_winner_reference || revFirstHead || (Number(marks.main) !== 1 ? Number(marks.main) : (Number(marks.second) || 3));
+    const escBranch = {
+      ...rawEsc,
+      winner: escWinner,
+      method: rawEsc.method || '逃げ',
+      order_2nd: rawEsc.order_2nd || rawEsc.order2 || [2,3,4,5,6],
+      order_3rd: rawEsc.order_3rd || rawEsc.order3 || [3,2,4,5,6]
+    };
+    const colBranch = {
+      ...rawCol,
+      winner: colWinner,
+      method: rawCol.method || (rec.predicted_method && rec.predicted_method !== '逃げ' ? rec.predicted_method : 'まくり差し'),
+      order_2nd: rawCol.order_2nd || rawCol.order2 || [1,2,4,5,6],
+      order_3rd: rawCol.order_3rd || rawCol.order3 || [2,1,4,5,6]
+    };
     const entryOrder = diag.entry_order || [1, 2, 3, 4, 5, 6];
 
     const pause1MTurnDiagrams = Boolean(
@@ -469,12 +507,23 @@
         <td><b>${esc(r.label)}</b></td>
       </tr>`).join('');
 
-    const revSummary = diag.reverse_summary || {};
+    const rawRevSummary = diag.reverse_summary || {};
+    const revSummary = {
+      axis: rawRevSummary.axis || (Array.isArray(bets.reverse) && bets.reverse[0] ? String(bets.reverse[0]).slice(0, 3) + '-流' : ''),
+      head: rawRevSummary.head || colBranch.winner || revFirstHead || null,
+      method: rawRevSummary.method || colBranch.method || ''
+    };
     const revAxisHtml = revSummary.axis
       ? `<div class="combo">${formatAxisInline(revSummary.axis)}</div>`
       : '';
 
     const naviDetails = rec.navi_details || {};
+    const rawNaviSummary = diag.navi_summary || {};
+    const naviHead = rawNaviSummary.head || (naviDetails.axis ? Number(String(naviDetails.axis).split('-')[0]) : null);
+    const naviSummary = {
+      head: naviHead,
+      method: rawNaviSummary.method || (naviHead && Number(marks.main) === Number(naviHead) ? (rec.predicted_method || '') : (Number(naviHead) === 1 ? '逃げ' : (colBranch.method || '')))
+    };
     const naviAxisHtml = (naviDetails.status === 'recommended' && naviDetails.axis)
       ? `<div class="combo">${formatAxisInline(naviDetails.axis)}</div>`
       : `<div class="combo"><span class="note">見送り（推奨不成立）</span></div>`;
@@ -541,7 +590,7 @@
             <h3>舟券ナビ</h3>
             ${naviAxisHtml}
             ${Array.isArray(bets.navi) && bets.navi.length ? `<div style="margin-top:6px;font-size:15px">${renderComboList(bets.navi)}</div>` : ''}
-            ${naviDetails.status === 'recommended' && diag.navi_summary?.head ? `<p>予想決まり手：${boatBadge(diag.navi_summary.head)} ${esc(diag.navi_summary.method || '')}</p>` : ''}
+            ${naviDetails.status === 'recommended' && naviSummary.head ? `<p>予想決まり手：${boatBadge(naviSummary.head)} ${esc(naviSummary.method || '')}</p>` : ''}
             <p>${esc(naviDetails.reason || naviDetails.axis_reason || '')}</p>
           </div>
         </div>
@@ -639,7 +688,7 @@
         : '<span class="note ochap-digest-unissued">Gemi兄 未発行（予想なし）</span>';
       return rowInfo.hasReporterCol ? ['Gemi兄', '—', '—', msg] : ['—', '—', msg];
     }
-    if (sharedInputMeta && sharedInputMeta.sha256 && rec.input_sha256 && rec.input_sha256 !== sharedInputMeta.sha256) {
+    if (isInputShaMismatch(rec)) {
       const msg = '<span class="note ochap-digest-unissued">共通入力SHA-256不一致</span>';
       return rowInfo.hasReporterCol ? ['Gemi兄', '—', '—', msg] : ['—', '—', msg];
     }
@@ -672,6 +721,39 @@
     return [markHtml, methodHtml, ticketsHtml];
   }
 
+  function syncSharedRosterMarks(article, showGemi) {
+    if (!article) return;
+    const rec = resolveRaceRecord(article.id);
+    const marks = rec?.marks || {};
+    const gemiMarkByBoat = {};
+    if (marks.main) gemiMarkByBoat[String(marks.main)] = '◎';
+    if (marks.second) gemiMarkByBoat[String(marks.second)] = '○';
+    if (marks.third) gemiMarkByBoat[String(marks.third)] = '▲';
+    if (marks.fourth) gemiMarkByBoat[String(marks.fourth)] = '△';
+
+    const copyDiv = article.querySelector(':scope > .copy');
+    const rosterDetails = copyDiv
+      ? Array.from(copyDiv.querySelectorAll(':scope > details')).find(det => /^\s*01\s/.test(det.querySelector('summary')?.textContent || ''))
+      : Array.from(article.querySelectorAll(':scope > section.section')).find(sec => /^\s*01\s/.test(sec.querySelector('h3')?.textContent || ''));
+    if (!rosterDetails) return;
+    const rows = rosterDetails.querySelectorAll('tbody tr');
+    rows.forEach((tr, idx) => {
+      const tds = tr.querySelectorAll('td');
+      if (tds.length < 2) return;
+      const boatNum = String(tds[0].textContent || '').trim() || String(idx + 1);
+      const nameTd = tds[1];
+      if (!nameTd.dataset.ochapOrigHtml) {
+        nameTd.dataset.ochapOrigHtml = nameTd.innerHTML;
+      }
+      if (!showGemi || !rec || rec.status !== 'published') {
+        nameTd.innerHTML = nameTd.dataset.ochapOrigHtml;
+      } else {
+        const gSym = gemiMarkByBoat[boatNum] || '';
+        nameTd.innerHTML = nameTd.dataset.ochapOrigHtml.replace(/^\s*[◎○▲△]?\s*/, gSym ? (gSym + ' ') : ' ');
+      }
+    });
+  }
+
   function syncDigestRow(raceId, showGemi) {
     const rowInfo = digestRows.get(raceId);
     if (!rowInfo) return;
@@ -702,6 +784,7 @@
     gemiPane.hidden = !showGemi;
     ochaButton.setAttribute('aria-pressed', String(!showGemi));
     gemiButton.setAttribute('aria-pressed', String(showGemi));
+    syncSharedRosterMarks(article, showGemi);
     syncDigestRow(article.id, showGemi);
     if (preserveScroll && prevTop !== null) {
       const nextTop = article.getBoundingClientRect().top;
@@ -949,6 +1032,7 @@
           info.gemiPane.innerHTML = gemiContent(article.id, article);
           // Do not auto-switch to Gemini when OchaP's M0 is missing.
           // Both journalists' forecasts remain separately attributed.
+          syncSharedRosterMarks(article, article.dataset.ochapReporterActive === 'gemi');
           syncDigestRow(article.id, article.dataset.ochapReporterActive === 'gemi');
         }
       } finally {
