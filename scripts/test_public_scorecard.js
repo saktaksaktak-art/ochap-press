@@ -109,3 +109,60 @@ const hit=rows.find(r=>r.reporters.ocha.main.includes(r.order.join('-')));
 const unsettled=liveScore([{...hit,trifecta_payout_yen:null}],'ocha','main');
 assert.equal(unsettled.three,1);assert.equal(unsettled.profit,null);
 console.log('PASS: production 11/16 reference scorecards and agreement, both journalists, deadlines, missing payouts and excluded races');
+
+// Read the 11/19 published Gemi JSON through the real browser loader. An issue
+// can have a verified public payload before it has independent original metadata.
+async function publicShaRegression(){
+ const {webcrypto}=require('node:crypto');
+ const {gzipSync,gunzipSync}=require('node:zlib');
+ const day='2026-11-19';
+ const published=manifest.issues.find(x=>x.date===day);
+ const {gemi_original_sha256:_original,...publicOnly}=published;
+ const payload=fs.readFileSync(published.gemi_json,'utf8');
+ const raw=gunzipSync(Buffer.from(payload,'base64'));
+ assert.equal(createHash('sha256').update(raw).digest('hex'),published.gemi_public_sha256);
+ const reference=JSON.parse(fs.readFileSync('data/consensus/'+day+'.json','utf8'));
+ const results=JSON.parse(fs.readFileSync('data/public-results/'+day+'.json','utf8'));
+ const raceBulletin=readBulletin(results,day);
+ const sourceJS=fs.readFileSync('assets/hit-reporters.js','utf8');
+ class Clock extends Date { static now(){return Date.parse('2026-11-20T12:00:00+09:00')} }
+ async function loadPublished(currentIssue,responseBody=payload){
+  const receiver={
+   window:{DecompressionStream,__OCHAP_SELECTED_DATE__:day,__OCHAP_ISSUE_INDEX__:{issues:[currentIssue]}},
+   Date:Clock,crypto:webcrypto,TextDecoder,DecompressionStream,Blob,Response,atob,
+   fetch:async path=>{
+    assert.equal(path,'./'+currentIssue.gemi_json);
+    return new Response(responseBody);
+   }
+  };
+  vm.runInNewContext(sourceJS,receiver);
+  const loaded=await receiver.window.OchaPHitReporters.load(day);
+  const rowsById=Object.fromEntries(reference.races.map(r=>[r.race_id,{
+   ...(loaded[r.race_id]||{}),ocha:r.reporters.ocha.categories,
+   meta:{closing_at:r.deadline,venue:r.venue,race_no:r.race_no}
+  }]));
+  return {
+   loaded,rows:liveRecords(raceBulletin,rowsById,currentIssue,day)
+  };
+ }
+ const verified=await loadPublished(publicOnly);
+ assert.equal(Object.values(verified.loaded).filter(f=>f.gemi).length,132);
+ assert.ok(verified.rows.length>0);
+ assert.equal(liveScore(verified.rows,'gemi','all').n,liveScore(verified.rows,'ocha','all').n);
+ assert.ok(verified.rows.every(r=>r.reporters.ocha&&r.reporters.gemi));
+ const plain=await loadPublished({...publicOnly,gemi_json:'data/gemi/'+day+'.json'},raw);
+ assert.equal(liveScore(plain.rows,'gemi','all').n,verified.rows.length,'the digest also covers uncompressed JSON');
+ const tampered=gzipSync(Buffer.concat([raw,Buffer.from(' ')])).toString('base64');
+ const mismatched=await loadPublished(publicOnly,tampered);
+ assert.ok(Object.values(mismatched.loaded).some(f=>f.gemi),'altered bytes remain valid JSON');
+ assert.equal(mismatched.rows.length,verified.rows.length);
+ assert.equal(liveScore(mismatched.rows,'gemi','all').n,0,'a byte mismatch is not evidence');
+ const noReceipt={...publicOnly,gemi_first_publication_confirmed_at_jst:undefined,gemi_publication_timing_checked_at:undefined};
+ assert.ok((await loadPublished(noReceipt)).rows.every(r=>r.reporters.ocha&&!r.reporters.gemi));
+ const lateReceipt={...publicOnly,gemi_first_publication_confirmed_at_jst:reference.races[0].deadline};
+ const lateRows=(await loadPublished(lateReceipt)).rows;
+ assert.ok(lateRows.length>0 && lateRows.every(r=>r.reporters.ocha&&!r.reporters.gemi));
+ assert.equal(published.formal_bc_eligible,false);
+ console.log('PASS: production 11/19 public SHA fallback, digest mismatch, missing and late receipts');
+}
+publicShaRegression().catch(error=>{console.error(error);process.exitCode=1});

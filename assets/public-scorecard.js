@@ -63,6 +63,8 @@
     const gemiTime=zonedTime(issue.reporters?.gemi?.recorded_freeze_at_jst);
     const observation=issue.gemi_first_publication_confirmed_at_jst||issue.gemi_publication_timing_checked_at;
     const gemiIssueTime=observation?zonedTime(observation):issueTime;
+    const originalSha=sha(issue.gemi_original_sha256);
+    const canUsePublicSha=issue.gemi_original_sha256==null&&sha(issue.gemi_public_sha256)&&Number.isFinite(zonedTime(observation));
     const rows=[];
     for(const [key,result] of bulletin.results){
       if(!result)continue;
@@ -74,7 +76,8 @@
         f.meta.race_no!==result.race_no||f.meta.venue!==result.venue)continue;
       const entry={};
       if(f.ocha&&sha(issue.forecast_sha256)&&Math.max(issueTime,ochaTime)<deadline)entry.ocha=f.ocha;
-      if(f.gemi&&sha(issue.gemi_original_sha256)&&(!issue.gemi_publication_pending||observation)&&
+      const gemiSourceVerified=originalSha||(canUsePublicSha&&f.gemiTiming?.verified_public_sha256===issue.gemi_public_sha256);
+      if(f.gemi&&gemiSourceVerified&&(!issue.gemi_publication_pending||observation)&&
         zonedTime(f.gemiTiming?.closing_at)===deadline&&
         Math.max(gemiIssueTime,gemiTime,zonedTime(f.gemiTiming?.freeze_at))<deadline)entry.gemi=f.gemi;
       if(!Object.keys(entry).length)continue;
