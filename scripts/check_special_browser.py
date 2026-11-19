@@ -249,3 +249,26 @@ with ThreadingHTTPServer(("127.0.0.1", 0), handler) as server, sync_playwright()
         assert page.evaluate("document.documentElement.scrollWidth <= innerWidth")
     assert not errors, errors
     print("PASS: 390×844 tabs, specials, section jumps, navy styling, unchanged boat colors, scorecard widths and historical edition")
+
+    # Exercise the live comparison on the edition that uses a public Gemi SHA.
+    for width, height in [(390, 844), (1280, 900)]:
+        comparison = browser.new_page(
+            viewport={"width": width, "height": height}, is_mobile=width < 500,
+            has_touch=width < 500, timezone_id="Asia/Tokyo")
+        comparison.set_default_timeout(12000)
+        comparison.route("**/data/public-scorecards/2026-11-19.json", lambda route: route.fulfill(status=404))
+        comparison.goto(url + "2026-11-19&view=versus")
+        expect(comparison.locator(".ochap-score-compact")).to_be_visible()
+        comparison.locator('details[data-drawer=notes] > summary').click()
+        notes = comparison.locator(".ochap-score-note")
+        denominators = []
+        for name in ["お茶P", "Gemi兄"]:
+            note = notes.filter(has_text=re.compile(rf"^{name}：.*3連単 \d+/[1-9]\d*"))
+            expect(note).to_be_visible()
+            denominators.append(int(re.search(r"3連単 \d+/(\d+)", note.inner_text()).group(1)))
+        assert denominators[0] == denominators[1], (width, denominators)
+        expect(comparison.locator(".ochap-score-empty").filter(has_text="Gemi兄")).to_have_count(0)
+        expect(notes.filter(has_text="正式バックチェック・正式比較には加算しません。")).to_be_visible()
+        assert comparison.evaluate("document.documentElement.scrollWidth <= innerWidth")
+        comparison.close()
+    print("PASS: 11/19 public SHA reference scorecard at 390px and 1280px")

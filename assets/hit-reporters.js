@@ -88,14 +88,16 @@
       try {
         const response = await fetch('./'+path,{cache:'no-store'});
         if (!response.ok) return forecasts;
-        let text = await response.text();
+        let jsonBytes;
         if (path.endsWith('.gz.b64.txt')) {
-          const ascii = text.replace(/\s+/g,'');
+          const ascii = (await response.text()).replace(/\s+/g,'');
           if (!/^[A-Za-z0-9+/=]+$/.test(ascii) || !('DecompressionStream' in window)) return forecasts;
           const bytes = Uint8Array.from(atob(ascii),c=>c.charCodeAt(0));
-          text = await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text();
+          jsonBytes = await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
+        } else {
+          jsonBytes = await response.arrayBuffer();
         }
-        const doc = JSON.parse(text);
+        const doc = JSON.parse(new TextDecoder().decode(jsonBytes));
         if (doc.date !== date || doc.reporter !== 'gemi' || !doc.races || Array.isArray(doc.races)) return forecasts;
         // A completed publication receipt may coexist with an older pending flag
         // preserved by the publisher. Only a dated, observed receipt clears it.
@@ -105,6 +107,18 @@
           /(?:Z|[+-]\d{2}:\d{2})$/.test(firstPublication) &&
           Number.isFinite(publishedAt) && publishedAt <= Date.now() &&
           new Date(publishedAt+9*60*60*1000).toISOString().slice(0,10) === date;
+        // This hash covers the exact published JSON bytes, not the compressed
+        // transport, shared input, or independent frozen original.
+        let verifiedPublicSha;
+        const publicSha=issue.gemi_public_sha256,subtle=globalThis.crypto?.subtle;
+        if (issue.gemi_original_sha256 == null && receiptVerified && subtle &&
+            typeof publicSha === 'string' && /^[a-f0-9]{64}$/.test(publicSha)) {
+          try {
+            const digest=await subtle.digest('SHA-256',jsonBytes);
+            const actual=Array.from(new Uint8Array(digest),b=>b.toString(16).padStart(2,'0')).join('');
+            if (actual===publicSha) verifiedPublicSha=actual;
+          } catch (_) { /* No verified public payload for the reference scorecard. */ }
+        }
         for (const [id,rec] of Object.entries(doc.races)) {
           if ((issue.gemi_publication_pending === true && !receiptVerified) || rec.status !== 'published' || rec.retrospective === true || rec.frozen_before_race_closing === false || String(rec.m0_status||'').startsWith('POST_DEADLINE')) continue;
           if(firstPublication && (!receiptVerified || !rec.closing_at || !Number.isFinite(Date.parse(rec.closing_at)) || Date.parse(rec.closing_at)<=publishedAt)) continue;
@@ -113,7 +127,9 @@
             const mark=String(rec.marks?.main??'');
             if(/^[1-6]$/.test(mark))bets.published_main_mark=mark;
             if(typeof rec.predicted_method==='string')bets.predicted_method=rec.predicted_method;
-            Object.assign(forecasts[id] ||= {},{gemi:bets,gemiTiming:{closing_at:rec.closing_at,freeze_at:rec.freeze_at}});
+            const gemiTiming={closing_at:rec.closing_at,freeze_at:rec.freeze_at};
+            if (verifiedPublicSha) gemiTiming.verified_public_sha256=verifiedPublicSha;
+            Object.assign(forecasts[id] ||= {},{gemi:bets,gemiTiming});
           }
         }
       } catch (_) { /* Missing input stays unknown rather than an attributed miss. */ }

@@ -11,8 +11,8 @@ const element=(raw,boats=[],plain=raw,declared=null)=>({
 function context(articles=[],issue={},doc={}){
   const date='2026-11-08';
   const c={window:{__OCHAP_SELECTED_DATE__:date,__OCHAP_ISSUE_INDEX__:{issues:[{date,gemi_json:'data/gemi/'+date+'.json',...issue}]}},
-    document:{querySelectorAll:()=>articles},console,
-    fetch:async()=>({ok:true,text:async()=>JSON.stringify(doc)})};
+    document:{querySelectorAll:()=>articles},console,TextDecoder,
+    fetch:async()=>new Response(JSON.stringify(doc))};
   vm.runInNewContext(source,c);return c.window.OchaPHitReporters;
 }
 function article(id,tickets,late=false){
