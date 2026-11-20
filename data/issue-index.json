@@ -1,7 +1,18 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-20",
+  "default_date": "2026-11-21",
   "issues": [
+    {
+      "date": "2026-11-21",
+      "label": "2026年11月21日 全国予想",
+      "path": "archives/2026-11-21.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": true,
+      "gemi_json": "data/gemi/2026-11-21.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-21.json",
+      "ochap_status": "published_original_preserved",
+      "gemi_status": "live_m0_pre_deadline"
+    },
     {
       "date": "2026-11-20",
       "path": "archives/2026-11-20.html.gz.b64.txt",
@@ -673,5 +684,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-20"
+  "latest": "2026-11-21"
 }
