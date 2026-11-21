@@ -61,6 +61,44 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
         expect(fav.locator(".favorite-race")).to_have_count(12)
         expect(fav.locator(".favorite-race").last.locator("h3")).to_have_text("住之江 4R")
         check_no_overflow(page)
+
+        # Today's special races: preserve both original category filters and cards,
+        # but show only pre-cutoff races until the user opts in to past cutoffs.
+        page.goto(base+"index.html?date=2026-11-21&view=special")
+        special=page.locator("#ochap-special-view")
+        cards=special.locator(".special-card")
+        closed_checkbox=special.get_by_label("締切済みも表示")
+        expect(closed_checkbox).to_be_visible()
+        expect(special.locator(".special-time-count")).to_contain_text("未締切")
+        upcoming_count=cards.count()
+        assert upcoming_count>0, "Expected upcoming special races at 17:00 JST"
+        expect(cards.first.locator(".special-card-head > span")).to_contain_text("締切 ")
+        closed_checkbox.check()
+        all_count=cards.count()
+        assert all_count>upcoming_count, (all_count,upcoming_count)
+        expect(cards.nth(upcoming_count).locator(".special-card-head > span")).to_contain_text("締切済")
+        # Existing category filter keeps working without hiding the new toggle.
+        special.get_by_role("combobox",name="特選区分").select_option("special_teppan")
+        expect(closed_checkbox).to_be_visible()
+        special.get_by_role("combobox",name="特選区分").select_option("")
+        # Open details survive an automatic reorder at a deadline.
+        cards.first.locator("details > summary").click()
+        assert cards.first.locator("details").get_attribute("open") is not None
+        closed_checkbox.uncheck()
+        page.clock.set_fixed_time(datetime(2026,11,21,21,0,tzinfo=JST))
+        page.evaluate("document.dispatchEvent(new Event('visibilitychange'))")
+        expect(cards).to_have_count(0)
+        expect(special.locator(".special-time-count")).to_contain_text("未締切 0R")
+        closed_checkbox.check()
+        expect(cards).to_have_count(all_count)
+        check_no_overflow(page)
+
+        # Historical special editions must retain their original complete list and controls.
+        page.goto(base+"index.html?date=2026-11-15&view=special")
+        historical=page.locator("#ochap-special-view")
+        expect(historical.locator(".special-card")).to_have_count(28)
+        expect(historical.get_by_label("締切済みも表示")).to_have_count(0)
+        check_no_overflow(page)
         assert not errors, (width, errors)
         page.close()
 
@@ -94,4 +132,4 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
     expect(page.locator(".board-card")).to_have_count(0)
     page.close()
     browser.close()
-    print("PASS: 390px/1280px, JST deadline order, closed toggle, old favorites, M1 missing/valid/late.")
+    print("PASS: 390px/1280px, JST deadline order, old favorites, upcoming/past special races, historical specials, M1 missing/valid/late.")
