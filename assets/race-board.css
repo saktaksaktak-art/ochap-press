@@ -1,0 +1,41 @@
+
+/* Standalone deadline/M1 pages only. Existing newspaper styles are not loaded or altered. */
+:root{color-scheme:light}
+*{box-sizing:border-box}
+body.press-board{margin:0;background:#f5f7fa;color:#142b4c;font:15px/1.6 system-ui,-apple-system,"Hiragino Kaku Gothic ProN",sans-serif}
+.board-header{background:#142b4c;color:white;padding:17px max(16px,calc((100vw - 1020px)/2))}
+.board-header h1{margin:2px 0 4px;font-size:25px}
+.board-header p{margin:0;font-size:13px;color:#d6e3f3}
+.board-links{display:flex;gap:15px;flex-wrap:wrap;margin-top:10px}
+.board-links a{color:#e9f3ff;font-size:14px}
+.board-main{max-width:1020px;margin:0 auto;padding:14px 12px 60px}
+.board-controls{display:flex;align-items:end;gap:10px;flex-wrap:wrap;background:white;padding:12px;border:1px solid #c4d0de;border-radius:8px}
+.board-controls label{display:grid;gap:3px;font-size:13px;font-weight:600}
+.board-controls select,.board-controls button{border:1px solid #a1b3ca;border-radius:6px;background:white;color:#142b4c;padding:9px 11px;min-height:42px;font:inherit}
+.board-controls button{cursor:pointer;font-weight:700}
+.board-controls .check{display:flex;align-items:center;gap:6px;min-height:42px}
+.board-status{margin:13px 0;color:#50627a;font-size:13px}
+.board-list{display:grid;gap:10px}
+.board-card{padding:13px;background:white;border:1px solid #c2d0df;border-radius:8px;min-width:0}
+.board-head{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:baseline}
+.board-head h2{margin:0;color:#142b4c;font-size:19px}
+.board-time{font-size:13px;font-weight:700;color:#254e79}
+.board-time.closed{color:#64748b}
+.board-quote{margin:5px 0 8px;font-size:14px}
+.board-line{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:7px 0}
+.board-line b{min-width:5.2em;font-size:13px}
+.board-ticket{display:inline-block;background:#eef3f9;border:1px solid #d4deea;color:#142b4c;padding:3px 7px;border-radius:5px;font-weight:750;font-variant-numeric:tabular-nums}
+.board-ticket.first{background:#e3edf9;border-color:#83a1c9}
+.board-foot{display:flex;flex-wrap:wrap;gap:15px;margin:10px 0 0;font-size:13px}
+.board-foot a{color:#18528b}
+.board-detail{margin-top:8px;border-top:1px solid #d8e1ec;padding-top:9px}
+.board-detail summary{font-weight:700;cursor:pointer}
+.board-detail p{margin:8px 0}
+.board-table-scroll{overflow-x:auto;margin:10px 0}
+.board-table{width:100%;border-collapse:collapse;font-size:13px}
+.board-table th,.board-table td{padding:7px;border:1px solid #c4d0df;text-align:right;white-space:nowrap}
+.board-table th:first-child,.board-table td:first-child{text-align:left}
+.board-table th{background:#edf3fa}
+.board-note{font-size:12px;color:#62758c}
+.board-empty{background:white;border:1px solid #c6d1e0;border-radius:8px;padding:18px}
+@media(max-width:470px){.board-header h1{font-size:22px}.board-controls{gap:7px}.board-controls label{flex:1 1 125px}.board-controls .check{flex:1 1 100%}.board-card{padding:11px}.board-head h2{font-size:17px}}
