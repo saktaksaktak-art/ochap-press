@@ -40,9 +40,15 @@ with ThreadingHTTPServer(("127.0.0.1",0),partial(SimpleHTTPRequestHandler,direct
             body=json.dumps({"schema_version":"1.0","date":"2026-11-16","races":[result]})))
         page.locator("#ochap-settle-refresh").click()
         outcome=original.locator(":scope > .ochap-settle-bulletin")
-        expect(outcome).to_contain_text("公式確認済み")
-        expect(outcome).to_contain_text("🎯 的中")
-        expect(outcome).to_contain_text("1,820円")
+        expect(outcome.locator(".ochap-settle-head")).to_contain_text("公式確定")
+        expect(outcome.locator(".ochap-settle-head")).to_contain_text("3連単 "+hit)
+        expect(outcome.locator(".ochap-settle-head")).to_contain_text("1,820円")
+        expect(outcome.locator(".ochap-settle-judgment").first).to_contain_text("🎯的中")
+        assert "100円あたり" not in outcome.inner_text()
+        assert "区分計" not in outcome.inner_text()
+        assert outcome.locator(".ochap-settle-line").count() >= 1
+        assert outcome.locator(".ochap-settle-amount").count() >= 1
+        assert outcome.locator(".ochap-settle-head").count() == 1
         page.get_by_label("平買い収支を表示").check()
         expect(outcome).to_contain_text("収支")
         page.get_by_label("結果で絞り込み").select_option("official")
@@ -70,9 +76,9 @@ with ThreadingHTTPServer(("127.0.0.1",0),partial(SimpleHTTPRequestHandler,direct
       lambda route:route.fulfill(status=200,content_type="application/json",
         body=json.dumps({"schema_version":"1.0","date":"2026-11-16","races":[result]})))
     page.locator("#ochap-settle-refresh").click()
-    expect(page.locator("#cards article[id='"+id+"'] .ochap-settle-bulletin")).to_contain_text("API速報・公式未確認")
+    expect(page.locator("#cards article[id='"+id+"'] .ochap-settle-bulletin")).to_contain_text("API速報・未確定")
     page.get_by_label("結果で絞り込み").select_option("official")
     expect(page.locator("#cards article[id^='v']:not(.ochap-settle-filtered)")).to_have_count(0)
     page.close()
     browser.close()
-    print("PASS: settlement accuracy, 100-yen finance, A/B/D toggles, official/API boundary, 390/1280.")
+    print("PASS: compact three-line settlement, 100-yen finance, A/B/D toggles, official/API boundary, 390/1280.")
