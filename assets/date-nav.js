@@ -42,6 +42,11 @@
   viewModeScript.src = './assets/view-mode.js?v=20261121';
   viewModeScript.async = true;
   document.head.append(viewModeScript);
+  window.addEventListener('load', () => {
+    const settlement=document.createElement('script');
+    settlement.src='./assets/forecast-settlement.js?v=20261121';
+    document.body.append(settlement);
+  }, {once:true});
   toolbar.append(label,chooser,refresh);
   (document.querySelector('header#top') || document.querySelector('header') || document.querySelector('main') || document.body.firstElementChild || document.body).before(toolbar);
 })();
