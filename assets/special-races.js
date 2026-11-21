@@ -160,7 +160,7 @@
     const closedToggle=isToday?element('input'):null;
     if(closedToggle){
       closedToggle.type='checkbox';
-      const closedLabel=element('label');
+      const closedLabel=element('label',undefined,'special-closed-label');
       closedLabel.append(closedToggle,document.createTextNode(' 締切済みも表示'));
       filters.append(closedLabel);
       closedToggle.addEventListener('change',render);

@@ -37,3 +37,7 @@
   .ochap-settle-filtered{display:initial!important}
   .ochap-settle-bulletin,.ochap-settle-extra{display:none!important}
 }
+
+/* Optional settlement setting checkbox uses the same inline spacing. */
+.ochap-settle-check{justify-content:flex-start;gap:7px;white-space:nowrap;text-align:left}
+.ochap-settle-check input[type="checkbox"]{margin:0;flex:none}

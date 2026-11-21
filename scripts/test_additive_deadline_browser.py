@@ -15,6 +15,24 @@ FIXED = datetime(2026, 11, 21, 17, 0, tzinfo=JST)
 def check_no_overflow(page):
     assert page.evaluate("document.documentElement.scrollWidth <= innerWidth"), "horizontal overflow"
 
+def check_checkbox_caption(checkbox, label):
+    # Measure the checkbox and its adjacent text glyph, not the full label width.
+    gap = label.evaluate("""label => {
+      const input = label.querySelector('input[type="checkbox"]');
+      const text = [...label.childNodes].find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+      if (!input || !text) return null;
+      const index = text.textContent.length - text.textContent.trimStart().length;
+      const range = document.createRange();
+      range.setStart(text,index);
+      range.setEnd(text,text.textContent.length);
+      const t = range.getBoundingClientRect(), b = input.getBoundingClientRect();
+      return {gap:t.left-b.right, dy:Math.abs((t.top+t.bottom)/2-(b.top+b.bottom)/2),
+              labelWidth:label.getBoundingClientRect().width};
+    }""")
+    assert gap is not None, "checkbox or caption missing"
+    assert 0 <= gap['gap'] <= 16, f"{gap}: caption too far from checkbox"
+    assert gap['dy'] <= 12, f"{gap}: checkbox/caption vertical misalignment"
+
 with ThreadingHTTPServer(("127.0.0.1", 0),
                          partial(SimpleHTTPRequestHandler, directory=str(ROOT))) as http, sync_playwright() as pw:
     Thread(target=http.serve_forever, daemon=True).start()
@@ -36,7 +54,9 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
         expect(cards.first.locator("h2")).to_have_text("住之江 5R")
         assert cards.filter(has_text="住之江 4R").count() == 0
         check_no_overflow(page)
-        page.get_by_label("締切済みも表示").check()
+        checkbox=page.get_by_label("締切済みも表示")
+        check_checkbox_caption(checkbox, checkbox.locator(".."))
+        checkbox.check()
         expect(cards).to_have_count(12)
         expect(cards.last.locator("h2")).to_have_text("住之江 4R")
         assert cards.first.locator(".board-time").inner_text().startswith("締切 ")
@@ -52,12 +72,16 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
 
         # Today's original Favorites: same cards, upcoming first, closed on demand.
         page.goto(base+"index.html?date=2026-11-21&view=favorites")
+        finance=page.get_by_label("平買い収支を表示")
+        check_checkbox_caption(finance, finance.locator(".."))
         fav=page.locator("#ochap-favorites-view")
         fav.get_by_role("button",name="住之江",exact=True).click()
         expect(fav.locator(".favorite-race")).to_have_count(8)
         expect(fav.locator(".favorite-race").first.locator("h3")).to_have_text("住之江 5R")
         expect(fav.locator(".favorite-time-controls a")).to_have_count(2)
-        fav.get_by_label("締切済みも表示").check()
+        checkbox=fav.get_by_label("締切済みも表示")
+        check_checkbox_caption(checkbox, checkbox.locator(".."))
+        checkbox.check()
         expect(fav.locator(".favorite-race")).to_have_count(12)
         expect(fav.locator(".favorite-race").last.locator("h3")).to_have_text("住之江 4R")
         check_no_overflow(page)
@@ -69,6 +93,7 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
         cards=special.locator(".special-card")
         closed_checkbox=special.get_by_label("締切済みも表示")
         expect(closed_checkbox).to_be_visible()
+        check_checkbox_caption(closed_checkbox, closed_checkbox.locator(".."))
         expect(special.locator(".special-time-count")).to_contain_text("未締切")
         upcoming_count=cards.count()
         assert upcoming_count>0, "Expected upcoming special races at 17:00 JST"
