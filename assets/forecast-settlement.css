@@ -9,14 +9,18 @@
 .ochap-settle-refresh{min-height:38px;border:1px solid #adc1d9;border-radius:5px;
   padding:5px 9px;background:#edf4fd;color:#183c65;font:700 12px system-ui,sans-serif}
 .ochap-settle-status{flex-basis:100%;margin:2px 0 0;font-size:11px;color:#506780}
-.ochap-settle-bulletin{box-sizing:border-box;margin:6px 0 10px;padding:8px 10px;border:1px solid #adc1d9;
+.ochap-settle-bulletin{box-sizing:border-box;margin:6px 0 10px;padding:6px 9px;border:1px solid #adc1d9;
   border-left:3px solid #163f73;border-radius:7px;background:#f7faff;color:#183c65;
-  font:600 13px/1.5 system-ui,-apple-system,sans-serif}
-.ochap-settle-head{display:flex;gap:6px 11px;flex-wrap:wrap;align-items:baseline}
-.ochap-settle-kind{font-size:12px;color:#163f73}
-.ochap-settle-outcome{font-weight:700;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
-.ochap-settle-line{margin:4px 0 0;overflow-wrap:anywhere}
-.ochap-settle-hit{color:#216144;font-weight:800}
+  font:600 12px/1.4 system-ui,-apple-system,sans-serif}
+.ochap-settle-head{display:flex;gap:3px 10px;flex-wrap:wrap;align-items:baseline}
+.ochap-settle-kind{font-size:11px;color:#163f73}
+.ochap-settle-outcome{font-weight:750;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.ochap-settle-unit{font-size:10px;color:#58708c;font-weight:500}
+.ochap-settle-line{display:grid;grid-template-columns:63px minmax(0,1fr) auto;gap:3px 7px;align-items:baseline;margin:3px 0 0;min-width:0}
+.ochap-settle-author{font-weight:750}
+.ochap-settle-judgment{min-width:0;overflow-wrap:anywhere}
+.ochap-settle-amount{white-space:nowrap;font-variant-numeric:tabular-nums}
+.ochap-settle-hit .ochap-settle-judgment,.ochap-settle-hit .ochap-settle-amount{color:#216144}
 .ochap-settle-finance{margin:3px 0 0 10px;color:#425d7b;font-size:11px;overflow-wrap:anywhere}
 .ochap-settle-extra{margin:5px 0;padding:5px 7px;border-left:3px solid #163f73;
   border-radius:4px;background:#f1f5fc;color:#183c65;font:700 12px/1.5 system-ui,sans-serif}
@@ -25,7 +29,8 @@
   .ochap-settle-controls{padding:7px;gap:7px}
   .ochap-settle-control{flex:1 1 135px}
   .ochap-settle-control select{width:100%;min-width:0}
-  .ochap-settle-bulletin{padding:7px;font-size:12px}
+  .ochap-settle-bulletin{padding:6px 7px;font-size:12px}
+  .ochap-settle-line{grid-template-columns:53px minmax(0,1fr) auto;gap:3px 4px}
 }
 @media print{
   .ochap-settle-controls{display:none!important}
