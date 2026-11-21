@@ -22,3 +22,7 @@
 #ochap-favorites-view .favorite-preview{margin:6px 0 0;padding:5px 0 2px;font-size:13px}
 #ochap-favorites-view .favorite-preview .favorite-tickets{margin:5px 0}
 #ochap-favorites-view .favorite-preview summary{min-height:32px}
+
+/* Match special-race checkbox alignment; preserve the surrounding shortcuts. */
+#ochap-favorites-view .favorite-closed-toggle{display:inline-flex;align-items:center;justify-content:flex-start;gap:7px;flex:0 0 auto;width:auto;max-width:100%;white-space:nowrap;text-align:left}
+#ochap-favorites-view .favorite-closed-toggle input[type="checkbox"]{flex:none;width:18px;height:18px;margin:0}

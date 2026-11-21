@@ -39,3 +39,7 @@ body.press-board{margin:0;background:#f5f7fa;color:#142b4c;font:15px/1.6 system-
 .board-note{font-size:12px;color:#62758c}
 .board-empty{background:white;border:1px solid #c6d1e0;border-radius:8px;padding:18px}
 @media(max-width:470px){.board-header h1{font-size:22px}.board-controls{gap:7px}.board-controls label{flex:1 1 125px}.board-controls .check{flex:1 1 100%}.board-card{padding:11px}.board-head h2{font-size:17px}}
+
+/* Deadline/M1 checkbox: keep the caption beside its box on all screen widths. */
+.board-controls .check{justify-content:flex-start;text-align:left;gap:7px}
+.board-controls .check input[type="checkbox"]{flex:none;width:18px;height:18px;margin:0}
