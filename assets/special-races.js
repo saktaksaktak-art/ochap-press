@@ -161,7 +161,8 @@
     if(closedToggle){
       closedToggle.type='checkbox';
       const closedLabel=element('label',undefined,'special-closed-label');
-      closedLabel.append(closedToggle,document.createTextNode(' 締切済みも表示'));
+      const caption=element('span','締切済みも表示','special-closed-caption');
+      closedLabel.append(closedToggle,caption);
       filters.append(closedLabel);
       closedToggle.addEventListener('change',render);
     }
