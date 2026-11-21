@@ -183,7 +183,7 @@
         const badges=element('div',undefined,'special-badges');
         badges.append(...activeTypes(pick).map(type=>badge(type)));
         const head=element('div',undefined,'special-card-head');
-        head.append(heading,element('span','締切 '+pick.closing_time,'public-note'),badges);
+        head.append(heading,element('span',(isToday&&Date.parse(pick.deadline)<=now?'締切済 ':'締切 ')+pick.closing_time,'public-note'),badges);
         card.append(head);
         const summaryTickets=[...new Set([...pick.special_teppan,...pick.special_myoumi])];
         const tickets=element('div',undefined,'special-tickets');
