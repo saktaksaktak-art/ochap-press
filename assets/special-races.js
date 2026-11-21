@@ -19,6 +19,11 @@
     return Array.isArray(entries)&&entries.every(validTicket)?entries:[];
   };
   const closedAt = new Intl.DateTimeFormat('ja-JP',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
+  const jstDayFormat = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'});
+  const jstDay = date => {
+    const parts=Object.fromEntries(jstDayFormat.formatToParts(date).map(part=>[part.type,part.value]));
+    return parts.year+'-'+parts.month+'-'+parts.day;
+  };
   const cache = new Map();
 
   function select(data,issue,forecasts={}){
@@ -131,8 +136,10 @@
     }
     const sorted=[...picks.values()].sort((a,b)=>Date.parse(a.deadline)-Date.parse(b.deadline)||
       a.venue_code-b.venue_code||a.race_no-b.race_no);
+    const isToday=jstDay(new Date())===jstDay(new Date(sorted[0].deadline));
     const filters=element('div',undefined,'public-controls');
     const list=element('div',undefined,'special-cards');
+    const timeCount=isToday?element('p',undefined,'public-note special-time-count'):null;
     function filter(label,options){
       const control=element('label',label+' '),select=element('select');
       select.setAttribute('aria-label',label);
@@ -149,12 +156,29 @@
     const venues=[...new Map(sorted.map(pick=>[String(pick.venue_code),pick.venue]))];
     const venue=filter('開催場',[['','全場'],...venues]);
     const category=filter('特選区分',[['','全区分'],...types.map(type=>[type,labels[type]])]);
+    // Add a cutoff toggle only for the current JST edition. Older editions retain their original view.
+    const closedToggle=isToday?element('input'):null;
+    if(closedToggle){
+      closedToggle.type='checkbox';
+      const closedLabel=element('label');
+      closedLabel.append(closedToggle,document.createTextNode(' 締切済みも表示'));
+      filters.append(closedLabel);
+      closedToggle.addEventListener('change',render);
+    }
     function render(){
-      const shown=sorted.filter(pick=>(!venue.value||venue.value===String(pick.venue_code))&&
+      const expanded=new Set([...list.querySelectorAll('.special-card')].filter(card=>
+        card.querySelector('details')?.open).map(card=>card.dataset.raceId));
+      const matching=sorted.filter(pick=>(!venue.value||venue.value===String(pick.venue_code))&&
         (!category.value||pick[category.value].length));
+      const now=Date.now();
+      const upcoming=isToday?matching.filter(pick=>Date.parse(pick.deadline)>now):matching;
+      const closed=isToday?matching.filter(pick=>Date.parse(pick.deadline)<=now):[];
+      const shown=isToday?(closedToggle.checked?[...upcoming,...closed]:upcoming):matching;
+      if(timeCount)timeCount.textContent='未締切 '+upcoming.length+'R／締切済 '+closed.length+'R';
       list.replaceChildren();
       for(const pick of shown){
         const card=element('article',undefined,'public-card special-card');
+        card.dataset.raceId=pick.race_id;
         const heading=element('h3',pick.venue+' '+pick.race_no+'R');
         const badges=element('div',undefined,'special-badges');
         badges.append(...activeTypes(pick).map(type=>badge(type)));
@@ -166,6 +190,7 @@
         tickets.append(...summaryTickets.map(ticket=>element('span',ticket)));
         card.append(tickets);
         const detail=element('details');
+        detail.open=expanded.has(pick.race_id);
         detail.append(element('summary','両記者の予想・内訳'));
         detail.append(element('p','お茶P ◎'+(pick.ochaMark??'—')+'・'+(pick.ochaMethod||'—')+
           ' ／ Gemi兄 ◎'+(pick.gemiMark??'—')+'・'+(pick.gemiMethod||'—')));
@@ -191,10 +216,24 @@
         card.append(link);
         list.append(card);
       }
-      if(!shown.length)list.append(element('p','この条件に該当するレースはありません。'));
+      if(!shown.length)list.append(element('p',isToday&&matching.length&&!closedToggle.checked
+        ?'未締切の特選レースはありません。「締切済みも表示」で確認できます。'
+        :'この条件に該当するレースはありません。'));
     }
-    root.append(filters,list);
+    if(timeCount)root.append(filters,timeCount,list);
+    else root.append(filters,list);
     render();
+    if(isToday){
+      let lastClosed=sorted.filter(pick=>Date.parse(pick.deadline)<=Date.now()).length;
+      const refresh=()=>{
+        if(document.visibilityState==='hidden'||root.hidden)return;
+        const current=sorted.filter(pick=>Date.parse(pick.deadline)<=Date.now()).length;
+        if(current!==lastClosed){lastClosed=current;render();}
+      };
+      setInterval(refresh,30000);
+      document.addEventListener('visibilitychange',refresh);
+      new MutationObserver(refresh).observe(root,{attributes:true,attributeFilter:['hidden']});
+    }
   }
 
   window.OchaPSpecial=Object.freeze({load,select,score,activeTypes,tagForecastCards,mount,labels});
