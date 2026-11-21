@@ -1,0 +1,33 @@
+/* Display-mode control is separate from the approved newspaper skin. */
+#ochap-view-mode-entry{
+  position:fixed;z-index:10020;left:10px;
+  bottom:calc(88px + env(safe-area-inset-bottom, 0px));
+  border:1px solid #adc1d9;border-radius:8px;background:#fff;color:#183c65;
+  padding:4px 7px;box-shadow:0 2px 10px #17375c24;
+  font:700 12px/1.35 system-ui,-apple-system,sans-serif;
+}
+#ochap-view-mode-entry label{display:flex;align-items:center;gap:5px}
+#ochap-view-mode-entry select{width:auto;min-width:94px;min-height:36px;
+  padding:4px;border:1px solid #adc1d9;border-radius:5px;background:#fff;color:#183c65;
+  font:700 13px system-ui,-apple-system,sans-serif}
+@media(min-width:700px){#ochap-view-mode-entry{bottom:14px}}
+@media print{#ochap-view-mode-entry,#ochap-view-toolbar{display:none!important}}
+html:has(body.ochap-viewer-body){height:100%}
+body.ochap-viewer-body{margin:0;padding:0;min-height:100%;overflow:hidden;
+  background:#e9eff8;color:#183c65;font:14px/1.45 system-ui,-apple-system,sans-serif}
+#ochap-view-toolbar{box-sizing:border-box;position:relative;z-index:2;display:flex;
+  flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 15px;
+  padding:9px 12px;background:#163f73;color:#fff;min-height:58px}
+#ochap-view-toolbar label{display:inline-flex;align-items:center;gap:6px;font-weight:700}
+#ochap-view-toolbar select{min-height:36px;background:#fff;color:#183c65;
+  border:1px solid #adc1d9;border-radius:5px;padding:4px 9px;font:700 14px system-ui,sans-serif}
+#ochap-view-toolbar input{width:18px;height:18px;accent-color:#fff}
+#ochap-view-scale{font-size:12px;font-variant-numeric:tabular-nums}
+#ochap-view-stage{box-sizing:border-box;width:100%;overflow:auto;padding:7px 8px;
+  overscroll-behavior:contain}
+#ochap-view-canvas{position:relative;box-sizing:content-box;margin:0 auto;
+  background:#fff;box-shadow:0 2px 12px #1a3b6333}
+#ochap-view-frame{box-sizing:border-box;position:absolute;top:0;left:0;border:0;
+  transform-origin:top left;background:#fff}
+@media(max-width:480px){#ochap-view-toolbar{gap:6px 10px;padding:7px}
+  #ochap-view-scale{width:100%;text-align:center}}
