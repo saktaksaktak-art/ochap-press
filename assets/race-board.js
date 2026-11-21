@@ -107,7 +107,7 @@
     const methods=addTable(exp,'決まり手別',r.methodRows,[
       ['boat','艇/C'],['sample_count','母数'],['escape','逃げ/逃し%'],
       ['sashi','差し/差され%'],['makuri','まくり/まくられ%'],
-      ['makurizashi','まくり差し/差され%']]);
+      ['makurisashi','まくり差し/差され%']]);
     addTable(exp,'当地コース成績',r.localCourse,[
       ['boat','艇/C'],['sample_count','出走'],['first','1着%'],
       ['second','2着%'],['third','3着%'],['average_st','ST']]);
