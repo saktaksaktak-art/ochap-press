@@ -139,7 +139,7 @@
   function createSettlement(card,id){
     const row=rows.get(id),parent=card.querySelector(board?'.board-head':'.race-head');
     if(!parent)return;
-    const current=card.querySelector(':scope > .ochap-settle-bulletin');
+    const current=card.querySelector('.ochap-settle-bulletin');
     if(!row){
       current?.remove();
       return;
@@ -185,8 +185,9 @@
       const p=cleanPicks(forecasts[id]?.ocha);
       const hit=p?groupHit(row,p):[];
       const prefix=row.official?'公式確認済み':'API速報';
-      host.textContent=prefix+'｜3連単 '+row.order.join('-')+' ／ '+oneYen(row.validPayout?row.trifecta_payout_yen:null)+
+      const label=prefix+'｜3連単 '+row.order.join('-')+' ／ '+oneYen(row.validPayout?row.trifecta_payout_yen:null)+
         (hit.length?' ／ お茶P '+(row.official?'🎯的中':'🎯速報的中')+'（'+hit.join('・')+'）':'');
+      if(host.textContent!==label)host.textContent=label;
       if(!existing)(card.querySelector('.favorite-race-head,.special-card-head')||card.firstElementChild).after(host);
     }
   }
@@ -304,7 +305,7 @@
   }else{
     for(const id of ['ochap-favorites-view','ochap-special-view']){
       const root=document.getElementById(id);
-      if(root)new MutationObserver(()=>decorateExtra()).observe(root,{childList:true,subtree:false});
+      if(root)new MutationObserver(()=>decorateExtra()).observe(root,{childList:true,subtree:true});
     }
   }
   document.addEventListener('visibilitychange',()=>{if(!document.hidden)loadResults();});
