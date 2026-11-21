@@ -81,7 +81,19 @@
     count.setAttribute('role','status');
     const list=element('div',null,'favorite-race-list');
     picker.append(buttons,hint);
-    host.append(picker,count,list);
+    // Additive shortcuts only: the published M0 cards and their styling are unchanged.
+    const shortcuts=element('div',null,'favorite-time-controls');
+    const deadlineLink=element('a','全場の締切順を見る');
+    deadlineLink.href='./deadline.html?date='+encodeURIComponent(date);
+    const m1Link=element('a','直前M1ページ');
+    m1Link.href='./m1.html?date='+encodeURIComponent(date);
+    const closedToggle=element('label',null,'favorite-closed-toggle');
+    const showClosed=document.createElement('input');
+    showClosed.type='checkbox';
+    closedToggle.append(showClosed,document.createTextNode(' 締切済みも表示'));
+    if(today)shortcuts.append(closedToggle,document.createTextNode(' ｜ '));
+    shortcuts.append(deadlineLink,document.createTextNode(' ｜ '),m1Link);
+    host.append(picker,shortcuts,count,list);
     const controls=new Map();
     for(const [code,venue] of venues){
       const button=element('button',venue);
@@ -99,14 +111,19 @@
     function render(){
       const expanded=new Set([...list.querySelectorAll('article:has(details[open])')].map(card=>card.dataset.raceId));
       for(const [code,button] of controls)button.setAttribute('aria-pressed',String(selected.has(code)));
-      const filtered=races.filter(r=>selected.has(r.code));
-      count.textContent=selected.size?'登録 '+selected.size+'場・'+filtered.length+'R ｜ 締切順':'開催場を選ぶと、この記事一覧にレースが並びます。';
+      const relevant=races.filter(r=>selected.has(r.code));
+      const now=Date.now();
+      const open=today?relevant.filter(r=>r.deadline>now):relevant;
+      const closed=today?relevant.filter(r=>r.deadline<=now):[];
+      const filtered=today?(showClosed.checked?[...open,...closed]:open):relevant;
+      count.textContent=selected.size?'登録 '+selected.size+'場・未締切 '+open.length+'R'+(today?'／締切済 '+closed.length+'R':'')+' ｜ 締切順':'開催場を選ぶと、この記事一覧にレースが並びます。';
       const fragment=document.createDocumentFragment();
+      if(selected.size&&!filtered.length)fragment.append(element('p',today?'この場の未締切レースはありません。「締切済みも表示」を選んでください。':'該当レースがありません。','public-status'));
       for(const row of filtered){
         const card=element('article',null,'public-card favorite-race');
         card.dataset.raceId=row.node.id;
         const header=element('div',null,'favorite-race-head');
-        const close=Number.isFinite(row.deadline)?'締切 '+timeFormat.format(new Date(row.deadline)):'締切未掲載';
+        const close=Number.isFinite(row.deadline)?(today&&row.deadline<=now?'締切済 ':'締切 ')+timeFormat.format(new Date(row.deadline)):'締切未掲載';
         header.append(element('h3',row.venue+' '+row.race+'R'),element('span',close,'public-note'));
         card.append(header);
         const copy=row.node.querySelector(':scope > .copy');
@@ -152,6 +169,19 @@
       list.replaceChildren(fragment);
     }
     stateByHost.add(host);
+    if(today){
+      showClosed.addEventListener('change',render);
+      let lastClosed=null;
+      const updateTime=()=>{
+        if(document.hidden||host.hidden)return;
+        const current=races.filter(r=>selected.has(r.code)&&r.deadline<=Date.now()).length;
+        if(current!==lastClosed){lastClosed=current;render();}
+      };
+      setInterval(updateTime,30000);
+      document.addEventListener('visibilitychange',updateTime);
+      // Switching back to Favorites refreshes the deadline order immediately.
+      new MutationObserver(updateTime).observe(host,{attributes:true,attributeFilter:['hidden']});
+    }
     render();
   }
   window.OchaPFavoriteVenues=Object.freeze({mount});
