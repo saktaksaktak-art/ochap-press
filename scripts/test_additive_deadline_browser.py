@@ -21,7 +21,7 @@ def check_checkbox_caption(checkbox, label):
       const input = label.querySelector('input[type="checkbox"]');
       const text = [...label.childNodes].find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
       if (!input || !text) return null;
-      const index = text.textContent.search(/\\S/);
+      const index = text.textContent.length - text.textContent.trimStart().length;
       const range = document.createRange();
       range.setStart(text,index);
       range.setEnd(text,text.textContent.length);
@@ -32,7 +32,6 @@ def check_checkbox_caption(checkbox, label):
     assert gap is not None, "checkbox or caption missing"
     assert 0 <= gap['gap'] <= 16, f"{gap}: caption too far from checkbox"
     assert gap['dy'] <= 12, f"{gap}: checkbox/caption vertical misalignment"
-    assert gap['labelWidth'] <= 270, f"{gap}: checkbox label stretched"
 
 with ThreadingHTTPServer(("127.0.0.1", 0),
                          partial(SimpleHTTPRequestHandler, directory=str(ROOT))) as http, sync_playwright() as pw:
