@@ -67,6 +67,7 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
                                        "date":"2026-11-21","races":[item]},ensure_ascii=False))
     page.route("**/data/m1/2026-11-21.json",serve_m1)
     page.goto(base+"m1.html?date=2026-11-21")
+    print("M1 test diagnostics:", page.locator("#board-status").inner_text(), page.locator("#board-list").inner_text()[:320],flush=True)
     expect(page.locator(".board-card")).to_have_count(1)
     expect(page.locator(".board-card .board-ticket")).to_have_count(6)
     check_no_overflow(page)
