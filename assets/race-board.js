@@ -48,6 +48,7 @@
          !validDeadline(r.deadline,date))continue;
       if(isM1 && (!validDeadline(r.frozen_at_jst,date) ||
           Date.parse(r.frozen_at_jst)>=Date.parse(r.deadline)||
+          Date.parse(r.frozen_at_jst)>Date.now()||
           !/^[0-9a-f]{64}$/i.test(String(r.source_sha256||''))))continue;
       const cat=r.reporters?.ocha?.categories||{};
       const marks=isM1?r.marks:r.ocha_marks;
@@ -169,7 +170,8 @@
   }
   function updateVenues(){
     const previous=venueInput.value;
-    venueInput.replaceChildren(text('option','全場'));
+    const allOption=text('option','全場');allOption.value='';
+    venueInput.replaceChildren(allOption);
     for(const [code,name] of [...new Map(rows.map(r=>[r.code,r.venue]))].sort((a,b)=>Number(a[0])-Number(b[0]))){
       const opt=text('option',name);opt.value=code;venueInput.append(opt);
     }
