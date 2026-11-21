@@ -49,6 +49,18 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
         page.get_by_role("button",name="徳山",exact=True).click()
         expect(page.locator(".favorite-race")).to_have_count(12)
         check_no_overflow(page)
+
+        # Today's original Favorites: same cards, upcoming first, closed on demand.
+        page.goto(base+"index.html?date=2026-11-21&view=favorites")
+        fav=page.locator("#ochap-favorites-view")
+        fav.get_by_role("button",name="住之江",exact=True).click()
+        expect(fav.locator(".favorite-race")).to_have_count(8)
+        expect(fav.locator(".favorite-race").first.locator("h3")).to_have_text("住之江 5R")
+        expect(fav.locator(".favorite-time-controls a")).to_have_count(2)
+        fav.get_by_label("締切済みも表示").check()
+        expect(fav.locator(".favorite-race")).to_have_count(12)
+        expect(fav.locator(".favorite-race").last.locator("h3")).to_have_text("住之江 4R")
+        check_no_overflow(page)
         assert not errors, (width, errors)
         page.close()
 
