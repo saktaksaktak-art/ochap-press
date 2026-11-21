@@ -1,7 +1,52 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-21",
+  "default_date": "2026-11-22",
   "issues": [
+    {
+      "date": "2026-11-22",
+      "path": "archives/2026-11-22.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": true,
+      "editorial_data": "data/editorial/2026-11-22-bbb67fa22e0a.json.gz.b64.txt",
+      "editorial_data_sha256": "bbb67fa22e0a40078833b5bf1fa8931a984c5a8421267b8e3bd0ec7736888af8",
+      "editorial_fragments": 336,
+      "edition_status": "normal_m0",
+      "venues": 14,
+      "races": 168,
+      "forecast_frozen_at_jst": "2026-11-22T07:11:47+09:00",
+      "publication_timing_checked_at": null,
+      "forecast_sha256": "8d129fc4912e1210cebc5bcf8b5eda3fe62ad23697aa6de063fcfff9fa95761c",
+      "formal_bc_eligible": true,
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-22T07:11:47+09:00",
+          "input_sha256": "4cb7b18dbee4ce57f896de5787a93b446de99a4c2abf35d749cf10515156dda2",
+          "forecast_sha256": "8d129fc4912e1210cebc5bcf8b5eda3fe62ad23697aa6de063fcfff9fa95761c"
+        },
+        "gemi": {
+          "recorded_freeze_at_jst": "2026-11-22T05:27:30+09:00",
+          "frozen_at_jst": "2026-11-22T05:27:30+09:00",
+          "input_sha256": "4cb7b18dbee4ce57f896de5787a93b446de99a4c2abf35d749cf10515156dda2",
+          "public_sha256": "09a0d9b635b83b6749cf6bcd25f28024dbefe1dbd90609db24265ab0930bd716"
+        }
+      },
+      "post_deadline_reference_races": [],
+      "diagrams": true,
+      "diagram_policy": "slit-only.v1",
+      "turn_diagrams": false,
+      "expected_races": 168,
+      "unissued_races": 0,
+      "single_bc_eligible_races": 168,
+      "single_bc_status": "PENDING_OFFICIAL_RESULTS",
+      "pair_comparison_eligible": true,
+      "gemi_json": "data/gemi/2026-11-22.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-22.json",
+      "gemi_script": "assets/gemi-reporter.js",
+      "gemi_public_sha256": "09a0d9b635b83b6749cf6bcd25f28024dbefe1dbd90609db24265ab0930bd716",
+      "forecast_drive_id": "1ho_AqBrKlg3gG8VpNDR3wMELDrTsIZhZ",
+      "gemi_first_publication_confirmed_at_jst": null,
+      "reporter_input_versions_differ": false
+    },
     {
       "date": "2026-11-21",
       "label": "2026年11月21日 全国予想",
