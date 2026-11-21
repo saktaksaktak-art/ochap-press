@@ -159,7 +159,16 @@ async function publicShaRegression(){
  assert.equal(liveScore(mismatched.rows,'gemi','all').n,0,'a byte mismatch is not evidence');
  const noReceipt={...publicOnly,gemi_first_publication_confirmed_at_jst:undefined,gemi_publication_timing_checked_at:undefined};
  assert.ok((await loadPublished(noReceipt)).rows.every(r=>r.reporters.ocha&&!r.reporters.gemi));
- const lateReceipt={...publicOnly,gemi_first_publication_confirmed_at_jst:reference.races[0].deadline};
+ // The first array entry is not the last cutoff (11/19 has races through 20:45 JST).
+ // An intermediate publication may legitimately qualify some later races.
+ const partialReceipt={...publicOnly,gemi_first_publication_confirmed_at_jst:reference.races[0].deadline};
+ const partialRows=(await loadPublished(partialReceipt)).rows;
+ assert.ok(partialRows.some(r=>r.reporters.gemi), 'intermediate receipt keeps later predeadline Gemi races');
+ assert.ok(partialRows.some(r=>r.reporters.ocha&&!r.reporters.gemi), 'intermediate receipt excludes earlier Gemi races');
+ // A receipt after the *latest* race deadline must exclude Gemi from all rows.
+ const finalDeadline=Math.max(...reference.races.map(r=>Date.parse(r.deadline)));
+ assert.ok(Number.isFinite(finalDeadline));
+ const lateReceipt={...publicOnly,gemi_first_publication_confirmed_at_jst:new Date(finalDeadline+1000).toISOString()};
  const lateRows=(await loadPublished(lateReceipt)).rows;
  assert.ok(lateRows.length>0 && lateRows.every(r=>r.reporters.ocha&&!r.reporters.gemi));
  assert.equal(published.formal_bc_eligible,false);
