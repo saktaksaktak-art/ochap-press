@@ -38,6 +38,10 @@
     }
     window.location.replace(url.href);
   });
+  const viewModeScript = document.createElement('script');
+  viewModeScript.src = './assets/view-mode.js?v=20261121';
+  viewModeScript.async = true;
+  document.head.append(viewModeScript);
   toolbar.append(label,chooser,refresh);
   (document.querySelector('header#top') || document.querySelector('header') || document.querySelector('main') || document.body.firstElementChild || document.body).before(toolbar);
 })();
