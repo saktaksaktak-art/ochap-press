@@ -45,7 +45,10 @@
       "gemi_public_sha256": "09a0d9b635b83b6749cf6bcd25f28024dbefe1dbd90609db24265ab0930bd716",
       "forecast_drive_id": "1ho_AqBrKlg3gG8VpNDR3wMELDrTsIZhZ",
       "gemi_first_publication_confirmed_at_jst": null,
-      "reporter_input_versions_differ": false
+      "reporter_input_versions_differ": false,
+      "label": "2026年11月22日 全国予想",
+      "ochap_status": "published_original_preserved",
+      "gemi_status": "live_m0_pre_deadline"
     },
     {
       "date": "2026-11-21",
@@ -769,5 +772,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-21"
+  "latest": "2026-11-22"
 }
