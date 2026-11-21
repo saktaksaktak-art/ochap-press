@@ -68,6 +68,21 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
     page.route("**/data/m1/2026-11-21.json",serve_m1)
     page.goto(base+"m1.html?date=2026-11-21")
     print("M1 test diagnostics:", page.locator("#board-status").inner_text(), page.locator("#board-list").inner_text()[:320],flush=True)
+    print("M1 normalized diagnostics:",page.evaluate("""async () => {
+      const d=await(await fetch('./data/m1/2026-11-21.json')).json();
+      const r=d.races[0], date=d.date;
+      const jp = dt => {
+        const ps = new Intl.DateTimeFormat('en-CA',{timeZone:'Asia/Tokyo',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date(dt));
+        const o=Object.fromEntries(ps.map(p=>[p.type,p.value]));
+        return o.year+'-'+o.month+'-'+o.day;
+      };
+      return {schema:d.schema_version,date,mode:document.body.dataset.boardMode,source:r.source_sha256,
+        ticket:r.main,sample:r,deadlineAt:jp(r.deadline),frozenAt:jp(r.frozen_at_jst),
+        deadlineValid:/(?:Z|[+-]\\d{2}:\\d{2})$/.test(r.deadline),
+        frozenValid:/(?:Z|[+-]\\d{2}:\\d{2})$/.test(r.frozen_at_jst),
+        late:Date.parse(r.frozen_at_jst)>=Date.parse(r.deadline),
+        shaValid:/^[0-9a-f]{64}$/i.test(String(r.source_sha256||'')),now:Date.now()};
+    }"""),flush=True)
     expect(page.locator(".board-card")).to_have_count(1)
     expect(page.locator(".board-card .board-ticket")).to_have_count(6)
     check_no_overflow(page)
