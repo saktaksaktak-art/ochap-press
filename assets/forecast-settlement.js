@@ -150,23 +150,29 @@
     box.replaceChildren();
     const head=create('div','ochap-settle-head');
     const raw=row.order.join('-');
-    head.append(create('strong','ochap-settle-kind',row.official?'公式確認済み':'API速報・公式未確認'));
-    head.append(create('span','ochap-settle-outcome','3連単 '+raw+' ／ 100円払戻 '+oneYen(row.validPayout?row.trifecta_payout_yen:null)));
+    const status=create('strong','ochap-settle-kind',row.official?'公式確定':'API速報・未確定');
+    status.title=row.official?'公式の確定結果':'API速報。公式結果は未確認です';
+    const outcome=create('span','ochap-settle-outcome','3連単 '+raw+'｜'+oneYen(row.validPayout?row.trifecta_payout_yen:null));
+    outcome.append(create('small','ochap-settle-unit',' /100円'));
+    head.append(status,outcome);
     box.append(head);
-    const authors=board?[['ocha',document.body.dataset.boardMode==='m1'?'お茶P M1':'お茶P M0']]:
-      [['ocha','お茶P M0'],['gemi','Gemi兄 M0']];
+    const authors=board?[['ocha',document.body.dataset.boardMode==='m1'?'お茶P M1':'お茶P']]:
+      [['ocha','お茶P'],['gemi','Gemi兄']];
     for(const [author,label] of authors){
       const picks=cleanPicks(predicted[author]);
       if(!picks)continue;
       const hit=groupHit(row,picks);
+      const brief=hit.map(value=>value.replace(/^本線 ([1-8])位$/,(_,n)=>
+        '本線'+['①','②','③','④','⑤','⑥','⑦','⑧'][Number(n)-1]).replace('舟券ナビ','ナビ')).join('・');
       const line=create('p','ochap-settle-line');
+      line.append(create('span','ochap-settle-author',label));
       if(hit.length){
-        const labelText=(row.official?'🎯 的中':'🎯 速報的中')+'（'+hit.join('・')+'）';
-        const count=hit.length;
-        line.textContent=label+'：'+labelText+' ／ 100円あたり '+oneYen(row.validPayout?row.trifecta_payout_yen:null);
-        if(count>1)line.textContent+=' ／ '+count+'区分計 '+oneYen(row.validPayout?row.trifecta_payout_yen*count:null);
+        const indicator=create('span','ochap-settle-judgment','🎯的中 '+brief);
+        indicator.title=row.official?'公式確認済みの的中':'API速報の的中（公式未確認）';
+        line.append(indicator,create('strong','ochap-settle-amount',
+          row.validPayout?(hit.length>1?'計':'')+oneYen(row.trifecta_payout_yen*hit.length):'金額未取得'));
         line.classList.add('ochap-settle-hit');
-      }else line.textContent=label+'：3連単不的中';
+      }else line.append(create('span','ochap-settle-judgment','不的中'));
       box.append(line);
       if(settings.finance)
         box.append(create('p','ochap-settle-finance',label+'｜'+financial(row,id,author,picks)));
