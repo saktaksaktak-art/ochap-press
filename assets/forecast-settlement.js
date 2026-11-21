@@ -301,7 +301,7 @@
     render();
   }
   const style=document.createElement('link');
-  style.rel='stylesheet';style.href='./assets/forecast-settlement.css?v=20261121';
+  style.rel='stylesheet';style.href='./assets/forecast-settlement.css?v=20261121-inline3';
   document.head.append(style);
   mountControls();
   if(board){

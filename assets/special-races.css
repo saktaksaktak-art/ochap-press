@@ -24,5 +24,15 @@
 #ochap-public-panels .lr-special-grid article{padding:10px;margin:0}
 
 /* Keep the closing-time checkbox and caption together at every viewport. */
-#ochap-public-panels .special-closed-label{display:inline-flex;align-items:center;justify-content:flex-start;gap:7px;flex:0 0 auto;width:auto;max-width:100%;white-space:nowrap;text-align:left}
-#ochap-public-panels .special-closed-label input[type="checkbox"]{flex:none;width:18px;height:18px;margin:0}
+#ochap-public-panels #ochap-special-view .public-controls > label.special-closed-label{
+  display:inline-flex!important;flex-direction:row!important;flex-wrap:nowrap!important;
+  align-items:center!important;justify-content:flex-start!important;gap:7px!important;
+  flex:0 0 auto!important;width:max-content!important;max-width:100%!important;
+  margin:0!important;padding:0!important;white-space:nowrap!important;text-align:left!important
+}
+#ochap-public-panels #ochap-special-view .special-closed-label input[type="checkbox"]{
+  flex:0 0 18px!important;width:18px!important;height:18px!important;margin:0!important
+}
+#ochap-public-panels #ochap-special-view .special-closed-caption{
+  display:inline!important;flex:none!important;white-space:nowrap!important
+}

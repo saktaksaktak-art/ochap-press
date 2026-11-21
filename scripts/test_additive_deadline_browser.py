@@ -19,13 +19,19 @@ def check_checkbox_caption(checkbox, label):
     # Measure the checkbox and its adjacent text glyph, not the full label width.
     gap = label.evaluate("""label => {
       const input = label.querySelector('input[type="checkbox"]');
+      const caption = label.querySelector('.special-closed-caption');
       const text = [...label.childNodes].find(n => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
-      if (!input || !text) return null;
-      const index = text.textContent.length - text.textContent.trimStart().length;
-      const range = document.createRange();
-      range.setStart(text,index);
-      range.setEnd(text,text.textContent.length);
-      const t = range.getBoundingClientRect(), b = input.getBoundingClientRect();
+      if (!input || (!caption && !text)) return null;
+      let t;
+      if (caption) t = caption.getBoundingClientRect();
+      else {
+        const index = text.textContent.length - text.textContent.trimStart().length;
+        const range = document.createRange();
+        range.setStart(text,index);
+        range.setEnd(text,text.textContent.length);
+        t = range.getBoundingClientRect();
+      }
+      const b = input.getBoundingClientRect();
       return {gap:t.left-b.right, dy:Math.abs((t.top+t.bottom)/2-(b.top+b.bottom)/2),
               labelWidth:label.getBoundingClientRect().width};
     }""")
@@ -93,7 +99,20 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
         cards=special.locator(".special-card")
         closed_checkbox=special.get_by_label("締切済みも表示")
         expect(closed_checkbox).to_be_visible()
+        expect(special.locator(".special-closed-label .special-closed-caption")).to_have_text("締切済みも表示")
         check_checkbox_caption(closed_checkbox, closed_checkbox.locator(".."))
+        alignment=special.locator(".special-closed-label").evaluate("""el => ({
+          display:getComputedStyle(el).display,
+          direction:getComputedStyle(el).flexDirection,
+          justify:getComputedStyle(el).justifyContent
+        })""")
+        # Browser blockifies inline-flex children of flex parents to computed "flex".
+        assert alignment["display"] in ("flex","inline-flex"), alignment
+        assert alignment["direction"]=="row" and alignment["justify"]=="flex-start", alignment
+        assets=page.evaluate("""() => [...document.querySelectorAll('script[src],link[rel="stylesheet"]')]
+          .map(x => x.src || x.href)""")
+        assert any('special-races.js?v=20261121-inline3' in x for x in assets)
+        assert any('special-races.css?v=20261121-inline3' in x for x in assets)
         expect(special.locator(".special-time-count")).to_contain_text("未締切")
         upcoming_count=cards.count()
         assert upcoming_count>0, "Expected upcoming special races at 17:00 JST"
@@ -126,6 +145,21 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
         check_no_overflow(page)
         assert not errors, (width, errors)
         page.close()
+
+    # Simulate an iPhone-class viewport: 393 CSS px at a 3x pixel ratio.
+    phone=browser.new_page(viewport={"width":393,"height":852},
+                           device_scale_factor=3,is_mobile=True,has_touch=True,
+                           timezone_id="Asia/Tokyo")
+    phone.clock.install(time=FIXED)
+    phone.goto(base+"index.html?date=2026-11-21&view=special")
+    phone_checkbox=phone.locator("#ochap-special-view .special-closed-label input[type=checkbox]")
+    expect(phone_checkbox).to_be_visible()
+    check_checkbox_caption(phone_checkbox,phone_checkbox.locator(".."))
+    assert phone.locator("#ochap-special-view .special-closed-caption").inner_text()=="締切済みも表示"
+    check_no_overflow(phone)
+    phone_checkbox.check()
+    expect(phone.locator("#ochap-special-view .special-card")).not_to_have_count(0)
+    phone.close()
 
     # Confirm the M1 publication boundary in a standalone mocked sample.
     page = browser.new_page(viewport={"width":390,"height":844},timezone_id="Asia/Tokyo")
