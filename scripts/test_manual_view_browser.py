@@ -11,7 +11,7 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
                          partial(SimpleHTTPRequestHandler, directory=str(ROOT))) as http, sync_playwright() as pw:
     Thread(target=http.serve_forever, daemon=True).start()
     base=f"http://127.0.0.1:{http.server_port}/"
-    browser=pw.chromium.launch(args=["--no-sandbox"])
+    browser=pw.chromium.launch(channel="chrome", args=["--no-sandbox"])
     for width, mobile in ((390,True),(820,False),(1280,False)):
         context=browser.new_context(viewport={"width":width,"height":850},
                                     is_mobile=mobile,has_touch=mobile)
