@@ -9,7 +9,7 @@
     (document.getElementById('cards') || document.querySelector('main'));
   if (!forecastSource) return;
   const SETTINGS_KEY='ochap.reader.settlement.v1';
-  const defaults={filter:'all',density:'normal',spoiler:false,finance:false};
+  const defaults={filter:'all',density:'normal',finance:false};
   const allowedFilter=new Set(['all','open','official','hits']);
   const allowedDensity=new Set(['normal','simple','detail']);
   const boats=['桐生','戸田','江戸川','平和島','多摩川','浜名湖','蒲郡','常滑','津','三国','びわこ','住之江','尼崎','鳴門','丸亀','児島','宮島','徳山','下関','若松','芦屋','福岡','唐津','大村'];
@@ -22,8 +22,7 @@
     try {
       const o=JSON.parse(localStorage.getItem(SETTINGS_KEY)||'{}');
       return {filter:allowedFilter.has(o.filter)?o.filter:'all',
-        density:allowedDensity.has(o.density)?o.density:'normal',
-        spoiler:o.spoiler===true,finance:o.finance===true};
+        density:allowedDensity.has(o.density)?o.density:'normal',finance:o.finance===true};
     } catch (_) {return {...defaults};}
   };
   let settings=readSettings(),activeDate='',rows=new Map(),forecasts={},serial=0;
@@ -152,11 +151,7 @@
     const head=create('div','ochap-settle-head');
     const raw=row.order.join('-');
     head.append(create('strong','ochap-settle-kind',row.official?'公式確認済み':'API速報・公式未確認'));
-    if(settings.spoiler){
-      head.append(create('span','ochap-settle-outcome','結果を非表示中'));
-    }else{
-      head.append(create('span','ochap-settle-outcome','3連単 '+raw+' ／ 100円払戻 '+oneYen(row.validPayout?row.trifecta_payout_yen:null)));
-    }
+    head.append(create('span','ochap-settle-outcome','3連単 '+raw+' ／ 100円払戻 '+oneYen(row.validPayout?row.trifecta_payout_yen:null)));
     box.append(head);
     const authors=board?[['ocha',document.body.dataset.boardMode==='m1'?'お茶P M1':'お茶P M0']]:
       [['ocha','お茶P M0'],['gemi','Gemi兄 M0']];
@@ -165,8 +160,7 @@
       if(!picks)continue;
       const hit=groupHit(row,picks);
       const line=create('p','ochap-settle-line');
-      if(settings.spoiler)line.textContent=label+'：結果非表示';
-      else if(hit.length){
+      if(hit.length){
         const labelText=(row.official?'🎯 的中':'🎯 速報的中')+'（'+hit.join('・')+'）';
         const count=hit.length;
         line.textContent=label+'：'+labelText+' ／ 100円あたり '+oneYen(row.validPayout?row.trifecta_payout_yen:null);
@@ -174,7 +168,7 @@
         line.classList.add('ochap-settle-hit');
       }else line.textContent=label+'：3連単不的中';
       box.append(line);
-      if(settings.finance&&!settings.spoiler)
+      if(settings.finance)
         box.append(create('p','ochap-settle-finance',label+'｜'+financial(row,id,author,picks)));
     }
     if(!current)parent.after(box);
@@ -191,16 +185,14 @@
       const p=cleanPicks(forecasts[id]?.ocha);
       const hit=p?groupHit(row,p):[];
       const prefix=row.official?'公式確認済み':'API速報';
-      host.textContent=settings.spoiler?prefix+'：結果非表示':
-        prefix+'｜3連単 '+row.order.join('-')+' ／ '+oneYen(row.validPayout?row.trifecta_payout_yen:null)+
+      host.textContent=prefix+'｜3連単 '+row.order.join('-')+' ／ '+oneYen(row.validPayout?row.trifecta_payout_yen:null)+
         (hit.length?' ／ お茶P '+(row.official?'🎯的中':'🎯速報的中')+'（'+hit.join('・')+'）':'');
       if(!existing)(card.querySelector('.favorite-race-head,.special-card-head')||card.firstElementChild).after(host);
     }
   }
   function setDensity(cards){
     for(const card of cards){
-      if(board)continue;
-      for(const detail of card.querySelectorAll('.copy details,.ochap-gemi-pane details')){
+      for(const detail of card.querySelectorAll(board ? ':scope > details,.board-details details' : '.copy details,.ochap-gemi-pane details')){
         if(settings.density==='normal'){
           if(detailInitial.has(detail)){detail.open=detailInitial.get(detail);detailInitial.delete(detail);}
         }else{
@@ -223,7 +215,7 @@
       });
       const shown=settings.filter==='all'||(settings.filter==='open'&&state==='open')||
         (settings.filter==='official'&&state==='official')||
-        (settings.filter==='hits'&&!settings.spoiler&&hit);
+        (settings.filter==='hits'&&hit);
       card.classList.toggle('ochap-settle-filtered',!shown);
       createSettlement(card,id);
     }
@@ -232,12 +224,10 @@
     if(elements){
       elements.filter.value=settings.filter;
       elements.density.value=settings.density;
-      elements.spoiler.checked=settings.spoiler;
       elements.finance.checked=settings.finance;
       const total=[...rows.values()].filter(x=>x.official).length;
       const api=rows.size-total;
-      elements.status.textContent='掲載結果 '+rows.size+'R（公式確認 '+total+'R／API速報 '+api+'R）・3連単100円単位'+
-        (settings.spoiler?'｜結果非表示中':'');
+      elements.status.textContent='掲載結果 '+rows.size+'R（公式確認 '+total+'R／API速報 '+api+'R）・3連単100円単位';
     }
   }
   function store(){
@@ -263,12 +253,11 @@
     host.id='ochap-settle-controls';host.setAttribute('aria-label','予想と結果の表示設定');
     const filter=selector('結果で絞り込み',[['all','全レース'],['open','未締切'],['official','結果確定'],['hits','的中のみ']],settings.filter);
     const density=selector('表示の詳しさ',[['normal','従来表示'],['simple','簡易'],['detail','詳細']],settings.density);
-    const spoiler=toggler('結果を隠す',settings.spoiler);
     const finance=toggler('平買い収支を表示',settings.finance);
     const refresh=create('button','ochap-settle-refresh','結果更新');refresh.type='button';refresh.id='ochap-settle-refresh';
     const status=create('p','ochap-settle-status','結果データを確認しています。');
     status.setAttribute('role','status');
-    for(const x of [filter,density,spoiler,finance])host.append(x.label);
+    for(const x of [filter,density,finance])host.append(x.label);
     host.append(refresh,status);
     if(board){
       const toolbar=document.querySelector('.board-controls');
@@ -277,14 +266,9 @@
       const first=forecastSource.querySelector('article[id]');
       if(first)first.before(host);else forecastSource.prepend(host);
     }
-    elements={filter:filter.input,density:density.input,spoiler:spoiler.input,finance:finance.input,status};
+    elements={filter:filter.input,density:density.input,finance:finance.input,status};
     filter.input.addEventListener('change',()=>{settings.filter=filter.input.value;store();render();});
     density.input.addEventListener('change',()=>{settings.density=density.input.value;store();render();});
-    spoiler.input.addEventListener('change',()=>{
-      settings.spoiler=spoiler.input.checked;
-      if(settings.spoiler&&settings.filter==='hits')settings.filter='all';
-      store();render();
-    });
     finance.input.addEventListener('change',()=>{settings.finance=finance.input.checked;store();render();});
     refresh.addEventListener('click',()=>loadResults());
   }
