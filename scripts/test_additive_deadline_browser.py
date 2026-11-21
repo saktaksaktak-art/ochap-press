@@ -101,8 +101,14 @@ with ThreadingHTTPServer(("127.0.0.1", 0),
         expect(closed_checkbox).to_be_visible()
         expect(special.locator(".special-closed-label .special-closed-caption")).to_have_text("締切済みも表示")
         check_checkbox_caption(closed_checkbox, closed_checkbox.locator(".."))
-        assert special.locator(".special-closed-label").evaluate(
-            "el => getComputedStyle(el).display") == "inline-flex"
+        alignment=special.locator(".special-closed-label").evaluate("""el => ({
+          display:getComputedStyle(el).display,
+          direction:getComputedStyle(el).flexDirection,
+          justify:getComputedStyle(el).justifyContent
+        })""")
+        # Browser blockifies inline-flex children of flex parents to computed "flex".
+        assert alignment["display"] in ("flex","inline-flex"), alignment
+        assert alignment["direction"]=="row" and alignment["justify"]=="flex-start", alignment
         assets=page.evaluate("""() => [...document.querySelectorAll('script[src],link[rel="stylesheet"]')]
           .map(x => x.src || x.href)""")
         assert any('special-races.js?v=20261121-inline3' in x for x in assets)
