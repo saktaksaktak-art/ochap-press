@@ -44,7 +44,7 @@
   document.head.append(viewModeScript);
   window.addEventListener('load', () => {
     const settlement=document.createElement('script');
-    settlement.src='./assets/forecast-settlement.js?v=20261121';
+    settlement.src='./assets/forecast-settlement.js?v=20261121-inline3';
     document.body.append(settlement);
   }, {once:true});
   toolbar.append(label,chooser,refresh);
