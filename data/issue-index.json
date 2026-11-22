@@ -48,7 +48,8 @@
       "reporter_input_versions_differ": false,
       "label": "2026年11月22日 全国予想",
       "ochap_status": "published_original_preserved",
-      "gemi_status": "live_m0_pre_deadline"
+      "gemi_status": "live_m0_pre_deadline",
+      "consensus_json": "data/consensus/2026-11-22.json"
     },
     {
       "date": "2026-11-21",
