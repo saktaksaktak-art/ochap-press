@@ -14,20 +14,22 @@
       "venues": 13,
       "races": 156,
       "forecast_frozen_at_jst": "2026-11-25T07:14:02+09:00",
-      "publication_timing_checked_at": null,
+      "publication_timing_checked_at": "2026-11-25T07:18:48+09:00",
       "forecast_sha256": "d50d7154b3928cf1d5fe21d19a605d8a57460b362040bf860a394fc77d80fa2b",
       "formal_bc_eligible": true,
       "reporters": {
         "ocha": {
           "frozen_at_jst": "2026-11-25T07:14:02+09:00",
           "input_sha256": "6d01a35288e35dcceb753eecf6a896a210c314eee2067c99f1f724a8fba29bb2",
-          "forecast_sha256": "d50d7154b3928cf1d5fe21d19a605d8a57460b362040bf860a394fc77d80fa2b"
+          "forecast_sha256": "d50d7154b3928cf1d5fe21d19a605d8a57460b362040bf860a394fc77d80fa2b",
+          "first_publication_confirmed_at_jst": "2026-11-25T07:18:48+09:00"
         },
         "gemi": {
           "recorded_freeze_at_jst": "2026-11-25T05:12:30+09:00",
           "frozen_at_jst": "2026-11-25T05:12:30+09:00",
           "input_sha256": "6d01a35288e35dcceb753eecf6a896a210c314eee2067c99f1f724a8fba29bb2",
-          "public_sha256": "00de29e5ac76056650acfc131c5d60d2812c5bd78be3e628bb47577a9079b758"
+          "public_sha256": "00de29e5ac76056650acfc131c5d60d2812c5bd78be3e628bb47577a9079b758",
+          "first_publication_confirmed_at_jst": "2026-11-25T07:18:48+09:00"
         }
       },
       "post_deadline_reference_races": [],
@@ -44,8 +46,11 @@
       "gemi_script": "assets/gemi-reporter.js",
       "gemi_public_sha256": "00de29e5ac76056650acfc131c5d60d2812c5bd78be3e628bb47577a9079b758",
       "forecast_drive_id": "11slLhjtFPd4eeHuecnj2VDoU3syHjhhV",
-      "gemi_first_publication_confirmed_at_jst": null,
-      "reporter_input_versions_differ": false
+      "gemi_first_publication_confirmed_at_jst": "2026-11-25T07:18:48+09:00",
+      "reporter_input_versions_differ": false,
+      "consensus_json": "data/consensus/2026-11-25.json",
+      "consensus_data": "data/consensus/2026-11-25.json",
+      "consensus_json_drive_file_id": "1qPBgfDAU82YySBxSD63M-KI8SrOedO34"
     },
     {
       "date": "2026-11-24",
