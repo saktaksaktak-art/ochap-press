@@ -38,6 +38,14 @@ class FlashTests(unittest.TestCase):
             candidate['races'][0].update(order=[2,1,3],source_observed_at_jst='2026-11-01T20:05:00+09:00')
             newer = payload()
             newer['races'][0].update(order=[3,2,1],source_observed_at_jst='2026-11-01T20:10:00+09:00')
+            # Simulate coherent corrections in both the normalized and source rows.
+            for packet in (candidate,newer):
+                r=packet['races'][0]
+                raw=r['api_result']
+                ranking=r['order']+[n for n in range(1,7) if n not in r['order']]
+                for rank,boat in enumerate(ranking,1):
+                    raw['racers'][str(boat)]['place_number']=rank
+                raw['payouts']['trifecta'][0]['combination']='-'.join(map(str,r['order']))
             raced = []
             def worker_git(*args, **kw):
                 if args[0]=='push' and not raced:
