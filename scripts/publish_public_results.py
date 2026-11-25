@@ -10,6 +10,7 @@ from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 import json
+from copy import deepcopy
 from reconcile_public_results import checked, merge
 
 JST = ZoneInfo('Asia/Tokyo')
@@ -62,7 +63,10 @@ def parse_api_result(result, date, venue, rno, source_url, observed_at):
         'venue':VENUES[venue], 'venue_code':venue, 'race_no':rno,
         'order':order, 'method':method, 'trifecta_payout_yen':price,
         'official_confirmed':False, 'result_status':'API_REPORTED',
-        'result_source_ref':source_url, 'source_observed_at_jst':observed_at
+        'result_source_ref':source_url, 'source_observed_at_jst':observed_at,
+        # Preserve the decoded result object, including original *_source values.
+        # Never substitute preview data or claim official-page verification.
+        'api_result': deepcopy(result)
     }
     exacta = payouts.get('exacta')
     if isinstance(exacta, list) and len(exacta) == 1 and isinstance(exacta[0], dict):

@@ -12,6 +12,31 @@ API_RE=re.compile(r'^https://boatraceopenapi\.github\.io/api/v1/\d{4}/\d{8}\.jso
 DATE_RE=re.compile(r'^\d{4}-\d{2}-\d{2}$')
 CORE=('venue_code','race_no','order','method','trifecta_payout_yen')
 OPTIONAL_SETTLEMENT=('exacta_payout_yen','refund_boats')
+OPTIONAL_RESULT_DETAIL=('api_result',)
+RESULT_FIELDS=CORE+OPTIONAL_SETTLEMENT+OPTIONAL_RESULT_DETAIL
+
+def check_api_snapshot(r, day):
+    if 'api_result' not in r:
+        return  # compatible with historical schema 1.0 rows
+    raw=r['api_result']
+    if not isinstance(raw,dict) or raw.get('date')!=day or raw.get('stadium_number')!=r['venue_code'] or raw.get('race_number')!=r['race_no']:
+        raise ValueError('API result snapshot identity mismatch')
+    racers=raw.get('racers')
+    if not isinstance(racers,dict) or set(racers)!=set('123456'):
+        raise ValueError('API result snapshot missing racer identities')
+    for n in range(1,7):
+        racer=racers[str(n)]
+        if not isinstance(racer,dict) or racer.get('entry_number')!=n or type(racer.get('number')) is not int or not 1000<=racer['number']<=9999:
+            raise ValueError('Invalid API result snapshot racer identity')
+    podium={n:racers[str(n)].get('place_number') for n in range(1,7)}
+    for rank,boat in enumerate(r['order'],1):
+        if podium[boat]!=rank or list(podium.values()).count(rank)!=1:
+            raise ValueError('API result snapshot podium mismatch')
+    payouts=raw.get('payouts')
+    tf=payouts.get('trifecta') if isinstance(payouts,dict) else None
+    if not isinstance(tf,list) or len(tf)!=1 or not isinstance(tf[0],dict) or tf[0].get('combination')!='-'.join(map(str,r['order'])) or tf[0].get('amount')!=r['trifecta_payout_yen']:
+        raise ValueError('API result snapshot payout mismatch')
+
 def checked(payload):
     if not isinstance(payload,dict) or payload.get('schema_version')!='1.0':
         raise ValueError('Invalid public results format')
@@ -49,6 +74,7 @@ def checked(payload):
             if t.tzinfo is None:raise ValueError('API timestamp missing time zone')
         else:
             raise ValueError('Unknown official confirmation state')
+        check_api_snapshot(r, day)
         key=(venue,no)
         if key in rows:raise ValueError('Duplicate race key')
         rows[key]=r
@@ -75,8 +101,11 @@ def merge(current, proposed):
             continue
         if old['order']==new['order']:
             new={**{field:old[field] for field in OPTIONAL_SETTLEMENT if field in old},**new}
-        if all(old.get(x)==new.get(x) for x in CORE+OPTIONAL_SETTLEMENT):
-            continue  # unchanged result should not trigger extra Git commits
+        # A legacy caller with no snapshot must not erase a matching saved snapshot.
+        if 'api_result' not in new and all(old.get(x)==new.get(x) for x in CORE+OPTIONAL_SETTLEMENT):
+            continue
+        if all(old.get(x)==new.get(x) for x in RESULT_FIELDS):
+            continue  # unchanged content should not trigger extra Git commits
         old_at=datetime.fromisoformat(old['source_observed_at_jst'])
         new_at=datetime.fromisoformat(new['source_observed_at_jst'])
         if new_at>old_at:
