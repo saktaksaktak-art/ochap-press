@@ -14,20 +14,22 @@
       "venues": 12,
       "races": 144,
       "forecast_frozen_at_jst": "2026-11-26T07:10:53+09:00",
-      "publication_timing_checked_at": null,
+      "publication_timing_checked_at": "2026-11-26T07:14:51+09:00",
       "forecast_sha256": "06c45a765b002335c006c68fd5bef2c39356e88f46c4731c3e2ac82b44eaafe1",
       "formal_bc_eligible": true,
       "reporters": {
         "ocha": {
           "frozen_at_jst": "2026-11-26T07:10:53+09:00",
           "input_sha256": "12f8e64b09f60ea4a10bb3fd0b88c1b15908ff3b2ecbcf546e679a9bf96eee98",
-          "forecast_sha256": "06c45a765b002335c006c68fd5bef2c39356e88f46c4731c3e2ac82b44eaafe1"
+          "forecast_sha256": "06c45a765b002335c006c68fd5bef2c39356e88f46c4731c3e2ac82b44eaafe1",
+          "first_publication_confirmed_at_jst": "2026-11-26T07:14:51+09:00"
         },
         "gemi": {
           "recorded_freeze_at_jst": "2026-11-26T05:06:30+09:00",
           "frozen_at_jst": "2026-11-26T05:06:30+09:00",
           "input_sha256": "12f8e64b09f60ea4a10bb3fd0b88c1b15908ff3b2ecbcf546e679a9bf96eee98",
-          "public_sha256": "247183f172982c09b8bc6a50c8d2efe16ea5549b94aafd601821f37476f3cf06"
+          "public_sha256": "247183f172982c09b8bc6a50c8d2efe16ea5549b94aafd601821f37476f3cf06",
+          "first_publication_confirmed_at_jst": "2026-11-26T07:14:51+09:00"
         }
       },
       "post_deadline_reference_races": [],
@@ -44,8 +46,10 @@
       "gemi_script": "assets/gemi-reporter.js",
       "gemi_public_sha256": "247183f172982c09b8bc6a50c8d2efe16ea5549b94aafd601821f37476f3cf06",
       "forecast_drive_id": "1950LMV0MF2SSFbJhs03StAIbA2Jwa3Ql",
-      "gemi_first_publication_confirmed_at_jst": null,
-      "reporter_input_versions_differ": false
+      "gemi_first_publication_confirmed_at_jst": "2026-11-26T07:14:51+09:00",
+      "reporter_input_versions_differ": false,
+      "consensus_json_drive_file_id": "133ECQoKUCS4GwmoTT4mm0QjvnTfuh_Kz",
+      "consensus_json": "data/consensus/2026-11-26.json"
     },
     {
       "date": "2026-11-25",
