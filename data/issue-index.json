@@ -1,7 +1,52 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-25",
+  "default_date": "2026-11-26",
   "issues": [
+    {
+      "date": "2026-11-26",
+      "path": "archives/2026-11-26.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": true,
+      "editorial_data": "data/editorial/2026-11-26-690cb7371725.json.gz.b64.txt",
+      "editorial_data_sha256": "690cb73717250cdb8db9d0675d7b44970b47ade32949b1ef55129e761c28cc22",
+      "editorial_fragments": 288,
+      "edition_status": "normal_m0",
+      "venues": 12,
+      "races": 144,
+      "forecast_frozen_at_jst": "2026-11-26T07:10:53+09:00",
+      "publication_timing_checked_at": null,
+      "forecast_sha256": "06c45a765b002335c006c68fd5bef2c39356e88f46c4731c3e2ac82b44eaafe1",
+      "formal_bc_eligible": true,
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-26T07:10:53+09:00",
+          "input_sha256": "12f8e64b09f60ea4a10bb3fd0b88c1b15908ff3b2ecbcf546e679a9bf96eee98",
+          "forecast_sha256": "06c45a765b002335c006c68fd5bef2c39356e88f46c4731c3e2ac82b44eaafe1"
+        },
+        "gemi": {
+          "recorded_freeze_at_jst": "2026-11-26T05:06:30+09:00",
+          "frozen_at_jst": "2026-11-26T05:06:30+09:00",
+          "input_sha256": "12f8e64b09f60ea4a10bb3fd0b88c1b15908ff3b2ecbcf546e679a9bf96eee98",
+          "public_sha256": "247183f172982c09b8bc6a50c8d2efe16ea5549b94aafd601821f37476f3cf06"
+        }
+      },
+      "post_deadline_reference_races": [],
+      "diagrams": true,
+      "diagram_policy": "slit-only.v1",
+      "turn_diagrams": false,
+      "expected_races": 144,
+      "unissued_races": 0,
+      "single_bc_eligible_races": 144,
+      "single_bc_status": "PENDING_OFFICIAL_RESULTS",
+      "pair_comparison_eligible": true,
+      "gemi_json": "data/gemi/2026-11-26.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-26.json",
+      "gemi_script": "assets/gemi-reporter.js",
+      "gemi_public_sha256": "247183f172982c09b8bc6a50c8d2efe16ea5549b94aafd601821f37476f3cf06",
+      "forecast_drive_id": "1950LMV0MF2SSFbJhs03StAIbA2Jwa3Ql",
+      "gemi_first_publication_confirmed_at_jst": null,
+      "reporter_input_versions_differ": false
+    },
     {
       "date": "2026-11-25",
       "path": "archives/2026-11-25.html.gz.b64.txt",
