@@ -2,10 +2,46 @@
   "schema_version": "1.0",
   "date": "2026-11-25",
   "status": "API_RESULTS_REFERENCE_ONLY",
-  "checked_at_jst": "2026-11-25T10:48:24+09:00",
+  "checked_at_jst": "2026-11-25T10:58:25+09:00",
   "not_formal_m0": true,
   "not_formal_bc": true,
   "races": [
+    {
+      "venue": "多摩川",
+      "venue_code": 5,
+      "race_no": 1,
+      "order": [
+        3,
+        4,
+        1
+      ],
+      "method": "まくり差し",
+      "trifecta_payout_yen": 2450,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261125.json",
+      "source_observed_at_jst": "2026-11-25T10:58:25+09:00",
+      "exacta_payout_yen": 1050,
+      "refund_boats": []
+    },
+    {
+      "venue": "常滑",
+      "venue_code": 8,
+      "race_no": 1,
+      "order": [
+        1,
+        2,
+        5
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 2800,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261125.json",
+      "source_observed_at_jst": "2026-11-25T10:58:25+09:00",
+      "exacta_payout_yen": 560,
+      "refund_boats": []
+    },
     {
       "venue": "三国",
       "venue_code": 10,
@@ -76,6 +112,42 @@
       "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261125.json",
       "source_observed_at_jst": "2026-11-25T10:48:24+09:00",
       "exacta_payout_yen": 1860,
+      "refund_boats": []
+    },
+    {
+      "venue": "びわこ",
+      "venue_code": 11,
+      "race_no": 1,
+      "order": [
+        2,
+        4,
+        1
+      ],
+      "method": "差し",
+      "trifecta_payout_yen": 12150,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261125.json",
+      "source_observed_at_jst": "2026-11-25T10:58:25+09:00",
+      "exacta_payout_yen": 3420,
+      "refund_boats": []
+    },
+    {
+      "venue": "尼崎",
+      "venue_code": 13,
+      "race_no": 1,
+      "order": [
+        1,
+        5,
+        3
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 4440,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261125.json",
+      "source_observed_at_jst": "2026-11-25T10:58:25+09:00",
+      "exacta_payout_yen": 1490,
       "refund_boats": []
     },
     {
@@ -257,8 +329,26 @@
       "source_observed_at_jst": "2026-11-25T10:28:24+09:00",
       "exacta_payout_yen": 340,
       "refund_boats": []
+    },
+    {
+      "venue": "芦屋",
+      "venue_code": 21,
+      "race_no": 5,
+      "order": [
+        1,
+        2,
+        4
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 1520,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261125.json",
+      "source_observed_at_jst": "2026-11-25T10:58:25+09:00",
+      "exacta_payout_yen": 380,
+      "refund_boats": []
     }
   ],
   "source_policy": "Unified third-party API; formal BC is separate.",
-  "result_changed_at_jst": "2026-11-25T10:48:25+09:00"
+  "result_changed_at_jst": "2026-11-25T10:58:26+09:00"
 }
