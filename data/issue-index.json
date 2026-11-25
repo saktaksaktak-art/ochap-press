@@ -49,7 +49,10 @@
       "gemi_first_publication_confirmed_at_jst": "2026-11-26T07:14:51+09:00",
       "reporter_input_versions_differ": false,
       "consensus_json_drive_file_id": "133ECQoKUCS4GwmoTT4mm0QjvnTfuh_Kz",
-      "consensus_json": "data/consensus/2026-11-26.json"
+      "consensus_json": "data/consensus/2026-11-26.json",
+      "label": "2026年11月26日 全国予想",
+      "ochap_status": "published_original_preserved",
+      "gemi_status": "live_m0_pre_deadline"
     },
     {
       "date": "2026-11-25",
@@ -887,5 +890,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-25"
+  "latest": "2026-11-26"
 }
