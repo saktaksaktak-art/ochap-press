@@ -1,7 +1,54 @@
 {
   "schema_version": "1.1",
-  "default_date": "2026-11-26",
+  "default_date": "2026-11-27",
   "issues": [
+    {
+      "date": "2026-11-27",
+      "path": "archives/2026-11-27.html.gz.b64.txt",
+      "compression": "base64gzip",
+      "gemi_tabs": true,
+      "editorial_data": "data/editorial/2026-11-27-379663d016b7.json.gz.b64.txt",
+      "editorial_data_sha256": "379663d016b7a8a2906a5e9fa18ff2687aa669808e1307a8b6c668f5b17e3fb5",
+      "editorial_fragments": 336,
+      "edition_status": "normal_m0",
+      "venues": 14,
+      "races": 168,
+      "forecast_frozen_at_jst": "2026-11-27T07:09:54+09:00",
+      "publication_timing_checked_at": null,
+      "forecast_sha256": "ecfc3f4f9795dfd7f42c5dd0e5526da6b5ae2f41ac0930882d73b1307472e335",
+      "formal_bc_eligible": true,
+      "reporters": {
+        "ocha": {
+          "frozen_at_jst": "2026-11-27T07:09:54+09:00",
+          "input_sha256": "44886ce9d4bde66c3775156bce07b7199c8e974f4f29e0c3de009bc2fdcb0e16",
+          "forecast_sha256": "ecfc3f4f9795dfd7f42c5dd0e5526da6b5ae2f41ac0930882d73b1307472e335"
+        },
+        "gemi": {
+          "recorded_freeze_at_jst": "2026-11-27T05:01:30+09:00",
+          "frozen_at_jst": "2026-11-27T05:01:30+09:00",
+          "input_sha256": "44886ce9d4bde66c3775156bce07b7199c8e974f4f29e0c3de009bc2fdcb0e16",
+          "public_sha256": "e1ff029c1849b8ba5d49e414d641902af5f12797358ca4597d8bcd00f399864d"
+        }
+      },
+      "post_deadline_reference_races": [],
+      "diagrams": true,
+      "diagram_policy": "slit-only.v1",
+      "turn_diagrams": false,
+      "expected_races": 168,
+      "unissued_races": 0,
+      "single_bc_eligible_races": 168,
+      "single_bc_status": "PENDING_OFFICIAL_RESULTS",
+      "pair_comparison_eligible": true,
+      "gemi_json": "data/gemi/2026-11-27.json.gz.b64.txt",
+      "gemi_data": "./data/gemi/2026-11-27.json",
+      "gemi_script": "assets/gemi-reporter.js",
+      "gemi_public_sha256": "e1ff029c1849b8ba5d49e414d641902af5f12797358ca4597d8bcd00f399864d",
+      "forecast_drive_id": "1rHm8jzo-4eHQl3NEjwS9p5RtY8oQ5ymB",
+      "gemi_first_publication_confirmed_at_jst": null,
+      "reporter_input_versions_differ": false,
+      "instruction_version": "ochap.prediction.approved.v8",
+      "gemi_v8_application_verified": false
+    },
     {
       "date": "2026-11-26",
       "path": "archives/2026-11-26.html.gz.b64.txt",
