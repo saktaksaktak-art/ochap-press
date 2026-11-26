@@ -14,20 +14,22 @@
       "venues": 14,
       "races": 168,
       "forecast_frozen_at_jst": "2026-11-27T07:09:54+09:00",
-      "publication_timing_checked_at": null,
+      "publication_timing_checked_at": "2026-11-27T07:12:42+09:00",
       "forecast_sha256": "ecfc3f4f9795dfd7f42c5dd0e5526da6b5ae2f41ac0930882d73b1307472e335",
       "formal_bc_eligible": true,
       "reporters": {
         "ocha": {
           "frozen_at_jst": "2026-11-27T07:09:54+09:00",
           "input_sha256": "44886ce9d4bde66c3775156bce07b7199c8e974f4f29e0c3de009bc2fdcb0e16",
-          "forecast_sha256": "ecfc3f4f9795dfd7f42c5dd0e5526da6b5ae2f41ac0930882d73b1307472e335"
+          "forecast_sha256": "ecfc3f4f9795dfd7f42c5dd0e5526da6b5ae2f41ac0930882d73b1307472e335",
+          "first_publication_confirmed_at_jst": "2026-11-27T07:12:42+09:00"
         },
         "gemi": {
           "recorded_freeze_at_jst": "2026-11-27T05:01:30+09:00",
           "frozen_at_jst": "2026-11-27T05:01:30+09:00",
           "input_sha256": "44886ce9d4bde66c3775156bce07b7199c8e974f4f29e0c3de009bc2fdcb0e16",
-          "public_sha256": "e1ff029c1849b8ba5d49e414d641902af5f12797358ca4597d8bcd00f399864d"
+          "public_sha256": "e1ff029c1849b8ba5d49e414d641902af5f12797358ca4597d8bcd00f399864d",
+          "first_publication_confirmed_at_jst": "2026-11-27T07:12:42+09:00"
         }
       },
       "post_deadline_reference_races": [],
@@ -44,10 +46,12 @@
       "gemi_script": "assets/gemi-reporter.js",
       "gemi_public_sha256": "e1ff029c1849b8ba5d49e414d641902af5f12797358ca4597d8bcd00f399864d",
       "forecast_drive_id": "1rHm8jzo-4eHQl3NEjwS9p5RtY8oQ5ymB",
-      "gemi_first_publication_confirmed_at_jst": null,
+      "gemi_first_publication_confirmed_at_jst": "2026-11-27T07:12:42+09:00",
       "reporter_input_versions_differ": false,
       "instruction_version": "ochap.prediction.approved.v8",
-      "gemi_v8_application_verified": false
+      "gemi_v8_application_verified": false,
+      "consensus_json_drive_file_id": "1r3KYGDlkK9HlWIKwcJ5zG55IgEYsq_eg",
+      "consensus_json": "data/consensus/2026-11-27.json"
     },
     {
       "date": "2026-11-26",
