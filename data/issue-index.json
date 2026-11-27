@@ -14,20 +14,24 @@
       "venues": 14,
       "races": 168,
       "forecast_frozen_at_jst": "2026-11-28T07:09:06+09:00",
-      "publication_timing_checked_at": null,
+      "publication_timing_checked_at": "2026-11-28T07:12:57+09:00",
       "forecast_sha256": "ff37d9de8170f2e693d71d03f96276072f3985cc32bec2b13d5e74d74585ec65",
       "formal_bc_eligible": true,
       "reporters": {
         "ocha": {
           "frozen_at_jst": "2026-11-28T07:09:06+09:00",
           "input_sha256": "afbb2cf3a4d7c7a58a94cb97db368407ebc6cfc60c7599233d6b723566a0ae16",
-          "forecast_sha256": "ff37d9de8170f2e693d71d03f96276072f3985cc32bec2b13d5e74d74585ec65"
+          "forecast_sha256": "ff37d9de8170f2e693d71d03f96276072f3985cc32bec2b13d5e74d74585ec65",
+          "first_publication_confirmed_at_jst": "2026-11-28T07:12:57+09:00",
+          "publication_confirmed_at_jst": "2026-11-28T07:12:57+09:00"
         },
         "gemi": {
           "recorded_freeze_at_jst": "2026-11-28T05:22:30+09:00",
           "frozen_at_jst": "2026-11-28T05:22:30+09:00",
           "input_sha256": "afbb2cf3a4d7c7a58a94cb97db368407ebc6cfc60c7599233d6b723566a0ae16",
-          "public_sha256": "ab8043d6fe783bc26a648e43781ff1c012aa3b03f63dd6b16b265f0aee4f00f5"
+          "public_sha256": "ab8043d6fe783bc26a648e43781ff1c012aa3b03f63dd6b16b265f0aee4f00f5",
+          "first_publication_confirmed_at_jst": "2026-11-28T07:12:57+09:00",
+          "publication_confirmed_at_jst": "2026-11-28T07:12:57+09:00"
         }
       },
       "post_deadline_reference_races": [],
@@ -44,10 +48,14 @@
       "gemi_script": "assets/gemi-reporter.js",
       "gemi_public_sha256": "ab8043d6fe783bc26a648e43781ff1c012aa3b03f63dd6b16b265f0aee4f00f5",
       "forecast_drive_id": "1IdiNQ4mAah3zcb3MbtQxvee1XFek_9T6",
-      "gemi_first_publication_confirmed_at_jst": null,
+      "gemi_first_publication_confirmed_at_jst": "2026-11-28T07:12:57+09:00",
       "reporter_input_versions_differ": false,
       "instruction_version": "ochap.prediction.approved.v8",
-      "gemi_v8_application_verified": false
+      "gemi_v8_application_verified": false,
+      "first_publication_confirmed_at_jst": "2026-11-28T07:12:57+09:00",
+      "ocha_first_publication_confirmed_at_jst": "2026-11-28T07:12:57+09:00",
+      "consensus_json_drive_file_id": "1TguRm56EjNPoUaQx3_o9DZmOuXnPABXz",
+      "consensus_data": "data/consensus/2026-11-28.json"
     },
     {
       "date": "2026-11-27",
