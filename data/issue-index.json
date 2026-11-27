@@ -55,7 +55,11 @@
       "first_publication_confirmed_at_jst": "2026-11-28T07:12:57+09:00",
       "ocha_first_publication_confirmed_at_jst": "2026-11-28T07:12:57+09:00",
       "consensus_json_drive_file_id": "1TguRm56EjNPoUaQx3_o9DZmOuXnPABXz",
-      "consensus_data": "data/consensus/2026-11-28.json"
+      "consensus_data": "data/consensus/2026-11-28.json",
+      "label": "2026年11月28日 全国予想",
+      "consensus_json": "data/consensus/2026-11-28.json",
+      "ochap_status": "published_original_preserved",
+      "gemi_status": "live_m0_pre_deadline"
     },
     {
       "date": "2026-11-27",
@@ -999,5 +1003,5 @@
       "gemi_tabs": false
     }
   ],
-  "latest": "2026-11-27"
+  "latest": "2026-11-28"
 }
