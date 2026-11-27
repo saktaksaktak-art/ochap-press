@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "date": "2026-11-27",
   "status": "API_RESULTS_REFERENCE_ONLY",
-  "checked_at_jst": "2026-11-27T20:28:25+09:00",
+  "checked_at_jst": "2026-11-27T20:48:29+09:00",
   "not_formal_m0": true,
   "not_formal_bc": true,
   "races": [
@@ -1734,6 +1734,179 @@
         "refunds": []
       },
       "exacta_payout_yen": 6200,
+      "refund_boats": []
+    },
+    {
+      "venue": "桐生",
+      "venue_code": 1,
+      "race_no": 11,
+      "order": [
+        1,
+        2,
+        4
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 530,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261127.json",
+      "source_observed_at_jst": "2026-11-27T20:48:29+09:00",
+      "api_result": {
+        "date": "2026-11-27",
+        "stadium_number": 1,
+        "race_number": 11,
+        "wind_speed_source": "2m",
+        "wind_speed": 2,
+        "wind_direction_number_source": "東北東",
+        "wind_direction_number": 4,
+        "wave_height_source": "1cm",
+        "wave_height": 1,
+        "weather_number_source": "曇り",
+        "weather_number": 2,
+        "air_temperature_source": "8.0℃",
+        "air_temperature": 8,
+        "water_temperature_source": "11.0℃",
+        "water_temperature": 11,
+        "technique_number_source": "逃げ",
+        "technique_number": 1,
+        "remarks": null,
+        "racers": {
+          "1": {
+            "entry_number": 1,
+            "course_number": 1,
+            "start_timing_source": ".07",
+            "start_timing": 0.07,
+            "place_number_source": "1",
+            "place_number": 1,
+            "number_source": "5034",
+            "number": 5034,
+            "name": "若林 義人"
+          },
+          "2": {
+            "entry_number": 2,
+            "course_number": 2,
+            "start_timing_source": ".08",
+            "start_timing": 0.08,
+            "place_number_source": "2",
+            "place_number": 2,
+            "number_source": "5051",
+            "number": 5051,
+            "name": "松本 純平"
+          },
+          "3": {
+            "entry_number": 3,
+            "course_number": 3,
+            "start_timing_source": ".09",
+            "start_timing": 0.09,
+            "place_number_source": "5",
+            "place_number": 5,
+            "number_source": "4121",
+            "number": 4121,
+            "name": "富永 修一"
+          },
+          "4": {
+            "entry_number": 4,
+            "course_number": 4,
+            "start_timing_source": ".08",
+            "start_timing": 0.08,
+            "place_number_source": "3",
+            "place_number": 3,
+            "number_source": "4227",
+            "number": 4227,
+            "name": "安達 裕樹"
+          },
+          "5": {
+            "entry_number": 5,
+            "course_number": 5,
+            "start_timing_source": ".04",
+            "start_timing": 0.04,
+            "place_number_source": "6",
+            "place_number": 6,
+            "number_source": "4438",
+            "number": 4438,
+            "name": "森作 雄大"
+          },
+          "6": {
+            "entry_number": 6,
+            "course_number": 6,
+            "start_timing_source": ".08",
+            "start_timing": 0.08,
+            "place_number_source": "4",
+            "place_number": 4,
+            "number_source": "4725",
+            "number": 4725,
+            "name": "佐竹 太一"
+          }
+        },
+        "payouts": {
+          "trifecta": [
+            {
+              "combination": "1-2-4",
+              "amount": 530,
+              "label": null
+            }
+          ],
+          "trio": [
+            {
+              "combination": "1=2=4",
+              "amount": 370,
+              "label": null
+            }
+          ],
+          "exacta": [
+            {
+              "combination": "1-2",
+              "amount": 210,
+              "label": null
+            }
+          ],
+          "quinella": [
+            {
+              "combination": "1=2",
+              "amount": 130,
+              "label": null
+            }
+          ],
+          "quinella_place": [
+            {
+              "combination": "1=2",
+              "amount": 120,
+              "label": null
+            },
+            {
+              "combination": "1=4",
+              "amount": 140,
+              "label": null
+            },
+            {
+              "combination": "2=4",
+              "amount": 200,
+              "label": null
+            }
+          ],
+          "win": [
+            {
+              "combination": "1",
+              "amount": 180,
+              "label": null
+            }
+          ],
+          "place": [
+            {
+              "combination": "1",
+              "amount": 100,
+              "label": null
+            },
+            {
+              "combination": "2",
+              "amount": 140,
+              "label": null
+            }
+          ]
+        },
+        "refunds": []
+      },
+      "exacta_payout_yen": 210,
       "refund_boats": []
     },
     {
@@ -17830,6 +18003,179 @@
       "refund_boats": []
     },
     {
+      "venue": "丸亀",
+      "venue_code": 15,
+      "race_no": 11,
+      "order": [
+        4,
+        2,
+        1
+      ],
+      "method": "まくり",
+      "trifecta_payout_yen": 4460,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261127.json",
+      "source_observed_at_jst": "2026-11-27T20:48:29+09:00",
+      "api_result": {
+        "date": "2026-11-27",
+        "stadium_number": 15,
+        "race_number": 11,
+        "wind_speed_source": "1m",
+        "wind_speed": 1,
+        "wind_direction_number_source": "北西",
+        "wind_direction_number": 15,
+        "wave_height_source": "1cm",
+        "wave_height": 1,
+        "weather_number_source": "曇り",
+        "weather_number": 2,
+        "air_temperature_source": "15.0℃",
+        "air_temperature": 15,
+        "water_temperature_source": "17.0℃",
+        "water_temperature": 17,
+        "technique_number_source": "まくり",
+        "technique_number": 3,
+        "remarks": null,
+        "racers": {
+          "1": {
+            "entry_number": 1,
+            "course_number": 1,
+            "start_timing_source": ".06",
+            "start_timing": 0.06,
+            "place_number_source": "3",
+            "place_number": 3,
+            "number_source": "3966",
+            "number": 3966,
+            "name": "作間 章"
+          },
+          "2": {
+            "entry_number": 2,
+            "course_number": 2,
+            "start_timing_source": ".06",
+            "start_timing": 0.06,
+            "place_number_source": "2",
+            "place_number": 2,
+            "number_source": "4713",
+            "number": 4713,
+            "name": "白神 優"
+          },
+          "3": {
+            "entry_number": 3,
+            "course_number": 3,
+            "start_timing_source": ".08",
+            "start_timing": 0.08,
+            "place_number_source": "6",
+            "place_number": 6,
+            "number_source": "4675",
+            "number": 4675,
+            "name": "井手 良太"
+          },
+          "4": {
+            "entry_number": 4,
+            "course_number": 4,
+            "start_timing_source": ".09",
+            "start_timing": 0.09,
+            "place_number_source": "1",
+            "place_number": 1,
+            "number_source": "5218",
+            "number": 5218,
+            "name": "山田 理央"
+          },
+          "5": {
+            "entry_number": 5,
+            "course_number": 5,
+            "start_timing_source": ".21",
+            "start_timing": 0.21,
+            "place_number_source": "4",
+            "place_number": 4,
+            "number_source": "5009",
+            "number": 5009,
+            "name": "大賀 龍之介"
+          },
+          "6": {
+            "entry_number": 6,
+            "course_number": 6,
+            "start_timing_source": ".18",
+            "start_timing": 0.18,
+            "place_number_source": "5",
+            "place_number": 5,
+            "number_source": "5167",
+            "number": 5167,
+            "name": "小川 竜太朗"
+          }
+        },
+        "payouts": {
+          "trifecta": [
+            {
+              "combination": "4-2-1",
+              "amount": 4460,
+              "label": null
+            }
+          ],
+          "trio": [
+            {
+              "combination": "1=2=4",
+              "amount": 320,
+              "label": null
+            }
+          ],
+          "exacta": [
+            {
+              "combination": "4-2",
+              "amount": 1810,
+              "label": null
+            }
+          ],
+          "quinella": [
+            {
+              "combination": "2=4",
+              "amount": 860,
+              "label": null
+            }
+          ],
+          "quinella_place": [
+            {
+              "combination": "2=4",
+              "amount": 160,
+              "label": null
+            },
+            {
+              "combination": "1=4",
+              "amount": 130,
+              "label": null
+            },
+            {
+              "combination": "1=2",
+              "amount": 130,
+              "label": null
+            }
+          ],
+          "win": [
+            {
+              "combination": "4",
+              "amount": 950,
+              "label": null
+            }
+          ],
+          "place": [
+            {
+              "combination": "4",
+              "amount": 160,
+              "label": null
+            },
+            {
+              "combination": "2",
+              "amount": 240,
+              "label": null
+            }
+          ]
+        },
+        "refunds": []
+      },
+      "exacta_payout_yen": 1810,
+      "refund_boats": []
+    },
+    {
       "venue": "宮島",
       "venue_code": 17,
       "race_no": 1,
@@ -23901,6 +24247,179 @@
       "refund_boats": []
     },
     {
+      "venue": "若松",
+      "venue_code": 20,
+      "race_no": 12,
+      "order": [
+        1,
+        3,
+        4
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 1650,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261127.json",
+      "source_observed_at_jst": "2026-11-27T20:48:29+09:00",
+      "api_result": {
+        "date": "2026-11-27",
+        "stadium_number": 20,
+        "race_number": 12,
+        "wind_speed_source": "0m",
+        "wind_speed": 0,
+        "wind_direction_number_source": "無風",
+        "wind_direction_number": 17,
+        "wave_height_source": "1cm",
+        "wave_height": 1,
+        "weather_number_source": "曇り",
+        "weather_number": 2,
+        "air_temperature_source": "16.0℃",
+        "air_temperature": 16,
+        "water_temperature_source": "15.0℃",
+        "water_temperature": 15,
+        "technique_number_source": "逃げ",
+        "technique_number": 1,
+        "remarks": null,
+        "racers": {
+          "1": {
+            "entry_number": 1,
+            "course_number": 1,
+            "start_timing_source": ".09",
+            "start_timing": 0.09,
+            "place_number_source": "1",
+            "place_number": 1,
+            "number_source": "4066",
+            "number": 4066,
+            "name": "東本 勝利"
+          },
+          "2": {
+            "entry_number": 2,
+            "course_number": 2,
+            "start_timing_source": ".13",
+            "start_timing": 0.13,
+            "place_number_source": "4",
+            "place_number": 4,
+            "number_source": "4134",
+            "number": 4134,
+            "name": "杉山 貴博"
+          },
+          "3": {
+            "entry_number": 3,
+            "course_number": 3,
+            "start_timing_source": ".12",
+            "start_timing": 0.12,
+            "place_number_source": "2",
+            "place_number": 2,
+            "number_source": "4318",
+            "number": 4318,
+            "name": "桑原 将光"
+          },
+          "4": {
+            "entry_number": 4,
+            "course_number": 4,
+            "start_timing_source": ".17",
+            "start_timing": 0.17,
+            "place_number_source": "3",
+            "place_number": 3,
+            "number_source": "3935",
+            "number": 3935,
+            "name": "岩津 徹郎"
+          },
+          "5": {
+            "entry_number": 5,
+            "course_number": 5,
+            "start_timing_source": ".23",
+            "start_timing": 0.23,
+            "place_number_source": "5",
+            "place_number": 5,
+            "number_source": "3508",
+            "number": 3508,
+            "name": "久富 政弘"
+          },
+          "6": {
+            "entry_number": 6,
+            "course_number": 6,
+            "start_timing_source": ".22",
+            "start_timing": 0.22,
+            "place_number_source": "6",
+            "place_number": 6,
+            "number_source": "5434",
+            "number": 5434,
+            "name": "藤田 康生"
+          }
+        },
+        "payouts": {
+          "trifecta": [
+            {
+              "combination": "1-3-4",
+              "amount": 1650,
+              "label": null
+            }
+          ],
+          "trio": [
+            {
+              "combination": "1=3=4",
+              "amount": 1220,
+              "label": null
+            }
+          ],
+          "exacta": [
+            {
+              "combination": "1-3",
+              "amount": 280,
+              "label": null
+            }
+          ],
+          "quinella": [
+            {
+              "combination": "1=3",
+              "amount": 470,
+              "label": null
+            }
+          ],
+          "quinella_place": [
+            {
+              "combination": "1=3",
+              "amount": 180,
+              "label": null
+            },
+            {
+              "combination": "1=4",
+              "amount": 270,
+              "label": null
+            },
+            {
+              "combination": "3=4",
+              "amount": 1040,
+              "label": null
+            }
+          ],
+          "win": [
+            {
+              "combination": "1",
+              "amount": 140,
+              "label": null
+            }
+          ],
+          "place": [
+            {
+              "combination": "1",
+              "amount": 110,
+              "label": null
+            },
+            {
+              "combination": "3",
+              "amount": 310,
+              "label": null
+            }
+          ]
+        },
+        "refunds": []
+      },
+      "exacta_payout_yen": 280,
+      "refund_boats": []
+    },
+    {
       "venue": "唐津",
       "venue_code": 23,
       "race_no": 1,
@@ -27709,8 +28228,181 @@
       },
       "exacta_payout_yen": 2010,
       "refund_boats": []
+    },
+    {
+      "venue": "大村",
+      "venue_code": 24,
+      "race_no": 11,
+      "order": [
+        1,
+        3,
+        6
+      ],
+      "method": "逃げ",
+      "trifecta_payout_yen": 1200,
+      "official_confirmed": false,
+      "result_status": "API_REPORTED",
+      "result_source_ref": "https://boatraceopenapi.github.io/api/v1/2026/20261127.json",
+      "source_observed_at_jst": "2026-11-27T20:48:29+09:00",
+      "api_result": {
+        "date": "2026-11-27",
+        "stadium_number": 24,
+        "race_number": 11,
+        "wind_speed_source": "1m",
+        "wind_speed": 1,
+        "wind_direction_number_source": "北",
+        "wind_direction_number": 1,
+        "wave_height_source": "1cm",
+        "wave_height": 1,
+        "weather_number_source": "曇り",
+        "weather_number": 2,
+        "air_temperature_source": "17.0℃",
+        "air_temperature": 17,
+        "water_temperature_source": "15.0℃",
+        "water_temperature": 15,
+        "technique_number_source": "逃げ",
+        "technique_number": 1,
+        "remarks": null,
+        "racers": {
+          "1": {
+            "entry_number": 1,
+            "course_number": 1,
+            "start_timing_source": ".19",
+            "start_timing": 0.19,
+            "place_number_source": "1",
+            "place_number": 1,
+            "number_source": "4436",
+            "number": 4436,
+            "name": "渋谷 明憲"
+          },
+          "2": {
+            "entry_number": 2,
+            "course_number": 2,
+            "start_timing_source": ".20",
+            "start_timing": 0.2,
+            "place_number_source": "4",
+            "place_number": 4,
+            "number_source": "5002",
+            "number": 5002,
+            "name": "上田 健太"
+          },
+          "3": {
+            "entry_number": 3,
+            "course_number": 3,
+            "start_timing_source": ".20",
+            "start_timing": 0.2,
+            "place_number_source": "2",
+            "place_number": 2,
+            "number_source": "5032",
+            "number": 5032,
+            "name": "谷口 知優"
+          },
+          "4": {
+            "entry_number": 4,
+            "course_number": 4,
+            "start_timing_source": ".20",
+            "start_timing": 0.2,
+            "place_number_source": "5",
+            "place_number": 5,
+            "number_source": "3998",
+            "number": 3998,
+            "name": "冨成 謙児"
+          },
+          "5": {
+            "entry_number": 5,
+            "course_number": 5,
+            "start_timing_source": ".17",
+            "start_timing": 0.17,
+            "place_number_source": "6",
+            "place_number": 6,
+            "number_source": "4564",
+            "number": 4564,
+            "name": "山本 景士郎"
+          },
+          "6": {
+            "entry_number": 6,
+            "course_number": 6,
+            "start_timing_source": ".21",
+            "start_timing": 0.21,
+            "place_number_source": "3",
+            "place_number": 3,
+            "number_source": "4330",
+            "number": 4330,
+            "name": "奈須 啓太"
+          }
+        },
+        "payouts": {
+          "trifecta": [
+            {
+              "combination": "1-3-6",
+              "amount": 1200,
+              "label": null
+            }
+          ],
+          "trio": [
+            {
+              "combination": "1=3=6",
+              "amount": 1080,
+              "label": null
+            }
+          ],
+          "exacta": [
+            {
+              "combination": "1-3",
+              "amount": 320,
+              "label": null
+            }
+          ],
+          "quinella": [
+            {
+              "combination": "1=3",
+              "amount": 420,
+              "label": null
+            }
+          ],
+          "quinella_place": [
+            {
+              "combination": "1=3",
+              "amount": 140,
+              "label": null
+            },
+            {
+              "combination": "1=6",
+              "amount": 260,
+              "label": null
+            },
+            {
+              "combination": "3=6",
+              "amount": 610,
+              "label": null
+            }
+          ],
+          "win": [
+            {
+              "combination": "1",
+              "amount": 100,
+              "label": null
+            }
+          ],
+          "place": [
+            {
+              "combination": "1",
+              "amount": 100,
+              "label": null
+            },
+            {
+              "combination": "3",
+              "amount": 300,
+              "label": null
+            }
+          ]
+        },
+        "refunds": []
+      },
+      "exacta_payout_yen": 320,
+      "refund_boats": []
     }
   ],
   "source_policy": "Unified third-party API; formal BC is separate.",
-  "result_changed_at_jst": "2026-11-27T20:28:25+09:00"
+  "result_changed_at_jst": "2026-11-27T20:48:30+09:00"
 }
